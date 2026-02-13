@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quantum Link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%2300d9ff'/%3E%3C/svg%3E">
+
+    <style>
+        /* ===== CSS RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0e27;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== CSS CUSTOM PROPERTIES ===== */
+        :root {
+            /* Colors */
+            --color-primary: #00d9ff;
+            --color-primary-glow: rgba(0, 217, 255, 0.5);
+            --color-secondary: #ff006e;
+            --color-success: #00ff88;
+            --color-warning: #ff6b35;
+            --color-bg: #0a0e27;
+            --color-surface: rgba(255, 255, 255, 0.05);
+            --color-border: rgba(0, 217, 255, 0.3);
+            --color-text-primary: #ffffff;
+            --color-text-secondary: rgba(255, 255, 255, 0.7);
+
+            /* Spacing (8px grid) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Animation */
+            --transition-fast: 150ms;
+            --transition-normal: 300ms;
+            --transition-slow: 500ms;
+            --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+            /* Shadows */
+            --shadow-sm: 0 0 20px rgba(0, 217, 255, 0.2);
+            --shadow-lg: 0 0 40px rgba(0, 217, 255, 0.3);
+            --glow-primary: 0 0 30px var(--color-primary-glow);
+            /* Expose safe-area insets so JS can respect device notch/home areas */
+            --safe-left: env(safe-area-inset-left, 0px);
+            --safe-right: env(safe-area-inset-right, 0px);
+        }
+
+        /* ===== GAME CANVAS ===== */
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            cursor: pointer;
+        }
+
+        /* ===== UI OVERLAY CONTAINER ===== */
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ui-overlay>* {
+            pointer-events: auto;
+        }
+
+        /* ===== SCORE DISPLAY ===== */
+        .score-container {
+            position: absolute;
+            top: var(--space-sm);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-surface);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-xs) var(--space-md);
+            box-shadow: var(--shadow-sm);
+            pointer-events: none;
+        }
+
+        .score-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .score-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            text-align: center;
+            line-height: 1;
+            transition: transform var(--transition-fast) var(--ease-bounce);
+        }
+
+        .score-display.bump {
+            transform: scale(1.15);
+        }
+
+        /* ===== TIMER DISPLAY ===== */
+        .timer-container {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: var(--color-surface);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-xs) var(--space-sm);
+            box-shadow: var(--shadow-sm);
+            min-width: 120px;
+            pointer-events: none;
+            transition: all var(--transition-normal) var(--ease-out);
+        }
+
+        .timer-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .timer-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--color-text-primary);
+            text-shadow: 0 0 10px var(--color-primary);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .timer-container.warning {
+            border-color: var(--color-secondary);
+            background: rgba(255, 0, 110, 0.1);
+            animation: timerPulse 0.5s infinite;
+        }
+
+        .timer-container.warning .timer-display {
+            color: var(--color-secondary);
+            text-shadow: 0 0 20px var(--color-secondary);
+        }
+
+        @keyframes timerPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(255, 0, 110, 0.6);
+            }
+        }
+
+        /* ===== COMBO DISPLAY ===== */
+        .combo-container {
+            position: absolute;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .combo-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffbe0b;
+            text-shadow: 0 0 20px #ffbe0b;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            transition: all var(--transition-normal) var(--ease-out);
+        }
+
+        .combo-display.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ===== PAUSE BUTTON ===== */
+        .pause-button {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            width: 56px;
+            height: 56px;
+            background: var(--color-surface);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast) var(--ease-out);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Left controls container (pause + back) */
+        .left-controls {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* When buttons are inside the container they should flow, not use absolute offsets */
+        .left-controls .pause-button {
+            position: relative;
+            left: auto;
+            top: auto;
+        }
+
+        /* Back button styling (match pause-button size) */
+        .back-button {
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Music toggle positioned near the timer (top-right) */
+        .music-button {
+            left: auto;
+            /* place to the left of the timer container (timer min-width ~120px + padding) */
+            right: calc(var(--space-sm));
+            /* top: var(--space-sm) + 200px; */
+            top: 120px;
+            transform: none;
+            background: var(--color-surface);
+        }
+
+        .pause-button:hover {
+            transform: scale(1.05);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pause-button:active {
+            transform: scale(0.95);
+        }
+
+        .pause-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        /* ===== PAUSE OVERLAY ===== */
+        .pause-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-normal) var(--ease-out);
+        }
+
+        .pause-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .pause-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            margin-bottom: var(--space-xl);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .pause-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            width: 100%;
+            max-width: 400px;
+            padding: 0 var(--space-md);
+        }
+
+        /* ===== GAME OVER OVERLAY ===== */
+        .game-over-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-slow) var(--ease-out);
+        }
+
+        .game-over-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .game-over-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--color-secondary);
+            text-shadow: 0 0 40px var(--color-secondary);
+            margin-bottom: var(--space-lg);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: gameOverPulse 2s infinite;
+        }
+
+        @keyframes gameOverPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .stats-container {
+            background: var(--color-surface);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            min-width: 400px;
+        }
+
+        .final-score {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .final-score-value {
+            font-size: 72px;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+        }
+
+        .best-combo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-align: center;
+        }
+
+        .best-combo-value {
+            color: #ffbe0b;
+            text-shadow: 0 0 20px #ffbe0b;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            padding: 20px 60px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-bg);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: var(--glow-primary);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px var(--color-primary-glow);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            border: 2px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== KEYBOARD HINTS ===== */
+        .keyboard-hints {
+            position: absolute;
+            bottom: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: var(--space-md);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-normal) var(--ease-out);
+        }
+
+        .keyboard-hints.visible {
+            opacity: 0.6;
+        }
+
+        .keyboard-hint {
+            background: var(--color-surface);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            padding: var(--space-xs) var(--space-sm);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .keyboard-key {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-primary);
+            min-width: 32px;
+            text-align: center;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Apply entrance animations */
+        .score-container {
+            animation: slideInFromTop var(--transition-slow) var(--ease-out);
+        }
+
+        .timer-container {
+            animation: slideInFromTop var(--transition-slow) var(--ease-out) 0.1s backwards;
+        }
+
+        .pause-button {
+            animation: slideInFromTop var(--transition-slow) var(--ease-out) 0.2s backwards;
+        }
+
+        /* ===== MEDIA QUERY FOR REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ===== RESPONSIVE ADJUSTMENTS ===== */
+        @media (hover: none) {
+            .keyboard-hints {
+                display: none;
+            }
+        }
+
+        /* ===== MOBILE TUNING ===== */
+        @media (max-width: 600px) {
+            :root {
+                --space-xs: 6px;
+                --space-sm: 12px;
+                --space-md: 16px;
+                --space-lg: 20px;
+                --space-xl: 32px;
+            }
+
+            body,
+            html {
+                font-size: 14px;
+            }
+
+            /* Score / Timer / Combo scale down on mobile */
+            .score-container {
+                padding: 6px 12px;
+                border-radius: 6px;
+            }
+
+            .score-display {
+                font-size: 36px;
+            }
+
+            .timer-container {
+                top: var(--space-sm);
+                right: var(--space-sm);
+                min-width: 96px;
+                padding: 6px 10px;
+            }
+
+            .timer-display {
+                font-size: 28px;
+            }
+
+            .combo-container {
+                top: 100px;
+            }
+
+            .combo-display {
+                font-size: 18px;
+            }
+
+            /* Smaller control buttons */
+            .pause-button,
+            .back-button,
+            .music-button {
+                width: 44px;
+                height: 44px;
+            }
+
+            .pause-icon {
+                width: 18px;
+                height: 18px;
+                stroke-width: 2;
+            }
+
+            /* Pause / Game Over overlays scale */
+            .pause-title,
+            .game-over-title {
+                font-size: 36px;
+            }
+
+            .stats-container {
+                min-width: auto;
+                width: 92%;
+                max-width: 340px;
+                padding: 16px;
+            }
+
+            /* Action buttons */
+            .btn {
+                padding: 12px 28px;
+                font-size: 18px;
+                min-width: 160px;
+            }
+
+            /* Keyboard hints & spacing */
+            .keyboard-hints {
+                bottom: 12px;
+                gap: 8px;
+            }
+
+            /* Make canvas touch-friendly */
+            #gameCanvas {
+                touch-action: manipulation;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="ui-overlay">
+        <!-- Left controls: Back + Pause -->
+        <div class="left-controls">
+            <button class="pause-button back-button" id="backButton" aria-label="Back">
+                <svg class="pause-icon" viewBox="0 0 24 24">
+                    <path d="M15 6l-6 6 6 6" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                </svg>
+            </button>
+
+            <button class="pause-button" id="pauseButton" aria-label="Pause Game">
+                <svg class="pause-icon" viewBox="0 0 24 24">
+                    <rect x="6" y="4" width="4" height="16" rx="1" />
+                    <rect x="14" y="4" width="4" height="16" rx="1" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-container">
+            <div class="score-label">Score</div>
+            <div class="score-display" id="scoreDisplay">0</div>
+        </div>
+
+        <!-- Timer Display -->
+        <div class="timer-container" id="timerContainer">
+            <div class="timer-label">Time</div>
+            <div class="timer-display" id="timerDisplay">60</div>
+        </div>
+
+        <!-- Music Toggle Button (right edge) -->
+        <button class="pause-button music-button" id="musicToggle" aria-label="Toggle Music" title="Toggle Music">
+            <svg class="pause-icon" id="musicIcon" viewBox="0 0 24 24">
+                <g id="icon-unmuted">
+                    <path d="M5 9v6h4l5 4V5L9 9H5z" fill="none" stroke="var(--color-primary)" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19 9a5 5 0 0 1 0 6" fill="none" stroke="var(--color-primary)" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <g id="icon-muted" style="display:none;">
+                    <path d="M5 9v6h4l5 4V5L9 9H5z" fill="none" stroke="var(--color-primary)" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="var(--color-secondary)" stroke-width="2"
+                        stroke-linecap="round" />
+                </g>
+            </svg>
+        </button>
+
+        <!-- Combo Display -->
+        <div class="combo-container">
+            <div class="combo-display" id="comboDisplay"></div>
+        </div>
+
+        <!-- Pause Overlay -->
+        <div class="pause-overlay" id="pauseOverlay">
+            <div class="pause-title">Paused</div>
+            <div class="pause-buttons">
+                <button class="btn" id="resumeButton">Resume</button>
+                <button class="btn btn-secondary" id="restartFromPauseButton">Restart</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div class="game-over-overlay" id="gameOverOverlay">
+            <div class="game-over-title">Game Over</div>
+            <div class="stats-container">
+                <div class="final-score">
+                    Score<br>
+                    <span class="final-score-value" id="finalScore">0</span>
+                </div>
+                <div class="best-combo">
+                    Best Combo: <span class="best-combo-value" id="bestCombo">0x</span>
+                </div>
+            </div>
+            <button class="btn" id="restartButton">Play Again</button>
+        </div>
+
+    </div>
+
+    <!-- Audio enable overlay shown when autoplay is blocked -->
+    <!-- <div id="audioEnableOverlay"
+        style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+        <div id="audioEnableCard"
+            style="pointer-events:auto;background:rgba(10,14,39,0.95);border:2px solid rgba(0,217,255,0.15);padding:18px;border-radius:10px;color:#fff;display:none;flex-direction:column;align-items:center;gap:12px;max-width:320px;text-align:center;">
+            <div
+                style="font-family:Orbitron, Rajdhani, sans-serif;font-weight:800;font-size:20px;color:var(--color-primary);">
+                Enable Sound</div>
+            <div style="font-size:13px;opacity:0.9">Your browser blocked autoplay. Tap anywhere to enable background
+                music.</div>
+            <button id="enableAudioBtn"
+                style="padding:10px 18px;border-radius:8px;background:linear-gradient(135deg,var(--color-primary),var(--color-success));border:none;color:#081024;font-weight:700;cursor:pointer;">Enable</button>
+        </div>
+    </div> -->
+
+    <script id="gameConfigInline">
+        window.gameConfig = {
+            "gridWidth": 8,
+            "gridHeight": 12,
+            "numColors": 5,
+            "startTime": 120,
+            "targetScoreMultiplier": 1,
+            "comboMultipliers": {
+                "3": 1,
+                "4": 2,
+                "5": 4,
+                "6": 8,
+                "7": 16
+            },
+            "visualTheme": "cosmic-glass",
+            "glowIntensity": "medium",
+            "particleDensity": "normal",
+            "gridLineVisibility": "subtle",
+            "soundVolume": 1,
+            "musicVolume": 1
+        };
+    </script>
+
+    <script id="assetsMap" type="application/json">
+{
+  "node_cyan": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/4aea167e-ff81-4a79-bcba-8eab81b93ea5.webp",
+    "type": "image",
+    "aspect_ratio": [
+      798,
+      806
+    ]
+  },
+  "node_magenta": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6b584a1f-e56c-4bed-b172-1b9a76a8632c.webp",
+    "type": "image",
+    "aspect_ratio": [
+      995,
+      1005
+    ]
+  },
+  "node_yellow": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/09958533-99c9-4d4a-bd93-ba0cc257c85f.webp",
+    "type": "image",
+    "aspect_ratio": [
+      1001,
+      1020
+    ]
+  },
+  "node_green": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a4edd313-7d2b-44e7-a978-bc010d7cae38.webp",
+    "type": "image",
+    "aspect_ratio": [
+      1013,
+      1024
+    ]
+  },
+  "node_orange": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c4716b75-20bb-4eb8-b70e-a4800376f7e6.webp",
+    "type": "image",
+    "aspect_ratio": [
+      984,
+      998
+    ]
+  },
+  "particle_triangle": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d496bd31-31f2-45df-9fab-d8041e20a8a6.webp",
+    "type": "image",
+    "aspect_ratio": [
+      358,
+      313
+    ]
+  },
+  "particle_square": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/605aa047-2731-4a34-b905-809ad8a0732f.webp",
+    "type": "image",
+    "aspect_ratio": [
+      1024,
+      1024
+    ]
+  },
+  "particle_hexagon": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3cc9844e-368d-4df4-a27e-7f5f0bbfd556.webp",
+    "type": "image",
+    "aspect_ratio": [
+      1024,
+      1024
+    ]
+  },
+  "background_circuit": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6b134b62-5197-41c1-acbd-191e324f68d7.webp",
+    "type": "image",
+    "aspect_ratio": [
+      1536,
+      1024
+    ]
+  },
+  "sound_connect": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/87638911-e2bf-4918-a09f-1f4d835c9f23.mp3",
+    "type": "audio"
+  },
+  "sound_discharge": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/9b429ff9-99a1-48c7-be15-6f20c86fa7af.mp3",
+    "type": "audio"
+  },
+  "sound_combo": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/30c690d0-b330-4a31-9d94-310b93a97834.mp3",
+    "type": "audio"
+  },
+  "sound_cascade": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/d107c008-db88-4258-8aa5-4488830695b6.mp3",
+    "type": "audio"
+  },
+  "sound_timer_warning": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/55b7228a-6c5c-4499-aa3a-a6396bf8bfaf.mp3",
+    "type": "audio"
+  },
+  "music_background": {
+    "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/e3e9c8cd-7141-4e78-9726-cde18fb0bd23.mp3",
+    "type": "audio"
+  }
+}
+    </script>
+
+    <script>
+        // Lightweight local `lib` implementation used for local testing and editor
+        // Provides: lib.log, lib.getAsset, save/load state via localStorage, simple event emitter
+        (function () {
+            if (typeof window.lib !== 'undefined') return; // don't overwrite existing lib
+
+            const cache = { assetsMap: null };
+            const listeners = {};
+
+            function emit(name,data) {
+                if (!listeners[name]) return;
+                listeners[name].forEach(fn => {
+                    try { fn(data); } catch (e) { console.warn('lib listener error',e); }
+                });
+            }
+
+            window.lib = {
+                log: function () {
+                    try { console.log.apply(console,arguments); } catch (e) { }
+                },
+
+                // simple event API
+                on: function (evt,cb) {
+                    if (!listeners[evt]) listeners[evt] = [];
+                    listeners[evt].push(cb);
+                    return function () {
+                        listeners[evt] = listeners[evt].filter(x => x !== cb);
+                    };
+                },
+                emit: emit,
+
+                // Loads asset map from inline <script id="assetsMap"> or external file 'asset_map' or 'asset_map.json'
+                getAsset: function (id) {
+                    try {
+                        if (cache.assetsMap) return cache.assetsMap[id];
+
+                        const mapEl = document.getElementById('assetsMap');
+                        if (mapEl && mapEl.textContent) {
+                            try {
+                                cache.assetsMap = JSON.parse(mapEl.textContent);
+                                // Notify listeners that assets map is available (useful for file://)
+                                try { emit('assetsMapLoaded',cache.assetsMap); } catch (e) { }
+                                return cache.assetsMap[id];
+                            } catch (e) { /* fallthrough */ }
+                        }
+
+                        // try fetching external json (synchronous isn't allowed, so fallback to undefined)
+                        // but attempt to fetch and cache asynchronously
+                        fetch('asset_map').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+                        fetch('asset_map.json').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+
+                        return undefined;
+                    } catch (e) { return undefined; }
+                },
+
+                // Small settings UI used by run() to expose game parameters during local testing
+                showGameParameters: function (opts) {
+                    try {
+                        // Remove any existing panel
+                        const existing = document.getElementById('lib-param-panel');
+                        if (existing) existing.remove();
+
+                        const panel = document.createElement('div');
+                        panel.id = 'lib-param-panel';
+                        panel.style.position = 'fixed';
+                        panel.style.right = '16px';
+                        panel.style.top = '16px';
+                        panel.style.zIndex = 99999;
+                        panel.style.background = 'rgba(10,14,39,0.9)';
+                        panel.style.border = '1px solid rgba(0,217,255,0.15)';
+                        panel.style.padding = '12px';
+                        panel.style.borderRadius = '8px';
+                        panel.style.color = '#fff';
+                        panel.style.maxWidth = '340px';
+                        panel.style.fontFamily = 'Rajdhani, sans-serif';
+                        panel.style.fontSize = '13px';
+
+                        const title = document.createElement('div');
+                        title.textContent = opts && opts.name ? opts.name : 'Settings';
+                        title.style.fontWeight = '700';
+                        title.style.marginBottom = '8px';
+                        panel.appendChild(title);
+
+                        const params = (opts && opts.params) || {};
+
+                        function getPathValue(path) {
+                            const parts = path.split('.');
+                            let obj = window;
+                            for (let p of parts) {
+                                if (obj == null) return null;
+                                obj = obj[p];
+                            }
+                            return obj;
+                        }
+
+                        Object.keys(params).forEach(key => {
+                            const def = params[key];
+                            const row = document.createElement('div');
+                            row.style.display = 'flex';
+                            row.style.flexDirection = 'column';
+                            row.style.gap = '6px';
+                            row.style.marginBottom = '10px';
+
+                            const label = document.createElement('div');
+                            label.textContent = key;
+                            label.style.opacity = '0.9';
+                            label.style.fontWeight = '600';
+
+                            const controlWrap = document.createElement('div');
+                            controlWrap.style.display = 'flex';
+                            controlWrap.style.alignItems = 'center';
+                            controlWrap.style.gap = '8px';
+
+                            const input = document.createElement('input');
+                            input.type = 'range';
+                            input.min = def.min;
+                            input.max = def.max;
+                            input.step = def.step;
+
+                            // Initial value from provided key path if available
+                            const initVal = getPathValue(def.key) ?? def.default ?? def.min;
+                            input.value = initVal;
+
+                            const valueDisplay = document.createElement('div');
+                            valueDisplay.textContent = String(input.value);
+                            valueDisplay.style.minWidth = '40px';
+                            valueDisplay.style.textAlign = 'right';
+
+                            input.addEventListener('input',(e) => {
+                                valueDisplay.textContent = input.value;
+                            });
+
+                            input.addEventListener('change',(e) => {
+                                // Parse numeric value (int when step is integer-like)
+                                const stepStr = String(def.step);
+                                const parsed = (stepStr.indexOf('.') >= 0) ? parseFloat(input.value) : parseInt(input.value,10);
+                                try { def.onChange(parsed); } catch (err) { console.warn('param onChange error',err); }
+                            });
+
+                            controlWrap.appendChild(input);
+                            controlWrap.appendChild(valueDisplay);
+
+                            row.appendChild(label);
+                            row.appendChild(controlWrap);
+                            panel.appendChild(row);
+                        });
+
+                        const closeBtn = document.createElement('button');
+                        closeBtn.textContent = 'Close';
+                        closeBtn.style.marginTop = '6px';
+                        closeBtn.style.padding = '8px 12px';
+                        closeBtn.style.border = 'none';
+                        closeBtn.style.borderRadius = '6px';
+                        closeBtn.style.cursor = 'pointer';
+                        closeBtn.addEventListener('click',() => panel.remove());
+                        panel.appendChild(closeBtn);
+
+                        document.body.appendChild(panel);
+                        return panel;
+                    } catch (e) { console.warn('showGameParameters error',e); }
+                },
+
+                // Save/load user game state locally for testing
+                saveUserGameState: async function (state) {
+                    try {
+                        localStorage.setItem('circuit_connect_state',JSON.stringify(state));
+                        return { success: true,state };
+                    } catch (e) {
+                        return { success: false,error: String(e) };
+                    }
+                },
+
+                getUserGameState: async function () {
+                    try {
+                        const raw = localStorage.getItem('circuit_connect_state');
+                        if (!raw) return { success: true,state: null };
+                        return { success: true,state: JSON.parse(raw) };
+                    } catch (e) {
+                        return { success: false,error: String(e),state: null };
+                    }
+                },
+
+                deleteUserGameState: async function () {
+                    try { localStorage.removeItem('circuit_connect_state'); return { success: true }; } catch (e) { return { success: false }; }
+                },
+
+                // Animation/player stubs (not full-featured)
+                getAnimationPlayer: function (assetId) { return null; },
+                preloadAnimation: async function () { return; },
+
+                // Leaderboard stubs
+                addPlayerScoreToLeaderboard: async function (score) { return { success: true }; },
+                getTopNEntriesFromLeaderboard: async function () { return { entries: [],userRank: null,success: true }; }
+            };
+
+            // Expose a DOM-ready helper so game can wait if needed
+            document.addEventListener('DOMContentLoaded',function () { emit('domReady'); });
+        })();
+
+    </script>
+
+
+    <script>
+        /* ==================================================
+         * QUANTUM LINK - High-tech futuristic puzzle game
+         * 
+         * GAME OVERVIEW:
+         * Connect adjacent energy nodes of the same color by swiping.
+         * Create chains of 3+ nodes to score points with combo multipliers.
+         * Cascading reactions create automatic matches for bonus points.
+         * Race against the 60-second timer to achieve the highest score.
+         * 
+         * EDIT MODE: Adjust grid size, colors, timer, difficulty, and visual/audio settings
+         * PLAY MODE: Full puzzle gameplay with scoring, combos, and cascades
+         * 
+         * GAME STATE SHAPE: window.gameConfig = {
+         *   gridWidth: 6,           // Number of columns (5-7)
+         *   gridHeight: 8,          // Number of rows (7-9)
+         *   numColors: 5,           // Number of different node colors (4-6)
+         *   startTime: 60,          // Starting time in seconds (20-120)
+         *   targetScoreMultiplier: 1.0,  // Affects win conditions (future)
+         *   comboMultipliers: {     // Score multipliers for chain lengths
+         *     3: 1, 4: 2, 5: 4, 6: 8, 7: 16
+         *   },
+         *   visualTheme: 'default', // Color scheme preset
+         *   glowIntensity: 'medium',// Node glow effect (low/medium/high)
+         *   particleDensity: 'normal', // Particle effect amount
+         *   gridLineVisibility: 'subtle', // Grid line opacity
+         *   soundVolume: 0.7,       // Sound effect volume (0-1)
+         *   musicVolume: 0.5        // Background music volume (0-1)
+         * }
+         * ==================================================
+         */
+
+        // ===== GLOBAL STATE =====
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let currentMode = 'play';
+        let gameState = 'playing'; // 'playing', 'paused', or 'gameover'
+        let grid = [];
+        let score = 0;
+        let displayScore = 0; // For animated score counting
+        let timeRemaining = 120;
+        let bestCombo = 0;
+        let currentConnection = [];
+        let particles = [];
+        let screenShake = 0;
+        let lastTime = 0;
+        let timerWarningPlaying = false;
+
+        // Input state
+        let isConnecting = false;
+        let lastConnectedNode = null;
+
+        // Assets
+        const assetCache = {};
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const audioBuffers = {};
+        let backgroundMusicSource = null;
+        let backgroundMusicElement = null;
+        let backgroundMusicStarted = false;
+        let desireBackgroundMusic = false; // user/auto intent to play when allowed
+
+        // Colors
+        const nodeColors = ['cyan','magenta','yellow','green','orange'];
+        const colorHex = {
+            cyan: '#00d9ff',
+            magenta: '#ff006e',
+            yellow: '#ffbe0b',
+            green: '#00ff88',
+            orange: '#ff6b35'
+        };
+
+        // Grid layout
+        let gridStartX,gridStartY,cellSize;
+
+        // ===== UI STATE MANAGEMENT =====
+        function togglePause() {
+            if (gameState === 'gameover') return;
+
+            if (gameState === 'playing') {
+                gameState = 'paused';
+                document.getElementById('pauseOverlay').classList.add('active');
+                stopBackgroundMusic();
+            } else if (gameState === 'paused') {
+                resumeGame();
+            }
+        }
+
+        function resumeGame() {
+            gameState = 'playing';
+            document.getElementById('pauseOverlay').classList.remove('active');
+            if (currentMode === 'play') {
+                playBackgroundMusic();
+            }
+        }
+
+        function animateScore() {
+            if (displayScore < score) {
+                displayScore = Math.min(displayScore + Math.ceil((score - displayScore) / 10),score);
+                document.getElementById('scoreDisplay').textContent = displayScore;
+
+                // Add bump animation
+                const scoreEl = document.getElementById('scoreDisplay');
+                scoreEl.classList.add('bump');
+                setTimeout(() => scoreEl.classList.remove('bump'),150);
+            }
+        }
+
+        // ===== KEYBOARD SHORTCUTS =====
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown',(e) => {
+                if (e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    togglePause();
+                } else if (e.key === 'r' || e.key === 'R') {
+                    e.preventDefault();
+                    if (gameState === 'paused' || gameState === 'gameover') {
+                        resetGame();
+                    }
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    if (gameState === 'playing') {
+                        togglePause();
+                    } else if (gameState === 'paused') {
+                        resumeGame();
+                    }
+                }
+            });
+
+            // Show keyboard hints on desktop
+            if (window.matchMedia('(hover: hover)').matches) {
+                setTimeout(() => {
+                    const kh = document.getElementById('keyboardHints');
+                    if (kh) kh.classList.add('visible');
+                },1000);
+            }
+        }
+
+        // Back button handler: send payload to Flutter (multiple bridge fallbacks), otherwise safe fallbacks
+        document.addEventListener('DOMContentLoaded',function () {
+            const backBtn = document.getElementById('backButton');
+            if (!backBtn) return;
+
+            backBtn.addEventListener('click',function () {
+                try {
+                    const payload = {
+                        type: 'exitGame',
+                        score: typeof score !== 'undefined' ? score : null,
+                        timeRemaining: typeof timeRemaining !== 'undefined' ? timeRemaining : null,
+                        gameState: typeof gameState !== 'undefined' ? gameState : null
+                    };
+
+                    // 1) App-provided JS callback
+                    if (typeof window.onBackButton === 'function') {
+                        try { window.onBackButton(payload); return; } catch (e) { console.warn('onBackButton threw',e); }
+                    }
+
+                    // 2) flutter_inappwebview plugin (callHandler)
+                    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
+                        try { window.flutter_inappwebview.callHandler('onBack',payload); return; } catch (e) { console.warn('flutter_inappwebview.callHandler failed',e); }
+                    }
+
+                    // 3) common JS channel names exposed by embedding (webview_flutter or custom)
+                    if (window.FlutterWebViewChannel && typeof window.FlutterWebViewChannel.postMessage === 'function') {
+                        try { window.FlutterWebViewChannel.postMessage(JSON.stringify(payload)); return; } catch (e) { console.warn('FlutterWebViewChannel.postMessage failed',e); }
+                    }
+
+                    if (window.JSBridge && typeof window.JSBridge.postMessage === 'function') {
+                        try { window.JSBridge.postMessage(JSON.stringify(payload)); return; } catch (e) { console.warn('JSBridge.postMessage failed',e); }
+                    }
+
+                    // 4) generic flutter postMessage (some setups expose `window.flutter.postMessage`)
+                    if (window.flutter && typeof window.flutter.postMessage === 'function') {
+                        try { window.flutter.postMessage(JSON.stringify(payload)); return; } catch (e) { console.warn('window.flutter.postMessage failed',e); }
+                    }
+
+                    // 5) iOS WKWebView message handler (common naming varies)
+                    if (window.webkit && window.webkit.messageHandlers) {
+                        // try a few common handler names
+                        const handlers = ['flutter','Flutter','flutter_inappwebview','JSBridge'];
+                        for (let h of handlers) {
+                            if (window.webkit.messageHandlers[h] && typeof window.webkit.messageHandlers[h].postMessage === 'function') {
+                                try { window.webkit.messageHandlers[h].postMessage(payload); return; } catch (e) { /* continue */ }
+                            }
+                        }
+                    }
+
+                    // 6) postMessage to parent window (if embedded)
+                    if (window.parent && window.parent !== window && typeof window.parent.postMessage === 'function') {
+                        window.parent.postMessage({ type: 'back',payload: payload },'*');
+                        return;
+                    }
+
+                    // 7) Fallback to navigation or UI fallback
+                    if (window.history && history.length > 1) {
+                        history.back();
+                        return;
+                    }
+
+                    // final fallback: toggle pause so user doesn't get stuck
+                    togglePause();
+                } catch (e) {
+                    console.warn('backButton click error',e);
+                }
+            });
+        });
+
+        // ===== ASSET LOADING =====
+        function preloadAssets() {
+            const imageAssets = [
+                'node_cyan','node_magenta','node_yellow','node_green','node_orange',
+                'particle_triangle','particle_square','particle_hexagon','background_circuit'
+            ];
+
+            const audioAssets = [
+                'sound_connect','sound_discharge','sound_combo','sound_cascade',
+                'sound_timer_warning','music_background'
+            ];
+
+            let loadedCount = 0;
+            const totalAssets = imageAssets.length + audioAssets.length;
+
+            function maybeStartGame() {
+                if (loadedCount !== totalAssets) return;
+
+                // If music buffer is present, start immediately. Otherwise wait briefly for it (in case of slow decode),
+                // but don't block forever: timeout after 5s and start anyway.
+                if (audioBuffers['music_background']) {
+                    startGame();
+                    return;
+                }
+
+                let waited = 0;
+                const interval = setInterval(() => {
+                    if (audioBuffers['music_background']) {
+                        clearInterval(interval);
+                        startGame();
+                        return;
+                    }
+                    waited += 200;
+                    if (waited >= 5000) {
+                        clearInterval(interval);
+                        console.warn('Background music not available after timeout — starting game without music');
+                        startGame();
+                    }
+                },200);
+            }
+
+            // Load images
+            imageAssets.forEach(id => {
+                const assetInfo = lib.getAsset(id);
+                if (assetInfo) {
+                    const img = new Image();
+                    img.onload = () => {
+                        loadedCount++;
+                        maybeStartGame();
+                    };
+                    img.onerror = () => {
+                        loadedCount++;
+                        maybeStartGame();
+                    };
+                    img.src = assetInfo.url;
+                    assetCache[id] = img;
+                } else {
+                    // treat missing asset as loaded to avoid blocking
+                    loadedCount++;
+                    maybeStartGame();
+                }
+            });
+
+            // Load audio (try WebAudio decode first; if that fails — common when running from file:// in WebView —
+            // fall back to using HTMLAudioElement instances so audio still plays)
+            const audioElements = {};
+            audioAssets.forEach(id => {
+                const assetInfo = lib.getAsset(id);
+                if (assetInfo) {
+                    fetch(assetInfo.url).then(response => response.arrayBuffer())
+                        .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+                        .then(audioBuffer => {
+                            audioBuffers[id] = audioBuffer;
+                            loadedCount++;
+                            maybeStartGame();
+                        }).catch(err => {
+                            // Fallback: try HTMLAudioElement (less control but works in many WebView setups)
+                            try {
+                                const a = new Audio();
+                                a.preload = 'auto';
+                                a.src = assetInfo.url;
+                                a.addEventListener('canplaythrough',() => {
+                                    audioElements[id] = a;
+                                    // mark as "loaded" for startup flow
+                                    loadedCount++;
+                                    maybeStartGame();
+                                },{ once: true });
+                                a.addEventListener('error',() => {
+                                    console.warn('HTMLAudio fallback failed for',id);
+                                    loadedCount++;
+                                    maybeStartGame();
+                                },{ once: true });
+                                // In some environments the above events may never fire; guard with timeout
+                                setTimeout(() => {
+                                    if (!audioElements[id]) {
+                                        console.warn('Audio fallback timeout for',id);
+                                        loadedCount++;
+                                        maybeStartGame();
+                                    }
+                                },4000);
+                            } catch (e) {
+                                console.error('Error loading audio:',id,err,e);
+                                loadedCount++;
+                                maybeStartGame();
+                            }
+                        });
+                } else {
+                    loadedCount++;
+                    maybeStartGame();
+                }
+            });
+
+            // expose audioElements for play fallback
+            window.__audioElements = window.__audioElements || {};
+            Object.assign(window.__audioElements,audioElements);
+
+        }
+
+        // ===== AUDIO FUNCTIONS =====
+        function playSound(soundId,volume = 1.0) {
+            // Prefer WebAudio buffers when available
+            if (audioBuffers[soundId]) {
+                const source = audioContext.createBufferSource();
+                const gainNode = audioContext.createGain();
+
+                source.buffer = audioBuffers[soundId];
+                source.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                const configVolume = soundId.startsWith('music_') ?
+                    window.gameConfig.musicVolume : window.gameConfig.soundVolume;
+                gainNode.gain.value = volume * configVolume;
+
+                source.start(0);
+                return source;
+            }
+
+            // Fallback: if we have an HTMLAudioElement loaded, clone and play it
+            const ae = (window.__audioElements && window.__audioElements[soundId]);
+            if (ae) {
+                try {
+                    const clone = new Audio();
+                    clone.src = ae.src;
+                    clone.preload = 'auto';
+                    clone.volume = (soundId.startsWith('music_') ? window.gameConfig.musicVolume : window.gameConfig.soundVolume) * volume;
+                    clone.play().catch(() => { /* ignore play rejection */ });
+                    return clone;
+                } catch (e) {
+                    console.warn('Audio element play failed for',soundId,e);
+                }
+            }
+
+            return null;
+        }
+
+        function playBackgroundMusic() {
+            if (backgroundMusicSource) {
+                backgroundMusicSource.stop();
+            }
+            // Prefer WebAudio buffer; if not available, try HTMLAudioElement fallback
+            if (audioBuffers['music_background']) {
+                // If audio context isn't running yet, mark desire and wait for user gesture to resume
+                if (audioContext.state !== 'running') {
+                    desireBackgroundMusic = true;
+                    return;
+                }
+
+                // create source and play
+                backgroundMusicSource = audioContext.createBufferSource();
+                const gainNode = audioContext.createGain();
+
+                backgroundMusicSource.buffer = audioBuffers['music_background'];
+                backgroundMusicSource.loop = true;
+                backgroundMusicSource.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                gainNode.gain.value = window.gameConfig.musicVolume;
+
+                try {
+                    backgroundMusicSource.start(0);
+                    backgroundMusicStarted = true;
+                    desireBackgroundMusic = false;
+                } catch (e) {
+                    console.warn('playBackgroundMusic start failed',e);
+                    backgroundMusicStarted = false;
+                    desireBackgroundMusic = true;
+                }
+                return;
+            }
+
+            // HTMLAudioElement fallback (works better in some WebView/file:// contexts)
+            const ae = window.__audioElements && window.__audioElements['music_background'];
+            if (ae) {
+                try {
+                    // Stop previous element if any
+                    if (backgroundMusicElement) {
+                        backgroundMusicElement.pause();
+                        backgroundMusicElement.currentTime = 0;
+                    }
+                    backgroundMusicElement = new Audio();
+                    backgroundMusicElement.src = ae.src;
+                    backgroundMusicElement.loop = true;
+                    backgroundMusicElement.volume = window.gameConfig.musicVolume;
+                    backgroundMusicElement.play().then(() => {
+                        backgroundMusicStarted = true;
+                        desireBackgroundMusic = false;
+                    }).catch(() => {
+                        backgroundMusicStarted = false;
+                        desireBackgroundMusic = true;
+                    });
+                } catch (e) {
+                    console.warn('playBackgroundMusic element fallback failed',e);
+                }
+            }
+        }
+
+        function stopBackgroundMusic() {
+            if (backgroundMusicSource) {
+                try { backgroundMusicSource.stop(); } catch (e) { }
+                backgroundMusicSource = null;
+                backgroundMusicStarted = false;
+            }
+            if (typeof backgroundMusicElement !== 'undefined' && backgroundMusicElement) {
+                try { backgroundMusicElement.pause(); backgroundMusicElement.currentTime = 0; } catch (e) { }
+                backgroundMusicElement = null;
+                backgroundMusicStarted = false;
+            }
+        }
+
+        // ===== GRID FUNCTIONS =====
+        function initGrid() {
+            grid = [];
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+
+            for (let y = 0; y < height; y++) {
+                grid[y] = [];
+                for (let x = 0; x < width; x++) {
+                    grid[y][x] = createNode(x,y);
+                }
+            }
+        }
+
+        function createNode(x,y) {
+            const colors = nodeColors.slice(0,window.gameConfig.numColors);
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return {
+                x,y,color,
+                visualX: x,visualY: y,
+                scale: 1,
+                glow: 0,
+                falling: false
+            };
+        }
+
+        function calculateGridLayout() {
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+
+            // Use logical (CSS) size for layout calculations so cells align with client coordinates
+            const rect = canvas.getBoundingClientRect();
+            const logicalW = rect.width;
+            const logicalH = rect.height;
+
+            // Determine side margin: respect safe-area insets (notch) and use a slightly larger base margin
+            const cs = window.getComputedStyle(document.documentElement);
+            const safeLeftPx = parseFloat(cs.getPropertyValue('--safe-left')) || 0;
+            const safeRightPx = parseFloat(cs.getPropertyValue('--safe-right')) || 0;
+            const baseSideMargin = Math.max(20,logicalW * 0.08);
+            const marginX = Math.max(baseSideMargin,safeLeftPx,safeRightPx);
+            const marginTop = 150; // top offset for header UI (increased per request)
+
+            const availableWidth = logicalW - marginX * 2;
+            const availableHeight = logicalH - marginTop - 40; // leave some bottom padding
+
+            const cellWidth = availableWidth / width;
+            const cellHeight = availableHeight / height;
+
+            // Use integer logical cell size for consistent placement and cap to avoid overflow
+            const maxCell = 120;
+            cellSize = Math.floor(Math.min(cellWidth,cellHeight,maxCell));
+            if (cellSize < 6) cellSize = 6;
+
+            // Ensure gridWidth fits within logical width minus side margins; if not, reduce cellSize
+            let gridWidth = cellSize * width;
+            let gridHeight = cellSize * height;
+            if (gridWidth > availableWidth) {
+                cellSize = Math.max(1,Math.floor(availableWidth / width));
+                gridWidth = cellSize * width;
+                gridHeight = cellSize * height;
+            }
+
+            // Center grid but don't allow it to overlap the side margin
+            gridStartX = Math.round((logicalW - gridWidth) / 2);
+            gridStartX = Math.max(marginX,gridStartX);
+            if (gridStartX + gridWidth + marginX > logicalW) {
+                gridStartX = Math.max(marginX,logicalW - marginX - gridWidth);
+            }
+
+            gridStartY = Math.round(marginTop + ((logicalH - marginTop - 40 - gridHeight) / 2));
+            if (gridStartY < marginTop) gridStartY = marginTop;
+        }
+
+        function getNodePosition(x,y) {
+            return {
+                x: gridStartX + x * cellSize + cellSize / 2,
+                y: gridStartY + y * cellSize + cellSize / 2
+            };
+        }
+
+        function getGridCoordinates(screenX,screenY) {
+            const x = Math.floor((screenX - gridStartX) / cellSize);
+            const y = Math.floor((screenY - gridStartY) / cellSize);
+
+            if (x >= 0 && x < window.gameConfig.gridWidth &&
+                y >= 0 && y < window.gameConfig.gridHeight) {
+                return { x,y };
+            }
+            return null;
+        }
+
+        function isAdjacent(node1,node2) {
+            const dx = Math.abs(node1.x - node2.x);
+            const dy = Math.abs(node1.y - node2.y);
+            return (dx <= 1 && dy <= 1) && !(dx === 0 && dy === 0);
+        }
+
+        // ===== CONNECTION LOGIC =====
+        function startConnection(gridX,gridY) {
+            if (gameState !== 'playing') return;
+
+            const node = grid[gridY][gridX];
+            if (!node) return;
+
+            currentConnection = [node];
+            lastConnectedNode = node;
+            isConnecting = true;
+            node.glow = 1;
+
+            playSound('sound_connect',0.5);
+        }
+
+        function updateConnection(gridX,gridY) {
+            if (!isConnecting || gameState !== 'playing') return;
+
+            const node = grid[gridY][gridX];
+            if (!node) return;
+
+            // Check if already in connection
+            if (currentConnection.includes(node)) return;
+
+            // Check if adjacent to last node
+            if (!isAdjacent(lastConnectedNode,node)) return;
+
+            // Check if same color
+            if (node.color !== currentConnection[0].color) return;
+
+            // Add to connection
+            currentConnection.push(node);
+            lastConnectedNode = node;
+            node.glow = 1;
+
+            playSound('sound_connect',0.5);
+        }
+
+        function endConnection() {
+            if (!isConnecting || gameState !== 'playing') return;
+
+            isConnecting = false;
+
+            if (currentConnection.length >= 3) {
+                dischargeConnection();
+            } else {
+                // Clear glow from nodes
+                currentConnection.forEach(node => node.glow = 0);
+            }
+
+            currentConnection = [];
+            lastConnectedNode = null;
+        }
+
+        function dischargeConnection() {
+            const chainLength = currentConnection.length;
+            const multiplier = getComboMultiplier(chainLength);
+            const points = chainLength * 10 * multiplier;
+
+            score += points;
+
+            if (multiplier > 1) {
+                showComboDisplay(multiplier);
+                bestCombo = Math.max(bestCombo,multiplier);
+            }
+
+            // Recalculate layout and clamp visuals to avoid overflow on score events
+            calculateGridLayout();
+            clampNodeVisuals();
+
+            // Create explosion particles
+            currentConnection.forEach(node => {
+                createExplosion(node);
+                const pos = getNodePosition(node.x,node.y);
+                createScorePopup(pos.x,pos.y,points / currentConnection.length);
+            });
+
+            // Remove nodes from grid
+            currentConnection.forEach(node => {
+                grid[node.y][node.x] = null;
+            });
+
+            // Play sound
+            if (chainLength >= 4) {
+                playSound('sound_combo');
+            } else {
+                playSound('sound_discharge');
+            }
+
+            // Screen shake for big combos
+            if (chainLength >= 5) {
+                screenShake = chainLength >= 8 ? 15 : 8;
+            }
+
+            // Apply gravity and check for cascades
+            setTimeout(() => {
+                applyGravity();
+                // ensure layout still fits after gravity
+                calculateGridLayout();
+                clampNodeVisuals();
+                setTimeout(() => checkCascades(),300);
+            },200);
+        }
+
+        function getComboMultiplier(chainLength) {
+            const multipliers = window.gameConfig.comboMultipliers;
+            if (chainLength >= 7) return multipliers[7] || 16;
+            return multipliers[chainLength] || 1;
+        }
+
+        // ===== GRAVITY & CASCADES =====
+        function applyGravity() {
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+
+            // Move nodes down
+            for (let x = 0; x < width; x++) {
+                let writeY = height - 1;
+
+                for (let y = height - 1; y >= 0; y--) {
+                    if (grid[y][x]) {
+                        if (y !== writeY) {
+                            grid[writeY][x] = grid[y][x];
+                            grid[writeY][x].y = writeY;
+                            grid[writeY][x].falling = true;
+                            grid[y][x] = null;
+                        }
+                        writeY--;
+                    }
+                }
+
+                // Fill empty spaces from top
+                while (writeY >= 0) {
+                    grid[writeY][x] = createNode(x,writeY);
+                    grid[writeY][x].visualY = -1;
+                    grid[writeY][x].falling = true;
+                    writeY--;
+                }
+            }
+        }
+
+        function checkCascades() {
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+            let foundCascade = false;
+            const cascadeNodes = [];
+
+            // Find all groups of 3+ adjacent same-color nodes
+            const visited = Array(height).fill(null).map(() => Array(width).fill(false));
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    if (!visited[y][x] && grid[y][x]) {
+                        const group = findConnectedGroup(x,y,grid[y][x].color,visited);
+                        if (group.length >= 3) {
+                            cascadeNodes.push(...group);
+                            foundCascade = true;
+                        }
+                    }
+                }
+            }
+
+            if (foundCascade) {
+                // Remove cascade nodes
+                cascadeNodes.forEach(node => {
+                    createExplosion(node);
+                    const multiplier = getComboMultiplier(cascadeNodes.length);
+                    const points = 10 * multiplier;
+                    score += points;
+                    grid[node.y][node.x] = null;
+                });
+
+                playSound('sound_cascade');
+
+                // Recalculate layout and clamp after cascade removal
+                calculateGridLayout();
+                clampNodeVisuals();
+
+                // Continue cascading
+                setTimeout(() => {
+                    applyGravity();
+                    setTimeout(() => checkCascades(),300);
+                },200);
+            }
+        }
+
+        function findConnectedGroup(startX,startY,color,visited) {
+            const group = [];
+            const stack = [{ x: startX,y: startY }];
+
+            while (stack.length > 0) {
+                const { x,y } = stack.pop();
+
+                if (x < 0 || x >= window.gameConfig.gridWidth ||
+                    y < 0 || y >= window.gameConfig.gridHeight) continue;
+                if (visited[y][x]) continue;
+                if (!grid[y][x] || grid[y][x].color !== color) continue;
+
+                visited[y][x] = true;
+                group.push(grid[y][x]);
+
+                // Check 4 directions (not diagonal for cascades)
+                stack.push({ x: x + 1,y });
+                stack.push({ x: x - 1,y });
+                stack.push({ x,y: y + 1 });
+                stack.push({ x,y: y - 1 });
+            }
+
+            return group;
+        }
+
+        // Clamp node visual positions within grid bounds and reset any extreme values
+        function clampNodeVisuals() {
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const node = grid[y][x];
+                    if (!node) continue;
+                    // Ensure logical visual indices are within [0, height-1]
+                    if (typeof node.visualY !== 'number' || isNaN(node.visualY)) node.visualY = node.y;
+                    if (node.visualY < -1) node.visualY = -1; // keep -1 allowed for spawn-above animation
+                    if (node.visualY > height - 1) node.visualY = height - 1;
+                    // visualX should track grid x
+                    node.visualX = node.x;
+                    // If node isn't falling, snap visualY to its grid row
+                    if (!node.falling) node.visualY = node.y;
+                }
+            }
+        }
+
+        // ===== PARTICLES =====
+        function createExplosion(node) {
+            const pos = getNodePosition(node.x,node.y);
+            const particleTypes = ['particle_triangle','particle_square','particle_hexagon'];
+            // Reduce explosion intensity on mobile: fewer, smaller, shorter-lived particles
+            const isMobile = Math.min(window.innerWidth,window.innerHeight) < 700 || (window.devicePixelRatio || 1) > 2;
+            const baseCount = isMobile ? 6 : 12;
+            const sizeBase = isMobile ? 12 : 20;
+            const sizeJitter = isMobile ? 6 : 10;
+            const speedBase = isMobile ? 1.5 : 2;
+            const speedJitter = isMobile ? 2 : 3;
+            const lifeVal = isMobile ? 0.8 : 1;
+            const decayVal = isMobile ? 0.03 : 0.02;
+
+            for (let i = 0; i < baseCount; i++) {
+                const angle = (Math.PI * 2 * i) / baseCount + (Math.random() - 0.5) * 0.4;
+                const speed = speedBase + Math.random() * speedJitter;
+
+                particles.push({
+                    x: pos.x,
+                    y: pos.y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: lifeVal,
+                    decay: decayVal,
+                    size: sizeBase + Math.random() * sizeJitter,
+                    color: colorHex[node.color],
+                    type: particleTypes[Math.floor(Math.random() * particleTypes.length)]
+                });
+            }
+        }
+
+        function createScorePopup(x,y,points) {
+            particles.push({
+                x,y,
+                vx: 0,
+                vy: -2,
+                life: 1,
+                decay: 0.015,
+                text: '+' + Math.floor(points),
+                isText: true
+            });
+        }
+
+        function updateParticles(deltaTime) {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx * deltaTime * 60;
+                p.y += p.vy * deltaTime * 60;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    particles.splice(i,1);
+                }
+            }
+        }
+
+        // ===== UI UPDATES =====
+        function updateTimerDisplay() {
+            const timerEl = document.getElementById('timerDisplay');
+            const timerContainer = document.getElementById('timerContainer');
+            timerEl.textContent = Math.ceil(timeRemaining);
+
+            if (timeRemaining <= 10) {
+                timerContainer.classList.add('warning');
+                if (!timerWarningPlaying) {
+                    timerWarningPlaying = true;
+                    playTimerWarning();
+                }
+            } else {
+                timerContainer.classList.remove('warning');
+            }
+        }
+
+        function playTimerWarning() {
+            if (gameState !== 'playing' || timeRemaining > 10) {
+                timerWarningPlaying = false;
+                return;
+            }
+
+            playSound('sound_timer_warning',0.3);
+            setTimeout(() => playTimerWarning(),500);
+        }
+
+        function showComboDisplay(multiplier) {
+            const comboEl = document.getElementById('comboDisplay');
+            comboEl.textContent = multiplier + 'x Combo!';
+            comboEl.classList.add('active');
+
+            setTimeout(() => {
+                comboEl.classList.remove('active');
+            },1500);
+        }
+
+        function showGameOver() {
+            gameState = 'gameover';
+            stopBackgroundMusic();
+
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('bestCombo').textContent = bestCombo + 'x';
+            document.getElementById('gameOverOverlay').classList.add('active');
+        }
+
+        function hideGameOver() {
+            document.getElementById('gameOverOverlay').classList.remove('active');
+        }
+
+        // ===== GAME LOOP =====
+        function update(deltaTime) {
+            if (gameState !== 'playing') return;
+
+            // Update timer
+            timeRemaining -= deltaTime;
+            if (timeRemaining <= 0) {
+                timeRemaining = 0;
+                showGameOver();
+            }
+            updateTimerDisplay();
+
+            // Animate score
+            animateScore();
+
+            // Update node animations
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const node = grid[y][x];
+                    if (!node) continue;
+
+                    // Animate falling
+                    if (node.falling) {
+                        const targetY = node.y;
+                        if (node.visualY < targetY) {
+                            node.visualY += deltaTime * 15;
+                            if (node.visualY >= targetY) {
+                                node.visualY = targetY;
+                                node.falling = false;
+                            }
+                        }
+                    }
+
+                    // Animate glow
+                    if (node.glow > 0) {
+                        node.glow = Math.max(0,node.glow - deltaTime * 2);
+                    }
+
+                    // Pulse animation
+                    node.scale = 1 + Math.sin(Date.now() * 0.003 + x + y) * 0.05;
+                }
+            }
+
+            // Update particles
+            updateParticles(deltaTime);
+
+            // Update screen shake
+            if (screenShake > 0) {
+                screenShake -= deltaTime * 60;
+                if (screenShake < 0) screenShake = 0;
+            }
+        }
+
+        function render() {
+            // Clear canvas using logical (CSS) size so transforms map 1:1
+            const logicalRect = canvas.getBoundingClientRect();
+            const logicalW = logicalRect.width;
+            const logicalH = logicalRect.height;
+            ctx.clearRect(0,0,logicalW,logicalH);
+
+            // Apply screen shake
+            ctx.save();
+            if (screenShake > 0) {
+                const shakeX = (Math.random() - 0.5) * screenShake;
+                const shakeY = (Math.random() - 0.5) * screenShake;
+                ctx.translate(shakeX,shakeY);
+            }
+
+            // Draw background
+            if (assetCache['background_circuit']) {
+                ctx.globalAlpha = 0.3;
+                ctx.drawImage(assetCache['background_circuit'],0,0,logicalW,logicalH);
+                ctx.globalAlpha = 1;
+            }
+
+            // Draw grid lines
+            ctx.strokeStyle = 'rgba(0, 217, 255, 0.2)';
+            ctx.lineWidth = 1;
+
+            const width = window.gameConfig.gridWidth;
+            const height = window.gameConfig.gridHeight;
+
+            for (let x = 0; x <= width; x++) {
+                const posX = gridStartX + x * cellSize;
+                ctx.beginPath();
+                ctx.moveTo(posX,gridStartY);
+                ctx.lineTo(posX,gridStartY + height * cellSize);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y <= height; y++) {
+                const posY = gridStartY + y * cellSize;
+                ctx.beginPath();
+                ctx.moveTo(gridStartX,posY);
+                ctx.lineTo(gridStartX + width * cellSize,posY);
+                ctx.stroke();
+            }
+
+            // Draw nodes
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const node = grid[y][x];
+                    if (!node) continue;
+
+                    const pos = getNodePosition(x,node.visualY);
+                    const nodeSize = cellSize * 0.8 * node.scale;
+
+                    // Draw glow
+                    if (node.glow > 0) {
+                        ctx.shadowBlur = 30 * node.glow;
+                        ctx.shadowColor = colorHex[node.color];
+                    }
+
+                    // Draw node image
+                    const nodeImg = assetCache['node_' + node.color];
+                    if (nodeImg) {
+                        ctx.drawImage(
+                            nodeImg,
+                            pos.x - nodeSize / 2,
+                            pos.y - nodeSize / 2,
+                            nodeSize,
+                            nodeSize
+                        );
+                    }
+
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            // Draw connection trail
+            if (currentConnection.length > 0) {
+                ctx.strokeStyle = colorHex[currentConnection[0].color];
+                ctx.lineWidth = 8;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = colorHex[currentConnection[0].color];
+
+                ctx.beginPath();
+                for (let i = 0; i < currentConnection.length; i++) {
+                    const node = currentConnection[i];
+                    const pos = getNodePosition(node.x,node.visualY);
+
+                    if (i === 0) {
+                        ctx.moveTo(pos.x,pos.y);
+                    } else {
+                        ctx.lineTo(pos.x,pos.y);
+                    }
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            }
+
+            // Draw particles
+            particles.forEach(p => {
+                ctx.globalAlpha = p.life;
+
+                if (p.isText) {
+                    ctx.font = 'bold 24px Orbitron, sans-serif';
+                    ctx.fillStyle = '#ffbe0b';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(p.text,p.x,p.y);
+                } else {
+                    const particleImg = assetCache[p.type];
+                    if (particleImg) {
+                        ctx.drawImage(
+                            particleImg,
+                            p.x - p.size / 2,
+                            p.y - p.size / 2,
+                            p.size,
+                            p.size
+                        );
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+            });
+
+            ctx.restore();
+        }
+
+        function gameLoop(timestamp) {
+            const deltaTime = Math.min((timestamp - lastTime) / 1000,0.11);
+            lastTime = timestamp;
+
+            if (currentMode === 'play') {
+                update(deltaTime);
+                render();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // ===== INPUT HANDLING =====
+        function setupInputHandlers() {
+            // Touch events
+            canvas.addEventListener('touchstart',(e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                // Use logical client coordinates (CSS pixels) to match layout calculations
+                const x = (touch.clientX - rect.left);
+                const y = (touch.clientY - rect.top);
+
+                const gridCoords = getGridCoordinates(x,y);
+                if (gridCoords) {
+                    startConnection(gridCoords.x,gridCoords.y);
+                }
+            });
+
+            canvas.addEventListener('touchmove',(e) => {
+                e.preventDefault();
+                if (!isConnecting) return;
+
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = (touch.clientX - rect.left);
+                const y = (touch.clientY - rect.top);
+
+                const gridCoords = getGridCoordinates(x,y);
+                if (gridCoords) {
+                    updateConnection(gridCoords.x,gridCoords.y);
+                }
+            });
+
+            canvas.addEventListener('touchend',(e) => {
+                e.preventDefault();
+                endConnection();
+            });
+
+            // Mouse events
+            canvas.addEventListener('mousedown',(e) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX - rect.left);
+                const y = (e.clientY - rect.top);
+
+                const gridCoords = getGridCoordinates(x,y);
+                if (gridCoords) {
+                    startConnection(gridCoords.x,gridCoords.y);
+                }
+            });
+
+            canvas.addEventListener('mousemove',(e) => {
+                if (!isConnecting) return;
+
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX - rect.left);
+                const y = (e.clientY - rect.top);
+
+                const gridCoords = getGridCoordinates(x,y);
+                if (gridCoords) {
+                    updateConnection(gridCoords.x,gridCoords.y);
+                }
+            });
+
+            canvas.addEventListener('mouseup',() => {
+                endConnection();
+            });
+
+            // UI Button handlers
+            document.getElementById('pauseButton').addEventListener('click',togglePause);
+            document.getElementById('resumeButton').addEventListener('click',resumeGame);
+            document.getElementById('restartButton').addEventListener('click',resetGame);
+            document.getElementById('restartFromPauseButton').addEventListener('click',resetGame);
+
+            // Keyboard shortcuts
+            setupKeyboardShortcuts();
+        }
+
+        // ===== GAME INITIALIZATION =====
+        function startGame() {
+            // Responsive canvas sizing using logical (CSS) pixels and devicePixelRatio backing store
+            function resizeCanvasAndLayout() {
+                const dpr = window.devicePixelRatio || 1;
+                // Set CSS size to fill the viewport
+                const logicalW = window.innerWidth;
+                const logicalH = window.innerHeight;
+                canvas.style.width = logicalW + 'px';
+                canvas.style.height = logicalH + 'px';
+
+                // Set backing store size for crisp rendering
+                canvas.width = Math.round(logicalW * dpr);
+                canvas.height = Math.round(logicalH * dpr);
+
+                // Map drawing coordinates so 1 unit == 1 CSS pixel
+                ctx.setTransform(dpr,0,0,dpr,0,0);
+
+                // Recalculate grid using logical (CSS) sizes
+                calculateGridLayout();
+            }
+
+            // Initial layout and event setup
+            resizeCanvasAndLayout();
+            initGrid();
+            setupInputHandlers();
+
+            // Debounced resize handler
+            let resizeTimer = null;
+            window.addEventListener('resize',() => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    resizeCanvasAndLayout();
+                    // Recreate node positions to match new layout
+                    // keep existing grid data but adjust visual positions
+                    grid.forEach(row => row.forEach(node => {
+                        const pos = getNodePosition(node.x,node.y);
+                        node.visualX = node.x;
+                        node.visualY = node.y;
+                    }));
+                },120);
+            });
+
+            // Try to start background music immediately. If blocked by autoplay policies,
+            // attach a one-time user-gesture listener to resume and start music.
+            function ensureMusicStartedOnGesture() {
+                if (backgroundMusicStarted) return;
+
+                const resumeAndPlay = () => {
+                    audioContext.resume().then(() => {
+                        if (!backgroundMusicStarted && currentMode === 'play') {
+                            playBackgroundMusic();
+                        }
+                    }).catch(() => { });
+                    window.removeEventListener('pointerdown',resumeAndPlay);
+                    window.removeEventListener('touchstart',resumeAndPlay);
+                };
+
+                window.addEventListener('pointerdown',resumeAndPlay,{ once: true });
+                window.addEventListener('touchstart',resumeAndPlay,{ once: true });
+            }
+
+            if (currentMode === 'play') {
+                // If audio context is already running, play now. Otherwise wait for a user gesture.
+                if (audioContext.state === 'running') {
+                    playBackgroundMusic();
+                } else {
+                    ensureMusicStartedOnGesture();
+                }
+            }
+
+            lastTime = performance.now();
+            gameLoop(lastTime);
+        }
+
+        function resetGame() {
+            hideGameOver();
+            document.getElementById('pauseOverlay').classList.remove('active');
+            score = 0;
+            displayScore = 0;
+            timeRemaining = window.gameConfig.startTime;
+            bestCombo = 0;
+            gameState = 'playing';
+            particles = [];
+            currentConnection = [];
+            isConnecting = false;
+            lastConnectedNode = null;
+            timerWarningPlaying = false;
+
+            document.getElementById('scoreDisplay').textContent = '0';
+            updateTimerDisplay();
+            initGrid();
+
+            if (currentMode === 'play') {
+                playBackgroundMusic();
+            }
+        }
+
+        // ===== MAIN RUN FUNCTION =====
+        function run(mode) {
+            lib.log('run() called. Mode: ' + mode);
+            currentMode = mode;
+
+            // Show game parameters UI
+            // lib.showGameParameters({
+            //     name: 'Game Settings',
+            //     params: {
+            //         'Grid Width': {
+            //             key: 'gameConfig.gridWidth',
+            //             type: 'slider',
+            //             min: 5,
+            //             max: 7,
+            //             step: 1,
+            //             onChange: (value) => {
+            //                 window.gameConfig.gridWidth = value;
+            //                 calculateGridLayout();
+            //                 initGrid();
+            //             }
+            //         },
+            //         'Grid Height': {
+            //             key: 'gameConfig.gridHeight',
+            //             type: 'slider',
+            //             min: 7,
+            //             max: 9,
+            //             step: 1,
+            //             onChange: (value) => {
+            //                 window.gameConfig.gridHeight = value;
+            //                 calculateGridLayout();
+            //                 initGrid();
+            //             }
+            //         },
+            //         'Number of Colors': {
+            //             key: 'gameConfig.numColors',
+            //             type: 'slider',
+            //             min: 4,
+            //             max: 6,
+            //             step: 1,
+            //             onChange: (value) => {
+            //                 window.gameConfig.numColors = value;
+            //                 initGrid();
+            //             }
+            //         },
+            //         'Starting Time': {
+            //             key: 'gameConfig.startTime',
+            //             type: 'slider',
+            //             min: 20,
+            //             max: 120,
+            //             step: 5,
+            //             onChange: (value) => {
+            //                 window.gameConfig.startTime = value;
+            //                 if (gameState === 'playing') {
+            //                     timeRemaining = value;
+            //                     updateTimerDisplay();
+            //                 }
+            //             }
+            //         },
+            //         'Sound Volume': {
+            //             key: 'gameConfig.soundVolume',
+            //             type: 'slider',
+            //             min: 0,
+            //             max: 1,
+            //             step: 0.1,
+            //             onChange: (value) => {
+            //                 window.gameConfig.soundVolume = value;
+            //             }
+            //         },
+            //         'Music Volume': {
+            //             key: 'gameConfig.musicVolume',
+            //             type: 'slider',
+            //             min: 0,
+            //             max: 1,
+            //             step: 0.1,
+            //             onChange: (value) => {
+            //                 window.gameConfig.musicVolume = value;
+            //                 if (backgroundMusicSource) {
+            //                     stopBackgroundMusic();
+            //                     if (currentMode === 'play' && gameState === 'playing') {
+            //                         playBackgroundMusic();
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // });
+
+            // Start asset loading
+            preloadAssets();
+        }
+
+        // Auto-start when page is loaded so the game runs when opening the HTML directly
+        document.addEventListener('DOMContentLoaded',function () {
+            try { run('play'); } catch (e) { console.warn('Auto-run failed',e); }
+        });
+
+        // If background music hasn't started after a short delay, show the enable-sound overlay.
+        document.addEventListener('DOMContentLoaded',function () {
+            setTimeout(() => {
+                try {
+                    const overlay = document.getElementById('audioEnableOverlay');
+                    const card = document.getElementById('audioEnableCard');
+                    const btn = document.getElementById('enableAudioBtn');
+
+                    function hideCard() {
+                        if (card) card.style.display = 'none';
+                        if (overlay) overlay.style.pointerEvents = 'none';
+                    }
+
+                    function showCard() {
+                        if (card) card.style.display = 'flex';
+                        if (overlay) overlay.style.pointerEvents = 'auto';
+                    }
+
+                    // Show the prompt only if audio isn't running and music hasn't started
+                    if (!backgroundMusicStarted && audioContext.state !== 'running') showCard();
+
+                    const enable = () => {
+                        audioContext.resume().then(() => {
+                            if (!backgroundMusicStarted) playBackgroundMusic();
+                        }).catch(() => {
+                            try { playBackgroundMusic(); } catch (e) { }
+                        }).finally(() => hideCard());
+                    };
+
+                    if (btn) btn.addEventListener('click',enable);
+                    if (overlay) overlay.addEventListener('pointerdown',(e) => { if (e.target === overlay) enable(); });
+                } catch (e) { /* ignore */ }
+            },900);
+        });
+
+        // Initialize music toggle button and persisted muted state
+        (function initMusicToggle() {
+            try {
+                const MUSIC_KEY = 'ql_music_muted';
+                const btn = document.getElementById('musicToggle');
+                const iconUnmuted = document.getElementById('icon-unmuted');
+                const iconMuted = document.getElementById('icon-muted');
+
+                function isMutedStored() {
+                    try { return localStorage.getItem(MUSIC_KEY) === '1'; } catch (e) { return false; }
+                }
+
+                function setMutedState(muted) {
+                    try { localStorage.setItem(MUSIC_KEY,muted ? '1' : '0'); } catch (e) { }
+                    if (muted) {
+                        if (backgroundMusicStarted) stopBackgroundMusic();
+                        if (iconUnmuted) iconUnmuted.style.display = 'none';
+                        if (iconMuted) iconMuted.style.display = 'block';
+                    } else {
+                        if (!backgroundMusicStarted) playBackgroundMusic();
+                        if (iconUnmuted) iconUnmuted.style.display = 'block';
+                        if (iconMuted) iconMuted.style.display = 'none';
+                    }
+                }
+
+                if (btn) {
+                    // Initialize from storage
+                    const muted = isMutedStored();
+                    setTimeout(() => setMutedState(muted),200);
+
+                    btn.addEventListener('click',(e) => {
+                        e.stopPropagation();
+                        const currentlyMuted = isMutedStored();
+                        setMutedState(!currentlyMuted);
+                    });
+                }
+            } catch (e) { console.warn('initMusicToggle error',e); }
+        })();
+    </script>
+</body>
+
+</html>

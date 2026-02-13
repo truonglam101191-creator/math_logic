@@ -1,0 +1,941 @@
+{
+    "stethoscope": "null",
+    "tray": {
+        "shapes": [
+            {
+                "id": "tray_bg",
+                "type": "rounded_rectangle",
+                "x": 0,
+                "y": 368.0186210848792,
+                "width": 704,
+                "height": 843.0683918669129,
+                "color": "#c55230",
+                "borderColor": "#ccc",
+                "borderWidth": 2,
+                "cornerRadius": 20,
+                "rotation": 0,
+                "opacity": 1,
+                "assetId": "toolbox_tray"
+            }
+        ]
+    },
+    "correctSlot": "null",
+    "animations": {
+        "snapSpeed": 1.2,
+        "bounceIntensity": 1.3,
+        "sparkleIntensity": 1.9
+    },
+    "gameplay": {
+        "isPlaced": false,
+        "showGlow": false
+    },
+    "ui": {
+        "theme": "soft-medical",
+        "showHelpOnStart": false,
+        "enableHints": true,
+        "primaryColor": "#ff6b9d",
+        "secondaryColor": "#ff4757",
+        "successColor": "#2ed573",
+        "enablePreviewMode": "true",
+        "showGlowEffects": "true"
+    },
+    "items": "[{\"id\":\"hammer\",\"assetId\":\"hammer_tool\",\"name\":\"Hammer\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":137.1228243914582,\"height\":305.4786615927194,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"screwdriver\",\"assetId\":\"screwdriver_tool\",\"name\":\"Screwdriver\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":101.93881501942624,\"height\":157.5855879663099,\"color\":\"#FF4500\",\"isPlaced\":false,\"slotId\":null,\"rotation\":179.78555683245372,\"opacity\":1},{\"id\":\"wrench\",\"assetId\":\"wrench_tool\",\"name\":\"Wrench\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":157.42913904869653,\"height\":159.49927847757124,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pliers\",\"assetId\":\"pliers_tool\",\"name\":\"Pliers\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":146.56796111105257,\"height\":119.43602391025055,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":290.6670575114661,\"opacity\":1},{\"id\":\"measuring_tape\",\"assetId\":\"measuring_tape\",\"name\":\"Measuring Tape\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":116.93934490666058,\"height\":110.6689863675146,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"level\",\"assetId\":\"level_tool\",\"name\":\"Level\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":137.73627781485456,\"height\":194.88596921632904,\"color\":\"#FFFF00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"drill_bits\",\"assetId\":\"drill_bits\",\"name\":\"Drill Bits\",\"x\":236,\"y\":236.7320261437909,\"startX\":200,\"startY\":220,\"width\":65.00743041137426,\"height\":84.93409301991576,\"color\":\"#2F4F4F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":269.5739538092949,\"opacity\":1},{\"id\":\"utility_knife\",\"assetId\":\"utility_knife\",\"name\":\"Utility Knife\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":107.37947315111889,\"height\":189.8244802277205,\"color\":\"#FF8C00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"safety_glasses\",\"assetId\":\"safety_glasses\",\"name\":\"Safety Glasses\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":199.20102714304755,\"height\":216.84123497534173,\"color\":\"#000000\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"allen_wrench\",\"assetId\":\"allen_wrench_set\",\"name\":\"Allen Wrench Set\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":105.49391927378828,\"height\":104.95130869546607,\"color\":\"#696969\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"socket_wrench\",\"assetId\":\"socket_wrench\",\"name\":\"Socket Wrench\",\"x\":357,\"y\":276.3485477178423,\"startX\":80,\"startY\":360,\"width\":120,\"height\":103.90041493775936,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"medical_scissors\",\"assetId\":\"medical_scissors\",\"name\":\"Scissors\",\"x\":242,\"y\":322.82157676348567,\"startX\":220,\"startY\":360,\"width\":87,\"height\":91.41078838174269,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":39.58031492454995,\"opacity\":1}]",
+    "slots": "[{\"id\":\"slot_0\",\"x\":516,\"y\":711.5406162464986,\"width\":80.9154047857552,\"height\":326.67025589461934,\"shape\":\"rectangle\",\"itemId\":\"hammer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_1\",\"x\":437,\"y\":872.8851540616247,\"width\":30.195253954377378,\"height\":168.26393664166466,\"shape\":\"rectangle\",\"itemId\":\"screwdriver\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF4500\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_2\",\"x\":101,\"y\":865.7142857142857,\"width\":102.3773878056835,\"height\":172.8687971642291,\"shape\":\"rectangle\",\"itemId\":\"wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_3\",\"x\":104,\"y\":547.8057889822596,\"width\":124.08927761837818,\"height\":107.24830790628653,\"shape\":\"rounded_rectangle\",\"itemId\":\"pliers\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_4\",\"x\":263,\"y\":529.8786181139122,\"width\":117.33011919067003,\"height\":96.89623544747406,\"shape\":\"rounded_rectangle\",\"itemId\":\"measuring_tape\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_5\",\"x\":107,\"y\":729.9533146591972,\"width\":119.71832516498847,\"height\":70.05408897269928,\"shape\":\"rounded_rectangle\",\"itemId\":\"level\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFF00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_6\",\"x\":231,\"y\":982.3792864310317,\"width\":83.67038471117529,\"height\":59.08917013241715,\"shape\":\"oval\",\"itemId\":\"drill_bits\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#2F4F4F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_7\",\"x\":344,\"y\":861.4192343604109,\"width\":48.02319592597712,\"height\":168.34936474987856,\"shape\":\"rectangle\",\"itemId\":\"utility_knife\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF8C00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_8\",\"x\":412,\"y\":548.2913165266106,\"width\":185.88334989113847,\"height\":106.9580389884795,\"shape\":\"rectangle\",\"itemId\":\"safety_glasses\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#000000\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_9\",\"x\":283,\"y\":685.7329598506069,\"width\":76.3504348825737,\"height\":137.1516965411177,\"shape\":\"oval\",\"itemId\":\"allen_wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#696969\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_10\",\"x\":403,\"y\":696.5705064875191,\"width\":76,\"height\":134.6591970121383,\"shape\":\"rectangle\",\"itemId\":\"socket_wrench\",\"rotation\":23.95553942580767,\"color\":\"#c55230\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_11\",\"x\":248,\"y\":877.551867219917,\"width\":62,\"height\":75.39419087136923,\"shape\":\"circle\",\"itemId\":\"medical_scissors\",\"rotation\":0,\"color\":\"#c55230\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1}]",
+    "currentTheme": "medical",
+    "scoring": {
+        "basePoints": 100,
+        "maxMultiplier": 5,
+        "streakBonus": 0.5
+    },
+    "currentLevel": 1,
+    "unlockedLevels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+    ],
+    "levelConfigurations": {
+        "medical_level_1": {
+            "items": [
+                {
+                    "id": "stethoscope",
+                    "assetId": "pink_stethoscope",
+                    "name": "Stethoscope",
+                    "x": 80,
+                    "y": 80,
+                    "startX": 80,
+                    "startY": 80,
+                    "width": 159.54,
+                    "height": 244.56,
+                    "color": "#ff6b9d",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "gloves",
+                    "assetId": "medical_gloves",
+                    "name": "Medical Gloves",
+                    "x": 200,
+                    "y": 80,
+                    "startX": 200,
+                    "startY": 80,
+                    "width": 229.72,
+                    "height": 124.44,
+                    "color": "#87ceeb",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "pills",
+                    "assetId": "pill_bottle",
+                    "name": "Pill Bottle",
+                    "x": 320,
+                    "y": 80,
+                    "startX": 320,
+                    "startY": 80,
+                    "width": 108.98,
+                    "height": 116.02,
+                    "color": "#ffa07a",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "thermometer",
+                    "assetId": "thermometer",
+                    "name": "Thermometer",
+                    "x": 440,
+                    "y": 80,
+                    "startX": 440,
+                    "startY": 80,
+                    "width": 103.1,
+                    "height": 263.93,
+                    "color": "#98fb98",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "bottle",
+                    "assetId": "baby_bottle",
+                    "name": "Baby Bottle",
+                    "x": 560,
+                    "y": 80,
+                    "startX": 560,
+                    "startY": 80,
+                    "width": 130.21,
+                    "height": 241.15,
+                    "color": "#ffb6c1",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "gauze",
+                    "assetId": "gauze_roll",
+                    "name": "Gauze Roll",
+                    "x": 80,
+                    "y": 220,
+                    "startX": 80,
+                    "startY": 220,
+                    "width": 107.5,
+                    "height": 148.62,
+                    "color": "#f5f5dc",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "bandages",
+                    "assetId": "bandages",
+                    "name": "Bandages",
+                    "x": 200,
+                    "y": 220,
+                    "startX": 200,
+                    "startY": 220,
+                    "width": 123.64,
+                    "height": 103.56,
+                    "color": "#deb887",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "syringe",
+                    "assetId": "syringe",
+                    "name": "Syringe",
+                    "x": 320,
+                    "y": 220,
+                    "startX": 320,
+                    "startY": 220,
+                    "width": 112.49,
+                    "height": 405.04,
+                    "color": "#e0e0e0",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "swabs",
+                    "assetId": "cotton_swabs",
+                    "name": "Cotton Swabs",
+                    "x": 440,
+                    "y": 220,
+                    "startX": 440,
+                    "startY": 220,
+                    "width": 122.86,
+                    "height": 96.09,
+                    "color": "#ffffff",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                },
+                {
+                    "id": "mask",
+                    "assetId": "medical_mask",
+                    "name": "Medical Mask",
+                    "x": 560,
+                    "y": 220,
+                    "startX": 560,
+                    "startY": 220,
+                    "width": 186.23,
+                    "height": 173.2,
+                    "color": "#add8e6",
+                    "isPlaced": false,
+                    "slotId": null,
+                    "rotation": 0,
+                    "opacity": 1
+                }
+            ],
+            "slots": [
+                {
+                    "id": "slot_0",
+                    "x": 100,
+                    "y": 494.0242763772176,
+                    "width": 139.1777175463153,
+                    "height": 255.24369255564753,
+                    "shape": "rounded_rectangle",
+                    "itemId": "stethoscope",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#ff6b9d",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_1",
+                    "x": 386,
+                    "y": 496.41456582633043,
+                    "width": 219.10899313562018,
+                    "height": 104.68566363997611,
+                    "shape": "rounded_rectangle",
+                    "itemId": "gloves",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#87ceeb",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_2",
+                    "x": 219,
+                    "y": 809.5424836601308,
+                    "width": 98.3936024049519,
+                    "height": 94.53770383290546,
+                    "shape": "oval",
+                    "itemId": "pills",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#ffa07a",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_3",
+                    "x": 108,
+                    "y": 805.9570494864612,
+                    "width": 65.53559707557406,
+                    "height": 270.70852239750457,
+                    "shape": "rectangle",
+                    "itemId": "thermometer",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#98fb98",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_4",
+                    "x": 279,
+                    "y": 507.170868347339,
+                    "width": 61.490859908141175,
+                    "height": 242.0542777619663,
+                    "shape": "rounded_rectangle",
+                    "itemId": "bottle",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#ffb6c1",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_5",
+                    "x": 428,
+                    "y": 948.7664609412229,
+                    "width": 78.63921532370051,
+                    "height": 130.6831066317735,
+                    "shape": "rectangle",
+                    "itemId": "gauze",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#f5f5dc",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_6",
+                    "x": 380,
+                    "y": 653.4640522875817,
+                    "width": 119.48288588845232,
+                    "height": 93.24058118311115,
+                    "shape": "rectangle",
+                    "itemId": "bandages",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#deb887",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_7",
+                    "x": 537,
+                    "y": 654.6591970121382,
+                    "width": 69.77225044884324,
+                    "height": 432.3072622741189,
+                    "shape": "rectangle",
+                    "itemId": "syringe",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#e0e0e0",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_8",
+                    "x": 374,
+                    "y": 807.6377217553688,
+                    "width": 128.22662436164427,
+                    "height": 103.8678698226716,
+                    "shape": "rounded_rectangle",
+                    "itemId": "swabs",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#ffffff",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                },
+                {
+                    "id": "slot_9",
+                    "x": 218,
+                    "y": 963.1663285506274,
+                    "width": 175.2122985378214,
+                    "height": 114.85421299932574,
+                    "shape": "rectangle",
+                    "itemId": "mask",
+                    "rotation": 0,
+                    "color": "#f0f0f0",
+                    "borderColor": "#add8e6",
+                    "cornerRadius": 8,
+                    "opacity": 0,
+                    "difficulty": "medium"
+                }
+            ],
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.21,
+                        "width": 704,
+                        "height": 843.07,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "large_medical_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758305074435
+        },
+        "toolbox_level_2": {
+            "items": "[{\"id\":\"hammer\",\"assetId\":\"hammer_tool\",\"name\":\"Hammer\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":137.1228243914582,\"height\":305.4786615927194,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"screwdriver\",\"assetId\":\"screwdriver_tool\",\"name\":\"Screwdriver\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":101.93881501942624,\"height\":157.5855879663099,\"color\":\"#FF4500\",\"isPlaced\":false,\"slotId\":null,\"rotation\":179.78555683245372,\"opacity\":1},{\"id\":\"wrench\",\"assetId\":\"wrench_tool\",\"name\":\"Wrench\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":157.42913904869653,\"height\":159.49927847757124,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pliers\",\"assetId\":\"pliers_tool\",\"name\":\"Pliers\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":146.56796111105257,\"height\":119.43602391025055,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":290.6670575114661,\"opacity\":1},{\"id\":\"measuring_tape\",\"assetId\":\"measuring_tape\",\"name\":\"Measuring Tape\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":116.93934490666058,\"height\":110.6689863675146,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"level\",\"assetId\":\"level_tool\",\"name\":\"Level\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":137.73627781485456,\"height\":194.88596921632904,\"color\":\"#FFFF00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"drill_bits\",\"assetId\":\"drill_bits\",\"name\":\"Drill Bits\",\"x\":236,\"y\":236.7320261437909,\"startX\":200,\"startY\":220,\"width\":65.00743041137426,\"height\":84.93409301991576,\"color\":\"#2F4F4F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":269.5739538092949,\"opacity\":1},{\"id\":\"utility_knife\",\"assetId\":\"utility_knife\",\"name\":\"Utility Knife\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":107.37947315111889,\"height\":189.8244802277205,\"color\":\"#FF8C00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"safety_glasses\",\"assetId\":\"safety_glasses\",\"name\":\"Safety Glasses\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":199.20102714304755,\"height\":216.84123497534173,\"color\":\"#000000\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"allen_wrench\",\"assetId\":\"allen_wrench_set\",\"name\":\"Allen Wrench Set\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":105.49391927378828,\"height\":104.95130869546607,\"color\":\"#696969\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"socket_wrench\",\"assetId\":\"socket_wrench\",\"name\":\"Socket Wrench\",\"x\":357,\"y\":276.3485477178423,\"startX\":80,\"startY\":360,\"width\":120,\"height\":103.90041493775936,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"medical_scissors\",\"assetId\":\"medical_scissors\",\"name\":\"Scissors\",\"x\":242,\"y\":322.82157676348567,\"startX\":220,\"startY\":360,\"width\":87,\"height\":91.41078838174269,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":39.58031492454995,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":516,\"y\":711.5406162464986,\"width\":80.9154047857552,\"height\":326.67025589461934,\"shape\":\"rectangle\",\"itemId\":\"hammer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_1\",\"x\":437,\"y\":872.8851540616247,\"width\":30.195253954377378,\"height\":168.26393664166466,\"shape\":\"rectangle\",\"itemId\":\"screwdriver\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF4500\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_2\",\"x\":101,\"y\":865.7142857142857,\"width\":102.3773878056835,\"height\":172.8687971642291,\"shape\":\"rectangle\",\"itemId\":\"wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_3\",\"x\":104,\"y\":547.8057889822596,\"width\":124.08927761837818,\"height\":107.24830790628653,\"shape\":\"rounded_rectangle\",\"itemId\":\"pliers\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_4\",\"x\":263,\"y\":529.8786181139122,\"width\":117.33011919067003,\"height\":96.89623544747406,\"shape\":\"rounded_rectangle\",\"itemId\":\"measuring_tape\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_5\",\"x\":107,\"y\":729.9533146591972,\"width\":119.71832516498847,\"height\":70.05408897269928,\"shape\":\"rounded_rectangle\",\"itemId\":\"level\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFF00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_6\",\"x\":231,\"y\":982.3792864310317,\"width\":83.67038471117529,\"height\":59.08917013241715,\"shape\":\"oval\",\"itemId\":\"drill_bits\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#2F4F4F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_7\",\"x\":344,\"y\":861.4192343604109,\"width\":48.02319592597712,\"height\":168.34936474987856,\"shape\":\"rectangle\",\"itemId\":\"utility_knife\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF8C00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_8\",\"x\":412,\"y\":548.2913165266106,\"width\":185.88334989113847,\"height\":106.9580389884795,\"shape\":\"rectangle\",\"itemId\":\"safety_glasses\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#000000\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_9\",\"x\":283,\"y\":685.7329598506069,\"width\":76.3504348825737,\"height\":137.1516965411177,\"shape\":\"oval\",\"itemId\":\"allen_wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#696969\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_10\",\"x\":403,\"y\":696.5705064875191,\"width\":76,\"height\":134.6591970121383,\"shape\":\"rectangle\",\"itemId\":\"socket_wrench\",\"rotation\":23.95553942580767,\"color\":\"#c55230\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_11\",\"x\":248,\"y\":877.551867219917,\"width\":62,\"height\":75.39419087136923,\"shape\":\"circle\",\"itemId\":\"medical_scissors\",\"rotation\":0,\"color\":\"#c55230\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 368.0186210848792,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "toolbox_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759519174027
+        },
+        "toybox_level_6": {
+            "items": "[{\"id\":\"teddy_bear\",\"assetId\":\"teddy_bear\",\"name\":\"Teddy Bear\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":100,\"height\":120,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_car\",\"assetId\":\"toy_car\",\"name\":\"Toy Car\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":110,\"height\":80,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"building_blocks\",\"assetId\":\"building_blocks\",\"name\":\"Building Blocks\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":100,\"height\":100,\"color\":\"#FF6347\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_airplane\",\"assetId\":\"toy_airplane\",\"name\":\"Toy Airplane\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":120,\"height\":80,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"rubber_duck\",\"assetId\":\"rubber_duck\",\"name\":\"Rubber Duck\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":80,\"height\":90,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_robot\",\"assetId\":\"toy_robot\",\"name\":\"Toy Robot\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":90,\"height\":120,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_ball\",\"assetId\":\"toy_ball\",\"name\":\"Bouncy Ball\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":80,\"height\":80,\"color\":\"#FF69B4\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_train\",\"assetId\":\"toy_train\",\"name\":\"Toy Train\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":130,\"height\":80,\"color\":\"#32CD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_dinosaur\",\"assetId\":\"toy_dinosaur\",\"name\":\"Toy Dinosaur\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":110,\"height\":100,\"color\":\"#9ACD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toy_doll\",\"assetId\":\"toy_doll\",\"name\":\"Rag Doll\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":85,\"height\":130,\"color\":\"#FFB6C1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":500,\"width\":100,\"height\":120,\"shape\":\"rounded_rectangle\",\"itemId\":\"teddy_bear\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":220,\"y\":520,\"width\":110,\"height\":80,\"shape\":\"rectangle\",\"itemId\":\"toy_car\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":350,\"y\":500,\"width\":100,\"height\":100,\"shape\":\"rectangle\",\"itemId\":\"building_blocks\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF6347\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":470,\"y\":520,\"width\":120,\"height\":80,\"shape\":\"oval\",\"itemId\":\"toy_airplane\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":100,\"y\":650,\"width\":80,\"height\":90,\"shape\":\"circle\",\"itemId\":\"rubber_duck\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":200,\"y\":640,\"width\":90,\"height\":120,\"shape\":\"rectangle\",\"itemId\":\"toy_robot\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":310,\"y\":660,\"width\":80,\"height\":80,\"shape\":\"circle\",\"itemId\":\"toy_ball\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF69B4\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":410,\"y\":650,\"width\":130,\"height\":80,\"shape\":\"rounded_rectangle\",\"itemId\":\"toy_train\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#32CD32\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":100,\"y\":800,\"width\":110,\"height\":100,\"shape\":\"oval\",\"itemId\":\"toy_dinosaur\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#9ACD32\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":230,\"y\":790,\"width\":85,\"height\":130,\"shape\":\"rectangle\",\"itemId\":\"toy_doll\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFB6C1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369,
+                        "width": 704,
+                        "height": 843,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "toy_chest"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759520000000
+        },
+        "kitchen_level_7": {
+            "items": "[{\"id\":\"chef_knife\",\"assetId\":\"chef_knife\",\"name\":\"Chef Knife\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":50,\"height\":180,\"color\":\"#2F4F4F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"wooden_spoon\",\"assetId\":\"wooden_spoon\",\"name\":\"Wooden Spoon\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":40,\"height\":160,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"whisk\",\"assetId\":\"whisk\",\"name\":\"Whisk\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":50,\"height\":170,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"spatula\",\"assetId\":\"spatula\",\"name\":\"Spatula\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":60,\"height\":150,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"measuring_cups\",\"assetId\":\"measuring_cups\",\"name\":\"Measuring Cups\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":120,\"height\":80,\"color\":\"#B0C4DE\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"can_opener\",\"assetId\":\"can_opener\",\"name\":\"Can Opener\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":100,\"height\":60,\"color\":\"#696969\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"tongs\",\"assetId\":\"tongs\",\"name\":\"Tongs\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":50,\"height\":180,\"color\":\"#708090\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"peeler\",\"assetId\":\"peeler\",\"name\":\"Peeler\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":40,\"height\":120,\"color\":\"#A0522D\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"ladle\",\"assetId\":\"ladle\",\"name\":\"Ladle\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":70,\"height\":180,\"color\":\"#4682B4\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"cutting_board\",\"assetId\":\"cutting_board\",\"name\":\"Cutting Board\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":150,\"height\":100,\"color\":\"#DEB887\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":500,\"width\":50,\"height\":180,\"shape\":\"rectangle\",\"itemId\":\"chef_knife\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#2F4F4F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":170,\"y\":510,\"width\":40,\"height\":160,\"shape\":\"rectangle\",\"itemId\":\"wooden_spoon\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":230,\"y\":500,\"width\":50,\"height\":170,\"shape\":\"rectangle\",\"itemId\":\"whisk\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":300,\"y\":520,\"width\":60,\"height\":150,\"shape\":\"rectangle\",\"itemId\":\"spatula\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":380,\"y\":580,\"width\":120,\"height\":80,\"shape\":\"rounded_rectangle\",\"itemId\":\"measuring_cups\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#B0C4DE\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":520,\"y\":500,\"width\":100,\"height\":60,\"shape\":\"oval\",\"itemId\":\"can_opener\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#696969\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":100,\"y\":720,\"width\":50,\"height\":180,\"shape\":\"rectangle\",\"itemId\":\"tongs\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#708090\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":170,\"y\":780,\"width\":40,\"height\":120,\"shape\":\"rectangle\",\"itemId\":\"peeler\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#A0522D\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":230,\"y\":710,\"width\":70,\"height\":180,\"shape\":\"rectangle\",\"itemId\":\"ladle\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4682B4\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":320,\"y\":800,\"width\":150,\"height\":100,\"shape\":\"rounded_rectangle\",\"itemId\":\"cutting_board\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DEB887\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369,
+                        "width": 704,
+                        "height": 843,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "kitchen_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759520000000
+        },
+        "farm_level_9": {
+            "items": "[{\"id\":\"watering_can\",\"assetId\":\"watering_can\",\"name\":\"Watering Can\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":110,\"height\":100,\"color\":\"#228B22\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"shovel\",\"assetId\":\"garden_shovel\",\"name\":\"Garden Shovel\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":50,\"height\":160,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"seeds\",\"assetId\":\"seed_packet\",\"name\":\"Seed Packet\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":70,\"height\":100,\"color\":\"#32CD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"gloves\",\"assetId\":\"garden_gloves\",\"name\":\"Garden Gloves\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":90,\"height\":80,\"color\":\"#DEB887\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pot\",\"assetId\":\"plant_pot\",\"name\":\"Plant Pot\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":90,\"height\":90,\"color\":\"#CD853F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"shears\",\"assetId\":\"pruning_shears\",\"name\":\"Pruning Shears\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":50,\"height\":130,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"fertilizer\",\"assetId\":\"fertilizer_bag\",\"name\":\"Fertilizer\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":100,\"height\":80,\"color\":\"#8FBC8F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"rake\",\"assetId\":\"garden_rake\",\"name\":\"Hand Rake\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":50,\"height\":140,\"color\":\"#A0522D\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"spray\",\"assetId\":\"spray_bottle\",\"name\":\"Spray Bottle\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":60,\"height\":120,\"color\":\"#00CED1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"trowel\",\"assetId\":\"garden_shovel\",\"name\":\"Trowel\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":45,\"height\":130,\"color\":\"#D2691E\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":500,\"width\":110,\"height\":100,\"shape\":\"rounded_rectangle\",\"itemId\":\"watering_can\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#228B22\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":230,\"y\":490,\"width\":50,\"height\":160,\"shape\":\"rectangle\",\"itemId\":\"shovel\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":300,\"y\":530,\"width\":70,\"height\":100,\"shape\":\"rounded_rectangle\",\"itemId\":\"seeds\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#32CD32\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":400,\"y\":560,\"width\":90,\"height\":80,\"shape\":\"oval\",\"itemId\":\"gloves\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DEB887\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":510,\"y\":540,\"width\":90,\"height\":90,\"shape\":\"circle\",\"itemId\":\"pot\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#CD853F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":100,\"y\":680,\"width\":50,\"height\":130,\"shape\":\"rectangle\",\"itemId\":\"shears\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":170,\"y\":750,\"width\":100,\"height\":80,\"shape\":\"rounded_rectangle\",\"itemId\":\"fertilizer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8FBC8F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":290,\"y\":690,\"width\":50,\"height\":140,\"shape\":\"rectangle\",\"itemId\":\"rake\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#A0522D\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":360,\"y\":720,\"width\":60,\"height\":120,\"shape\":\"oval\",\"itemId\":\"spray\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#00CED1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":450,\"y\":710,\"width\":45,\"height\":130,\"shape\":\"rectangle\",\"itemId\":\"trowel\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#D2691E\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369,
+                        "width": 704,
+                        "height": 843,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "gardening_tote"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759520000000
+        },
+        "gardening_level_10": {
+            "items": "[{\"id\":\"garden_trowel\",\"assetId\":\"garden_trowel\",\"name\":\"Garden Trowel\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":50,\"height\":150,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"garden_fork\",\"assetId\":\"garden_fork\",\"name\":\"Hand Fork\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":50,\"height\":140,\"color\":\"#A0522D\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"garden_weeder\",\"assetId\":\"garden_weeder\",\"name\":\"Weeder Tool\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":45,\"height\":160,\"color\":\"#654321\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"plant_markers\",\"assetId\":\"plant_markers\",\"name\":\"Plant Markers\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":100,\"height\":60,\"color\":\"#DEB887\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"garden_twine\",\"assetId\":\"garden_twine\",\"name\":\"Garden Twine\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":80,\"height\":80,\"color\":\"#8B7355\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"soil_scoop\",\"assetId\":\"soil_scoop\",\"name\":\"Soil Scoop\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":60,\"height\":120,\"color\":\"#32CD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"garden_kneeler\",\"assetId\":\"garden_kneeler\",\"name\":\"Kneeling Pad\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":120,\"height\":60,\"color\":\"#228B22\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"bulb_planter\",\"assetId\":\"bulb_planter\",\"name\":\"Bulb Planter\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":50,\"height\":130,\"color\":\"#556B2F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"garden_apron\",\"assetId\":\"garden_apron\",\"name\":\"Garden Apron\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":100,\"height\":120,\"color\":\"#6B8E23\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"watering_can\",\"assetId\":\"watering_can\",\"name\":\"Watering Can\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":110,\"height\":100,\"color\":\"#228B22\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":500,\"width\":50,\"height\":150,\"shape\":\"rectangle\",\"itemId\":\"garden_trowel\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":170,\"y\":510,\"width\":50,\"height\":140,\"shape\":\"rectangle\",\"itemId\":\"garden_fork\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#A0522D\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":240,\"y\":490,\"width\":45,\"height\":160,\"shape\":\"rectangle\",\"itemId\":\"garden_weeder\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#654321\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":310,\"y\":590,\"width\":100,\"height\":60,\"shape\":\"rounded_rectangle\",\"itemId\":\"plant_markers\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DEB887\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":430,\"y\":560,\"width\":80,\"height\":80,\"shape\":\"circle\",\"itemId\":\"garden_twine\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B7355\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":100,\"y\":700,\"width\":60,\"height\":120,\"shape\":\"oval\",\"itemId\":\"soil_scoop\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#32CD32\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":180,\"y\":790,\"width\":120,\"height\":60,\"shape\":\"rounded_rectangle\",\"itemId\":\"garden_kneeler\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#228B22\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":320,\"y\":700,\"width\":50,\"height\":130,\"shape\":\"rectangle\",\"itemId\":\"bulb_planter\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#556B2F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":390,\"y\":720,\"width\":100,\"height\":120,\"shape\":\"rounded_rectangle\",\"itemId\":\"garden_apron\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#6B8E23\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":510,\"y\":740,\"width\":110,\"height\":100,\"shape\":\"oval\",\"itemId\":\"watering_can\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#228B22\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369,
+                        "width": 704,
+                        "height": 843,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "gardening_tote"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759520000000
+        }
+    },
+    "lastModified": 1759519643740,
+    "editMode": true,
+    "lastAutoSave": 1759519174027,
+    "lastLevelSwitch": 1758734206589,
+    "emergencySave": 1759519643741,
+    "saveVersion": "3.0",
+    "totalSaves": 2791,
+    "autoSaveEnabled": true,
+    "redundantBackups": {
+        "medical_level_1": {
+            "items": "[{\"id\":\"stethoscope\",\"assetId\":\"pink_stethoscope\",\"name\":\"Stethoscope\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":159.54001504878664,\"height\":244.56452162382914,\"color\":\"#ff6b9d\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"gloves\",\"assetId\":\"medical_gloves\",\"name\":\"Medical Gloves\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":229.7231172329246,\"height\":124.44256308049205,\"color\":\"#87ceeb\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pills\",\"assetId\":\"pill_bottle\",\"name\":\"Pill Bottle\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":108.97595571872307,\"height\":116.02075437580206,\"color\":\"#ffa07a\",\"isPlaced\":false,\"slotId\":null,\"rotation\":271.30671225168703,\"opacity\":1},{\"id\":\"thermometer\",\"assetId\":\"thermometer\",\"name\":\"Thermometer\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":103.09553789800182,\"height\":263.9258139216621,\"color\":\"#98fb98\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"bottle\",\"assetId\":\"baby_bottle\",\"name\":\"Baby Bottle\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":130.20858219522782,\"height\":241.1475837361781,\"color\":\"#ffb6c1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":359.6039814278279,\"opacity\":1},{\"id\":\"gauze\",\"assetId\":\"gauze_roll\",\"name\":\"Gauze Roll\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":107.49592385846766,\"height\":148.62025635794026,\"color\":\"#f5f5dc\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"bandages\",\"assetId\":\"bandages\",\"name\":\"Bandages\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":123.63867048834544,\"height\":103.56112394383845,\"color\":\"#deb887\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"syringe\",\"assetId\":\"syringe\",\"name\":\"Syringe\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":112.4911218356246,\"height\":405.04138159620027,\"color\":\"#e0e0e0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"swabs\",\"assetId\":\"cotton_swabs\",\"name\":\"Cotton Swabs\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":122.85541473313941,\"height\":96.09423012405517,\"color\":\"#ffffff\",\"isPlaced\":false,\"slotId\":null,\"rotation\":273.0848833843256,\"opacity\":1},{\"id\":\"mask\",\"assetId\":\"medical_mask\",\"name\":\"Medical Mask\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":186.22534650922387,\"height\":173.1991164518672,\"color\":\"#add8e6\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":494.0242763772176,\"width\":139.1777175463153,\"height\":255.24369255564753,\"shape\":\"rounded_rectangle\",\"itemId\":\"stethoscope\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#ff6b9d\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":386,\"y\":496.41456582633043,\"width\":219.10899313562018,\"height\":104.68566363997611,\"shape\":\"rounded_rectangle\",\"itemId\":\"gloves\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#87ceeb\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":219,\"y\":809.5424836601308,\"width\":98.3936024049519,\"height\":94.53770383290546,\"shape\":\"oval\",\"itemId\":\"pills\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#ffa07a\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":108,\"y\":805.9570494864612,\"width\":65.53559707557406,\"height\":270.70852239750457,\"shape\":\"rectangle\",\"itemId\":\"thermometer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#98fb98\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":279,\"y\":507.170868347339,\"width\":61.490859908141175,\"height\":242.0542777619663,\"shape\":\"rounded_rectangle\",\"itemId\":\"bottle\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#ffb6c1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":428,\"y\":948.7664609412229,\"width\":78.63921532370051,\"height\":130.6831066317735,\"shape\":\"rectangle\",\"itemId\":\"gauze\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#f5f5dc\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":380,\"y\":653.4640522875817,\"width\":119.48288588845232,\"height\":93.24058118311115,\"shape\":\"rectangle\",\"itemId\":\"bandages\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#deb887\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":537,\"y\":654.6591970121382,\"width\":69.77225044884324,\"height\":432.3072622741189,\"shape\":\"rectangle\",\"itemId\":\"syringe\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#e0e0e0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":374,\"y\":807.6377217553688,\"width\":128.22662436164427,\"height\":103.8678698226716,\"shape\":\"rounded_rectangle\",\"itemId\":\"swabs\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#ffffff\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":218,\"y\":963.1663285506274,\"width\":175.2122985378214,\"height\":114.85421299932574,\"shape\":\"rectangle\",\"itemId\":\"mask\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#add8e6\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.2137658094357,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "large_medical_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.5,
+                "bounceIntensity": 1.4,
+                "sparkleIntensity": 2
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758734206587,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        },
+        "toolbox_level_2": {
+            "items": "[{\"id\":\"hammer\",\"assetId\":\"hammer_tool\",\"name\":\"Hammer\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":137.1228243914582,\"height\":305.4786615927194,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"screwdriver\",\"assetId\":\"screwdriver_tool\",\"name\":\"Screwdriver\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":101.93881501942624,\"height\":157.5855879663099,\"color\":\"#FF4500\",\"isPlaced\":false,\"slotId\":null,\"rotation\":179.78555683245372,\"opacity\":1},{\"id\":\"wrench\",\"assetId\":\"wrench_tool\",\"name\":\"Wrench\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":157.42913904869653,\"height\":159.49927847757124,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pliers\",\"assetId\":\"pliers_tool\",\"name\":\"Pliers\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":146.56796111105257,\"height\":119.43602391025055,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":290.6670575114661,\"opacity\":1},{\"id\":\"measuring_tape\",\"assetId\":\"measuring_tape\",\"name\":\"Measuring Tape\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":116.93934490666058,\"height\":110.6689863675146,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"level\",\"assetId\":\"level_tool\",\"name\":\"Level\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":137.73627781485456,\"height\":194.88596921632904,\"color\":\"#FFFF00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"drill_bits\",\"assetId\":\"drill_bits\",\"name\":\"Drill Bits\",\"x\":236,\"y\":236.7320261437909,\"startX\":200,\"startY\":220,\"width\":65.00743041137426,\"height\":84.93409301991576,\"color\":\"#2F4F4F\",\"isPlaced\":false,\"slotId\":null,\"rotation\":269.5739538092949,\"opacity\":1},{\"id\":\"utility_knife\",\"assetId\":\"utility_knife\",\"name\":\"Utility Knife\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":107.37947315111889,\"height\":189.8244802277205,\"color\":\"#FF8C00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"safety_glasses\",\"assetId\":\"safety_glasses\",\"name\":\"Safety Glasses\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":199.20102714304755,\"height\":216.84123497534173,\"color\":\"#000000\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"allen_wrench\",\"assetId\":\"allen_wrench_set\",\"name\":\"Allen Wrench Set\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":105.49391927378828,\"height\":104.95130869546607,\"color\":\"#696969\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"socket_wrench\",\"assetId\":\"socket_wrench\",\"name\":\"Socket Wrench\",\"x\":357,\"y\":276.3485477178423,\"startX\":80,\"startY\":360,\"width\":120,\"height\":103.90041493775936,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"medical_scissors\",\"assetId\":\"medical_scissors\",\"name\":\"Scissors\",\"x\":242,\"y\":322.82157676348567,\"startX\":220,\"startY\":360,\"width\":87,\"height\":91.41078838174269,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":39.58031492454995,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":516,\"y\":711.5406162464986,\"width\":80.9154047857552,\"height\":326.67025589461934,\"shape\":\"rectangle\",\"itemId\":\"hammer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_1\",\"x\":437,\"y\":872.8851540616247,\"width\":30.195253954377378,\"height\":168.26393664166466,\"shape\":\"rectangle\",\"itemId\":\"screwdriver\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF4500\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_2\",\"x\":101,\"y\":865.7142857142857,\"width\":102.3773878056835,\"height\":172.8687971642291,\"shape\":\"rectangle\",\"itemId\":\"wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_3\",\"x\":104,\"y\":547.8057889822596,\"width\":124.08927761837818,\"height\":107.24830790628653,\"shape\":\"rounded_rectangle\",\"itemId\":\"pliers\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_4\",\"x\":263,\"y\":529.8786181139122,\"width\":117.33011919067003,\"height\":96.89623544747406,\"shape\":\"rounded_rectangle\",\"itemId\":\"measuring_tape\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_5\",\"x\":107,\"y\":729.9533146591972,\"width\":119.71832516498847,\"height\":70.05408897269928,\"shape\":\"rounded_rectangle\",\"itemId\":\"level\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFF00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_6\",\"x\":231,\"y\":982.3792864310317,\"width\":83.67038471117529,\"height\":59.08917013241715,\"shape\":\"oval\",\"itemId\":\"drill_bits\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#2F4F4F\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_7\",\"x\":344,\"y\":861.4192343604109,\"width\":48.02319592597712,\"height\":168.34936474987856,\"shape\":\"rectangle\",\"itemId\":\"utility_knife\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF8C00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_8\",\"x\":412,\"y\":548.2913165266106,\"width\":185.88334989113847,\"height\":106.9580389884795,\"shape\":\"rectangle\",\"itemId\":\"safety_glasses\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#000000\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_9\",\"x\":283,\"y\":685.7329598506069,\"width\":76.3504348825737,\"height\":137.1516965411177,\"shape\":\"oval\",\"itemId\":\"allen_wrench\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#696969\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_10\",\"x\":403,\"y\":696.5705064875191,\"width\":76,\"height\":134.6591970121383,\"shape\":\"rectangle\",\"itemId\":\"socket_wrench\",\"rotation\":23.95553942580767,\"color\":\"#c55230\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_11\",\"x\":248,\"y\":877.551867219917,\"width\":62,\"height\":75.39419087136923,\"shape\":\"circle\",\"itemId\":\"medical_scissors\",\"rotation\":0,\"color\":\"#c55230\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 368.0186210848792,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "toolbox_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1759519174027,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        },
+        "backpack_level_8": {
+            "items": "[{\"id\":\"homework_folder\",\"assetId\":\"homework_folder\",\"name\":\"Homework Folder\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":116.45754118175313,\"height\":95.58528594949965,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"lunch_box\",\"assetId\":\"lunch_box\",\"name\":\"Lunch Box\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":114.20588642361008,\"height\":101.83788393794626,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"water_bottle\",\"assetId\":\"water_bottle\",\"name\":\"Water Bottle\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":91.58641388747874,\"height\":94.00345609488724,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"textbook\",\"assetId\":\"textbook\",\"name\":\"Math Textbook\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":87.813931139698,\"height\":80.55040553393337,\"color\":\"#32CD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"gym_clothes\",\"assetId\":\"gym_clothes\",\"name\":\"Gym Clothes\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":117.44033750333753,\"height\":88.82904448735671,\"color\":\"#228B22\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"headphones\",\"assetId\":\"headphones\",\"name\":\"Headphones\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":82.80515564461044,\"height\":94.41625813385896,\"color\":\"#9370DB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"art_supplies_bag\",\"assetId\":\"art_supplies_bag\",\"name\":\"Art Supplies\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":88.09206244493944,\"height\":91.56382153826075,\"color\":\"#FF69B4\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"library_card\",\"assetId\":\"library_card\",\"name\":\"Library Card\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":107.60011571314686,\"height\":86.58763320297936,\"color\":\"#FF8C00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"hand_sanitizer\",\"assetId\":\"hand_sanitizer\",\"name\":\"Hand Sanitizer\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":96.67417973713742,\"height\":104.9057334657464,\"color\":\"#87CEEB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pencil_case\",\"assetId\":\"pencil_case\",\"name\":\"Pencil Case\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":111.15202997901717,\"height\":80.05875752035344,\"color\":\"#DA70D6\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":100,\"y\":500,\"width\":107.99250342138794,\"height\":95.42631063584862,\"shape\":\"rectangle\",\"itemId\":\"homework_folder\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":220,\"y\":500,\"width\":94.0012936055808,\"height\":104.71784074233088,\"shape\":\"rectangle\",\"itemId\":\"lunch_box\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":340,\"y\":500,\"width\":110.64200546022455,\"height\":118.55558941615826,\"shape\":\"rectangle\",\"itemId\":\"water_bottle\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":460,\"y\":500,\"width\":100.33022575908433,\"height\":90.83263844053253,\"shape\":\"rectangle\",\"itemId\":\"textbook\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#32CD32\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":580,\"y\":500,\"width\":100.53456201118814,\"height\":90.55597189180352,\"shape\":\"oval\",\"itemId\":\"gym_clothes\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#228B22\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":100,\"y\":620,\"width\":105.57992520530394,\"height\":84.77395766195283,\"shape\":\"rounded_rectangle\",\"itemId\":\"headphones\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#9370DB\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":220,\"y\":620,\"width\":113.82671688868453,\"height\":111.96307362093421,\"shape\":\"circle\",\"itemId\":\"art_supplies_bag\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF69B4\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":340,\"y\":620,\"width\":103.23214519452415,\"height\":98.47667342082349,\"shape\":\"oval\",\"itemId\":\"library_card\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF8C00\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":460,\"y\":620,\"width\":92.15929954212137,\"height\":108.98729385275814,\"shape\":\"rounded_rectangle\",\"itemId\":\"hand_sanitizer\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#87CEEB\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":580,\"y\":620,\"width\":93.78010575134665,\"height\":103.22368411484064,\"shape\":\"rectangle\",\"itemId\":\"pencil_case\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DA70D6\",\"cornerRadius\":8,\"opacity\":0.5,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.2137658094357,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "backpack_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758336789615,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        },
+        "bathroom_level_5": {
+            "items": "[{\"id\":\"toothbrush\",\"assetId\":\"toothbrush\",\"name\":\"Toothbrush\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":210.5728459900731,\"height\":114.90239503658358,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"toothpaste\",\"assetId\":\"toothpaste_tube\",\"name\":\"Toothpaste\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":127.5408202732765,\"height\":115.97909859633853,\"color\":\"#00CED1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":87.63178480053165,\"opacity\":1},{\"id\":\"shampoo\",\"assetId\":\"shampoo_bottle\",\"name\":\"Shampoo\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":154.7552218839465,\"height\":130.59164738860716,\"color\":\"#9370DB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"soap\",\"assetId\":\"soap_dispenser\",\"name\":\"Soap Dispenser\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":166.3034490975017,\"height\":156.29777762777957,\"color\":\"#F0F8FF\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"face_wash\",\"assetId\":\"face_wash\",\"name\":\"Face Wash\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":228.60785619591007,\"height\":120.06604387530595,\"color\":\"#98FB98\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"lotion\",\"assetId\":\"lotion_bottle\",\"name\":\"Lotion\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":122.25825943368591,\"height\":123.34611552252947,\"color\":\"#FFB6C1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"razor\",\"assetId\":\"razor\",\"name\":\"Razor\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":115.38910027694621,\"height\":97.72046593511175,\"color\":\"#C0C0C0\",\"isPlaced\":false,\"slotId\":null,\"rotation\":271.559744535404,\"opacity\":1},{\"id\":\"hair_brush\",\"assetId\":\"hair_brush\",\"name\":\"Hair Brush\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":85.37163468925345,\"height\":214.72362489121323,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":353.35426134314855,\"opacity\":1},{\"id\":\"deodorant\",\"assetId\":\"deodorant\",\"name\":\"Deodorant\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":74.86551956056617,\"height\":101.25994775251829,\"color\":\"#87CEEB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"cotton_balls\",\"assetId\":\"cotton_balls\",\"name\":\"Cotton Balls\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":95.51208881408745,\"height\":119.14010204640712,\"color\":\"#FFFFFF\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":418,\"y\":846.5919701213817,\"width\":80.45557795422792,\"height\":85.89031734660215,\"shape\":\"rounded_rectangle\",\"itemId\":\"toothbrush\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":435,\"y\":554.9766573295984,\"width\":104.2346520384561,\"height\":83.450130626299,\"shape\":\"rectangle\",\"itemId\":\"toothpaste\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#00CED1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":125,\"y\":690.0280112044818,\"width\":103.15231710601647,\"height\":82.10845077806292,\"shape\":\"rectangle\",\"itemId\":\"shampoo\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#9370DB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":285,\"y\":533.4640522875817,\"width\":100.46634535204493,\"height\":102.48185738792623,\"shape\":\"rounded_rectangle\",\"itemId\":\"soap\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#F0F8FF\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":88,\"y\":829.8599439775911,\"width\":122.96544458508527,\"height\":104.29679230203007,\"shape\":\"rectangle\",\"itemId\":\"face_wash\",\"rotation\":0,\"color\":\"#ba2121\",\"borderColor\":\"#98FB98\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":146,\"y\":523.1932773109243,\"width\":101.63743032579185,\"height\":99.84958521261623,\"shape\":\"rectangle\",\"itemId\":\"lotion\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFB6C1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":263,\"y\":833.9309056956116,\"width\":109.67919445026806,\"height\":93.74898344944553,\"shape\":\"rectangle\",\"itemId\":\"razor\",\"rotation\":0,\"color\":\"#f50000\",\"borderColor\":\"#C0C0C0\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":522,\"y\":721.5873015873016,\"width\":77.47536564087628,\"height\":208.48991560903642,\"shape\":\"rectangle\",\"itemId\":\"hair_brush\",\"rotation\":349.94546100083335,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":428,\"y\":676.171802054155,\"width\":59.221709379101824,\"height\":110.65962334513365,\"shape\":\"rectangle\",\"itemId\":\"deodorant\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#87CEEB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":276,\"y\":672.5863678804855,\"width\":92.85751040561861,\"height\":113.43264721338724,\"shape\":\"circle\",\"itemId\":\"cotton_balls\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFFFF\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.2137658094357,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "bathroom_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758667609206,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        },
+        "art_level_3": {
+            "items": "[{\"id\":\"paint_brush\",\"assetId\":\"paint_brush\",\"name\":\"Paint Brush\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":221.57828482367287,\"height\":324.15887896114185,\"color\":\"#8B4513\",\"isPlaced\":false,\"slotId\":null,\"rotation\":180.66621601238307,\"opacity\":1},{\"id\":\"paint_palette\",\"assetId\":\"paint_palette\",\"name\":\"Paint Palette\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":106.76535822977036,\"height\":150.82151890874025,\"color\":\"#FFFFFF\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"colored_pencils\",\"assetId\":\"colored_pencils\",\"name\":\"Colored Pencils\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":112.99196674050773,\"height\":137.6038188492978,\"color\":\"#FF6B35\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"paint_tubes\",\"assetId\":\"paint_tubes\",\"name\":\"Paint Tubes\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":68.70353309682781,\"height\":166.89392594063847,\"color\":\"#4ECDC4\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"art_canvas\",\"assetId\":\"art_canvas\",\"name\":\"Canvas\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":173.1867191346621,\"height\":171.76077092123558,\"color\":\"#F7F7F7\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"art_markers\",\"assetId\":\"art_markers\",\"name\":\"Art Markers\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":184.52597230253878,\"height\":141.2140704490744,\"color\":\"#FF1744\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"palette_knife\",\"assetId\":\"palette_knife\",\"name\":\"Palette Knife\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":143.8551422833736,\"height\":165.01483218378405,\"color\":\"#795548\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"art_eraser\",\"assetId\":\"art_eraser\",\"name\":\"Kneaded Eraser\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":116.4558772668068,\"height\":155.68002768436108,\"color\":\"#9E9E9E\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"sketch_pad\",\"assetId\":\"sketch_pad\",\"name\":\"Sketch Pad\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":162.98778157396714,\"height\":160.46801826757024,\"color\":\"#FAFAFA\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"charcoal_sticks\",\"assetId\":\"charcoal_sticks\",\"name\":\"Charcoal Sticks\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":112.87132136899784,\"height\":122.3285595638613,\"color\":\"#212121\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"new_stapler_asset\",\"assetId\":\"protractor_item\",\"name\":\"Protractor\",\"x\":80,\"y\":360,\"startX\":80,\"startY\":360,\"width\":137.90488499644678,\"height\":110.18907370986142,\"color\":\"#87CEEB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":88.19658669261753,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":89,\"y\":719.9066293183939,\"width\":65.415630801403,\"height\":347.09196016478404,\"shape\":\"rectangle\",\"itemId\":\"paint_brush\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#8B4513\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":513,\"y\":504.78057889822594,\"width\":104.18026397132179,\"height\":144.40847155807944,\"shape\":\"oval\",\"itemId\":\"paint_palette\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFFFF\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":520,\"y\":739.0289449112979,\"width\":90.28724673468108,\"height\":133.2901802957236,\"shape\":\"rounded_rectangle\",\"itemId\":\"colored_pencils\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF6B35\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":95,\"y\":516.7320261437909,\"width\":111.47629835197567,\"height\":136.8475213305249,\"shape\":\"rectangle\",\"itemId\":\"art_canvas\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#F7F7F7\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\",\"borderWidth\":1},{\"id\":\"slot_5\",\"x\":289,\"y\":955.8356676003734,\"width\":188.9385317627411,\"height\":110.72597383925185,\"shape\":\"rectangle\",\"itemId\":\"art_markers\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF1744\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":235,\"y\":723.9775910364145,\"width\":90.69559187501181,\"height\":155.01474647853888,\"shape\":\"keyhole\",\"itemId\":\"palette_knife\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#795548\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":510,\"y\":961.811391223156,\"width\":112.30308942014176,\"height\":119.9996201077522,\"shape\":\"oval\",\"itemId\":\"art_eraser\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#9E9E9E\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":360,\"y\":731.1484593837534,\"width\":117.79435448041427,\"height\":145.13807635287532,\"shape\":\"rounded_rectangle\",\"itemId\":\"sketch_pad\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FAFAFA\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":388,\"y\":520.8029878618114,\"width\":80.82682546727176,\"height\":121.10669587314,\"shape\":\"rectangle\",\"itemId\":\"charcoal_sticks\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#212121\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_10\",\"x\":261,\"y\":510.5322128851541,\"width\":75.66254547271892,\"height\":148.96722571826018,\"shape\":\"oval\",\"itemId\":\"new_stapler_asset\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#87CEEB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":187,\"y\":917.105508870215,\"width\":48.9755307506845,\"height\":149.8895627824371,\"shape\":\"rounded_rectangle\",\"itemId\":\"paint_tubes\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4ECDC4\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.2137658094357,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "art_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758667585352,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        },
+        "school_level_4": {
+            "items": "[{\"id\":\"pencil\",\"assetId\":\"pencil_item\",\"name\":\"Pencil\",\"x\":80,\"y\":80,\"startX\":80,\"startY\":80,\"width\":74.46255002309441,\"height\":72.59011541644547,\"color\":\"#FFD700\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"eraser\",\"assetId\":\"eraser_item\",\"name\":\"Eraser\",\"x\":200,\"y\":80,\"startX\":200,\"startY\":80,\"width\":83.60066701091964,\"height\":104.36531141006436,\"color\":\"#FFB6C1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"scissors\",\"assetId\":\"scissors_item\",\"name\":\"Scissors\",\"x\":320,\"y\":80,\"startX\":320,\"startY\":80,\"width\":70.22021233510104,\"height\":107.38530536457492,\"color\":\"#4169E1\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"glue\",\"assetId\":\"glue_stick\",\"name\":\"Glue Stick\",\"x\":440,\"y\":80,\"startX\":440,\"startY\":80,\"width\":144.29867078304352,\"height\":107.20620213751658,\"color\":\"#9370DB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"ruler\",\"assetId\":\"ruler_item\",\"name\":\"Ruler\",\"x\":560,\"y\":80,\"startX\":560,\"startY\":80,\"width\":247.94653717027234,\"height\":214.32452175044966,\"color\":\"#87CEEB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"crayons\",\"assetId\":\"crayon_box\",\"name\":\"Crayon Box\",\"x\":80,\"y\":220,\"startX\":80,\"startY\":220,\"width\":121.53375805085375,\"height\":318.17520692645604,\"color\":\"#FF6347\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0.04601155078790953,\"opacity\":1},{\"id\":\"notebook\",\"assetId\":\"notebook_item\",\"name\":\"Notebook\",\"x\":200,\"y\":220,\"startX\":200,\"startY\":220,\"width\":130.11461116164855,\"height\":301.3002267075145,\"color\":\"#DC143C\",\"isPlaced\":false,\"slotId\":null,\"rotation\":359.99402429892245,\"opacity\":1},{\"id\":\"calculator\",\"assetId\":\"calculator_item\",\"name\":\"Calculator\",\"x\":320,\"y\":220,\"startX\":320,\"startY\":220,\"width\":214.10035316397258,\"height\":88.20791329902862,\"color\":\"#32CD32\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"stapler\",\"assetId\":\"stapler_item\",\"name\":\"Stapler\",\"x\":440,\"y\":220,\"startX\":440,\"startY\":220,\"width\":117.62380474254084,\"height\":161.212168801411,\"color\":\"#FF8C00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"pencil_case\",\"assetId\":\"pencil_case\",\"name\":\"Pencil Case\",\"x\":560,\"y\":220,\"startX\":560,\"startY\":220,\"width\":136.09689348426878,\"height\":325.91610630855723,\"color\":\"#DA70D6\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"protractor\",\"assetId\":\"protractor_item\",\"name\":\"Protractor\",\"x\":80,\"y\":360,\"startX\":80,\"startY\":360,\"width\":67.03256813652409,\"height\":106.40617394355174,\"color\":\"#87CEEB\",\"isPlaced\":false,\"slotId\":null,\"rotation\":0,\"opacity\":1},{\"id\":\"highlighters\",\"assetId\":\"highlighter_set\",\"name\":\"Highlighter Set\",\"x\":200,\"y\":360,\"startX\":200,\"startY\":360,\"width\":114.01553888592127,\"height\":219.87145267049652,\"color\":\"#FFFF00\",\"isPlaced\":false,\"slotId\":null,\"rotation\":179.06999983588548,\"opacity\":1}]",
+            "slots": "[{\"id\":\"slot_0\",\"x\":432,\"y\":841.811391223156,\"width\":65.03901016369475,\"height\":80.91987083159498,\"shape\":\"oval\",\"itemId\":\"pencil\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFD700\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_1\",\"x\":431,\"y\":620.7096171802056,\"width\":65.70455932858417,\"height\":108.15837616510407,\"shape\":\"oval\",\"itemId\":\"eraser\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFB6C1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_2\",\"x\":340,\"y\":557.3669467787114,\"width\":37.90421938510825,\"height\":144.89973731759233,\"shape\":\"rounded_rectangle\",\"itemId\":\"scissors\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#4169E1\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_3\",\"x\":516,\"y\":500,\"width\":101.56317234871918,\"height\":88.47674266500839,\"shape\":\"circle\",\"itemId\":\"glue\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#9370DB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_4\",\"x\":89,\"y\":969.6918767507003,\"width\":219.36085035663572,\"height\":92.48952619117067,\"shape\":\"rectangle\",\"itemId\":\"ruler\",\"rotation\":0,\"color\":\"#b30000\",\"borderColor\":\"#87CEEB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_5\",\"x\":101,\"y\":507.65639589169007,\"width\":89.06388892775007,\"height\":257.0958776562587,\"shape\":\"rectangle\",\"itemId\":\"crayons\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF6347\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_6\",\"x\":221,\"y\":501.68067226890753,\"width\":73.03871247092275,\"height\":263.32912622617914,\"shape\":\"rectangle\",\"itemId\":\"notebook\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DC143C\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_7\",\"x\":82,\"y\":820.7843137254903,\"width\":173.7674271548184,\"height\":83.89493425249043,\"shape\":\"rounded_rectangle\",\"itemId\":\"calculator\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#32CD32\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_8\",\"x\":531,\"y\":666.610644257703,\"width\":84.76909635342113,\"height\":102.37833718048972,\"shape\":\"rectangle\",\"itemId\":\"stapler\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#FF8C00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_9\",\"x\":532,\"y\":830.345471521942,\"width\":94.9071843728714,\"height\":241.76491753788162,\"shape\":\"rectangle\",\"itemId\":\"pencil_case\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#DA70D6\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_10\",\"x\":433,\"y\":973.0532212885155,\"width\":68.4348894832286,\"height\":102.33634349956495,\"shape\":\"oval\",\"itemId\":\"protractor\",\"rotation\":0,\"color\":\"#f0f0f0\",\"borderColor\":\"#87CEEB\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"},{\"id\":\"slot_11\",\"x\":299,\"y\":846.3678804855275,\"width\":100.55573666481834,\"height\":209.97527714018236,\"shape\":\"l_shape\",\"itemId\":\"highlighters\",\"rotation\":179.49872410680518,\"color\":\"#f0f0f0\",\"borderColor\":\"#FFFF00\",\"cornerRadius\":8,\"opacity\":0,\"difficulty\":\"medium\"}]",
+            "tray": {
+                "shapes": [
+                    {
+                        "id": "tray_bg",
+                        "type": "rounded_rectangle",
+                        "x": 0,
+                        "y": 369.2137658094357,
+                        "width": 704,
+                        "height": 843.0683918669129,
+                        "color": "#c55230",
+                        "borderColor": "#ccc",
+                        "borderWidth": 2,
+                        "cornerRadius": 20,
+                        "rotation": 0,
+                        "opacity": 1,
+                        "assetId": "school_tray"
+                    }
+                ]
+            },
+            "animations": {
+                "snapSpeed": 1.2,
+                "bounceIntensity": 1.3,
+                "sparkleIntensity": 1.9
+            },
+            "ui": {
+                "theme": "soft-medical",
+                "showHelpOnStart": false,
+                "enableHints": true,
+                "primaryColor": "#ff6b9d",
+                "secondaryColor": "#ff4757",
+                "successColor": "#2ed573",
+                "enablePreviewMode": "true",
+                "showGlowEffects": "true"
+            },
+            "scoring": {
+                "basePoints": 100,
+                "maxMultiplier": 5,
+                "streakBonus": 0.5
+            },
+            "timestamp": 1758667587600,
+            "saveVersion": "3.0",
+            "redundantBackup": true
+        }
+    },
+    "lockedLevels": [],
+    "customLevelOrder": [
+        "medical",
+        "toolbox",
+        "art",
+        "school",
+        "bathroom",
+        "toybox",
+        "kitchen",
+        "backpack",
+        "farm",
+        "gardening"
+    ],
+    "maxLevels": 10
+}

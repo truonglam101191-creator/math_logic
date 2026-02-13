@@ -1,0 +1,90 @@
+// Lightweight local `lib` implementation used for local testing and editor
+// Provides: lib.log, lib.getAsset, save/load state via localStorage, simple event emitter
+(function () {
+    if (typeof window.lib !== 'undefined') return; // don't overwrite existing lib
+
+    const cache = { assetsMap: null };
+    const listeners = {};
+
+    function emit(name,data) {
+        if (!listeners[name]) return;
+        listeners[name].forEach(fn => {
+            try { fn(data); } catch (e) { console.warn('lib listener error',e); }
+        });
+    }
+
+    window.lib = {
+        log: function () {
+            try { console.log.apply(console,arguments); } catch (e) { }
+        },
+
+        // simple event API
+        on: function (evt,cb) {
+            if (!listeners[evt]) listeners[evt] = [];
+            listeners[evt].push(cb);
+            return function () {
+                listeners[evt] = listeners[evt].filter(x => x !== cb);
+            };
+        },
+        emit: emit,
+
+        // Loads asset map from inline <script id="assetsMap"> or external file 'asset_map' or 'asset_map.json'
+        getAsset: function (id) {
+            try {
+                if (cache.assetsMap) return cache.assetsMap[id];
+
+                const mapEl = document.getElementById('assetsMap');
+                if (mapEl && mapEl.textContent) {
+                    try {
+                        cache.assetsMap = JSON.parse(mapEl.textContent);
+                        // Notify listeners that assets map is available (useful for file://)
+                        try { emit('assetsMapLoaded',cache.assetsMap); } catch (e) { }
+                        return cache.assetsMap[id];
+                    } catch (e) { /* fallthrough */ }
+                }
+
+                // try fetching external json (synchronous isn't allowed, so fallback to undefined)
+                // but attempt to fetch and cache asynchronously
+                fetch('asset_map').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+                fetch('asset_map.json').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+
+                return undefined;
+            } catch (e) { return undefined; }
+        },
+
+        // Save/load user game state locally for testing
+        saveUserGameState: async function (state) {
+            try {
+                localStorage.setItem('circuit_connect_state',JSON.stringify(state));
+                return { success: true,state };
+            } catch (e) {
+                return { success: false,error: String(e) };
+            }
+        },
+
+        getUserGameState: async function () {
+            try {
+                const raw = localStorage.getItem('circuit_connect_state');
+                if (!raw) return { success: true,state: null };
+                return { success: true,state: JSON.parse(raw) };
+            } catch (e) {
+                return { success: false,error: String(e),state: null };
+            }
+        },
+
+        deleteUserGameState: async function () {
+            try { localStorage.removeItem('circuit_connect_state'); return { success: true }; } catch (e) { return { success: false }; }
+        },
+
+        // Animation/player stubs (not full-featured)
+        getAnimationPlayer: function (assetId) { return null; },
+        preloadAnimation: async function () { return; },
+
+        // Leaderboard stubs
+        addPlayerScoreToLeaderboard: async function (score) { return { success: true }; },
+        getTopNEntriesFromLeaderboard: async function () { return { entries: [],userRank: null,success: true }; }
+    };
+
+    // Expose a DOM-ready helper so game can wait if needed
+    document.addEventListener('DOMContentLoaded',function () { emit('domReady'); });
+})();

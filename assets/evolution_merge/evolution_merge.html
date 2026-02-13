@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Evolution Merge</title>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Poppins:wght@400;600;700&display=swap"
+            rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+            rel="stylesheet">
+
+        <style>
+        /* ===================================
+           CSS RESET & BASE STYLES
+           =================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+
+
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Poppins", sans-serif;
+            touch-action: none;
+            background: #FFF8E1;
+        }
+
+
+
+
+
+
+        /* ===================================
+           CSS CUSTOM PROPERTIES
+           =================================== */
+
+
+
+
+
+        :root {
+            /* Animation Timings */
+            --transition-fast: 150ms;
+            --transition-normal: 300ms;
+            --transition-slow: 500ms;
+
+            /* Easing Functions */
+            --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+            /* Spacing Scale (8px grid) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Color System */
+            --color-primary: #4CAF50;
+            --color-primary-hover: #45a049;
+            --color-primary-active: #3d8b40;
+            --color-accent: #FF9800;
+            --color-accent-hover: #f57c00;
+            --color-danger: #F44336;
+            --color-success: #8BC34A;
+            --color-neutral-bg: #FFF8E1;
+            --color-neutral-dark: #5D4037;
+            --color-neutral-mid: #8D6E63;
+            --color-container: #FFEAA7;
+            --color-glass: rgba(255, 255, 255, 0.95);
+
+            /* Shadows & Effects */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-button-active: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            --glow-primary: 0 0 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* ===================================
+           CANVAS & GAME CONTAINER
+           =================================== */
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+
+
+
+
+        #header {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            right: var(--space-sm);
+            background: var(--color-glass);
+            border-radius: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(93, 64, 55, 0.1);
+            backdrop-filter: blur(10px);
+            animation: slideDown var(--transition-slow) var(--ease-out);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-sm);
+        }
+
+
+
+
+
+
+        #title {
+            font-family: "Fredoka", sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF9800, #F44336);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            letter-spacing: -1px;
+            flex: 1;
+            white-space: nowrap;
+        }
+
+
+
+
+
+
+        .score-item {
+            text-align: center;
+        }
+
+         .score-item1 {
+            text-align: center;
+            padding-left: 5%;
+        }
+
+
+
+
+
+
+
+        .score-label {
+            font-size: 12px;
+            color: var(--color-neutral-mid);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+
+
+
+
+
+        .score-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-neutral-dark);
+        }
+
+
+
+
+
+
+        .score-value.highlight {
+            color: var(--color-primary);
+            animation: scorePopIn var(--transition-normal) var(--ease-bounce);
+        }
+
+
+
+
+
+
+
+        /* ===================================
+           EVOLUTION LEGEND
+           =================================== */
+
+
+
+
+
+        #nextFruitPanel {
+            position: absolute;
+            top: 90px;
+            left: var(--space-sm);
+            right: var(--space-sm);
+            background: var(--color-glass);
+            border-radius: var(--space-sm);
+            padding: var(--space-xs);
+            box-shadow: var(--shadow-md);
+            border: 2px solid rgba(93, 64, 55, 0.1);
+            backdrop-filter: blur(10px);
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4px;
+            overflow: hidden;
+        }
+
+
+
+
+
+
+        .legend-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+
+
+
+
+
+
+
+        .legend-item img {
+            width: 100%;
+            height: auto;
+            max-width: 50px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+
+
+
+
+
+        /* ===================================
+           FOOTER CONTROLS
+           =================================== */
+
+
+
+
+
+        #footer {
+            position: absolute;
+            top: 170px;
+            left: var(--space-sm);
+            right: var(--space-sm);
+            display: flex;
+            justify-content: flex-start;
+            gap: var(--space-sm);
+            pointer-events: all;
+        }
+
+
+
+
+
+
+        .button {
+            padding: var(--space-md) var(--space-lg);
+            font-size: 24px;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+            border: none;
+            border-radius: var(--space-sm);
+            cursor: pointer;
+            box-shadow: var(--shadow-button);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-width: 160px;
+            min-height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+
+
+
+
+        .button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+
+
+
+
+
+        .button:active {
+            transform: scale(0.95);
+            box-shadow: var(--shadow-button-active);
+        }
+
+
+
+
+
+
+        .button .material-symbols-rounded {
+            font-size: 32px;
+        }
+
+
+
+
+
+
+        #musicBtn {
+            background: linear-gradient(135deg, var(--color-accent), #f57c00);
+            color: white;
+            min-width: 48px;
+            min-height: 48px;
+            padding: 12px;
+        }
+
+
+
+
+
+
+        #musicBtn.muted {
+            background: linear-gradient(135deg, var(--color-neutral-mid), #6d5d52);
+        }
+
+
+
+
+
+
+        @media (prefers-reduced-motion: no-preference) {
+            .button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+
+
+
+
+
+
+        /* ===================================
+           GAME OVER SCREEN
+           =================================== */
+
+
+
+
+
+        #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            pointer-events: all;
+            backdrop-filter: blur(10px);
+        }
+
+
+
+
+
+
+        #gameOverScreen.show {
+            display: flex;
+            animation: fadeIn var(--transition-normal) var(--ease-out);
+        }
+
+
+
+
+
+
+        #gameOverContent {
+            background: var(--color-glass);
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 600px;
+            margin: var(--space-md);
+            animation: scaleIn var(--transition-slow) var(--ease-bounce);
+        }
+
+
+
+
+
+
+        #gameOverText {
+            font-family: "Fredoka", sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F44336, #FF9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+
+
+
+
+
+        #finalScoreLabel {
+            font-size: 20px;
+            color: var(--color-neutral-mid);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-xs);
+        }
+
+
+
+
+
+
+        #finalScore {
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--color-neutral-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+
+
+
+
+
+        #newHighScore {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-md);
+            animation: pulse 1s infinite;
+        }
+
+
+
+
+
+
+        #newHighScore.show {
+            display: block;
+        }
+
+
+
+
+
+
+        #playAgainBtn {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+            color: white;
+            padding: var(--space-md) var(--space-xl);
+            font-size: 24px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--space-sm);
+            cursor: pointer;
+            box-shadow: var(--shadow-button);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-height: 96px;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin: 0 auto;
+        }
+
+
+
+
+
+
+        #playAgainBtn:active {
+            transform: scale(0.95);
+        }
+
+
+
+
+
+
+        /* ===================================
+           WIN SCREEN
+           =================================== */
+
+
+
+
+
+        #winScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            pointer-events: all;
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+        }
+
+
+
+
+
+
+        #winScreen.show {
+            display: flex;
+            animation: fadeIn var(--transition-normal) var(--ease-out);
+        }
+
+
+
+
+
+
+        #winContent {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 165, 0, 0.95));
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6), var(--shadow-lg);
+            text-align: center;
+            max-width: 600px;
+            margin: var(--space-md);
+            animation: scaleIn var(--transition-slow) var(--ease-bounce);
+            border: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+
+
+
+
+
+        #winText {
+            font-family: "Fredoka", sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: var(--space-md);
+            animation: pulse 2s infinite;
+        }
+
+
+
+
+
+
+        #winSubtext {
+            font-size: 28px;
+            color: white;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+        #winScoreLabel {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-xs);
+        }
+
+
+
+
+
+
+        #winScore {
+            font-size: 64px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: var(--space-lg);
+        }
+
+
+
+
+
+
+        #playAgainWinBtn {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+            color: white;
+            padding: var(--space-md) var(--space-xl);
+            font-size: 24px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--space-sm);
+            cursor: pointer;
+            box-shadow: var(--shadow-button);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-height: 96px;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin: 0 auto;
+        }
+
+
+
+
+
+
+        #playAgainWinBtn:active {
+            transform: scale(0.95);
+        }
+
+
+
+
+
+        /* ===================================
+           LEADERBOARD BUTTON & SCREEN
+           =================================== */
+
+
+
+
+
+        #leaderboardBtn {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            font-size: 20px;
+            font-weight: 600;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow:
+                0 6px 16px rgba(76, 175, 80, 0.4),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+                inset 0 3px 6px rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-height: 80px;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin: var(--space-md) auto 0;
+            font-family: "Fredoka", sans-serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: visible;
+            transform: translateY(-10px);
+        }
+
+
+
+
+
+        #leaderboardBtn:hover {
+            transform: translateY(-12px);
+            box-shadow:
+                0 8px 20px rgba(76, 175, 80, 0.5),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.2),
+                inset 0 3px 6px rgba(255, 255, 255, 0.3);
+        }
+
+
+
+
+
+        #leaderboardBtn:active {
+            transform: translateY(-8px) scale(0.98);
+            box-shadow:
+                0 4px 12px rgba(76, 175, 80, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+        }
+
+
+
+
+
+        #leaderboardBtn .material-symbols-rounded {
+            font-size: 28px;
+        }
+
+
+
+
+
+        #leaderboardScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            pointer-events: all;
+            backdrop-filter: blur(10px);
+            z-index: 1050;
+        }
+
+
+
+
+
+        #leaderboardScreen.show {
+            display: flex;
+            animation: fadeIn var(--transition-normal) var(--ease-out);
+        }
+
+
+
+
+
+        #leaderboardContent {
+            background: var(--color-glass);
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 600px;
+            max-height: 90%;
+            overflow-y: auto;
+            margin: var(--space-md);
+            animation: scaleIn var(--transition-slow) var(--ease-bounce);
+        }
+
+
+
+
+
+        #leaderboardTitle {
+            font-family: "Fredoka", sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+        }
+
+
+
+
+
+        #leaderboardList {
+            margin-bottom: var(--space-lg);
+            text-align: left;
+        }
+
+
+
+
+
+        .leaderboard-entry {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: var(--space-sm);
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 600;
+        }
+
+
+
+
+
+        .leaderboard-entry.player-entry {
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid var(--color-primary);
+        }
+
+
+
+
+
+        .leaderboard-rank {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            min-width: 40px;
+        }
+
+
+
+
+
+        .leaderboard-name {
+            flex: 1;
+            font-size: 18px;
+            color: var(--color-neutral-dark);
+        }
+
+
+
+
+
+        .leaderboard-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+
+
+
+
+        #closeLeaderboardBtn {
+            background: linear-gradient(135deg, var(--color-neutral-mid), #6d5d52);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--space-sm);
+            cursor: pointer;
+            box-shadow: var(--shadow-button);
+            transition: all var(--transition-fast) var(--ease-out);
+            min-height: 80px;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            margin: 0 auto;
+        }
+
+
+
+
+
+        #closeLeaderboardBtn:active {
+            transform: scale(0.95);
+        }
+
+
+
+
+
+        #scoreNotification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--space-md);
+            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.6);
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            z-index: 2000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+
+
+
+
+        #scoreNotification.show {
+            opacity: 1;
+        }
+
+
+
+
+
+
+
+
+        /* ===================================
+           INSTRUCTIONS
+           =================================== */
+
+
+
+
+
+        #instructions {
+            position: absolute;
+            /* bottom: var(--space-sm); */
+            bottom: 5px;
+            left: var(--space-sm);
+            right: var(--space-sm);
+            text-align: center;
+            background: var(--color-glass);
+            border-radius: var(--space-sm);
+            /* padding: var(--space-sm); */
+            padding-top: 5px;
+            padding-bottom: 5px;
+            box-shadow: var(--shadow-sm);
+            pointer-events: none;
+            border: 2px solid rgba(93, 64, 55, 0.1);
+        }
+
+        /* ===================================
+           LOADING SCREEN
+           =================================== */
+
+
+
+
+
+        #loadingScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            pointer-events: all;
+            z-index: 1100;
+        }
+
+
+
+
+
+
+        #loadingScreen.hidden {
+            display: none;
+        }
+
+
+
+
+
+
+        #loadingContent {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn var(--transition-slow) var(--ease-out);
+        }
+
+
+
+
+
+
+        #loadingTitle {
+            font-family: "Fredoka", sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF9800, #F44336);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+            animation: pulse 2s infinite;
+        }
+
+
+
+
+
+
+        #loadingSubtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            margin-bottom: var(--space-xl);
+        }
+
+
+
+
+
+
+        #loadingBarContainer {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: var(--space-sm);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+        #loadingBarFill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 6px;
+            transition: width 0.3s ease-out;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+
+
+
+
+
+        #loadingProgress {
+            font-size: 20px;
+            color: white;
+            font-weight: 600;
+        }
+
+
+
+
+
+
+        /* ===================================
+           START SCREEN
+           =================================== */
+
+
+
+
+
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a3a2e 0%, #0d1f1a 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            pointer-events: all;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+
+
+
+
+
+        #startScreenCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+
+
+
+
+
+        #startScreen.show {
+            display: flex;
+        }
+
+
+
+
+
+
+        #startScreen.hidden {
+            display: none;
+        }
+
+
+
+
+
+
+        #startContent {
+            background: transparent;
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            box-shadow: none;
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+            margin: var(--space-md);
+            animation: scaleIn var(--transition-slow) var(--ease-bounce);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: none;
+        }
+
+
+
+
+
+
+        #startLogo {
+            width: 135%;
+            ;
+            max-width: none;
+            ;
+            height: auto;
+            ;
+            margin: 0 auto var(--space-md);
+            ;
+            display: block;
+            ;
+            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8));
+            ;
+            position: relative;
+            ;
+            left: -17.5%;
+        }
+
+
+
+
+
+
+        #splashSceneCanvas {
+            width: 100%;
+            ;
+            max-width: 300px;
+            ;
+            height: auto;
+            ;
+            margin: 0 auto var(--space-lg);
+            ;
+            display: block;
+            ;
+            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8));
+            ;
+            transform: translateY(-37%);
+            background: transparent;
+        }
+
+
+
+
+
+
+        #startSubtitle {
+            font-size: 18px;
+            ;
+            color: white;
+            ;
+            font-weight: 600;
+            ;
+            margin-bottom: var(--space-md);
+            ;
+            line-height: 1.5;
+            ;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            ;
+            display: none;
+        }
+
+
+
+
+
+
+        #playBtn {
+            background: linear-gradient(135deg, #FF9800, #F44336);
+            ;
+            color: white;
+            ;
+            padding: var(--space-md) var(--space-xl);
+            ;
+            font-size: 36px;
+            ;
+            font-weight: 700;
+            ;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            ;
+            border-radius: 20px;
+            ;
+            cursor: pointer;
+            ;
+            box-shadow:
+                0 8px 24px rgba(255, 68, 54, 0.5),
+                0 4px 12px rgba(255, 152, 0, 0.4),
+                inset 0 -4px 8px rgba(0, 0, 0, 0.2),
+                inset 0 4px 8px rgba(255, 255, 255, 0.3);
+            ;
+            transition: all var(--transition-fast) var(--ease-out);
+            ;
+            min-height: 96px;
+            ;
+            min-width: 320px;
+            ;
+            display: flex;
+            ;
+            align-items: center;
+            ;
+            justify-content: center;
+            ;
+            gap: var(--space-sm);
+            ;
+            margin: 0 auto;
+            ;
+            font-family: "Fredoka", sans-serif;
+            ;
+            text-shadow:
+                2px 2px 4px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3);
+            ;
+            position: relative;
+            ;
+            overflow: visible;
+            ;
+            transform: perspective(1000px) rotateX(5deg) translateY(-50px);
+        }
+
+
+
+
+
+
+        #playBtn::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            background: linear-gradient(135deg, #FFB74D, #FF5252);
+            border-radius: 24px;
+            z-index: -1;
+            filter: blur(12px);
+            opacity: 0.6;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+
+
+
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
+        }
+
+
+
+
+
+        #playBtn:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-4px);
+            box-shadow:
+                0 12px 32px rgba(255, 68, 54, 0.6),
+                0 6px 16px rgba(255, 152, 0, 0.5),
+                inset 0 -4px 8px rgba(0, 0, 0, 0.2),
+                inset 0 4px 8px rgba(255, 255, 255, 0.4);
+        }
+
+
+
+
+
+        #playBtn:active {
+            transform: perspective(1000px) rotateX(5deg) translateY(-50px) scale(0.93);
+            box-shadow:
+                0 4px 16px rgba(255, 68, 54, 0.5),
+                0 2px 8px rgba(255, 152, 0, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            ;
+        }
+
+
+
+
+
+        #playBtn span:first-child {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+        #playBtn span:last-child {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+        #playBtn span:last-child {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+        #instructions p {
+            font-size: 10px;
+            color: var(--color-neutral-mid);
+            font-weight: 600;
+            margin: 0;
+        }
+
+
+
+
+
+
+        .instruction-icon {
+            font-size: 20px;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+
+        .back-button {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 28px;
+            padding: 6px 10px;
+            color: var(--color-neutral-dark);
+            cursor: pointer;
+            pointer-events: all;
+            position: absolute;
+            left: 1%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-fast) var(--ease-out), transform var(--transition-fast) var(--ease-out);
+        }
+
+        .back-button:hover {
+            background: rgba(0,0,0,0.04);
+            transform: translateY(-50%) translateY(-2px);
+        }
+
+
+
+
+
+        /* ===================================
+           MOBILE RESPONSIVE TWEAKS
+           =================================== */
+
+
+
+
+        @media (max-width: 600px) {
+            :root {
+                --space-xs: 6px;
+                --space-sm: 10px;
+                --space-md: 16px;
+                --space-lg: 24px;
+                --space-xl: 32px;
+            }
+
+            #header {
+                top: var(--space-sm);
+                left: var(--space-sm);
+                right: var(--space-sm);
+                padding: var(--space-xs) var(--space-md) var(--space-xs) calc(var(--space-md) + 12px);
+                gap: var(--space-xs);
+            }
+
+            #title {
+                font-size: 22px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .score-item,
+            .score-item1 {
+                min-width: 70px;
+            }
+
+            .score-label {
+                font-size: 10px;
+            }
+
+            .score-value {
+                font-size: 18px;
+            }
+
+            .back-button {
+                font-size: 22px;
+                left: var(--space-xs);
+            }
+
+            #nextFruitPanel {
+                top: 70px;
+                padding: var(--space-xs);
+                gap: 2px;
+            }
+
+            .legend-item img {
+                max-width: 40px;
+                max-height: 40px;
+            }
+
+            #footer {
+                top: 140px;
+                gap: var(--space-xs);
+            }
+
+            .button {
+                min-width: 120px;
+                min-height: 72px;
+                padding: var(--space-sm) var(--space-md);
+                font-size: 18px;
+            }
+
+            #musicBtn {
+                min-width: 44px;
+                min-height: 44px;
+                padding: 10px;
+            }
+
+            #instructions p {
+                font-size: 10px;
+                text-align: center;
+            }
+        }
+
+
+
+
+
+        /* ===================================
+           ANIMATIONS
+           =================================== */
+
+
+
+
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+
+
+
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+
+
+
+
+        @keyframes scorePopIn {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+
+
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+
+
+
+
+
+        /* ===================================
+           REDUCED MOTION
+           =================================== */
+
+
+
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+    </head>
+
+    <body>
+        <canvas id="gameCanvas" width="720" height="1280" style="padding-top: 30px;"></canvas>
+
+        <div id="ui">
+            <!-- Header Section -->
+            <div id="header">
+                <button id="backButton" class="back-button" onclick="handleBackButton()" title="Back">←</button>
+                <div class="score-item1">
+                    <div class="score-label">Score</div>
+                    <div class="score-value" id="scoreValue">0</div>
+                </div>
+                <div id="title">Merge</div>
+                <div class="score-item">
+                    <div class="score-label">Best</div>
+                    <div class="score-value" id="highScoreValue">0</div>
+                </div>
+            </div>
+
+            <!-- Evolution Legend -->
+            <div id="nextFruitPanel">
+                <div class="legend-item" id="legend-0"></div>
+                <div class="legend-item" id="legend-1"></div>
+                <div class="legend-item" id="legend-2"></div>
+                <div class="legend-item" id="legend-3"></div>
+                <div class="legend-item" id="legend-4"></div>
+                <div class="legend-item" id="legend-5"></div>
+                <div class="legend-item" id="legend-6"></div>
+                <div class="legend-item" id="legend-7"></div>
+                <div class="legend-item" id="legend-8"></div>
+                <div class="legend-item" id="legend-9"></div>
+                <div class="legend-item" id="legend-10"></div>
+            </div>
+
+            <!-- Footer Controls -->
+            <!-- <div id="footer">
+                <button id="musicBtn" class="button">
+                    <span class="material-symbols-rounded">music_note</span>
+                </button>
+            </div> -->
+
+            <!-- Instructions -->
+            <div id="instructions">
+                <p>
+                    <span
+                        class="material-symbols-rounded instruction-icon">touch_app</span>
+                    Drag to position • Tap to drop
+                </p>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen">
+                <div id="gameOverContent">
+                    <div id="gameOverText">Game Over!</div>
+                    <div id="newHighScore">🎉 New High Score! 🎉</div>
+                    <div id="finalScoreLabel">Final Score</div>
+                    <div id="finalScore">0</div>
+                    <div
+                        style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <button id="playAgainBtn" class="button"
+                            style="min-width: 200px;">
+                            <span class="material-symbols-rounded">replay</span>
+                            <span>Play Again</span>
+                        </button>
+                        <button id="viewLeaderboardBtn" class="button"
+                            style="min-width: 200px; background: linear-gradient(135deg, #4CAF50, #8BC34A);">
+                            <span
+                                class="material-symbols-rounded">leaderboard</span>
+                            <span>Leaderboard</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Win Screen -->
+            <div id="winScreen">
+                <div id="winContent">
+                    <div id="winText">🎉 VICTORY! 🎉</div>
+                    <div id="winSubtext">Evolution Complete!<br>You've reached
+                        modern humanity!</div>
+                    <div id="winScoreLabel">Final Score</div>
+                    <div id="winScore">0</div>
+                    <div
+                        style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <button id="playAgainWinBtn" class="button"
+                            style="min-width: 200px;">
+                            <span class="material-symbols-rounded">replay</span>
+                            <span>Play Again</span>
+                        </button>
+                        <button id="viewLeaderboardWinBtn" class="button"
+                            style="min-width: 200px; background: linear-gradient(135deg, #4CAF50, #8BC34A);">
+                            <span
+                                class="material-symbols-rounded">leaderboard</span>
+                            <span>Leaderboard</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Screen -->
+            <div id="loadingScreen">
+                <div id="loadingContent">
+                    <div id="loadingTitle">Evolution Merge</div>
+                    <div id="loadingSubtitle">Loading evolutionary
+                        assets...</div>
+                    <div id="loadingBarContainer">
+                        <div id="loadingBarFill"></div>
+                    </div>
+                    <div id="loadingProgress">0%</div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Screen -->
+            <div id="leaderboardScreen">
+                <div id="leaderboardContent">
+                    <div id="leaderboardTitle">🏆 Leaderboard 🏆</div>
+                    <div id="leaderboardList">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <button id="closeLeaderboardBtn" class="button">
+                        <span class="material-symbols-rounded">close</span>
+                        <span>Close</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Score Submission Notification -->
+            <div id="scoreNotification"></div>
+        </div>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+
+        <script id="gameConfig"></script>
+
+        <script id="assetsMap" type="application/json"></script>
+
+    <!-- LIB SHIM: minimal fallback so page code can call window.lib safely -->
+    <script id="LoadGame"></script>
+
+    <script id="logic"></script>
+
+    </body>
+
+</html>

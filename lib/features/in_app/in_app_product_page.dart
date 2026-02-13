@@ -1,0 +1,324 @@
+import 'package:flutter/material.dart';
+import 'package:logic_mathematics/cores/extentions/in_app_purchase.dart';
+import 'package:logic_mathematics/cores/themes/app_colors.dart';
+import 'package:logic_mathematics/cores/widgets/user_coin_widget.dart';
+import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
+import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
+import 'package:logic_mathematics/main.dart';
+
+class InAppProductPage extends StatefulWidget {
+  const InAppProductPage({super.key});
+
+  @override
+  State<InAppProductPage> createState() => _InAppProductPageState();
+}
+
+class _InAppProductPageState extends State<InAppProductPage> {
+  static const _heroImage =
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDv0relLJq0v8ZFlQZ4CpjBt6aVOOVYzuh8rhOvdKR0TTnxutPJVLIc-0GJ2sMOpi7uZqBtETD9R5EdEUXNhpH87hBi3jlRuGg-O_eElBo0fGMULt6ZypFDM3FD0H01NU26TZCChpvf-FTfdR75WutgB0sdsi7LvemhbcUY8oyW_fzk32AFAyVz0wrpxTIxCP4pz-xQjWpe9moTGBpV1LiC0M2wnjvzR0PfwjZFapv1XtZYE3dnxprRUdXJ97J1QVn6Q5rv-dg7qg';
+
+  @override
+  Widget build(BuildContext context) {
+    LocalInAppPurchase.listProduct.sort((a, b) => a.coin.compareTo(b.coin));
+    return Scaffold(
+      body: Column(
+        children: [
+          // Header with back button
+          _ShopHeader(showBackButton: true),
+
+          // Content
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 12),
+
+                  // Hero banner
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: _HeroBanner(imageUrl: _heroImage),
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  // Section title
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          AppLocalizations.of(context).buyCoins,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Opacity(
+                          opacity: 0.75,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.info_outline, size: 16),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                child: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).askParentsBeforePurchase,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          mainAxisExtent: 240,
+                        ),
+                    itemCount: LocalInAppPurchase.listProduct.length,
+                    itemBuilder: (_, index) => _StickerCard(
+                      title: LocalInAppPurchase.listProduct[index].title
+                          .split('(')
+                          .first,
+                      emoji: '✨',
+                      amount:
+                          '+${LocalInAppPurchase.listProduct[index].title.split(' ').first}',
+                      price: LocalInAppPurchase.listProduct[index].price,
+                      background: const Color(0xFFFFECB3),
+                      textColor: Colors.black,
+                      onPressed: () {
+                        serviceLocator.get<LocalInAppPurchase>().buy(
+                          LocalInAppPurchase.listProduct[index],
+                        );
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShopHeader extends StatelessWidget {
+  const _ShopHeader({this.showBackButton = false});
+
+  final bool showBackButton;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+      ),
+      child: SafeArea(
+        bottom: false,
+        child: SizedBox(
+          height: kToolbarHeight,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              if (showBackButton)
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Center(
+                    child: BackButton(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+              Center(
+                child: Text(
+                  AppLocalizations.of(context).coinShop,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              const Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: Center(child: UserCoinWidget()),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeroBanner extends StatelessWidget {
+  const _HeroBanner({Key? key, required this.imageUrl}) : super(key: key);
+
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 16 / 7,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (c, s, e) => Container(color: Colors.green),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Colors.black.withOpacity(0.55), Colors.transparent],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).rechargeCoins,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    AppLocalizations.of(context).buyCoinsDescription,
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StickerCard extends StatelessWidget {
+  const _StickerCard({
+    Key? key,
+    required this.title,
+    required this.emoji,
+    required this.amount,
+    required this.price,
+    required this.background,
+    required this.textColor,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final String title;
+  final String emoji;
+  final String amount;
+  final String price;
+  final Color background;
+  final Color textColor;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(color: background.withOpacity(0.1), blurRadius: 10),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(emoji, style: const TextStyle(fontSize: 34)),
+                  const SizedBox(height: 8),
+                  Text(
+                    amount,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    AppLocalizations.of(context).starsUnit,
+                    style: TextStyle(
+                      color: textColor.withOpacity(0.9),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 6),
+            AnimatedScaleButton(
+              onPressed: onPressed,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.accentDark,
+                  borderRadius: BorderRadius.circular(100),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.accentDark.withOpacity(0.4),
+                      blurRadius: 8,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  price,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "locale": "en",
+    "initializingText": "Initializing Circuits...",
+    "exitConfirm": "Exit game? Any unsaved progress will be lost.",
+    "exitLabel": "Back",
+    "menuLabel": "Menu",
+    "resetLabel": "Reset",
+    "undoLabel": "Undo",
+    "gameTitle": "Circuit Connect",
+    "levelCompleteTitle": "Level Complete",
+    "levelCompleteBody": "Great job! Ready for the next challenge?",
+    "stayButton": "Stay",
+    "nextButton": "Next",
+    "replayButton": "Replay",
+    "nextLabel": "Next",
+    "levelBadgePrefix": "Lv",
+    "goodbyeTitle": "Goodbye",
+    "thanksText": "Thanks for playing."
+}

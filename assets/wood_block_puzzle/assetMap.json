@@ -1,0 +1,50 @@
+{
+    "wood_block_single": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/900be68b-056b-4b8b-b413-6f361f137c5a.webp",
+        "type": "image",
+        "aspect_ratio": [
+            779,
+            786
+        ]
+    },
+    "wood_block_filled": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1d971ca7-847a-46af-9f2f-8fd2dc87a96f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            682,
+            682
+        ]
+    },
+    "wood_particle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a1dcfc8b-bd44-4b26-94a9-166eaad483ab.webp",
+        "type": "image",
+        "aspect_ratio": [
+            632,
+            869
+        ]
+    },
+    "sparkle_particle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5d687995-5a4a-45e1-b9e6-46989e7f5317.webp",
+        "type": "image",
+        "aspect_ratio": [
+            574,
+            697
+        ]
+    },
+    "place_block_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/c87a87b6-4154-4c42-93e8-e494eebfdd57.mp3",
+        "type": "audio"
+    },
+    "clear_line_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/5c16efa1-9d08-408e-983f-eae1fecce9a0.mp3",
+        "type": "audio"
+    },
+    "game_over_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/8d6bd1f4-136a-4490-aa3b-661c23832b6f.mp3",
+        "type": "audio"
+    },
+    "multi_clear_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/69901a81-3ad8-43e6-a990-699502df3dbf.mp3",
+        "type": "audio"
+    }
+}

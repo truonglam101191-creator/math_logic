@@ -1,0 +1,90 @@
+<!DOCTYPE <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Logic Mathematics</title>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../javascript/theme.js"></script>
+    <script src="../javascript/language.js"></script>
+    <script src="../javascript/privacy-content-enhancer.js"></script>
+</head>
+
+<body>
+    <div class="sub-page-container">
+        <a href="javascript:window.close()" class="back-btn">← Back to Home</a>
+
+        <h1>🔒 Privacy Policy</h1>
+
+        <p class="last-updated">Last updated: January 2025</p>
+
+        <h2>Information We Collect</h2>
+        <p>Logic Mathematics collects minimal information to provide you with the best learning experience:</p>
+        <p>• Device information for app optimization</p>
+        <p>• Progress data to track your learning journey</p>
+        <p>• Coins and achievements data</p>
+        <p>• Crash reports to improve app stability</p>
+
+        <h2>How We Use Your Information</h2>
+        <p>We use the collected information to:</p>
+        <p>• Provide personalized learning experiences</p>
+        <p>• Save your progress across devices</p>
+        <p>• Improve app performance and stability</p>
+        <p>• Show relevant advertisements (if applicable)</p>
+
+        <h2>Data Storage and Security</h2>
+        <p>Your data is securely stored using Firebase services with industry-standard encryption. We implement
+            appropriate security measures to protect your personal information against unauthorized access.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>Our app uses the following third-party services:</p>
+        <p>• Firebase (Google) - for data storage and analytics</p>
+        <p>• Google Mobile Ads - for advertising</p>
+        <p>• Google Play Services - for in-app purchases</p>
+
+        <h2>Children's Privacy</h2>
+        <p>Our app is designed to be safe for users of all ages. We do not knowingly collect personal information
+            from
+            children under 13 without parental consent.</p>
+
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <p>• Access your personal data</p>
+        <p>• Request deletion of your data</p>
+        <p>• Opt-out of data collection where applicable</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us through the app's support section
+            or
+            visit our developer portfolio.</p>
+
+        <p class="last-updated">This policy may be updated from time to time. We will notify users of any material
+            changes.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',function () {
+            console.log('Privacy page loaded, initializing language manager...');
+
+            // Ensure language manager exists and initialize
+            if (window.languageManager) {
+                window.languageManager.init();
+                console.log('Language manager initialized on privacy page');
+
+                // Use enhanced privacy content updater
+                setTimeout(() => {
+                    if (window.updatePrivacyContentEnhanced) {
+                        window.updatePrivacyContentEnhanced(window.languageManager.currentLang);
+                        console.log('Enhanced privacy content applied');
+                    }
+                },500);
+
+            } else {
+                console.error('Language manager not found!');
+            }
+        });
+    </script>
+</body>
+
+</html>

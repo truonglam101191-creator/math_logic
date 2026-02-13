@@ -1,0 +1,233 @@
+<!DOCTYPE ht <link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/styles.css">
+<title>Logic Mathematics - Smart Learning App</title>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="mycv">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="javascript/theme.js"></script>
+  <script src="javascript/language.js"></script>
+  <title>Logic Mathematics - Smart Learning App</title>
+</head>
+
+<body>
+  <!-- Color wave background -->
+  <div class="color-waves">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <!-- Theme toggle button -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <span class="theme-icon">🌓</span>
+  </button>
+
+  <!-- Language toggle button -->
+  <button class="language-toggle" id="languageToggle" aria-label="Switch language">
+    <span id="currentLang">EN</span>
+  </button>
+
+  <!-- Twinkling stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Floating particles background -->
+  <div class="particles" id="particles"></div>
+
+  <div class="container">
+    <!-- Header section with logo and title -->
+    <div class="header">
+      <div class="logo"> <img src="logo_app.png" /> </div>
+      <h1 class="app-title">Logic Mathematics</h1>
+      <p class="app-subtitle">An application for learning and practicing mathematical logic</p>
+      <div class="version-badge">
+        <span>🚀 Version 1.0.2</span>
+      </div>
+    </div>
+
+    <!-- Features section -->
+    <div class="features">
+      <div class="feature-card glass" style="animation-delay: 0.2s">
+        <span class="feature-icon">🎯</span>
+        <h3 class="feature-title">Interactive Learning</h3>
+        <p class="feature-desc">Multiple math topics including Basic Math, Fun Geometry, Advanced Arithmetic, and more
+          specialized challenges.</p>
+      </div>
+
+      <div class="feature-card glass" style="animation-delay: 0.4s">
+        <span class="feature-icon">🪙</span>
+        <h3 class="feature-title">Coin System & Shop</h3>
+        <p class="feature-desc">Earn coins by solving problems, use them for hints, or purchase more coins through the
+          in-app shop.</p>
+      </div>
+
+      <div class="feature-card glass" style="animation-delay: 0.6s">
+        <span class="feature-icon">📊</span>
+        <h3 class="feature-title">Progress Tracking</h3>
+        <p class="feature-desc">Track your performance across different difficulty levels with detailed statistics and
+          achievements.</p>
+      </div>
+
+      <div class="feature-card glass" style="animation-delay: 0.8s">
+        <span class="feature-icon">🔄</span>
+        <h3 class="feature-title">Dynamic Updates</h3>
+        <p class="feature-desc">Get new content and features instantly with Shorebird code push technology.</p>
+      </div>
+
+      <div class="feature-card glass" style="animation-delay: 1.0s">
+        <span class="feature-icon">🌐</span>
+        <h3 class="feature-title">Multi-language Support</h3>
+        <p class="feature-desc">Available in multiple languages including English and Vietnamese with localized content.
+        </p>
+      </div>
+
+      <div class="feature-card glass" style="animation-delay: 1.2s">
+        <span class="feature-icon">📱</span>
+        <h3 class="feature-title">Offline & Cloud Sync</h3>
+        <p class="feature-desc">Practice offline and sync your progress to the cloud with Firebase integration.</p>
+      </div>
+    </div>
+
+    <!-- Developer info section -->
+    <div class="developer-section">
+      <div class="developer-card glass">
+        <div class="developer-icon">
+          <img src="icons/Icon-192.png" alt="Developer Avatar" class="developer-avatar">
+        </div>
+        <h3 class="developer-title">Meet the Developer</h3>
+        <p class="developer-name">Trương Nguyễn Trường Lâm</p>
+        <p class="developer-desc">Passionate about creating educational apps that make learning fun and accessible for
+          everyone.</p>
+        <a href="https://portfoliotruonglam.web.app/" target="_blank" class="developer-link">
+          <span>🌐</span>
+          Visit My Portfolio
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download section -->
+  <div class="download-section">
+    <h2 class="download-title">📱 Download Now</h2>
+    <div class="download-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.lamit.logic.math.logic" class="download-btn glass"
+        target="_blank">
+        <span class="btn-icon">📱</span>
+        <div>
+          <div style="font-size: 12px; opacity: 0.8;">GET IT ON</div>
+          <div>Google Play</div>
+        </div>
+      </a>
+
+      <a href="#" class="download-btn glass" onclick="alert('Coming soon to App Store!')">
+        <span class="btn-icon">🍎</span>
+        <div>
+          <div style="font-size: 12px; opacity: 0.8;">Download on the</div>
+          <div>App Store</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Legal & Policy section -->
+    <div style="margin-top: 30px; margin-bottom: 20px;">
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="pages/privacy-policy.html" target="_blank"
+          style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; padding: 8px 16px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+          🔒 Privacy Policy
+        </a>
+        <a href="pages/terms-of-service.html" target="_blank"
+          style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; padding: 8px 16px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+          📋 Terms of Service
+        </a>
+        <a href="pages/support.html" target="_blank"
+          style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; padding: 8px 16px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+          🛠️ Support
+        </a>
+      </div>
+    </div>
+
+    <!-- Tech stack info -->
+    <div style="margin-top: 20px;">
+      <div class="firebase-status">
+        <strong>📋 App Details:</strong><br>
+        📱 In-App Purchases & Google Mobile Ads<br>
+        🌍 Multi-language Support (EN/VI)<br>
+        🔐 Secure Storage & Device Info<br>
+        📊 Progress Tracking & Statistics
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Debug script to check button existence and event conflicts
+    console.log('=== DEBUG: Checking theme and language buttons ===');
+
+    document.addEventListener('DOMContentLoaded',function () {
+      console.log('Debug: DOM loaded, checking buttons...');
+
+      // Check theme button
+      const themeBtn = document.getElementById('themeToggle');
+      const langBtn = document.getElementById('languageToggle');
+
+      console.log('Debug: Theme button exists:',!!themeBtn);
+      console.log('Debug: Language button exists:',!!langBtn);
+
+      if (themeBtn) {
+        console.log('Debug: Theme button classes:',themeBtn.className);
+        console.log('Debug: Theme button computed styles:',window.getComputedStyle(themeBtn).display);
+
+        // Test direct click handler
+        themeBtn.addEventListener('click',function () {
+          console.log('Debug: Direct theme button click detected!');
+        });
+      }
+
+      if (langBtn) {
+        console.log('Debug: Language button classes:',langBtn.className);
+      }
+
+      // Test manual theme toggle
+      window.testThemeToggle = function () {
+        console.log('Debug: Manual theme toggle test');
+        document.body.classList.toggle('dark');
+        console.log('Debug: Body classes after toggle:',document.body.className);
+      };
+
+      console.log('Debug: Run window.testThemeToggle() in console to test');
+    });
+
+    // Initialize all effects when page loads
+    document.addEventListener('DOMContentLoaded',function () {
+
+      // Obfuscated/minified equivalents
+      (function (d) { var c = d.getElementById('particles'),n = 20; for (var i = 0; i < n; i++) { var p = d.createElement('div'); p.className = 'particle'; var s = Math.random() * 6 + 4; p.style.width = s + 'px'; p.style.height = s + 'px'; p.style.left = Math.random() * 100 + '%'; p.style.top = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 6 + 's'; p.style.animationDuration = (Math.random() * 4 + 4) + 's'; c.appendChild(p); } })(document);
+
+      (function (d) { var c = d.getElementById('stars'),n = 50,S = [0x2728,0x2B50,0x1F31F,0x1F4AB,0x26A1].map(function (cp) { return String.fromCodePoint(cp) }); for (var i = 0; i < n; i++) { var s = d.createElement('div'); s.className = 'star'; s.innerHTML = S[Math.random() * S.length | 0]; s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.animationDelay = Math.random() * 2 + 's'; s.style.animationDuration = (Math.random() * 2 + 1) + 's'; s.style.fontSize = (Math.random() * 8 + 10) + 'px'; c.appendChild(s); } })(document);
+
+      (function () { var T = 3e3,R = 2e3; setInterval(function () { document.querySelectorAll('.star').forEach(function (s) { if (Math.random() < .3) { s.style.transition = 'all 2s ease-in-out'; s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; setTimeout(function () { s.style.transition = ''; },R); } }); },T); })();
+
+      // Initialize language system
+      console.log('Initializing language system...');
+      if (window.languageManager) {
+        window.languageManager.init();
+        console.log('Language manager initialized');
+      } else {
+        console.error('Language manager not found!');
+      }
+
+      console.log('Page loaded - systems should auto-initialize');
+
+    });
+  </script>
+</body>
+
+</html>

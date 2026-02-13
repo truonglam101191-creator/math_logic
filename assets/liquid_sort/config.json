@@ -1,0 +1,1885 @@
+{
+    "currentLevel": "3",
+    "maxLayers": 4,
+    "levels": [
+        {
+            "id": 1,
+            "difficulty": "tutorial",
+            "tubes": [
+                [
+                    null,
+                    null,
+                    "blue",
+                    "blue"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 1,
+            "targetTime": 70,
+            "colors": [
+                "blue"
+            ],
+            "starThresholds": {
+                "threeStar": 3,
+                "twoStar": 4,
+                "oneStar": 4
+            }
+        },
+        {
+            "id": 2,
+            "difficulty": "tutorial",
+            "tubes": [
+                [
+                    "red",
+                    "red",
+                    "blue",
+                    "blue"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    "red",
+                    "red"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 4,
+            "targetTime": 100,
+            "colors": [
+                "red",
+                "blue"
+            ],
+            "starThresholds": {
+                "threeStar": 6,
+                "twoStar": 8,
+                "oneStar": 9
+            }
+        },
+        {
+            "id": 3,
+            "difficulty": "tutorial",
+            "tubes": [
+                [
+                    "yellow",
+                    "green",
+                    null,
+                    null
+                ],
+                [
+                    "green",
+                    "yellow",
+                    null,
+                    null
+                ],
+                [
+                    "green",
+                    "green",
+                    null,
+                    null
+                ],
+                [
+                    "yellow",
+                    "yellow",
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 4,
+            "targetTime": 60,
+            "colors": [
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 6,
+                "twoStar": 8,
+                "oneStar": 9
+            }
+        },
+        {
+            "id": 4,
+            "difficulty": "tutorial",
+            "tubes": [
+                [
+                    "blue",
+                    "red",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "green",
+                    "blue",
+                    "blue",
+                    "green"
+                ],
+                [
+                    "red",
+                    "green",
+                    "green",
+                    "red"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 7,
+            "targetTime": 130,
+            "colors": [
+                "red",
+                "blue",
+                "green"
+            ],
+            "starThresholds": {
+                "threeStar": 9,
+                "twoStar": 12,
+                "oneStar": 14
+            }
+        },
+        {
+            "id": 5,
+            "difficulty": "tutorial",
+            "tubes": [
+                [
+                    "red",
+                    "blue",
+                    "blue",
+                    "red"
+                ],
+                [
+                    "blue",
+                    "green",
+                    "green",
+                    "blue"
+                ],
+                [
+                    "green",
+                    "red",
+                    "red",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 8,
+            "targetTime": 140,
+            "colors": [
+                "red",
+                "blue",
+                "green"
+            ],
+            "starThresholds": {
+                "threeStar": 10,
+                "twoStar": 13,
+                "oneStar": 15
+            }
+        },
+        {
+            "id": 6,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "green",
+                    "red",
+                    "green",
+                    "red"
+                ],
+                [
+                    "blue",
+                    "green",
+                    "blue",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "red",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 9,
+            "targetTime": 150,
+            "colors": [
+                "red",
+                "blue",
+                "green"
+            ],
+            "starThresholds": {
+                "threeStar": 11,
+                "twoStar": 14,
+                "oneStar": 17
+            }
+        },
+        {
+            "id": 7,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "blue",
+                    "red",
+                    "blue",
+                    "green"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "green",
+                    "yellow"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "red",
+                    "red"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 11,
+            "targetTime": 170,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 13,
+                "twoStar": 17,
+                "oneStar": 20
+            }
+        },
+        {
+            "id": 8,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "yellow",
+                    "yellow",
+                    "blue",
+                    "green"
+                ],
+                [
+                    "blue",
+                    "green",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "green",
+                    "yellow"
+                ],
+                [
+                    "green",
+                    "red",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 12,
+            "targetTime": 180,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 14,
+                "twoStar": 18,
+                "oneStar": 22
+            }
+        },
+        {
+            "id": 9,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "green",
+                    "yellow",
+                    "green",
+                    "yellow"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "red",
+                    "red"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "blue",
+                    "red",
+                    "blue",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 13,
+            "targetTime": 190,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 15,
+                "twoStar": 19,
+                "oneStar": 23
+            }
+        },
+        {
+            "id": 10,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "yellow",
+                    "green",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "blue",
+                    "red",
+                    "blue",
+                    "green"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "green",
+                    "red"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 14,
+            "targetTime": 200,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 16,
+                "twoStar": 21,
+                "oneStar": 25
+            }
+        },
+        {
+            "id": 11,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "green",
+                    "blue",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    "blue",
+                    "yellow",
+                    "green",
+                    "red"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "red",
+                    "red"
+                ],
+                [
+                    "yellow",
+                    "blue",
+                    "blue",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 11,
+            "targetTime": 210,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow"
+            ],
+            "starThresholds": {
+                "threeStar": 13,
+                "twoStar": 17,
+                "oneStar": 20
+            }
+        },
+        {
+            "id": 12,
+            "difficulty": "easy",
+            "tubes": [
+                [
+                    "blue",
+                    "blue",
+                    "green",
+                    "purple"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "purple",
+                    "yellow"
+                ],
+                [
+                    "red",
+                    "green",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "red",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "blue",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 16,
+            "targetTime": 220,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 18,
+                "twoStar": 23,
+                "oneStar": 28
+            }
+        },
+        {
+            "id": 13,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "yellow",
+                    "green",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "blue",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    "green",
+                    "purple",
+                    "blue",
+                    "purple"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "purple",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 17,
+            "targetTime": 230,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 19,
+                "twoStar": 25,
+                "oneStar": 30
+            }
+        },
+        {
+            "id": 14,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "green",
+                    "blue",
+                    "red",
+                    "green"
+                ],
+                [
+                    "purple",
+                    "red",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "yellow",
+                    "purple",
+                    "red"
+                ],
+                [
+                    "red",
+                    "yellow",
+                    "yellow",
+                    "purple"
+                ],
+                [
+                    "green",
+                    "blue",
+                    "green",
+                    "blue"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 18,
+            "targetTime": 240,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 20,
+                "twoStar": 26,
+                "oneStar": 31
+            }
+        },
+        {
+            "id": 15,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "yellow",
+                    "purple",
+                    "green",
+                    "blue"
+                ],
+                [
+                    "green",
+                    "red",
+                    "purple",
+                    "green"
+                ],
+                [
+                    "red",
+                    "yellow",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "green",
+                    "blue",
+                    "purple",
+                    "yellow"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "red",
+                    "blue"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 19,
+            "targetTime": 250,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 20,
+                "twoStar": 27,
+                "oneStar": 33
+            }
+        },
+        {
+            "id": 16,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "green",
+                    "purple",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "green",
+                    "blue",
+                    "blue",
+                    "red"
+                ],
+                [
+                    "blue",
+                    "yellow",
+                    "green",
+                    "green"
+                ],
+                [
+                    "yellow",
+                    "yellow",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "purple",
+                    "purple",
+                    "red",
+                    "purple"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 12,
+            "targetTime": 260,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 13,
+                "twoStar": 18,
+                "oneStar": 22
+            }
+        },
+        {
+            "id": 17,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "red",
+                    "purple",
+                    "red",
+                    "green"
+                ],
+                [
+                    "yellow",
+                    "blue",
+                    "green",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "red",
+                    "purple",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "blue",
+                    "purple",
+                    "yellow"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "yellow",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 21,
+            "targetTime": 270,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 22,
+                "twoStar": 30,
+                "oneStar": 36
+            }
+        },
+        {
+            "id": 18,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "green",
+                    "orange",
+                    "blue",
+                    "purple"
+                ],
+                [
+                    "red",
+                    "yellow",
+                    "red",
+                    "green"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    "green",
+                    "yellow"
+                ],
+                [
+                    "blue",
+                    "purple",
+                    "orange",
+                    "yellow"
+                ],
+                [
+                    "red",
+                    "orange",
+                    "red",
+                    "green"
+                ],
+                [
+                    "orange",
+                    "purple",
+                    "yellow",
+                    "purple"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 22,
+            "targetTime": 280,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange"
+            ],
+            "starThresholds": {
+                "threeStar": 23,
+                "twoStar": 31,
+                "oneStar": 38
+            }
+        },
+        {
+            "id": 19,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "blue",
+                    "purple",
+                    "green",
+                    "red"
+                ],
+                [
+                    "green",
+                    "orange",
+                    "green",
+                    "orange"
+                ],
+                [
+                    "blue",
+                    "purple",
+                    "purple",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "yellow",
+                    "red",
+                    "green"
+                ],
+                [
+                    "purple",
+                    "yellow",
+                    "red",
+                    "orange"
+                ],
+                [
+                    "blue",
+                    "yellow",
+                    "orange",
+                    "yellow"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 23,
+            "targetTime": 290,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange"
+            ],
+            "starThresholds": {
+                "threeStar": 24,
+                "twoStar": 32,
+                "oneStar": 39
+            }
+        },
+        {
+            "id": 20,
+            "difficulty": "medium",
+            "tubes": [
+                [
+                    "green",
+                    "red",
+                    "blue",
+                    "blue"
+                ],
+                [
+                    "orange",
+                    "yellow",
+                    "green",
+                    "purple"
+                ],
+                [
+                    "orange",
+                    "red",
+                    "green",
+                    "orange"
+                ],
+                [
+                    "blue",
+                    "purple",
+                    "blue",
+                    "red"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "red",
+                    "purple"
+                ],
+                [
+                    "yellow",
+                    "orange",
+                    "purple",
+                    "yellow"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 24,
+            "targetTime": 300,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange"
+            ],
+            "starThresholds": {
+                "threeStar": 25,
+                "twoStar": 34,
+                "oneStar": 41
+            }
+        },
+        {
+            "id": 21,
+            "difficulty": "hard",
+            "tubes": [
+                [
+                    "yellow",
+                    "red",
+                    "green",
+                    "red"
+                ],
+                [
+                    "green",
+                    "green",
+                    "blue",
+                    "purple"
+                ],
+                [
+                    "green",
+                    "red",
+                    "red",
+                    "purple"
+                ],
+                [
+                    "blue",
+                    "blue",
+                    "blue",
+                    "purple"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "yellow",
+                    "yellow"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 12,
+            "targetTime": 310,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple"
+            ],
+            "starThresholds": {
+                "threeStar": 12,
+                "twoStar": 18,
+                "oneStar": 22
+            }
+        },
+        {
+            "id": 22,
+            "difficulty": "hard",
+            "tubes": [
+                [
+                    "red",
+                    "orange",
+                    "blue",
+                    "purple"
+                ],
+                [
+                    "orange",
+                    "blue",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "yellow",
+                    "green",
+                    "green",
+                    "orange"
+                ],
+                [
+                    "yellow",
+                    "orange",
+                    "purple",
+                    "red"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "blue",
+                    "red"
+                ],
+                [
+                    "green",
+                    "red",
+                    "purple",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 26,
+            "targetTime": 320,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange"
+            ],
+            "starThresholds": {
+                "threeStar": 26,
+                "twoStar": 36,
+                "oneStar": 44
+            }
+        },
+        {
+            "id": 23,
+            "difficulty": "hard",
+            "tubes": [
+                [
+                    "yellow",
+                    "pink",
+                    "pink",
+                    "green"
+                ],
+                [
+                    "purple",
+                    "orange",
+                    "yellow",
+                    "purple"
+                ],
+                [
+                    "blue",
+                    "orange",
+                    "green",
+                    "orange"
+                ],
+                [
+                    "red",
+                    "green",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "orange",
+                    "blue",
+                    "pink",
+                    "purple"
+                ],
+                [
+                    "blue",
+                    "green",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "pink",
+                    "red",
+                    "purple"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 27,
+            "targetTime": 330,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink"
+            ],
+            "starThresholds": {
+                "threeStar": 27,
+                "twoStar": 38,
+                "oneStar": 46
+            }
+        },
+        {
+            "id": 24,
+            "difficulty": "hard",
+            "tubes": [
+                [
+                    "pink",
+                    "orange",
+                    "purple",
+                    "pink"
+                ],
+                [
+                    "orange",
+                    "pink",
+                    "red",
+                    "blue"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "yellow",
+                    "yellow"
+                ],
+                [
+                    "yellow",
+                    "blue",
+                    "green",
+                    "green"
+                ],
+                [
+                    "orange",
+                    "green",
+                    "blue",
+                    "red"
+                ],
+                [
+                    "blue",
+                    "pink",
+                    "red",
+                    "purple"
+                ],
+                [
+                    "purple",
+                    "green",
+                    "orange",
+                    "red"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 28,
+            "targetTime": 340,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink"
+            ],
+            "starThresholds": {
+                "threeStar": 28,
+                "twoStar": 39,
+                "oneStar": 47
+            }
+        },
+        {
+            "id": 25,
+            "difficulty": "hard",
+            "tubes": [
+                [
+                    "orange",
+                    "blue",
+                    "yellow",
+                    "yellow"
+                ],
+                [
+                    "yellow",
+                    "purple",
+                    "purple",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "blue",
+                    "purple",
+                    "blue"
+                ],
+                [
+                    "pink",
+                    "red",
+                    "pink",
+                    "orange"
+                ],
+                [
+                    "green",
+                    "orange",
+                    "green",
+                    "pink"
+                ],
+                [
+                    "red",
+                    "green",
+                    "pink",
+                    "orange"
+                ],
+                [
+                    "green",
+                    "red",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 29,
+            "targetTime": 350,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink"
+            ],
+            "starThresholds": {
+                "threeStar": 29,
+                "twoStar": 40,
+                "oneStar": 49
+            }
+        },
+        {
+            "id": 26,
+            "difficulty": "expert",
+            "tubes": [
+                [
+                    "blue",
+                    "green",
+                    "red",
+                    "red"
+                ],
+                [
+                    "green",
+                    "red",
+                    "purple",
+                    "purple"
+                ],
+                [
+                    "blue",
+                    "purple",
+                    "orange",
+                    "blue"
+                ],
+                [
+                    "red",
+                    "green",
+                    "yellow",
+                    "orange"
+                ],
+                [
+                    "yellow",
+                    "yellow",
+                    "blue",
+                    "orange"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "purple",
+                    "orange"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 17,
+            "targetTime": 360,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange"
+            ],
+            "starThresholds": {
+                "threeStar": 17,
+                "twoStar": 25,
+                "oneStar": 30
+            }
+        },
+        {
+            "id": 27,
+            "difficulty": "expert",
+            "tubes": [
+                [
+                    "blue",
+                    "green",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "red",
+                    "yellow",
+                    "red",
+                    "purple"
+                ],
+                [
+                    "green",
+                    "orange",
+                    "cyan",
+                    "green"
+                ],
+                [
+                    "cyan",
+                    "purple",
+                    "pink",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "pink",
+                    "purple",
+                    "pink"
+                ],
+                [
+                    "cyan",
+                    "orange",
+                    "pink",
+                    "green"
+                ],
+                [
+                    "cyan",
+                    "blue",
+                    "red",
+                    "orange"
+                ],
+                [
+                    "orange",
+                    "yellow",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 32,
+            "targetTime": 380,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink",
+                "cyan"
+            ],
+            "starThresholds": {
+                "threeStar": 32,
+                "twoStar": 44,
+                "oneStar": 54
+            }
+        },
+        {
+            "id": 28,
+            "difficulty": "expert",
+            "tubes": [
+                [
+                    "cyan",
+                    "pink",
+                    "purple",
+                    "cyan"
+                ],
+                [
+                    "cyan",
+                    "purple",
+                    "green",
+                    "blue"
+                ],
+                [
+                    "blue",
+                    "orange",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "orange",
+                    "red",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "pink",
+                    "blue",
+                    "red",
+                    "green"
+                ],
+                [
+                    "green",
+                    "yellow",
+                    "cyan",
+                    "orange"
+                ],
+                [
+                    "orange",
+                    "purple",
+                    "red",
+                    "pink"
+                ],
+                [
+                    "pink",
+                    "purple",
+                    "yellow",
+                    "green"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 34,
+            "targetTime": 400,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink",
+                "cyan"
+            ],
+            "starThresholds": {
+                "threeStar": 34,
+                "twoStar": 47,
+                "oneStar": 57
+            }
+        },
+        {
+            "id": 29,
+            "difficulty": "expert",
+            "tubes": [
+                [
+                    "orange",
+                    "blue",
+                    "blue",
+                    "pink"
+                ],
+                [
+                    "blue",
+                    "purple",
+                    "orange",
+                    "pink"
+                ],
+                [
+                    "cyan",
+                    "green",
+                    "pink",
+                    "green"
+                ],
+                [
+                    "cyan",
+                    "pink",
+                    "yellow",
+                    "purple"
+                ],
+                [
+                    "blue",
+                    "yellow",
+                    "red",
+                    "yellow"
+                ],
+                [
+                    "purple",
+                    "cyan",
+                    "orange",
+                    "red"
+                ],
+                [
+                    "orange",
+                    "yellow",
+                    "green",
+                    "red"
+                ],
+                [
+                    "cyan",
+                    "red",
+                    "green",
+                    "purple"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 36,
+            "targetTime": 420,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink",
+                "cyan"
+            ],
+            "starThresholds": {
+                "threeStar": 36,
+                "twoStar": 49,
+                "oneStar": 60
+            }
+        },
+        {
+            "id": 30,
+            "difficulty": "expert",
+            "tubes": [
+                [
+                    "orange",
+                    "cyan",
+                    "green",
+                    "pink"
+                ],
+                [
+                    "orange",
+                    "blue",
+                    "yellow",
+                    "blue"
+                ],
+                [
+                    "purple",
+                    "blue",
+                    "yellow",
+                    "pink"
+                ],
+                [
+                    "yellow",
+                    "red",
+                    "purple",
+                    "pink"
+                ],
+                [
+                    "orange",
+                    "cyan",
+                    "purple",
+                    "red"
+                ],
+                [
+                    "orange",
+                    "pink",
+                    "yellow",
+                    "red"
+                ],
+                [
+                    "cyan",
+                    "green",
+                    "blue",
+                    "green"
+                ],
+                [
+                    "green",
+                    "red",
+                    "cyan",
+                    "purple"
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            ],
+            "optimalSteps": 38,
+            "targetTime": 440,
+            "colors": [
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "purple",
+                "orange",
+                "pink",
+                "cyan"
+            ],
+            "starThresholds": {
+                "threeStar": 38,
+                "twoStar": 52,
+                "oneStar": 63
+            }
+        }
+    ],
+    "tubes": [
+        [
+            null,
+            null,
+            "blue",
+            "blue"
+        ],
+        [
+            "blue",
+            "blue",
+            null,
+            null
+        ],
+        null,
+        null,
+        null
+    ]
+}

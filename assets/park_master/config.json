@@ -1,0 +1,3062 @@
+{
+    "currentLevel": 0,
+    "levels": [
+        {
+            "starThresholds": [
+                18,
+                12,
+                8
+            ],
+            "playerStart": {
+                "x": 115,
+                "y": 1050,
+                "rotation": 0
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 120,
+                    "y": 195,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 115,
+                    "y": 1145,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                },
+                {
+                    "type": "greenery",
+                    "x": 285,
+                    "y": 1150,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 475,
+                    "y": 1210,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 285,
+                    "y": 650,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 370,
+                    "y": 195,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 285,
+                    "y": 900,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 475,
+                    "y": 590,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 725,
+                    "y": 585,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 725,
+                    "y": 1210,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 430,
+                    "y": 745,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": false,
+                    "targetX": -80,
+                    "targetY": -120,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "greenery",
+                    "x": 620,
+                    "y": 195,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 430,
+                    "y": 990,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": false,
+                    "targetX": 440,
+                    "targetY": 1000,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "barrier",
+                    "x": 680,
+                    "y": 740,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 675,
+                    "y": 1030,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "barrier",
+                    "x": 675,
+                    "y": 465,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 250
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "tree",
+                    "x": 120,
+                    "y": 145,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 285,
+                    "y": 1030,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 490,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 480,
+                    "y": 320,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 435,
+                    "y": 930,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "tree",
+                    "x": 600,
+                    "y": 160,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 290,
+                    "y": 540,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 435,
+                    "y": 1055,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 435,
+                    "y": 810,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 435,
+                    "y": 685,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 30,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 65,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 100,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 135,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 205,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 170,
+                    "y": 600,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 370,
+                    "y": 395,
+                    "length": 720,
+                    "rotation": 0
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                20,
+                15,
+                10
+            ],
+            "playerStart": {
+                "x": 145,
+                "y": 1070,
+                "rotation": 90
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 300,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 45,
+                    "y": 160,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 80,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 335,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 590,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 940,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 940,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 300,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 390,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 585,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 100,
+                    "y": 440,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0,
+                    "canMove": false,
+                    "targetX": 100,
+                    "targetY": 440,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_dashed",
+                    "x": 595,
+                    "y": 525,
+                    "length": 800,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 120,
+                    "y": 265,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 640,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 45,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 100,
+                    "y": 795,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 160,
+                    "y": 445,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 285,
+                    "y": 265,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 390,
+                    "y": 635,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 35,
+                    "y": 445,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 35,
+                    "y": 795,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 165,
+                    "y": 795,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 595,
+                    "y": 1020,
+                    "length": 180,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 1020,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 1050,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 1080,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 1110,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 215,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 185,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 155,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 125,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 285,
+                    "y": 445,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 285,
+                    "y": 795,
+                    "length": 160,
+                    "rotation": 90
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                22,
+                17,
+                13
+            ],
+            "playerStart": {
+                "x": 180,
+                "y": 295,
+                "rotation": 90
+            },
+            "obstacles": [
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 165,
+                    "y": 1030,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 45,
+                    "y": 585,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "greenery",
+                    "x": 210,
+                    "y": 445,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 15,
+                    "y": 135,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 15,
+                    "y": 385,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 695,
+                    "y": 445,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 695,
+                    "y": 145,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 440,
+                    "y": 145,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 195,
+                    "y": 155,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 170
+                },
+                {
+                    "type": "barrier",
+                    "x": 320,
+                    "y": 570,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 230
+                },
+                {
+                    "type": "barrier",
+                    "x": 410,
+                    "y": 655,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 220
+                },
+                {
+                    "type": "barrier",
+                    "x": 50,
+                    "y": 720,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 260
+                },
+                {
+                    "type": "greenery",
+                    "x": 15,
+                    "y": 925,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 15,
+                    "y": 1175,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 655,
+                    "y": 1190,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 10
+                },
+                {
+                    "type": "greenery",
+                    "x": 210,
+                    "y": 1180,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 465,
+                    "y": 1180,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 505,
+                    "y": 730,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 210
+                },
+                {
+                    "type": "barrier",
+                    "x": 650,
+                    "y": 1090,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 110
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_solid",
+                    "x": 175,
+                    "y": 835,
+                    "length": 190,
+                    "rotation": 0
+                },
+                {
+                    "type": "tree",
+                    "x": 665,
+                    "y": 395,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 175,
+                    "y": 975,
+                    "length": 190,
+                    "rotation": 0
+                },
+                {
+                    "type": "park_spot",
+                    "x": 180,
+                    "y": 905,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 175,
+                    "y": 1090,
+                    "length": 190,
+                    "rotation": 0
+                },
+                {
+                    "type": "tree",
+                    "x": 505,
+                    "y": 1125,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 360,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 440,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 480,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 520,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 560,
+                    "y": 460,
+                    "length": 120,
+                    "rotation": 90
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                26,
+                20,
+                15
+            ],
+            "playerStart": {
+                "x": 480,
+                "y": 1095,
+                "rotation": 0
+            },
+            "obstacles": [
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 115,
+                    "y": 505,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 180
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 115,
+                    "y": 890,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 595,
+                    "y": 390,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 20
+                },
+                {
+                    "type": "barrier",
+                    "x": 140,
+                    "y": 50,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 200
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 320,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 360,
+                    "y": 320,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 575,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 830,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 1085,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 360,
+                    "y": 575,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 360,
+                    "y": 830,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 65,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 360,
+                    "y": 1080,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 70,
+                    "y": 1235,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                },
+                {
+                    "type": "barrier",
+                    "x": 355,
+                    "y": 1240,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                },
+                {
+                    "type": "barrier",
+                    "x": 210,
+                    "y": 1235,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 170
+                },
+                {
+                    "type": "barrier",
+                    "x": 505,
+                    "y": 1225,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                },
+                {
+                    "type": "greenery",
+                    "x": 720,
+                    "y": 1085,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 720,
+                    "y": 830,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 720,
+                    "y": 575,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 720,
+                    "y": 320,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 645,
+                    "y": 1240,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 190
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 480,
+                    "y": 800,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 340
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 120,
+                    "y": 330,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 190,
+                    "canMove": false,
+                    "targetX": 120,
+                    "targetY": 280,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_dashed",
+                    "x": 545,
+                    "y": 785,
+                    "length": 800,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 360,
+                    "y": 470,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 120,
+                    "y": 700,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 360,
+                    "y": 975,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 545,
+                    "y": 205,
+                    "length": 360,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 365,
+                    "y": 170,
+                    "length": 110,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 365,
+                    "y": 135,
+                    "length": 110,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 365,
+                    "y": 100,
+                    "length": 110,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 365,
+                    "y": 60,
+                    "length": 110,
+                    "rotation": 0
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                23,
+                18,
+                15
+            ],
+            "playerStart": {
+                "x": 630,
+                "y": 625,
+                "rotation": 270
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 715,
+                    "y": 940,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 275,
+                    "y": 610,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 80
+                },
+                {
+                    "type": "greenery",
+                    "x": 370,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 625,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 625,
+                    "y": 375,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 370,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 310,
+                    "y": 70,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 625,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 190,
+                    "y": 1400,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0,
+                    "canMove": true,
+                    "targetX": 190,
+                    "targetY": -120,
+                    "startDelay": 0,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 3
+                },
+                {
+                    "type": "barrier",
+                    "x": 280,
+                    "y": 480,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 110
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 630,
+                    "y": 240,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 180,
+                    "canMove": false,
+                    "targetX": 600,
+                    "targetY": 240,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "barrier",
+                    "x": 665,
+                    "y": 1100,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 170
+                },
+                {
+                    "type": "barrier",
+                    "x": 540,
+                    "y": 1100,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 190
+                },
+                {
+                    "type": "barrier",
+                    "x": 420,
+                    "y": 1100,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_dashed",
+                    "x": 125,
+                    "y": 420,
+                    "length": 800,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 660,
+                    "y": 695,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 640,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 565,
+                    "y": 910,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 690,
+                    "y": 230,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 310,
+                    "y": 95,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 385,
+                    "y": 695,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 565,
+                    "y": 230,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 565,
+                    "y": 975,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 565,
+                    "y": 845,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 125,
+                    "y": 1040,
+                    "length": 450,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 355,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 390,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 215,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 285,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 320,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 320,
+                    "y": 250,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 505,
+                    "y": 555,
+                    "length": 380,
+                    "rotation": 0
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                23,
+                18,
+                15
+            ],
+            "playerStart": {
+                "x": 190,
+                "y": 460,
+                "rotation": 0
+            },
+            "obstacles": [
+                {
+                    "type": "barrier",
+                    "x": 190,
+                    "y": 565,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 180
+                },
+                {
+                    "type": "greenery",
+                    "x": 720,
+                    "y": 520,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 375,
+                    "y": 275,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 65,
+                    "y": 465,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 0,
+                    "y": 275,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 315,
+                    "y": 465,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 615,
+                    "y": 955,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 40,
+                    "canMove": false,
+                    "targetX": 100,
+                    "targetY": 440,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "greenery",
+                    "x": 600,
+                    "y": 825,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 345,
+                    "y": 825,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 300,
+                    "y": 965,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 210,
+                    "canMove": false,
+                    "targetX": 320,
+                    "targetY": 1000,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": -80,
+                    "y": 145,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 145,
+                    "startDelay": 0,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 4
+                },
+                {
+                    "type": "barrier",
+                    "x": 685,
+                    "y": 375,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 110
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 800,
+                    "y": 680,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": true,
+                    "targetX": -80,
+                    "targetY": 680,
+                    "startDelay": 3,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 3
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 800,
+                    "y": 1170,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": -80,
+                    "targetY": 1170,
+                    "startDelay": 1,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 1
+                },
+                {
+                    "type": "greenery",
+                    "x": 125,
+                    "y": 0,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 375,
+                    "y": 0,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 625,
+                    "y": 0,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "tree",
+                    "x": 320,
+                    "y": 320,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 65,
+                    "y": 330,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 450,
+                    "y": 975,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 300
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 680,
+                    "y": 960,
+                    "length": 160,
+                    "rotation": 120
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 525,
+                    "y": 975,
+                    "length": 190,
+                    "rotation": 120
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 435,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 470,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 505,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 540,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 575,
+                    "y": 530,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 375,
+                    "y": 960,
+                    "length": 160,
+                    "rotation": 120
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 225,
+                    "y": 950,
+                    "length": 140,
+                    "rotation": 120
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 345,
+                    "y": 1110,
+                    "length": 750,
+                    "rotation": 0
+                },
+                {
+                    "type": "tree",
+                    "x": 640,
+                    "y": 760,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 25,
+                    "y": 840,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 65,
+                    "y": 840,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 105,
+                    "y": 840,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 145,
+                    "y": 840,
+                    "length": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 185,
+                    "y": 840,
+                    "length": 120,
+                    "rotation": 90
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                27,
+                22,
+                18
+            ],
+            "playerStart": {
+                "x": 620,
+                "y": 995,
+                "rotation": 270
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 65,
+                    "y": 255,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "barrier",
+                    "x": 385,
+                    "y": 565,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "greenery",
+                    "x": 80,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 335,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 595,
+                    "y": 1200,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 345,
+                    "y": 1005,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 345,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 65,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 65,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 585,
+                    "y": 65,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 420,
+                    "y": 470,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 160
+                },
+                {
+                    "type": "barrier",
+                    "x": 535,
+                    "y": 485,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 200
+                },
+                {
+                    "type": "barrier",
+                    "x": 685,
+                    "y": 875,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "barrier",
+                    "x": 655,
+                    "y": 750,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 210
+                },
+                {
+                    "type": "barrier",
+                    "x": 565,
+                    "y": 670,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 240
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 190,
+                    "y": 780,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 80,
+                    "canMove": false,
+                    "targetX": 200,
+                    "targetY": 760,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "barrier",
+                    "x": 680,
+                    "y": 315,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "barrier",
+                    "x": 685,
+                    "y": 190,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 260
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 340,
+                    "y": 210,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0,
+                    "canMove": false,
+                    "targetX": 360,
+                    "targetY": 240,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 195,
+                    "y": 900,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 280,
+                    "canMove": false,
+                    "targetX": 160,
+                    "targetY": 880,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "barrier",
+                    "x": 50,
+                    "y": 450,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 260
+                },
+                {
+                    "type": "barrier",
+                    "x": 50,
+                    "y": 565,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 300
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "tree",
+                    "x": 65,
+                    "y": 120,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 640,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 190,
+                    "y": 1025,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 190,
+                    "y": 720,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "tree",
+                    "x": 345,
+                    "y": 1135,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 350,
+                    "y": 880,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 190,
+                    "y": 840,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 190,
+                    "y": 960,
+                    "length": 160,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 190,
+                    "y": 1090,
+                    "length": 160,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 165,
+                    "y": 215,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 280,
+                    "y": 215,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 400,
+                    "y": 215,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 565,
+                    "y": 745,
+                    "length": 800,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 520,
+                    "y": 215,
+                    "length": 160,
+                    "rotation": 90
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                30,
+                24,
+                19
+            ],
+            "playerStart": {
+                "x": 325,
+                "y": 945,
+                "rotation": 180
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 560,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 235,
+                    "y": 940,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 100
+                },
+                {
+                    "type": "greenery",
+                    "x": 430,
+                    "y": 1245,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": -80,
+                    "y": 1245,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 175,
+                    "y": 1245,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 250,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 560,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 390,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": -80,
+                    "y": 70,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 175,
+                    "y": 70,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 430,
+                    "y": 70,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 110,
+                    "y": 720,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": false,
+                    "targetX": 100,
+                    "targetY": 440,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "barrier",
+                    "x": 415,
+                    "y": 940,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 270
+                },
+                {
+                    "type": "barrier",
+                    "x": 420,
+                    "y": 440,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 270
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": -80,
+                    "y": 1090,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 1090,
+                    "startDelay": 0,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": -80,
+                    "y": 320,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 320,
+                    "startDelay": 5,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 5
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 800,
+                    "y": 190,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": -80,
+                    "targetY": 190,
+                    "startDelay": 4,
+                    "moveSpeed": 150,
+                    "moveLoopInterval": 4
+                },
+                {
+                    "type": "barrier",
+                    "x": 635,
+                    "y": 1235,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 170
+                },
+                {
+                    "type": "barrier",
+                    "x": 645,
+                    "y": 90,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 210
+                },
+                {
+                    "type": "barrier",
+                    "x": 520,
+                    "y": 840,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 150
+                },
+                {
+                    "type": "barrier",
+                    "x": 660,
+                    "y": 670,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 250
+                },
+                {
+                    "type": "barrier",
+                    "x": 515,
+                    "y": 485,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 190
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 80,
+                    "y": 435,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": false,
+                    "targetX": 80,
+                    "targetY": 400,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "tree",
+                    "x": 50,
+                    "y": 505,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 395,
+                    "y": 760,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 440,
+                    "y": 1200,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 270,
+                    "y": 440,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 360
+                },
+                {
+                    "type": "tree",
+                    "x": 120,
+                    "y": 1200,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 250,
+                    "y": 610,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 100,
+                    "y": 665,
+                    "length": 160,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 100,
+                    "y": 785,
+                    "length": 160,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 355,
+                    "y": 260,
+                    "length": 670,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 590,
+                    "y": 690,
+                    "length": 580,
+                    "rotation": 90
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                24,
+                19,
+                15
+            ],
+            "playerStart": {
+                "x": 485,
+                "y": 1070,
+                "rotation": 320
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 665,
+                    "y": 540,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 80,
+                    "y": 1205,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 335,
+                    "y": 1205,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 590,
+                    "y": 1205,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 215,
+                    "y": 625,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 410,
+                    "y": 540,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 410,
+                    "y": 720,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 665,
+                    "y": 720,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 180
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 585,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 335,
+                    "y": 1075,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 320,
+                    "canMove": false,
+                    "targetX": 100,
+                    "targetY": 440,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 640,
+                    "y": 1080,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 320,
+                    "canMove": false,
+                    "targetX": 640,
+                    "targetY": 1080,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 310,
+                    "y": 155,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 30,
+                    "canMove": false,
+                    "targetX": 280,
+                    "targetY": 200,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 615,
+                    "y": 175,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 50,
+                    "canMove": false,
+                    "targetX": 560,
+                    "targetY": 280,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 800,
+                    "y": 305,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": true,
+                    "targetX": -80,
+                    "targetY": 305,
+                    "startDelay": 1,
+                    "moveSpeed": 150,
+                    "moveLoopInterval": 5
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": -80,
+                    "y": 420,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 420,
+                    "startDelay": 1,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": -80,
+                    "y": 950,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 950,
+                    "startDelay": 0,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 3
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 800,
+                    "y": 830,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": true,
+                    "targetX": -80,
+                    "targetY": 830,
+                    "startDelay": 2,
+                    "moveSpeed": 150,
+                    "moveLoopInterval": 4
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_dashed",
+                    "x": 75,
+                    "y": 630,
+                    "length": 280,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 640,
+                    "y": 680,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 170,
+                    "y": 1155,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 600,
+                    "y": 520,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 455,
+                    "y": 175,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 130
+                },
+                {
+                    "type": "tree",
+                    "x": 215,
+                    "y": 525,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 390,
+                    "y": 665,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 80,
+                    "y": 145,
+                    "length": 130,
+                    "rotation": 130
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 250,
+                    "y": 1075,
+                    "length": 130,
+                    "rotation": 50
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 360,
+                    "y": 890,
+                    "length": 700,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 410,
+                    "y": 1075,
+                    "length": 130,
+                    "rotation": 50
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 565,
+                    "y": 1075,
+                    "length": 130,
+                    "rotation": 50
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 85,
+                    "y": 1075,
+                    "length": 130,
+                    "rotation": 50
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 720,
+                    "y": 1075,
+                    "length": 130,
+                    "rotation": 50
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 240,
+                    "y": 145,
+                    "length": 130,
+                    "rotation": 130
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 400,
+                    "y": 145,
+                    "length": 130,
+                    "rotation": 130
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 560,
+                    "y": 145,
+                    "length": 130,
+                    "rotation": 130
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 720,
+                    "y": 145,
+                    "length": 130,
+                    "rotation": 130
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 360,
+                    "y": 360,
+                    "length": 700,
+                    "rotation": 0
+                }
+            ]
+        },
+        {
+            "starThresholds": [
+                35,
+                28,
+                22
+            ],
+            "playerStart": {
+                "x": 220,
+                "y": 420,
+                "rotation": 180
+            },
+            "obstacles": [
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 560,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "barrier",
+                    "x": 240,
+                    "y": 130,
+                    "width": 100,
+                    "height": 40,
+                    "rotation": 190
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 940,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 940,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 560,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 390,
+                    "y": 750,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "greenery",
+                    "x": 75,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 330,
+                    "y": 25,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "greenery",
+                    "x": 385,
+                    "y": 370,
+                    "width": 240,
+                    "height": 120,
+                    "rotation": 90
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 245,
+                    "y": 795,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 100,
+                    "canMove": false,
+                    "targetX": 100,
+                    "targetY": 440,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 100,
+                    "y": 415,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 190,
+                    "canMove": false,
+                    "targetX": 120,
+                    "targetY": 400,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": 100,
+                    "y": 160,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 350,
+                    "canMove": false,
+                    "targetX": 120,
+                    "targetY": 160,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 245,
+                    "y": 690,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 90,
+                    "canMove": false,
+                    "targetX": 200,
+                    "targetY": 680,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_purple",
+                    "x": 350,
+                    "y": 1055,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 100,
+                    "canMove": false,
+                    "targetX": 320,
+                    "targetY": 1080,
+                    "startDelay": 0,
+                    "moveSpeed": 50,
+                    "moveLoopInterval": 2
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_white",
+                    "x": 520,
+                    "y": 1400,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0,
+                    "canMove": true,
+                    "targetX": 520,
+                    "targetY": -120,
+                    "startDelay": 0,
+                    "moveSpeed": 200,
+                    "moveLoopInterval": 5
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_yellow",
+                    "x": 660,
+                    "y": -120,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 0,
+                    "canMove": true,
+                    "targetX": 660,
+                    "targetY": 1400,
+                    "startDelay": 1,
+                    "moveSpeed": 150,
+                    "moveLoopInterval": 3
+                },
+                {
+                    "type": "parked_car",
+                    "assetId": "parked_car_green",
+                    "x": -80,
+                    "y": 1195,
+                    "width": 80,
+                    "height": 120,
+                    "rotation": 270,
+                    "canMove": true,
+                    "targetX": 800,
+                    "targetY": 1195,
+                    "startDelay": 7,
+                    "moveSpeed": 100,
+                    "moveLoopInterval": 6
+                }
+            ],
+            "decorations": [
+                {
+                    "type": "road_line_dashed",
+                    "x": 595,
+                    "y": 525,
+                    "length": 800,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 390,
+                    "y": 640,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 360,
+                    "y": 880,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "tree",
+                    "x": 90,
+                    "y": 890,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "park_spot",
+                    "x": 160,
+                    "y": 1060,
+                    "width": 160,
+                    "height": 100,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 160,
+                    "y": 175,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "tree",
+                    "x": 390,
+                    "y": 250,
+                    "rotation": 0,
+                    "width": 80,
+                    "height": 100
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 35,
+                    "y": 175,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 35,
+                    "y": 415,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 160,
+                    "y": 415,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 595,
+                    "y": 1020,
+                    "length": 180,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 215,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 185,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 155,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_dashed",
+                    "x": 400,
+                    "y": 125,
+                    "length": 120,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 240,
+                    "y": 640,
+                    "length": 160,
+                    "rotation": 180
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 280,
+                    "y": 415,
+                    "length": 160,
+                    "rotation": 90
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 240,
+                    "y": 745,
+                    "length": 160,
+                    "rotation": 0
+                },
+                {
+                    "type": "road_line_solid",
+                    "x": 240,
+                    "y": 855,
+                    "length": 160,
+                    "rotation": 0
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "maxSpeed": 200,
+        "acceleration": 500,
+        "turnSpeed": 180,
+        "friction": 0.95
+    }
+}

@@ -1,0 +1,95 @@
+/* Performance Optimizations */
+
+/* Reduce reflows and repaints */
+.theme-toggle,
+.language-toggle {
+    transform: translateZ(0);
+    /* Hardware acceleration */
+    will-change: transform, background-color;
+}
+
+.feature-card {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Optimize animations */
+.particle,
+.star {
+    transform: translateZ(0);
+    will-change: transform, left, top;
+}
+
+/* Improve text rendering */
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize background gradients */
+.color-waves .wave {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Reduce layout shifts */
+.feature-card,
+.developer-card {
+    contain: layout style paint;
+}
+
+/* Image optimization */
+.developer-avatar,
+.logo img {
+    object-fit: cover;
+    transform: translateZ(0);
+}
+
+/* Button hover optimizations */
+.theme-toggle:hover,
+.language-toggle:hover {
+    transform: translateZ(0) scale(1.1);
+}
+
+.download-btn:hover {
+    transform: translateZ(0) translateY(-2px);
+}
+
+/* Reduce repaint area */
+.firebase-status {
+    contain: layout;
+}
+
+/* Optimize for mobile */
+@media (max-width: 768px) {
+
+    .particles,
+    .stars {
+        display: none;
+        /* Disable on mobile for performance */
+    }
+
+    .color-waves .wave:nth-child(n+3) {
+        display: none;
+        /* Show fewer waves on mobile */
+    }
+}
+
+/* Critical loading optimizations */
+.app-title,
+.app-subtitle,
+.version-badge {
+    font-display: swap;
+}
+
+/* Prevent layout shift during language switching */
+.feature-title,
+.feature-desc {
+    min-height: 1.2em;
+}
+
+.developer-title,
+.developer-desc {
+    min-height: 1em;
+}

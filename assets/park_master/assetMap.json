@@ -1,0 +1,118 @@
+{
+    "player_car": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7e9f5914-b1c9-458f-8268-4e2702206263.webp",
+        "type": "image",
+        "aspect_ratio": [
+            637,
+            910
+        ]
+    },
+    "parked_car_yellow": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/77c7222d-bda4-43c1-8467-004dc98ff718.webp",
+        "type": "image",
+        "aspect_ratio": [
+            628,
+            907
+        ]
+    },
+    "parked_car_green": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5b5ef9d0-4900-447a-b32f-938456017022.webp",
+        "type": "image",
+        "aspect_ratio": [
+            579,
+            938
+        ]
+    },
+    "parked_car_purple": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/98a1f36d-56a0-47df-87a7-3762726292bf.webp",
+        "type": "image",
+        "aspect_ratio": [
+            621,
+            934
+        ]
+    },
+    "parked_car_white": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8d52307d-ee24-4214-9d0f-9f98cfa83561.webp",
+        "type": "image",
+        "aspect_ratio": [
+            591,
+            923
+        ]
+    },
+    "tree_small": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/74961bcd-8996-482e-b0df-91dcc4127a22.webp",
+        "type": "image",
+        "aspect_ratio": [
+            940,
+            1264
+        ]
+    },
+    "lamp_post": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/86aac596-8e39-4819-8355-c303dc7f2f0c.webp",
+        "type": "image",
+        "aspect_ratio": [
+            393,
+            1399
+        ]
+    },
+    "flower_bed": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d6eb53fe-8466-4835-b942-3adefd6f4f3f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            888,
+            889
+        ]
+    },
+    "engine_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/d867c84b-b108-41b9-a93b-d7acd67c4640.mp3",
+        "type": "audio"
+    },
+    "crash_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/f91f69bb-1a49-420c-a2a9-2523c3328975.mp3",
+        "type": "audio"
+    },
+    "success_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/1622b885-6524-4af0-8a0d-5f6807c43184.mp3",
+        "type": "audio"
+    },
+    "star_rating_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/a51bc53a-e11e-48ec-8e2f-21519569a306.mp3",
+        "type": "audio"
+    },
+    "background_music": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/5445b1b9-45e2-4ef9-b4a6-995a41f8e21d.mp3",
+        "type": "audio"
+    },
+    "greenery_patch": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b9754a1b-ac8b-4659-8328-d93bdffff051.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1420,
+            807
+        ]
+    },
+    "greenery_patch_square": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6416040f-8ec3-4938-b59b-1220bac2657b.webp",
+        "type": "image",
+        "aspect_ratio": [
+            871,
+            862
+        ]
+    },
+    "barrier_obstacle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/9769cb41-9717-4d25-971f-a5422dc1c0c4.webp",
+        "type": "image",
+        "aspect_ratio": [
+            936,
+            655
+        ]
+    },
+    "park_spot_marker": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/9ac98db4-1e6d-4634-841d-d98e8279ce1f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1181,
+            722
+        ]
+    }
+}

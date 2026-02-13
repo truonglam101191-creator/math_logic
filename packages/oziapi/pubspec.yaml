@@ -1,0 +1,38 @@
+name: oziapi
+description: "A new Flutter plugin api project."
+version: 1.0.0
+homepage:
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #plugin_platform_interface: ^2.0.2
+  dio: any
+  responsive_sizer: any
+  flutter_easyloading: any
+  pretty_dio_logger: ^1.4.0
+  flutter_svg: ^2.0.10+1
+  intl: any
+  crypto: any
+  file_picker: any
+  flutter_image_compress: ^2.3.0
+  device_info_plus: any
+  otp: ^3.1.4
+  diff_match_patch: ^0.4.1
+  flutter_markdown: ^0.6.14
+  markdown: ^7.0.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/files/

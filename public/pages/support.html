@@ -1,0 +1,139 @@
+<!DOCTYPE <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Logic Mathematics</title>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../javascript/theme.js"></script>
+    <script src="../javascript/language.js"></script>
+    <script src="../javascript/support-content-enhancer.js"></script>
+</head>
+
+<body>
+    <div class="sub-page-container">
+        <a href="javascript:window.close()" class="back-btn">← Back to Home</a>
+
+        <h1>🛠️ Support Center</h1>
+
+        <div class="support-card">
+            <h2>📞 Get Help</h2>
+            <p>Need assistance with Logic Mathematics? We're here to help! Choose the best way to reach us:</p>
+
+            <a href="https://portfoliotruonglam.web.app/" target="_blank" class="contact-btn">
+                🌐 Developer Portfolio
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.lamit.logic.math.logic" target="_blank"
+                class="contact-btn">
+                📱 App Store Review
+            </a>
+        </div>
+
+        <h2>❓ Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: How do I earn coins in the app?</div>
+            <p>A: You can earn coins by solving math problems correctly, completing challenges, and achieving
+                milestones. You can also purchase additional coins through the in-app shop.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: What should I do if the app crashes or freezes?</div>
+            <p>A: First, try restarting the app. If the problem persists, restart your device. Make sure you have
+                the
+                latest version of the app installed from the app store.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: Can I sync my progress across multiple devices?</div>
+            <p>A: Yes! Your progress is automatically saved to the cloud using Firebase. Just make sure you're using
+                the
+                same Google account on all devices.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: How do I use hints?</div>
+            <p>A: When you're stuck on a problem, tap the hint button (💡). Using a hint will cost 1 coin, so use
+                them
+                wisely!</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: Is the app suitable for children?</div>
+            <p>A: Yes! Logic Mathematics is designed to be educational and safe for users of all ages, including
+                children. The content is appropriate and helps develop mathematical thinking skills.</p>
+        </div>
+
+        <h2>🎯 App Features</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <h3>📚 15+ Math Topics</h3>
+                <p>From basic arithmetic to advanced geometry</p>
+            </div>
+            <div class="feature-item">
+                <h3>🏆 Achievement System</h3>
+                <p>Earn rewards for your progress</p>
+            </div>
+            <div class="feature-item">
+                <h3>💡 Hint System</h3>
+                <p>Get help when you're stuck</p>
+            </div>
+            <div class="feature-item">
+                <h3>🌍 Multi-language</h3>
+                <p>Available in English and Vietnamese</p>
+            </div>
+        </div>
+
+        <h2>🔧 Technical Support</h2>
+        <div class="support-card">
+            <p><strong>System Requirements:</strong></p>
+            <p>• Android 5.0+ or iOS 11.0+</p>
+            <p>• At least 100MB free storage</p>
+            <p>• Internet connection for cloud sync</p>
+
+            <p><strong>App Version:</strong> 1.0.2</p>
+            <p><strong>Last Updated:</strong> January 2025</p>
+        </div>
+
+        <h2>💝 Leave a Review</h2>
+        <p>Enjoying Logic Mathematics? Please consider leaving a positive review on the app store. Your feedback
+            helps
+            us improve and reach more learners!</p>
+
+        <a href="https://play.google.com/store/apps/details?id=com.lamit.logic.math.logic" target="_blank"
+            class="contact-btn">
+            ⭐ Rate on Google Play
+        </a>
+
+        <div class="thank-you-card">
+            <p><strong>Thank you for using Logic Mathematics!</strong></p>
+            <p>We're committed to making math learning fun and accessible for everyone.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',function () {
+            console.log('Support page loaded, initializing language manager...');
+
+            // Ensure language manager exists and initialize
+            if (window.languageManager) {
+                window.languageManager.init();
+                console.log('Language manager initialized on support page');
+
+                // Use enhanced support content updater
+                setTimeout(() => {
+                    if (window.updateSupportContentEnhanced) {
+                        window.updateSupportContentEnhanced(window.languageManager.currentLang);
+                        console.log('Enhanced support content applied');
+                    }
+                },500);
+
+            } else {
+                console.error('Language manager not found!');
+            }
+        });
+    </script>
+</body>
+
+</html>

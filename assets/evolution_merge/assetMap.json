@@ -1,0 +1,492 @@
+{
+    "fruit_cherry": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/4943c82a-08d6-4323-9e90-7090d61047fd.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_strawberry": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d029e066-f661-4d04-97b2-9b3da9e5754d.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_grape": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/44e02955-f30b-4a10-b776-b93380e52e0b.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_orange": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/591b0537-5d1b-4d54-a523-623a092252ab.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_apple": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ee3c7cd1-3c6a-402c-b2cb-999ecfc0b27e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_pear": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/02def148-2cdb-4c52-a3aa-d24fded004e7.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_peach": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d077ed0c-8f4e-40f4-846d-9f1e50ebeaa9.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_pineapple": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f2db8320-163f-44b0-aad5-87692b5f1b9e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_melon": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/bde68d07-e8d5-4aab-a6bf-6d02c716853e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fruit_watermelon": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e4ea0de9-0aeb-4820-b009-7cf0764b09ff.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "background_kitchen": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/915da1c7-98e9-4497-87db-9c3494439b9c.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "sound_drop": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/a3162c99-7625-45d5-b695-997de57277b6.mp3",
+        "type": "audio"
+    },
+    "sound_merge": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/98477e59-bad3-4805-958a-c1ee68598627.mp3",
+        "type": "audio"
+    },
+    "sound_gameover": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/6a64ca3b-0ebc-4c3c-ab0e-8d1046edb0ea.mp3",
+        "type": "audio"
+    },
+    "music_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/c4667090-463a-4e97-a29b-c9a4b413b2c7.mp3",
+        "type": "audio"
+    },
+    "evo_ooze": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/07f3af6c-377a-401f-8365-b8c6b4ff5894.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_cell": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/066e5b56-e95f-495f-9eb0-ea96818fcdd6.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_bacteria": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1129cdfb-323f-4104-8f94-561ee43feeb1.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_jellyfish": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/00e6f55c-48c3-4ae6-b985-81e143c4baf3.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_fish": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/35ca2e81-1a1c-49ce-8930-a59f316ac946.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_amphibian": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d5bb29ea-cd74-4565-875e-5a2ca1ca8590.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_reptile": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d3437ecb-fbc1-41c9-9ec2-48493184533f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_mammal": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/cfb4d4c0-816c-4861-bcc5-19ba41a4488a.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_primate": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/44893a9d-a696-4f60-ad3f-bdac16839c3e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_caveman": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/17b12b10-57a3-43aa-b1ff-ad39b2c6d0db.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_human": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a1bfcbbf-3fdf-4d7e-929e-3ec55e7e7df5.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "background_primordial": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2c849dab-0df2-4a29-b564-d54be494f1e5.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "sound_evolve": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/dc83f944-e54b-49ad-b510-44af76a2d3c8.mp3",
+        "type": "audio"
+    },
+    "music_evolution": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/5f8d7005-fc59-4e85-bf16-1c7fead3615e.mp3",
+        "type": "audio"
+    },
+    "music_evolution_retro": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/aa39c269-16f4-4d0e-9968-81b3dc114618.mp3",
+        "type": "audio"
+    },
+    "music_evolution_retro_v2": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/86458877-10d0-47c7-9b61-1a3b66f5425a.mp3",
+        "type": "audio"
+    },
+    "music_evolution_retro_v3": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/04f8c47a-9f82-45cc-9c1a-41dffd139ff2.mp3",
+        "type": "audio"
+    },
+    "logo_evolution_merge": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e2412320-c5e8-46c6-9427-d7489838bea2.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "gameplay_screenshot_1": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7f0788e5-7546-431f-a046-5e020219d92a.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "gameplay_screenshot_2": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/41e1ddef-1b62-4ac7-b5c7-126d86b2c382.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "splash_scene": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1697494c-aba8-478e-ad6c-9f25574b2b7c.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "evo_ooze_idle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_ooze_idle_sprite_sheet_b354465d-7d7d-4a3f-b734-76ac3d591cc6.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            1922,
+            1806
+        ],
+        "sprite": {
+            "frameWidth": 384,
+            "frameHeight": 361,
+            "frames": 25,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    },
+    "splash_scene_animated": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/splash_scene_animated_sprite_sheet_9bd37229-91d3-486b-8705-333e61f86db0.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2002,
+            2266
+        ],
+        "sprite": {
+            "frameWidth": 501,
+            "frameHeight": 567,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    },
+    "evo_ooze_grumpy": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_ooze_grumpy_sprite_sheet_3883d003-1135-42d5-b7cd-9b567dfcf4c0.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            1886,
+            1838
+        ],
+        "sprite": {
+            "frameWidth": 377,
+            "frameHeight": 368,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    },
+    "evo_cell_smile": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_cell_smile_sprite_sheet_6d81d4a2-f508-4708-989f-6b740ae4e59c.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2403,
+            1878
+        ],
+        "sprite": {
+            "frameWidth": 481,
+            "frameHeight": 469,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_bacteria_wink": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_bacteria_wink_sprite_sheet_79eec977-1663-403b-a2df-826fec02499b.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2058,
+            2034
+        ],
+        "sprite": {
+            "frameWidth": 686,
+            "frameHeight": 678,
+            "frames": 9,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    },
+    "evo_jellyfish_sad": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_jellyfish_sad_sprite_sheet_4c1b0a40-2d5d-4160-90e1-d58627aaf8d7.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            1794,
+            1822
+        ],
+        "sprite": {
+            "frameWidth": 449,
+            "frameHeight": 456,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    },
+    "evo_fish_bubble": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_fish_bubble_sprite_sheet_54fddcac-3583-4749-83f8-91358d0181b1.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2678,
+            1878
+        ],
+        "sprite": {
+            "frameWidth": 536,
+            "frameHeight": 470,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_amphibian_lick": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_amphibian_lick_sprite_sheet_1fce6cd1-70ad-4ea3-9f2d-4e5270d32272.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2288,
+            1690
+        ],
+        "sprite": {
+            "frameWidth": 572,
+            "frameHeight": 423,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_reptile_yawn": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_reptile_yawn_sprite_sheet_75ce7f24-f0b4-456e-bf86-307eb4141051.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2258,
+            2034
+        ],
+        "sprite": {
+            "frameWidth": 452,
+            "frameHeight": 508,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_mammal_shiver": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_mammal_shiver_sprite_sheet_f4bead29-a401-418c-bf92-8596629dc60d.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2628,
+            1906
+        ],
+        "sprite": {
+            "frameWidth": 438,
+            "frameHeight": 477,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_primate_ooo": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_primate_ooo_sprite_sheet_7d766213-9450-4431-bfec-8b87485ad0e2.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2523,
+            2046
+        ],
+        "sprite": {
+            "frameWidth": 505,
+            "frameHeight": 511,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_caveman_beard_pick": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_caveman_beard_pick_sprite_sheet_a4e28b70-4b98-45e7-83f0-f26c18cf4a01.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            3083,
+            2102
+        ],
+        "sprite": {
+            "frameWidth": 771,
+            "frameHeight": 701,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_caveman_sleep": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_caveman_sleep_sprite_sheet_951c6f64-7093-4406-9bb6-f082da8aae83.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            2548,
+            2130
+        ],
+        "sprite": {
+            "frameWidth": 637,
+            "frameHeight": 532,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 5,
+            "rows": 4
+        }
+    },
+    "evo_human_phone": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/animations/evo_human_phone_sprite_sheet_94d75dde-2040-40e4-8495-e8ac26d4020b.webp",
+        "type": "animation",
+        "aspect_ratio": [
+            1994,
+            1978
+        ],
+        "sprite": {
+            "frameWidth": 499,
+            "frameHeight": 495,
+            "frames": 16,
+            "fps": 4,
+            "loop": true,
+            "cols": 4,
+            "rows": 4
+        }
+    }
+}

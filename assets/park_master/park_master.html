@@ -1,0 +1,3974 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Park Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS RESET & BASE STYLES
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            touch-action: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            /* Colors */
+            --color-primary: #00D9FF;
+            --color-primary-hover: #00B8D4;
+            --color-primary-glow: rgba(0, 217, 255, 0.4);
+            --color-success: #00E676;
+            --color-success-glow: rgba(0, 230, 118, 0.4);
+            --color-warning: #FFD600;
+            --color-danger: #FF3D00;
+            --color-danger-hover: #DD2C00;
+            --color-neutral-dark: #1A1A1A;
+            --color-neutral-mid: #424242;
+            --color-neutral-light: #E0E0E0;
+            --color-glass: rgba(255, 255, 255, 0.1);
+            --color-glass-border: rgba(255, 255, 255, 0.2);
+            --color-backdrop: rgba(0, 0, 0, 0.6);
+
+            /* Spacing (8px grid) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Animation Timings */
+            --transition-fast: 150ms;
+            --transition-normal: 300ms;
+            --transition-slow: 500ms;
+
+            /* Easing Functions */
+            --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-fab: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+            /* Glows */
+            --glow-primary: 0 0 24px var(--color-primary-glow);
+            --glow-success: 0 0 24px var(--color-success-glow);
+        }
+
+        /* ============================================
+           GAME CANVAS
+           ============================================ */
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #808080;
+        }
+
+        /* ============================================
+           UI OVERLAY CONTAINER
+           ============================================ */
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* ============================================
+           STATUS BAR (TOP)
+           ============================================ */
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--color-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-sm);
+            pointer-events: auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Edit mode: hide status-bar background but keep children visible */
+        .status-bar.edit-mode {
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-bottom: none;
+            box-shadow: none;
+            height: 60px;
+            padding: var(--space-xs) var(--space-sm);
+            pointer-events: none;
+            /* Don't block clicks in edit mode */
+        }
+
+        /* But allow clicks on level-info and menu-button */
+        .status-bar.edit-mode .level-info,
+        .status-bar.edit-mode .menu-button {
+            pointer-events: auto;
+        }
+
+        .level-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .level-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-display {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .timer-icon {
+            font-size: 40px;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .timer-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 56px;
+            font-weight: 400;
+            color: white;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            line-height: 1;
+            min-width: 80px;
+            text-align: left;
+            transform: translateY(5px);
+        }
+
+        .menu-button {
+            width: 48px;
+            height: 48px;
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast) var(--ease-out);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .menu-button:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .menu-icon span {
+            width: 100%;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .pause-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pause-icon span {
+            width: 6px;
+            height: 24px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           BOTTOM CONTROL PANEL
+           ============================================ */
+        .control-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: var(--color-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--color-glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 var(--space-sm);
+            pointer-events: auto;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-panel.hidden {
+            display: none;
+        }
+
+        .speed-gauge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .speed-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-neutral-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .speed-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .speed-bar {
+            width: 80px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .speed-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-success), var(--color-warning), var(--color-danger));
+            border-radius: 4px;
+            transition: width var(--transition-fast) var(--ease-out);
+            width: 0%;
+        }
+
+        .level-progress {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-neutral-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all var(--transition-normal) var(--ease-out);
+        }
+
+        .progress-dot.active {
+            background: var(--color-primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .progress-dot.completed {
+            background: var(--color-success);
+        }
+
+        /* ============================================
+           FLOATING ACTION BUTTON (RESTART)
+           ============================================ */
+        .fab {
+            position: absolute;
+            bottom: 140px;
+            right: var(--space-sm);
+            width: 96px;
+            height: 96px;
+            background: linear-gradient(135deg, var(--color-danger), var(--color-danger-hover));
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: auto;
+            box-shadow: var(--shadow-fab);
+            transition: all var(--transition-normal) var(--ease-out);
+            z-index: 100;
+        }
+
+        .fab:active {
+            transform: scale(0.9);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .fab:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-fab), 0 0 32px rgba(255, 61, 0, 0.5);
+            }
+        }
+
+        .fab-icon {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            line-height: 1;
+        }
+
+        /* ============================================
+           LEVEL COMPLETE MODAL
+           ============================================ */
+        .modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-backdrop);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity var(--transition-normal) var(--ease-out);
+            z-index: 200;
+        }
+
+        .modal-backdrop.show {
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        .level-complete {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: calc(100% - 64px);
+            max-width: 480px;
+            background: white;
+            padding: var(--space-xl) var(--space-md);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            pointer-events: none;
+            opacity: 0;
+            transition: all var(--transition-normal) var(--ease-out);
+            z-index: 201;
+        }
+
+        .level-complete.show {
+            pointer-events: auto;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .complete-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--color-neutral-dark);
+            margin: 0 0 var(--space-md) 0;
+            letter-spacing: 2px;
+        }
+
+        .stars {
+            font-size: 72px;
+            margin: var(--space-md) 0;
+            line-height: 1;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .stars {
+                animation: starPulse 0.6s var(--ease-bounce);
+            }
+        }
+
+        .time-result {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-neutral-mid);
+            margin: var(--space-md) 0;
+        }
+
+        .time-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            color: var(--color-primary);
+            display: block;
+            margin-top: 8px;
+        }
+
+        .star-thresholds {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+            font-size: 14px;
+            color: var(--color-neutral-mid);
+        }
+
+        .threshold-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 16px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .modal-button {
+            flex: 1;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all var(--transition-fast) var(--ease-out);
+            box-shadow: var(--shadow-md);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-button:active {
+            transform: scale(0.95);
+        }
+
+        .modal-button.secondary {
+            background: var(--color-neutral-light);
+            color: var(--color-neutral-dark);
+        }
+
+        /* ============================================
+           PAUSE MODAL
+           ============================================ */
+        .pause-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: calc(100% - 64px);
+            max-width: 400px;
+            background: white;
+            padding: var(--space-xl) var(--space-md);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            pointer-events: none;
+            opacity: 0;
+            transition: all var(--transition-normal) var(--ease-out);
+            z-index: 201;
+        }
+
+        .pause-modal.show {
+            pointer-events: auto;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .pause-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--color-neutral-dark);
+            margin: 0 0 var(--space-lg) 0;
+            letter-spacing: 2px;
+        }
+
+        .pause-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .pause-button {
+            width: 100%;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all var(--transition-fast) var(--ease-out);
+            box-shadow: var(--shadow-md);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pause-button:active {
+            transform: scale(0.95);
+        }
+
+        .pause-button.secondary {
+            background: var(--color-neutral-light);
+            color: var(--color-neutral-dark);
+        }
+
+        /* ============================================
+           EDIT MODE PALETTE (BOTTOM DRAWER)
+           ============================================ */
+        .edit-drawer {
+            position: absolute;
+            bottom: -800px;
+            left: 0;
+            right: 0;
+            height: 600px;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: var(--space-md);
+            pointer-events: auto;
+            box-shadow: var(--shadow-lg);
+            transition: bottom var(--transition-slow) var(--ease-out);
+            z-index: 201;
+            display: none;
+        }
+
+        .edit-drawer.show {
+            display: block;
+            bottom: 0;
+        }
+
+        .drawer-handle {
+            width: 48px;
+            height: 4px;
+            background: var(--color-neutral-light);
+            border-radius: 2px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .drawer-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-neutral-dark);
+            margin-bottom: var(--space-md);
+            text-align: center;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+            max-height: 480px;
+            overflow-y: auto;
+            padding-bottom: var(--space-md);
+        }
+
+        .palette-item {
+            aspect-ratio: 1;
+            background: var(--color-neutral-light);
+            border: 3px solid transparent;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--color-neutral-dark);
+            transition: all var(--transition-fast) var(--ease-out);
+            padding: 8px;
+        }
+
+        .palette-item:active {
+            transform: scale(0.95);
+        }
+
+        .palette-item.selected {
+            border-color: var(--color-primary);
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: var(--glow-primary);
+        }
+
+        /* ============================================
+           DIRECTION CONTROL BUTTONS
+           ============================================ */
+        .direction-controls {
+            position: fixed !important;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            height: auto;
+            display: none;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 15px;
+            padding-bottom: env(safe-area-inset-bottom, 15px);
+            pointer-events: auto !important;
+            z-index: 9999 !important;
+            touch-action: manipulation;
+        }
+
+        .movement-controls {
+            display: flex;
+            gap: 10px;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+        }
+
+        .action-controls {
+            display: flex;
+            gap: 10px;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+        }
+
+        .direction-btn {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            color: #FFFFFF;
+            font-size: 32px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            position: relative;
+            pointer-events: auto !important;
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .direction-btn:active,
+        .direction-btn.pressed {
+            background: rgba(0, 200, 255, 0.8) !important;
+            transform: scale(0.92);
+            border-color: #00D9FF;
+        }
+
+        /* ============================================
+           RESPONSIVE MOBILE STYLES
+           ============================================ */
+        @media screen and (max-width: 480px) {
+            .direction-controls {
+                bottom: 10px;
+                padding: 0 10px;
+            }
+
+            .direction-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .movement-controls,
+            .action-controls {
+                gap: 5px;
+            }
+
+            .status-bar {
+                height: 60px;
+            }
+
+            .level-display {
+                font-size: 14px !important;
+            }
+
+            .timer-display {
+                font-size: 20px !important;
+            }
+        }
+
+        @media screen and (min-width: 481px) and (max-width: 768px) {
+            .direction-controls {
+                bottom: 8px;
+                padding: 0 15px;
+            }
+
+            .direction-btn {
+                width: 75px;
+                height: 75px;
+                font-size: 32px;
+            }
+
+            .movement-controls,
+            .action-controls {
+                gap: 8px;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .direction-btn {
+                width: 90px;
+                height: 90px;
+                font-size: 40px;
+            }
+
+            .movement-controls,
+            .action-controls {
+                gap: 12px;
+            }
+        }
+
+        /* ============================================
+           CRASH EFFECT
+           ============================================ */
+        @media (prefers-reduced-motion: no-preference) {
+            .crash-effect {
+                animation: screenShake 0.5s var(--ease-out);
+            }
+
+            .crash-flash {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--color-danger);
+                opacity: 0;
+                pointer-events: none;
+                animation: flashRed 0.5s var(--ease-out);
+            }
+        }
+
+        .collision-effect {
+            position: absolute;
+            pointer-events: none;
+            z-index: 150;
+        }
+
+        .collision-burst {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 200, 0, 0.8) 30%, rgba(255, 100, 0, 0) 70%);
+            animation: burstExpand 0.5s var(--ease-out) forwards;
+        }
+
+        .collision-text {
+            position: absolute;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: #FF3D00;
+            text-shadow:
+                -3px -3px 0 #FFF,
+                3px -3px 0 #FFF,
+                -3px 3px 0 #FFF,
+                3px 3px 0 #FFF,
+                0 0 20px rgba(255, 61, 0, 0.8);
+            transform: translate(-50%, -50%) scale(0) rotate(-15deg);
+            animation: crashTextPop 0.6s var(--ease-bounce) forwards;
+            letter-spacing: 4px;
+        }
+
+        .collision-particles {
+            position: absolute;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFD600;
+            border-radius: 50%;
+            animation: particleFly 0.6s var(--ease-out) forwards;
+        }
+
+        /* ============================================
+           START INDICATOR
+           ============================================ */
+        .start-indicator {
+            position: absolute;
+            pointer-events: none;
+            z-index: 150;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+            animation: floatUpDown 1.5s ease-in-out infinite;
+        }
+
+        .start-indicator.show {
+            display: flex;
+        }
+
+        .start-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFD600;
+            text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 16px rgba(255, 214, 0, 0.8);
+            letter-spacing: 4px;
+        }
+
+        .start-arrow {
+            font-size: 32px;
+            color: #FFD600;
+            text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 16px rgba(255, 214, 0, 0.8);
+            margin-top: -15px;
+        }
+
+        /* ============================================
+           TOAST NOTIFICATIONS
+           ============================================ */
+        .toast {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--color-neutral-dark);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            pointer-events: none;
+            opacity: 0;
+            transition: all var(--transition-normal) var(--ease-out);
+            z-index: 300;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ============================================
+           KEYFRAME ANIMATIONS
+           ============================================ */
+        @keyframes starPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes screenShake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-10px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes flashRed {
+            0% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes burstExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes crashTextPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-15deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(-15deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(-15deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes particleFly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatUpDown {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%);
+            }
+
+            50% {
+                transform: translate(-50%, calc(-50% - 15px));
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn var(--transition-normal) var(--ease-out);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <div class="ui-overlay">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="level-info">
+                <div class="level-number" id="levelNumber">Level: 1</div>
+            </div>
+            <div class="timer-display">
+                <span class="timer-icon">🕐</span>
+                <span class="timer-value" id="timerDisplay">0</span>
+            </div>
+            <div class="menu-button" id="menuButton">
+                <div class="menu-icon" id="menuIcon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="pause-icon" id="pauseIcon" style="display: none;">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Level Complete Modal -->
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="level-complete" id="levelComplete">
+            <h2 class="complete-title">Level Complete!</h2>
+            <div class="stars" id="starsDisplay">★★★</div>
+            <div class="time-result">
+                Your Time
+                <span class="time-value" id="timeResult">12.5s</span>
+            </div>
+            <div class="star-thresholds" id="starThresholds">
+                <div class="threshold-item">★★★ &lt;15s</div>
+                <div class="threshold-item">★★ &lt;30s</div>
+                <div class="threshold-item">★ 30s+</div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button secondary" id="retryButton">Retry</button>
+                <button class="modal-button" id="nextLevelButton">Next Level</button>
+            </div>
+        </div>
+
+        <!-- Pause Modal -->
+        <div class="pause-modal" id="pauseModal">
+            <h2 class="pause-title">PAUSED</h2>
+            <div class="pause-buttons">
+                <button class="pause-button" id="continueButton">Continue</button>
+                <button class="pause-button secondary" id="pauseRetryButton">Retry</button>
+            </div>
+        </div>
+
+        <!-- Edit Mode Drawer -->
+        <div class="edit-drawer" id="editDrawer">
+            <div class="drawer-handle"></div>
+            <div class="drawer-title">Place Objects</div>
+            <div class="palette-grid" id="paletteGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+
+        <!-- Crash Flash Effect -->
+        <div class="crash-flash" id="crashFlash"></div>
+
+        <!-- Start Indicator -->
+        <div class="start-indicator" id="startIndicator">
+            <div class="start-text">START</div>
+            <div class="start-arrow">▼</div>
+        </div>
+    </div>
+
+    <!-- Direction Control Buttons - Outside ui-overlay for proper touch handling -->
+    <div class="direction-controls" id="directionControls">
+        <div class="movement-controls">
+            <div class="direction-btn" id="leftBtn">◀</div>
+            <div class="direction-btn" id="rightBtn">▶</div>
+        </div>
+        <div class="action-controls">
+            <div class="direction-btn" id="upBtn">▲</div>
+            <div class="direction-btn" id="downBtn">▼</div>
+        </div>
+    </div>
+
+    <!-- Config and Assets Maps for Flutter WebView injection -->
+    <script id="gameConfig"></script>
+    <script id="assetsMap" type="application/json"></script>
+
+    <script>
+        /* ==================================================
+         * LIB STUB - Provides compatibility layer when running standalone
+         * ==================================================
+         */
+        if (typeof lib === 'undefined') {
+            window.lib = {
+                log: function (...args) { console.log('[ParkMaster]',...args); },
+                getAsset: function (id) {
+                    // Check if assetMap exists and has this asset
+                    if (window.assetMap && window.assetMap[id]) {
+                        return window.assetMap[id];
+                    }
+                    // Return placeholder assets for standalone mode
+                    const placeholders = {
+                        'player_car': { url: '',type: 'image' },
+                        'parked_car_yellow': { url: '',type: 'image' },
+                        'parked_car_green': { url: '',type: 'image' },
+                        'parked_car_purple': { url: '',type: 'image' },
+                        'parked_car_white': { url: '',type: 'image' },
+                        'greenery_patch': { url: '',type: 'image' },
+                        'greenery_patch_square': { url: '',type: 'image' },
+                        'tree_small': { url: '',type: 'image' },
+                        'lamp_post': { url: '',type: 'image' },
+                        'flower_bed': { url: '',type: 'image' },
+                        'barrier_obstacle': { url: '',type: 'image' },
+                        'park_spot_marker': { url: '',type: 'image' },
+                        'engine_sound': { url: '',type: 'audio' },
+                        'crash_sound': { url: '',type: 'audio' },
+                        'success_sound': { url: '',type: 'audio' },
+                        'star_rating_sound': { url: '',type: 'audio' },
+                        'background_music': { url: '',type: 'audio' }
+                    };
+                    return placeholders[id] || null;
+                },
+                showGameParameters: function (config) {
+                    console.log('[ParkMaster] Game parameters:',config.name);
+                },
+                editMenu: {
+                    open: function (options) { console.log('[ParkMaster] Edit menu opened'); },
+                    close: function () { console.log('[ParkMaster] Edit menu closed'); }
+                },
+                saveData: function (key,data) {
+                    try { localStorage.setItem(key,JSON.stringify(data)); return true; }
+                    catch (e) { return false; }
+                },
+                loadData: function (key) {
+                    try { return JSON.parse(localStorage.getItem(key)); }
+                    catch (e) { return null; }
+                },
+                getUserGameState: async function () {
+                    try {
+                        const data = localStorage.getItem('parkmaster_progress');
+                        return data ? JSON.parse(data) : null;
+                    } catch (e) { return null; }
+                },
+                setUserGameState: async function (state) {
+                    try {
+                        localStorage.setItem('parkmaster_progress',JSON.stringify(state));
+                        return true;
+                    } catch (e) { return false; }
+                }
+            };
+        }
+
+        /* ==================================================
+         * DEFAULT GAME CONFIG - Used when not injected by Flutter
+         * ==================================================
+         */
+        if (!window.gameConfig) {
+            window.gameConfig = {
+                currentLevel: 0,
+                settings: {
+                    maxSpeed: 200,
+                    acceleration: 500,
+                    turnSpeed: 180,
+                    friction: 0.95
+                },
+                levels: [
+                    {
+                        name: "Level 1 - Getting Started",
+                        starThresholds: [10,15,20],
+                        playerStart: { x: 360,y: 1100,rotation: 0 },
+                        obstacles: [
+                            { type: 'parked_car',assetId: 'parked_car_yellow',x: 200,y: 500,width: 80,height: 120,rotation: 0 },
+                            { type: 'parked_car',assetId: 'parked_car_green',x: 520,y: 500,width: 80,height: 120,rotation: 0 }
+                        ],
+                        decorations: [
+                            { type: 'park_spot',x: 360,y: 300,width: 100,height: 160,rotation: 0 },
+                            { type: 'road_line_dashed',x: 360,y: 700,length: 400,rotation: 0 }
+                        ]
+                    },
+                    {
+                        name: "Level 2 - Tight Squeeze",
+                        starThresholds: [12,18,25],
+                        playerStart: { x: 360,y: 1100,rotation: 0 },
+                        obstacles: [
+                            { type: 'parked_car',assetId: 'parked_car_purple',x: 180,y: 450,width: 80,height: 120,rotation: 0 },
+                            { type: 'parked_car',assetId: 'parked_car_white',x: 540,y: 450,width: 80,height: 120,rotation: 0 },
+                            { type: 'barrier',x: 360,y: 650,width: 200,height: 30,rotation: 0 }
+                        ],
+                        decorations: [
+                            { type: 'park_spot',x: 360,y: 250,width: 100,height: 160,rotation: 0 },
+                            { type: 'road_line_solid',x: 360,y: 800,length: 500,rotation: 0 }
+                        ]
+                    },
+                    {
+                        name: "Level 3 - Angled Parking",
+                        starThresholds: [15,22,30],
+                        playerStart: { x: 200,y: 1000,rotation: 45 },
+                        obstacles: [
+                            { type: 'parked_car',assetId: 'parked_car_yellow',x: 150,y: 500,width: 80,height: 120,rotation: 45 },
+                            { type: 'parked_car',assetId: 'parked_car_green',x: 500,y: 500,width: 80,height: 120,rotation: -45 }
+                        ],
+                        decorations: [
+                            { type: 'park_spot',x: 360,y: 350,width: 100,height: 160,rotation: 45 },
+                            { type: 'road_line_dashed',x: 360,y: 750,length: 400,rotation: 0 }
+                        ]
+                    }
+                ]
+            };
+        }
+
+        // Ensure settings always have default values (in case gameConfig was injected without settings)
+        if (!window.gameConfig.settings) {
+            window.gameConfig.settings = {};
+        }
+        const defaultSettings = {
+            maxSpeed: 200,
+            acceleration: 500,
+            turnSpeed: 180,
+            friction: 0.95
+        };
+        window.gameConfig.settings = Object.assign({},defaultSettings,window.gameConfig.settings);
+    </script>
+
+    <script>
+        /* ==================================================
+         * GAME OVERVIEW: Park Master - A 2D top-down car parking game where players navigate
+         * through obstacles to park in designated spots. Features realistic car physics,
+         * timer-based star ratings, and a full edit mode for creating custom levels.
+         * 
+         * GAME STATE SHAPE: window.gameConfig = {
+         *   currentLevel: number,
+         *   levels: [{
+         *     name: string,
+         *     starThresholds: [number, number, number],
+         *     playerStart: {x, y, rotation},
+         *     obstacles: [{type, x, y, width, height, rotation, color}],
+         *     decorations: [{type, x, y, width, height, rotation, length}]
+         *   }],
+         *   settings: {
+         *     maxSpeed: number,
+         *     acceleration: number,
+         *     turnSpeed: number,
+         *     friction: number
+         *   }
+         * }
+         * ==================================================
+         */
+
+        // Canvas setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 720;
+        canvas.height = 1280;
+
+        // Asset cache
+        const assetCache = {};
+
+        // Pixel mask cache for precise collision detection
+        const pixelMasks = {};
+
+        // Game state
+        let currentMode = 'play';
+        let gameRunning = false;
+        let gamePaused = false;
+        let gameTimer = 0;
+        let timerStarted = false;
+        let levelComplete = false;
+        let crashed = false;
+        let hideCrashedCar = false;
+        let currentParkingSpot = null;
+
+        // Moving car state (tracks runtime state for each moving car)
+        let movingCarStates = [];
+
+        // Player state
+        let playerX = 360;
+        let playerY = 1100;
+        let playerRotation = 0;
+        let playerVelocityX = 0;
+        let playerVelocityY = 0;
+        let playerSpeed = 0;
+        let frontWheelAngle = 0; // Front wheel steering angle (-30 to 30 degrees)
+
+        // Input state
+        let keys = {};
+
+        // Edit mode state
+        let selectedObject = null;
+        let selectedObjectType = null;
+        let selectedObjectIndex = -1;
+        let draggingObject = false;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let paletteSelection = null;
+
+        // Device detection
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+        /**
+         * Web Audio wrapper that mimics HTML5 Audio API
+         * Used for iOS to provide better audio support
+         */
+        class WebAudioSound {
+            constructor() {
+                this.audioContext = null;
+                this.audioBuffer = null;
+                this.sourceNode = null;
+                this.gainNode = null;
+                this.url = '';
+                this.isLooping = false;
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.currentTime = 0;
+                this.startTime = 0;
+                this.pauseTime = 0;
+                this._playbackRate = 1.0;
+                this.volumeValue = 1.0;
+
+                // Initialize AudioContext (lazy initialization)
+                if (isIOS && !WebAudioSound.sharedContext) {
+                    WebAudioSound.sharedContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                this.audioContext = WebAudioSound.sharedContext;
+            }
+
+            set src(url) {
+                this.url = url;
+                this.load();
+            }
+
+            set loop(value) {
+                this.isLooping = value;
+            }
+
+            get loop() {
+                return this.isLooping;
+            }
+
+            set volume(value) {
+                this.volumeValue = Math.max(0,Math.min(1,value));
+                if (this.gainNode) {
+                    this.gainNode.gain.value = this.volumeValue;
+                }
+            }
+
+            get volume() {
+                return this.volumeValue;
+            }
+
+            get currentTime() {
+                if (this.isPlaying && this.audioContext) {
+                    return this.audioContext.currentTime - this.startTime;
+                }
+                return this.isPaused ? this.pauseTime : 0;
+            }
+
+            set currentTime(value) {
+                // Reset playback position
+                const wasPlaying = this.isPlaying;
+
+                if (wasPlaying) {
+                    this.pause();
+                }
+
+                this.pauseTime = value;
+                this.startTime = 0;
+                this.isPaused = false;
+
+                if (wasPlaying) {
+                    this.play();
+                }
+            }
+
+            get playbackRate() {
+                return this._playbackRate;
+            }
+
+            set playbackRate(value) {
+                this._playbackRate = value;
+                if (this.sourceNode) {
+                    this.sourceNode.playbackRate.value = value;
+                }
+            }
+
+            async load() {
+                if (!this.url || !this.audioContext) return;
+
+                try {
+                    const response = await fetch(this.url);
+                    const arrayBuffer = await response.arrayBuffer();
+                    this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+                    console.log('Audio loaded successfully:',this.url);
+                } catch (error) {
+                    console.error('Error loading audio:',this.url,error);
+                }
+            }
+
+            async play() {
+                if (!this.audioContext) {
+                    console.error('No AudioContext available');
+                    return;
+                }
+
+                // Wait for audio to load if not yet loaded
+                if (!this.audioBuffer) {
+                    console.log('Waiting for audio buffer to load...');
+                    // Wait a bit for the buffer to load (up to 5 seconds)
+                    const maxWaitTime = 5000;
+                    const startWait = Date.now();
+                    while (!this.audioBuffer && (Date.now() - startWait) < maxWaitTime) {
+                        await new Promise(resolve => setTimeout(resolve,100));
+                    }
+
+                    if (!this.audioBuffer) {
+                        console.error('Audio buffer still not loaded after waiting');
+                        return;
+                    }
+                }
+
+                // Resume AudioContext if suspended (required for iOS)
+                if (this.audioContext.state === 'suspended') {
+                    this.audioContext.resume();
+                }
+
+                // Stop current playback if exists
+                if (this.sourceNode) {
+                    try {
+                        this.sourceNode.stop();
+                        this.sourceNode.disconnect();
+                    } catch (e) {
+                        // Source may already be stopped
+                    }
+                }
+
+                // Create new source node
+                this.sourceNode = this.audioContext.createBufferSource();
+                this.sourceNode.buffer = this.audioBuffer;
+                this.sourceNode.loop = this.isLooping;
+                this.sourceNode.playbackRate.value = this._playbackRate;
+
+                // Create gain node for volume control
+                if (!this.gainNode) {
+                    this.gainNode = this.audioContext.createGain();
+                }
+                this.gainNode.gain.value = this.volumeValue;
+
+                // Connect nodes
+                this.sourceNode.connect(this.gainNode);
+                this.gainNode.connect(this.audioContext.destination);
+
+                // Handle playback end
+                this.sourceNode.onended = () => {
+                    if (!this.isLooping) {
+                        this.isPlaying = false;
+                    }
+                };
+
+                // Start playback
+                const offset = this.isPaused ? this.pauseTime : 0;
+                this.sourceNode.start(0,offset);
+                this.startTime = this.audioContext.currentTime - offset;
+                this.isPlaying = true;
+                this.isPaused = false;
+            }
+
+            pause() {
+                if (!this.sourceNode || !this.isPlaying) return;
+
+                // Calculate current playback position
+                this.pauseTime = this.audioContext.currentTime - this.startTime;
+
+                // Stop the source
+                try {
+                    this.sourceNode.stop();
+                    this.sourceNode.disconnect();
+                } catch (e) {
+                    // Source may already be stopped
+                }
+                this.sourceNode = null;
+
+                this.isPlaying = false;
+                this.isPaused = true;
+            }
+        }
+
+        // Shared AudioContext for all Web Audio sounds (iOS best practice)
+        WebAudioSound.sharedContext = null;
+
+        /**
+         * HTML5 Audio wrapper that provides consistent loading behavior
+         * Used for non-iOS platforms
+         */
+        class HTML5AudioSound {
+            constructor() {
+                this.audio = new Audio();
+                this.isReady = false;
+                this.loadPromise = null;
+            }
+
+            set src(url) {
+                this.audio.src = url;
+                this.isReady = false;
+
+                // Create a promise that resolves when audio can play
+                this.loadPromise = new Promise((resolve,reject) => {
+                    const onCanPlay = () => {
+                        this.isReady = true;
+                        console.log('Audio loaded successfully:',url);
+                        cleanup();
+                        resolve();
+                    };
+
+                    const onError = (e) => {
+                        console.error('Error loading audio:',url,e);
+                        cleanup();
+                        reject(e);
+                    };
+
+                    const cleanup = () => {
+                        this.audio.removeEventListener('canplaythrough',onCanPlay);
+                        this.audio.removeEventListener('error',onError);
+                    };
+
+                    this.audio.addEventListener('canplaythrough',onCanPlay,{ once: true });
+                    this.audio.addEventListener('error',onError,{ once: true });
+
+                    this.audio.preload = 'auto';
+                    this.audio.load();
+                });
+            }
+
+            set loop(value) {
+                this.audio.loop = value;
+            }
+
+            get loop() {
+                return this.audio.loop;
+            }
+
+            set volume(value) {
+                this.audio.volume = value;
+            }
+
+            get volume() {
+                return this.audio.volume;
+            }
+
+            get currentTime() {
+                return this.audio.currentTime;
+            }
+
+            set currentTime(value) {
+                this.audio.currentTime = value;
+            }
+
+            get playbackRate() {
+                return this.audio.playbackRate;
+            }
+
+            set playbackRate(value) {
+                this.audio.playbackRate = value;
+            }
+
+            async play() {
+                // Wait for audio to be ready
+                if (!this.isReady && this.loadPromise) {
+                    console.log('Waiting for audio to load...');
+                    try {
+                        await this.loadPromise;
+                    } catch (error) {
+                        console.error('Failed to load audio:',error);
+                        return;
+                    }
+                }
+
+                // Play the audio
+                try {
+                    await this.audio.play();
+                } catch (error) {
+                    console.error('Failed to play audio:',error);
+                }
+            }
+
+            pause() {
+                this.audio.pause();
+            }
+        }
+
+        // Audio state
+        let engineAudio = null;
+        let backgroundMusic = null;
+
+        // Legacy device detection
+        //const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Grid size for snapping
+        const GRID_SIZE = 40;
+
+        // Car dimensions
+        const CAR_WIDTH = 80;
+        const CAR_HEIGHT = 120;
+
+        // Physics constants
+        let ACCELERATION = 500; // px/s²
+        let REVERSE_ACCELERATION = 250; // px/s²
+        let MAX_SPEED = 200; // px/s
+        let MAX_REVERSE_SPEED = 100; // px/s
+        //const FRICTION = 0.95;
+        //const TURN_SPEED = 180; // degrees/s
+        const PARKING_SPEED_THRESHOLD = 10; // px/s
+
+        // UI Elements
+        const uiElements = {
+            levelNumber: document.getElementById('levelNumber'),
+            timerDisplay: document.getElementById('timerDisplay'),
+            modalBackdrop: document.getElementById('modalBackdrop'),
+            levelComplete: document.getElementById('levelComplete'),
+            starsDisplay: document.getElementById('starsDisplay'),
+            timeResult: document.getElementById('timeResult'),
+            starThresholds: document.getElementById('starThresholds'),
+            editDrawer: document.getElementById('editDrawer'),
+            paletteGrid: document.getElementById('paletteGrid'),
+            toast: document.getElementById('toast'),
+            crashFlash: document.getElementById('crashFlash'),
+            pauseModal: document.getElementById('pauseModal'),
+            menuIcon: document.getElementById('menuIcon'),
+            pauseIcon: document.getElementById('pauseIcon'),
+            startIndicator: document.getElementById('startIndicator')
+        };
+
+        /* ==================================================
+         * UI HELPER FUNCTIONS
+         * ==================================================
+         */
+
+        function updateLevelUI() {
+            const level = getCurrentLevel();
+            const levelIndex = Number(window.gameConfig.currentLevel) || 0;
+
+            uiElements.levelNumber.textContent = `Level: ${levelIndex + 1}`;
+
+            // Guard against null level
+            if (!level) {
+                uiElements.starThresholds.innerHTML = `<div class="threshold-item">Loading...</div>`;
+                return;
+            }
+
+            // Update star thresholds display
+            const thresholds = level.starThresholds || [10,15,20];
+            uiElements.starThresholds.innerHTML = `
+                <div class="threshold-item">★★★ &lt;${thresholds[2]}s</div>
+                <div class="threshold-item">★★ &lt;${thresholds[1]}s</div>
+                <div class="threshold-item">★ &lt;${thresholds[0]}s</div>
+            `;
+        }
+
+
+        function showLevelCompleteModal(stars,time) {
+            uiElements.starsDisplay.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+            uiElements.timeResult.textContent = Math.floor(time) + 's';
+
+            setTimeout(() => {
+                uiElements.modalBackdrop.classList.add('show');
+                uiElements.levelComplete.classList.add('show');
+            },500);
+        }
+
+        function hideLevelCompleteModal() {
+            uiElements.modalBackdrop.classList.remove('show');
+            uiElements.levelComplete.classList.remove('show');
+        }
+
+        function showPauseModal() {
+            gamePaused = true;
+            uiElements.modalBackdrop.classList.add('show');
+            uiElements.pauseModal.classList.add('show');
+
+            if (engineAudio) {
+                engineAudio.pause();
+            }
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+            }
+        }
+
+        function hidePauseModal() {
+            gamePaused = false;
+            uiElements.modalBackdrop.classList.remove('show');
+            uiElements.pauseModal.classList.remove('show');
+
+            if (engineAudio && currentMode === 'play') {
+                engineAudio.play();
+            }
+            if (backgroundMusic && currentMode === 'play') {
+                backgroundMusic.play();
+            }
+        }
+
+        function showCrashEffect() {
+            canvas.parentElement.classList.add('crash-effect');
+            uiElements.crashFlash.style.display = 'block';
+            uiElements.crashFlash.style.animation = 'none';
+            setTimeout(() => {
+                uiElements.crashFlash.style.animation = 'flashRed 0.5s var(--ease-out)';
+            },10);
+
+            setTimeout(() => {
+                canvas.parentElement.classList.remove('crash-effect');
+                uiElements.crashFlash.style.display = 'none';
+            },500);
+        }
+
+        function showCollisionEffect(x,y) {
+            // Convert canvas coordinates to screen coordinates
+            const rect = canvas.getBoundingClientRect();
+            const screenX = (x / canvas.width) * rect.width + rect.left;
+            const screenY = (y / canvas.height) * rect.height + rect.top;
+
+            // Create collision effect container
+            const effectContainer = document.createElement('div');
+            effectContainer.className = 'collision-effect';
+            effectContainer.style.left = screenX + 'px';
+            effectContainer.style.top = screenY + 'px';
+
+            // Create burst effect
+            const burst = document.createElement('div');
+            burst.className = 'collision-burst';
+            effectContainer.appendChild(burst);
+
+            // Create "CRASH!" text
+            const crashText = document.createElement('div');
+            crashText.className = 'collision-text';
+            crashText.textContent = 'CRASH!';
+            effectContainer.appendChild(crashText);
+
+            // Create particles
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'collision-particles';
+
+            // Generate 8 particles in different directions
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 60 + Math.random() * 40;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                particle.style.setProperty('--tx',tx + 'px');
+                particle.style.setProperty('--ty',ty + 'px');
+                particle.style.animationDelay = (Math.random() * 0.1) + 's';
+
+                particlesContainer.appendChild(particle);
+            }
+
+            effectContainer.appendChild(particlesContainer);
+
+            // Add to DOM
+            document.body.appendChild(effectContainer);
+
+            // Remove after animation completes
+            setTimeout(() => {
+                effectContainer.remove();
+            },800);
+        }
+
+        function showToast(message,duration = 2000) {
+            uiElements.toast.textContent = message;
+            uiElements.toast.classList.add('show');
+
+            setTimeout(() => {
+                uiElements.toast.classList.remove('show');
+            },duration);
+        }
+
+        function showStartIndicator() {
+            uiElements.startIndicator.classList.add('show');
+            updateStartIndicatorPosition();
+        }
+
+        function hideStartIndicator() {
+            uiElements.startIndicator.classList.remove('show');
+        }
+
+        function updateStartIndicatorPosition() {
+            // Position the start indicator above the player car's bounding box (screen coordinate system)
+            const rect = canvas.getBoundingClientRect();
+
+            // Calculate the rotated car's bounding box height in Y direction
+            const rotationRad = Math.abs(playerRotation * Math.PI / 180);
+            const halfHeightY = (CAR_WIDTH / 2) * Math.abs(Math.sin(rotationRad)) +
+                (CAR_HEIGHT / 2) * Math.abs(Math.cos(rotationRad));
+
+            // Position indicator above the car's bounding box (fixed distance of 30px above the top edge)
+            const indicatorX = playerX;
+            const indicatorY = playerY - halfHeightY - 30;
+
+            // Convert to screen coordinates
+            const screenX = (indicatorX / canvas.width) * rect.width + rect.left;
+            const screenY = (indicatorY / canvas.height) * rect.height + rect.top;
+
+            // Position the indicator
+            uiElements.startIndicator.style.left = screenX + 'px';
+            uiElements.startIndicator.style.top = screenY + 'px';
+        }
+
+        function toggleEditDrawer() {
+            const isShown = uiElements.editDrawer.classList.contains('show');
+            if (isShown) {
+                uiElements.editDrawer.classList.remove('show');
+                uiElements.modalBackdrop.classList.remove('show');
+            } else {
+                uiElements.editDrawer.classList.add('show');
+                uiElements.modalBackdrop.classList.add('show');
+            }
+        }
+
+        function setupEditPalette() {
+            const items = [
+                { type: 'barrier',label: 'Barrier' },
+                { type: 'greenery',label: 'Greenery' },
+                { type: 'greenery_square',label: 'Greenery (square)' },
+                { type: 'parked_car_yellow',label: 'Car (Yellow)' },
+                { type: 'parked_car_green',label: 'Car (Green)' },
+                { type: 'parked_car_purple',label: 'Car (Purple)' },
+                { type: 'parked_car_white',label: 'Car (White)' },
+                { type: 'park_spot',label: 'ParkSpot' },
+                { type: 'road_line_dashed',label: 'Dashed Line' },
+                { type: 'road_line_solid',label: 'Solid Line' },
+                { type: 'tree',label: 'Tree' },
+                { type: 'lamp_post',label: 'Lamp Post' },
+                { type: 'flower_bed',label: 'Flowers' }
+            ];
+
+            uiElements.paletteGrid.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'palette-item';
+                div.textContent = item.label;
+                div.dataset.type = item.type;
+                div.addEventListener('click',() => {
+                    paletteSelection = paletteSelection === item.type ? null : item.type;
+                    updatePaletteUI();
+                    if (paletteSelection) {
+                        toggleEditDrawer();
+                    }
+                });
+                uiElements.paletteGrid.appendChild(div);
+            });
+        }
+
+        function updatePaletteUI() {
+            const items = uiElements.paletteGrid.children;
+            for (let item of items) {
+                if (item.dataset.type === paletteSelection) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            }
+        }
+
+        /* ==================================================
+         * GAME LOGIC (PRESERVED FROM ORIGINAL)
+         * ==================================================
+         */
+
+        function preloadAssets(assetIds,onComplete) {
+            let imagesToLoad = 0;
+            let imagesLoaded = 0;
+
+            assetIds.forEach(id => {
+                const assetInfo = lib.getAsset(id);
+                if (assetInfo) {
+                    if (assetInfo.type === 'audio') {
+                        // Use Web Audio for iOS, HTML5AudioSound wrapper for other platforms
+                        const audio = isIOS ? new WebAudioSound() : new HTML5AudioSound();
+
+                        if (assetInfo.loop === 'true' || assetInfo.loop === true) {
+                            audio.loop = true;
+                            audio.volume = 0.5;
+                        }
+
+                        audio.src = assetInfo.url;
+
+                        assetCache[id] = audio;
+                    } else {
+                        imagesToLoad++;
+                        const img = new Image();
+                        // Enable CORS to allow pixel data access
+                        img.crossOrigin = 'anonymous';
+                        img.onload = () => {
+                            imagesLoaded++;
+                            if (imagesLoaded === imagesToLoad && onComplete) {
+                                onComplete();
+                            }
+                        };
+                        img.onerror = () => {
+                            imagesLoaded++;
+                            lib.log(`Failed to load image: ${id}`);
+                            if (imagesLoaded === imagesToLoad && onComplete) {
+                                onComplete();
+                            }
+                        };
+                        img.src = assetInfo.url;
+                        assetCache[id] = img;
+                    }
+                }
+            });
+
+            // If no images to load, call complete immediately
+            if (imagesToLoad === 0 && onComplete) {
+                onComplete();
+            }
+        }
+
+        /**
+         * Generate pixel mask for an image
+         * @param {HTMLImageElement} image - The image to generate mask from
+         * @param {number} width - Width to render the image
+         * @param {number} height - Height to render the image
+         * @param {number} alphaThreshold - Alpha threshold (default 0)
+         * @returns {Array<Array<boolean>>} 2D array where true = solid pixel
+         */
+        function generatePixelMask(image,width,height,alphaThreshold = 0) {
+            // Create temporary canvas to extract pixel data
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = width;
+            tempCanvas.height = height;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            // Draw the image
+            tempCtx.drawImage(image,0,0,width,height);
+
+            // Get pixel data
+            const imageData = tempCtx.getImageData(0,0,width,height);
+            const pixels = imageData.data;
+
+            // Create 2D mask array
+            const mask = [];
+            for (let y = 0; y < height; y++) {
+                mask[y] = [];
+                for (let x = 0; x < width; x++) {
+                    const index = (y * width + x) * 4;
+                    const alpha = pixels[index + 3];
+                    mask[y][x] = alpha > alphaThreshold;
+                }
+            }
+
+            return mask;
+        }
+
+        /**
+         * Generate pixel masks for all car images
+         * Should be called after images are loaded
+         */
+        function generateCarPixelMasks() {
+            const carAssets = [
+                'player_car',
+                'parked_car_yellow',
+                'parked_car_green',
+                'parked_car_purple',
+                'parked_car_white'
+            ];
+
+            carAssets.forEach(assetId => {
+                const img = assetCache[assetId];
+                if (img && img.complete) {
+                    pixelMasks[assetId] = generatePixelMask(img,CAR_WIDTH,CAR_HEIGHT,0);
+                    lib.log(`Generated pixel mask for ${assetId}: ${CAR_WIDTH}x${CAR_HEIGHT}`);
+                }
+            });
+        }
+
+        /**
+         * Generate pixel masks for obstacle types (shared across all instances)
+         * This should be called after level is loaded and images are ready
+         */
+        function generateObstaclePixelMasks() {
+            // Define obstacle type metadata: asset ID and standard dimensions
+            const obstacleTypes = {
+                'greenery': { assetId: 'greenery_patch',width: 240,height: 120 },
+                'barrier': { assetId: 'barrier_obstacle',width: 100,height: 40 }
+            };
+
+            let maskCount = 0;
+
+            // Generate one mask per obstacle type (shared by all instances)
+            Object.entries(obstacleTypes).forEach(([type,metadata]) => {
+                // Only generate if not already exists
+                if (!pixelMasks[type]) {
+                    const img = assetCache[metadata.assetId];
+                    if (img && img.complete) {
+                        pixelMasks[type] = generatePixelMask(img,metadata.width,metadata.height,0);
+                        maskCount++;
+                        lib.log(`Generated shared pixel mask for ${type}: ${metadata.width}x${metadata.height}`);
+                    }
+                }
+            });
+
+            lib.log(`Generated ${maskCount} shared obstacle pixel masks for level ${Number(window.gameConfig.currentLevel) + 1}`);
+        }
+
+        function snapToGrid(value) {
+            return Math.round(value / GRID_SIZE) * GRID_SIZE;
+        }
+
+        function getCurrentLevel() {
+            const levelIndex = Number(window.gameConfig.currentLevel) || 0;
+            const levels = window.gameConfig.levels;
+            if (!levels || !Array.isArray(levels) || levels.length === 0) {
+                lib.log('Error: No levels found in gameConfig');
+                return null;
+            }
+            if (levelIndex < 0 || levelIndex >= levels.length) {
+                lib.log('Error: Invalid level index:',levelIndex);
+                return levels[0];
+            }
+            return levels[levelIndex];
+        }
+
+        function initializePlayer(isRetry = false) {
+            const level = getCurrentLevel();
+
+            // Guard against null level
+            if (!level) {
+                lib.log('Error: Cannot initialize player - no valid level');
+                showToast('Error: No level data found!',3000);
+                return false;
+            }
+
+            // Ensure playerStart exists with defaults
+            const playerStart = level.playerStart || { x: 360,y: 900,rotation: 0 };
+            playerX = playerStart.x;
+            playerY = playerStart.y;
+            playerRotation = playerStart.rotation || 0;
+            playerVelocityX = 0;
+            playerVelocityY = 0;
+            playerSpeed = 0;
+            gameTimer = 0;
+            timerStarted = false;
+            levelComplete = false;
+            crashed = false;
+            hideCrashedCar = false;
+            frontWheelAngle = 0;
+
+            if (isRetry) {
+                // Reset moving cars to their initial positions and reinitialize states
+                // First, restore positions from existing movingCarStates if they exist
+                if (movingCarStates.length > 0) {
+                    movingCarStates.forEach(carState => {
+                        carState.currentX = carState.startX;
+                        carState.currentY = carState.startY;
+                        carState.isMovingToTarget = false;
+                        carState.isWaiting = true;
+                        carState.isFirstMove = true;
+                        carState.elapsedTime = 0;
+                    });
+                }
+            }
+            else {
+                // Then reinitialize all moving car states
+                movingCarStates = [];
+                const obstacles = level.obstacles || [];
+                obstacles.forEach((obstacle,index) => {
+                    if (obstacle.type === 'parked_car' && obstacle.canMove) {
+                        movingCarStates.push({
+                            obstacleIndex: index,
+                            startX: obstacle.x,
+                            startY: obstacle.y,
+                            currentX: obstacle.x,  // Runtime position
+                            currentY: obstacle.y,  // Runtime position
+                            targetX: obstacle.targetX !== undefined ? obstacle.targetX : obstacle.x,
+                            targetY: obstacle.targetY !== undefined ? obstacle.targetY : obstacle.y,
+                            startDelay: obstacle.startDelay !== undefined ? obstacle.startDelay : 0,
+                            moveSpeed: obstacle.moveSpeed !== undefined ? obstacle.moveSpeed : 100,
+                            moveLoopInterval: obstacle.moveLoopInterval !== undefined ? obstacle.moveLoopInterval : 5,
+                            elapsedTime: 0,
+                            isMovingToTarget: false,
+                            isWaiting: true,
+                            isFirstMove: true // Track if this is the first move (for startDelay)
+                        });
+                    }
+                });
+
+                // Find the first park_spot in decorations
+                const decorations = level.decorations || [];
+                currentParkingSpot = decorations.find(deco => deco.type === 'park_spot');
+                if (!currentParkingSpot) {
+                    showToast('Error: No parking spot found in level!',3000);
+                    console.error('No park_spot found in level decorations');
+                }
+            }
+
+            hideLevelCompleteModal();
+            updateLevelUI();
+            uiElements.timerDisplay.textContent = '0';
+
+            // Show start indicator in play mode
+            if (currentMode === 'play') {
+                showStartIndicator();
+            }
+
+            return true;
+        }
+
+        function checkRectCollision(x1,y1,w1,h1,rot1,x2,y2,w2,h2,rot2) {
+            const corners1 = getRotatedCorners(x1,y1,w1,h1,rot1);
+            const corners2 = getRotatedCorners(x2,y2,w2,h2,rot2);
+
+            for (let corner of corners1) {
+                if (pointInRotatedRect(corner.x,corner.y,x2,y2,w2,h2,rot2)) {
+                    return true;
+                }
+            }
+
+            for (let corner of corners2) {
+                if (pointInRotatedRect(corner.x,corner.y,x1,y1,w1,h1,rot1)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Check pixel-perfect collision between two objects with masks
+         * @param {number} x1, y1 - Center position of object 1
+         * @param {number} w1, h1 - Width and height of object 1
+         * @param {number} rot1 - Rotation of object 1 in degrees
+         * @param {Array<Array<boolean>>} mask1 - Pixel mask of object 1
+         * @param {number} x2, y2 - Center position of object 2
+         * @param {number} w2, h2 - Width and height of object 2
+         * @param {number} rot2 - Rotation of object 2 in degrees
+         * @param {Array<Array<boolean>>} mask2 - Pixel mask of object 2
+         * @returns {Object|null} Collision info {collided: boolean, point: {x, y}} or null if no collision
+         */
+        function checkPixelCollision(x1,y1,w1,h1,rot1,mask1,x2,y2,w2,h2,rot2,mask2) {
+            if (!mask1 || !mask2) return null;
+
+            const rad1 = rot1 * Math.PI / 180;
+            const cos1 = Math.cos(rad1);
+            const sin1 = Math.sin(rad1);
+
+            const rad2 = rot2 * Math.PI / 180;
+            const cos2 = Math.cos(rad2);
+            const sin2 = Math.sin(rad2);
+
+            const maskHeight1 = mask1.length;
+            const maskWidth1 = mask1[0].length;
+            const maskHeight2 = mask2.length;
+            const maskWidth2 = mask2[0].length;
+
+            // Sample every few pixels for performance (can adjust step for accuracy vs speed)
+            const step = 2;
+
+            // Check pixels from object 1
+            for (let localY = 0; localY < maskHeight1; localY += step) {
+                for (let localX = 0; localX < maskWidth1; localX += step) {
+                    // Skip if this pixel is transparent in mask1
+                    if (!mask1[localY][localX]) continue;
+
+                    // Convert from mask coordinates to local coordinates (centered)
+                    const dx1 = localX - maskWidth1 / 2;
+                    const dy1 = localY - maskHeight1 / 2;
+
+                    // Rotate and translate to world coordinates
+                    const worldX = x1 + dx1 * cos1 - dy1 * sin1;
+                    const worldY = y1 + dx1 * sin1 + dy1 * cos1;
+
+                    // Transform world coordinates to object 2's local space
+                    const dx2 = worldX - x2;
+                    const dy2 = worldY - y2;
+
+                    // Rotate back to object 2's local coordinates
+                    const local2X = dx2 * cos2 + dy2 * sin2;
+                    const local2Y = -dx2 * sin2 + dy2 * cos2;
+
+                    // Convert to mask2 coordinates (from centered to top-left origin)
+                    const mask2X = Math.round(local2X + maskWidth2 / 2);
+                    const mask2Y = Math.round(local2Y + maskHeight2 / 2);
+
+                    // Check if this point is within mask2 bounds and is solid
+                    if (mask2X >= 0 && mask2X < maskWidth2 &&
+                        mask2Y >= 0 && mask2Y < maskHeight2) {
+                        if (mask2[mask2Y][mask2X]) {
+                            // Collision detected! Return collision point in world coordinates
+                            return {
+                                collided: true,
+                                point: { x: worldX,y: worldY }
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Enhanced collision check: first AABB/rect check, then pixel-perfect
+         * @param {string} assetId1 - Asset ID for object 1 (to get pixel mask)
+         * @param {number} x1, y1, w1, h1, rot1 - Object 1 parameters
+         * @param {string} assetId2 - Asset ID for object 2 (to get pixel mask)
+         * @param {number} x2, y2, w2, h2, rot2 - Object 2 parameters
+         * @returns {Object|null} Collision info {collided: true, point: {x, y}} or null if no collision
+         */
+        function checkCollisionWithMask(assetId1,x1,y1,w1,h1,rot1,assetId2,x2,y2,w2,h2,rot2) {
+            // First: Quick rectangle collision check
+            if (!checkRectCollision(x1,y1,w1,h1,rot1,x2,y2,w2,h2,rot2)) {
+                return null; // No collision at all
+            }
+
+            // Second: If rectangles collide, check pixel masks
+            const mask1 = pixelMasks[assetId1];
+            const mask2 = pixelMasks[assetId2];
+
+            // If masks don't exist, fall back to rectangle collision
+            // Use center point between two objects as approximate collision point
+            if (!mask1 || !mask2) {
+                return {
+                    collided: true,
+                    point: {
+                        x: (x1 + x2) / 2,
+                        y: (y1 + y2) / 2
+                    }
+                };
+            }
+
+            // Perform pixel-perfect collision
+            const result = checkPixelCollision(x1,y1,w1,h1,rot1,mask1,x2,y2,w2,h2,rot2,mask2);
+            return result;
+        }
+
+        /**
+         * Enhanced collision check with direct mask support
+         * @param {Array|null} mask1 - Pixel mask for object 1 (or null)
+         * @param {number} x1, y1, w1, h1, rot1 - Object 1 parameters
+         * @param {Array|null} mask2 - Pixel mask for object 2 (or null)
+         * @param {number} x2, y2, w2, h2, rot2 - Object 2 parameters
+         * @returns {Object|null} Collision info {collided: true, point: {x, y}} or null if no collision
+         */
+        function checkCollisionWithDirectMask(mask1,x1,y1,w1,h1,rot1,mask2,x2,y2,w2,h2,rot2) {
+            // First: Quick rectangle collision check
+            if (!checkRectCollision(x1,y1,w1,h1,rot1,x2,y2,w2,h2,rot2)) {
+                return null; // No collision at all
+            }
+
+            // Second: If rectangles collide and both masks exist, check pixel collision
+            if (mask1 && mask2) {
+                return checkPixelCollision(x1,y1,w1,h1,rot1,mask1,x2,y2,w2,h2,rot2,mask2);
+            }
+
+            // If masks don't exist, fall back to rectangle collision
+            // Use center point between two objects as approximate collision point
+            return {
+                collided: true,
+                point: {
+                    x: (x1 + x2) / 2,
+                    y: (y1 + y2) / 2
+                }
+            };
+        }
+
+        function getRotatedCorners(cx,cy,w,h,rotation) {
+            const corners = [
+                { x: -w / 2,y: -h / 2 },
+                { x: w / 2,y: -h / 2 },
+                { x: w / 2,y: h / 2 },
+                { x: -w / 2,y: h / 2 }
+            ];
+
+            const rad = rotation * Math.PI / 180;
+            const cos = Math.cos(rad);
+            const sin = Math.sin(rad);
+
+            return corners.map(c => ({
+                x: cx + c.x * cos - c.y * sin,
+                y: cy + c.x * sin + c.y * cos
+            }));
+        }
+
+        function pointInRotatedRect(px,py,cx,cy,w,h,rotation) {
+            const rad = -rotation * Math.PI / 180;
+            const cos = Math.cos(rad);
+            const sin = Math.sin(rad);
+
+            const dx = px - cx;
+            const dy = py - cy;
+
+            const localX = dx * cos - dy * sin;
+            const localY = dx * sin + dy * cos;
+
+            return Math.abs(localX) <= w / 2 && Math.abs(localY) <= h / 2;
+        }
+
+        function checkParkedInSpot() {
+            if (!currentParkingSpot) return false;
+
+            const spot = currentParkingSpot;
+
+            // Check if all corners of player car are inside the parking spot
+            const corners = getRotatedCorners(playerX,playerY,CAR_WIDTH,CAR_HEIGHT,playerRotation);
+            for (let corner of corners) {
+                if (!pointInRotatedRect(corner.x,corner.y,spot.x,spot.y,spot.width,spot.height,spot.rotation)) {
+                    return false;
+                }
+            }
+
+            // Check if player orientation matches parking spot orientation
+            // Player image faces up (0°), parkspot image faces right (0°)
+            // So player needs to rotate 90° clockwise to match parkspot
+            const expectedPlayerRotation = spot.rotation + 90;
+            let angleDiff = playerRotation - expectedPlayerRotation;
+
+            // Normalize angle difference to [-180, 180]
+            while (angleDiff > 180) angleDiff -= 360;
+            while (angleDiff < -180) angleDiff += 360;
+
+            // Allow ±15 degrees tolerance
+            const angleTolerance = 15;
+            if (Math.abs(angleDiff) > angleTolerance) {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Get the runtime position of an obstacle.
+         * For moving cars, returns the current runtime position.
+         * For static obstacles, returns the original position from config.
+         */
+        function getObstaclePosition(obstacle,obstacleIndex) {
+            // Check if this is a moving car
+            const movingCarState = movingCarStates.find(state => state.obstacleIndex === obstacleIndex);
+            if (movingCarState) {
+                return {
+                    x: movingCarState.currentX,
+                    y: movingCarState.currentY
+                };
+            }
+            // Return original position for non-moving obstacles
+            return {
+                x: obstacle.x,
+                y: obstacle.y
+            };
+        }
+
+        function updateMovingCars(deltaTime,level) {
+            // Guard against null level or obstacles
+            if (!level || !level.obstacles || !Array.isArray(level.obstacles)) return;
+
+            // Update each moving car's position
+            movingCarStates.forEach(carState => {
+                const obstacle = level.obstacles[carState.obstacleIndex];
+                if (!obstacle || obstacle.type !== 'parked_car') return;
+
+                carState.elapsedTime += deltaTime;
+
+                // State machine for moving cars: A -> B -> teleport to A -> repeat
+                if (carState.isWaiting) {
+                    // Waiting state: check if we should start moving
+                    const waitTime = carState.isFirstMove ? carState.startDelay : carState.moveLoopInterval;
+
+                    if (carState.elapsedTime >= waitTime) {
+                        // Start moving to target
+                        carState.isWaiting = false;
+                        carState.isMovingToTarget = true;
+                        carState.elapsedTime = 0;
+                        carState.isFirstMove = false;
+                    }
+                } else if (carState.isMovingToTarget) {
+                    // Moving to target
+                    const dx = carState.targetX - carState.currentX;
+                    const dy = carState.targetY - carState.currentY;
+                    const distanceToTarget = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distanceToTarget > 1) {
+                        const moveDistance = carState.moveSpeed * deltaTime;
+                        const ratio = Math.min(moveDistance / distanceToTarget,1);
+                        carState.currentX += dx * ratio;
+                        carState.currentY += dy * ratio;
+                    } else {
+                        // Reached target - teleport back to start and wait
+                        carState.currentX = carState.startX;
+                        carState.currentY = carState.startY;
+                        carState.isMovingToTarget = false;
+                        carState.isWaiting = true;
+                        carState.elapsedTime = 0;
+                    }
+                }
+            });
+        }
+
+        function updatePhysics(deltaTime) {
+            if (crashed || levelComplete || gamePaused) return;
+
+            const settings = window.gameConfig.settings || {};
+            const level = getCurrentLevel();
+
+            // Guard against null level
+            if (!level) return;
+
+            // Update moving cars
+            updateMovingCars(deltaTime,level);
+
+            let acceleration = 0;
+            let steering = 0;
+
+            // Debug: log keys state every few frames
+            if (Math.random() < 0.02) {
+                const activeKeys = Object.keys(keys).filter(k => keys[k]);
+                if (activeKeys.length > 0) {
+                    console.log('Active keys:',activeKeys);
+                }
+            }
+
+            // Keyboard/touch input
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) {
+                acceleration = 1;
+                if (!timerStarted) {
+                    timerStarted = true;
+                    hideStartIndicator();
+                }
+            }
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) {
+                acceleration = -1;
+                if (!timerStarted) {
+                    timerStarted = true;
+                    hideStartIndicator();
+                }
+            }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
+                steering = -1;
+                if (!timerStarted) {
+                    timerStarted = true;
+                    hideStartIndicator();
+                }
+            }
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) {
+                steering = 1;
+                if (!timerStarted) {
+                    timerStarted = true;
+                    hideStartIndicator();
+                }
+            }
+
+            // Update front wheel angle based on steering input
+            const maxWheelAngle = 25; // Maximum wheel turn angle in degrees
+            const wheelTurnSpeed = 180; // Degrees per second
+
+            if (steering < 0) {
+                // Turn left
+                frontWheelAngle = Math.max(frontWheelAngle - wheelTurnSpeed * deltaTime,-maxWheelAngle);
+            } else if (steering > 0) {
+                // Turn right
+                frontWheelAngle = Math.min(frontWheelAngle + wheelTurnSpeed * deltaTime,maxWheelAngle);
+            } else {
+                // Return to center when no steering input
+                if (frontWheelAngle > 0) {
+                    frontWheelAngle = Math.max(0,frontWheelAngle - wheelTurnSpeed * deltaTime);
+                } else if (frontWheelAngle < 0) {
+                    frontWheelAngle = Math.min(0,frontWheelAngle + wheelTurnSpeed * deltaTime);
+                }
+            }
+
+            // Apply physics
+            if (acceleration > 0) {
+                playerSpeed += ACCELERATION * deltaTime;
+                playerSpeed = Math.min(playerSpeed,MAX_SPEED);
+            } else if (acceleration < 0) {
+                playerSpeed -= REVERSE_ACCELERATION * deltaTime;
+                playerSpeed = Math.max(playerSpeed,-MAX_REVERSE_SPEED);
+            }
+
+            // Apply friction
+            playerSpeed *= Math.pow(window.gameConfig.settings.friction,deltaTime * 60);
+            //console.log(playerSpeed);
+
+            // Apply steering (speed-dependent turn rate)
+            if (Math.abs(playerSpeed) > 5) {
+                const turnRate = window.gameConfig.settings.turnSpeed * (Math.abs(playerSpeed) / MAX_SPEED);
+                // Reverse steering direction when reversing
+                const steeringDirection = playerSpeed < 0 ? -steering : steering;
+                playerRotation += steeringDirection * turnRate * deltaTime;
+            }
+
+            // Update velocity based on rotation
+            const radians = (playerRotation * Math.PI) / 180;
+            playerVelocityX = Math.sin(radians) * playerSpeed;
+            playerVelocityY = -Math.cos(radians) * playerSpeed;
+
+            // Update position
+            playerX += playerVelocityX * deltaTime;
+            playerY += playerVelocityY * deltaTime;
+
+            // Check boundaries
+            playerX = Math.max(CAR_WIDTH / 2,Math.min(720 - CAR_WIDTH / 2,playerX));
+            playerY = Math.max(CAR_HEIGHT / 2,Math.min(1280 - CAR_HEIGHT / 2,playerY));
+
+            // Check collisions with obstacles
+            const obstacles = level.obstacles || [];
+            for (let i = 0; i < obstacles.length; i++) {
+                const obstacle = obstacles[i];
+                const pos = getObstaclePosition(obstacle,i);
+                let collisionInfo = null;
+
+                // Get player mask
+                const playerMask = pixelMasks['player_car'];
+
+                // Check if this is a parked car (has assetId for pixel mask detection)
+                if (obstacle.type === 'parked_car' && obstacle.assetId) {
+                    // Use pixel-perfect collision for car vs car
+                    collisionInfo = checkCollisionWithMask(
+                        'player_car',playerX,playerY,CAR_WIDTH,CAR_HEIGHT,playerRotation,
+                        obstacle.assetId,pos.x,pos.y,obstacle.width,obstacle.height,obstacle.rotation
+                    );
+                } else if (pixelMasks[obstacle.type] && playerMask) {
+                    // Use pixel-perfect collision for obstacles with shared pixel masks
+                    // (greenery, barrier)
+                    collisionInfo = checkCollisionWithDirectMask(
+                        playerMask,playerX,playerY,CAR_WIDTH,CAR_HEIGHT,playerRotation,
+                        pixelMasks[obstacle.type],pos.x,pos.y,obstacle.width,obstacle.height,obstacle.rotation
+                    );
+                } else {
+                    // Use standard rectangle collision for other obstacles
+                    const rectCollision = checkRectCollision(
+                        playerX,playerY,CAR_WIDTH,CAR_HEIGHT,playerRotation,
+                        pos.x,pos.y,obstacle.width,obstacle.height,obstacle.rotation
+                    );
+                    if (rectCollision) {
+                        // Use center point between player and obstacle as approximate collision point
+                        collisionInfo = {
+                            collided: true,
+                            point: {
+                                x: (playerX + pos.x) / 2,
+                                y: (playerY + pos.y) / 2
+                            }
+                        };
+                    }
+                }
+
+                if (collisionInfo && collisionInfo.collided) {
+                    handleCrash(collisionInfo.point.x,collisionInfo.point.y);
+                    return;
+                }
+            }
+
+            // Check parking
+            if (Math.abs(playerSpeed) < PARKING_SPEED_THRESHOLD && checkParkedInSpot()) {
+                handleLevelComplete();
+            }
+
+            // Update engine audio
+            if (engineAudio) {
+                const pitchFactor = 0.8 + (Math.abs(playerSpeed) / MAX_SPEED) * 0.6;
+                engineAudio.playbackRate = pitchFactor;
+            }
+        }
+
+        function handleCrash(collisionX,collisionY) {
+            crashed = true;
+            playerSpeed = 0;
+
+            // Show collision effect at actual collision point
+            // If no collision point provided, default to player position
+            const effectX = collisionX !== undefined ? collisionX : playerX;
+            const effectY = collisionY !== undefined ? collisionY : playerY;
+            showCollisionEffect(effectX,effectY);
+
+            showCrashEffect();
+
+            if (assetCache['crash_sound']) {
+                assetCache['crash_sound'].currentTime = 0;
+                assetCache['crash_sound'].play();
+            }
+
+            if (engineAudio) {
+                engineAudio.pause();
+            }
+
+            // Hide the car after 1 second
+            setTimeout(() => {
+                hideCrashedCar = true;
+            },1000);
+
+            // Reset the level after 2 seconds (1 second after car disappears)
+            setTimeout(() => {
+                initializePlayer(true);
+                if (engineAudio && currentMode === 'play') {
+                    engineAudio.currentTime = 0;
+                    engineAudio.play();
+                }
+            },2000);
+        }
+
+        /**
+         * Save user progress to persistent storage
+         * @param {number} levelIndex - Current level index
+         * @param {number} time - Completion time
+         * @param {number} stars - Stars earned
+         */
+        async function saveUserProgress(levelIndex,time,stars) {
+            try {
+                // Load existing progress
+                const savedData = await lib.getUserGameState();
+                let progress = savedData && savedData.state ? savedData.state : {
+                    currentLevel: 0,
+                    levelProgress: []
+                };
+
+                // Initialize levelProgress array if needed
+                if (!progress.levelProgress) {
+                    progress.levelProgress = [];
+                }
+
+                // Update progress for this level
+                if (!progress.levelProgress[levelIndex]) {
+                    progress.levelProgress[levelIndex] = {
+                        bestTime: time,
+                        bestStars: stars,
+                        completed: true
+                    };
+                } else {
+                    // Update if this is a better time
+                    if (time < progress.levelProgress[levelIndex].bestTime) {
+                        progress.levelProgress[levelIndex].bestTime = time;
+                    }
+                    // Update if this is more stars
+                    if (stars > progress.levelProgress[levelIndex].bestStars) {
+                        progress.levelProgress[levelIndex].bestStars = stars;
+                    }
+                    progress.levelProgress[levelIndex].completed = true;
+                }
+
+                // Update current level (unlock next level)
+                // if (levelIndex >= progress.currentLevel) {
+                //     progress.currentLevel = Math.min(levelIndex + 1, window.gameConfig.levels.length - 1);
+                // }
+                progress.currentLevel = (levelIndex + 1) % window.gameConfig.levels.length;
+
+                // Save to persistent storage
+                await lib.saveUserGameState(progress);
+                lib.log('Progress saved successfully');
+            } catch (error) {
+                lib.log('Error saving progress: ' + error.message);
+            }
+        }
+
+        /**
+         * Load user progress from persistent storage
+         */
+        async function loadUserProgress() {
+            try {
+                const savedData = await lib.getUserGameState();
+                if (savedData && savedData.state) {
+                    lib.log('Progress loaded successfully');
+                    return savedData.state;
+                } else {
+                    lib.log('No saved progress found');
+                    return null;
+                }
+            } catch (error) {
+                lib.log('Error loading progress: ' + error.message);
+                return null;
+            }
+        }
+
+        async function handleLevelComplete() {
+            if (levelComplete) return;
+
+            levelComplete = true;
+
+            if (engineAudio) {
+                engineAudio.pause();
+            }
+
+            const level = getCurrentLevel();
+            let stars = 0;
+            if (gameTimer < level.starThresholds[2]) stars = 3;
+            else if (gameTimer < level.starThresholds[1]) stars = 2;
+            else if (gameTimer < level.starThresholds[0]) stars = 1;
+
+            // Save user progress
+            await saveUserProgress(window.gameConfig.currentLevel,gameTimer,stars);
+
+            if (assetCache['success_sound']) {
+                assetCache['success_sound'].currentTime = 0;
+                assetCache['success_sound'].play();
+            }
+
+            setTimeout(() => {
+                if (assetCache['star_rating_sound']) {
+                    assetCache['star_rating_sound'].currentTime = 0;
+                    assetCache['star_rating_sound'].play();
+                }
+
+                showLevelCompleteModal(stars,gameTimer);
+            },500);
+        }
+
+        function render() {
+            const level = getCurrentLevel();
+
+            ctx.fillStyle = '#808080';
+            ctx.fillRect(0,0,720,1280);
+
+            // Guard against null level
+            if (!level) {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '32px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Loading level...',360,640);
+                return;
+            }
+
+            // Update start indicator position if visible
+            if (!timerStarted && currentMode === 'play' && !crashed && !levelComplete) {
+                updateStartIndicatorPosition();
+            }
+
+            ctx.restore();
+
+            const decorations = level.decorations || [];
+            for (let deco of decorations) {
+                if (deco.type === 'road_line_dashed' || deco.type === 'road_line_solid') {
+                    ctx.save();
+                    ctx.translate(deco.x,deco.y);
+                    ctx.rotate(deco.rotation * Math.PI / 180);
+
+                    ctx.strokeStyle = 'white';
+                    ctx.lineWidth = 10;
+
+                    if (deco.type === 'road_line_dashed') {
+                        ctx.setLineDash([20,20]);
+                    } else {
+                        ctx.setLineDash([]);
+                    }
+
+                    ctx.beginPath();
+                    ctx.moveTo(-deco.length / 2,0);
+                    ctx.lineTo(deco.length / 2,0);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                } else if (deco.type === 'park_spot') {
+                    ctx.save();
+                    ctx.translate(deco.x,deco.y);
+                    ctx.rotate(deco.rotation * Math.PI / 180);
+
+                    const img = assetCache['park_spot_marker'];
+                    if (img && img.complete && img.naturalWidth > 0) {
+                        ctx.drawImage(img,-deco.width / 2,-deco.height / 2,deco.width,deco.height);
+                    } else {
+                        // Draw fallback parking spot
+                        ctx.strokeStyle = '#FFD600';
+                        ctx.lineWidth = 4;
+                        ctx.setLineDash([]);
+                        // Draw parking spot outline
+                        ctx.strokeRect(-deco.width / 2,-deco.height / 2,deco.width,deco.height);
+                        // Draw "P" text
+                        ctx.fillStyle = '#FFD600';
+                        ctx.font = 'bold 40px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('P',0,0);
+                    }
+                    ctx.restore();
+                }
+
+                ctx.restore();
+            }
+
+            const obstacles = level.obstacles || [];
+            for (let i = 0; i < obstacles.length; i++) {
+                const obs = obstacles[i];
+                const pos = getObstaclePosition(obs,i);
+                ctx.save();
+                ctx.translate(pos.x,pos.y);
+                ctx.rotate(obs.rotation * Math.PI / 180);
+
+                if (obs.type === 'barrier') {
+                    const barrierAsset = assetCache['barrier_obstacle'];
+                    if (barrierAsset) {
+                        ctx.drawImage(barrierAsset,-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    } else {
+                        ctx.fillStyle = '#555555';
+                        ctx.fillRect(-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    }
+                } else if (obs.type === 'greenery') {
+                    const greeneryAsset = assetCache['greenery_patch'];
+                    if (greeneryAsset) {
+                        ctx.drawImage(greeneryAsset,-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    } else {
+                        ctx.fillStyle = '#2ECC40';
+                        ctx.fillRect(-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    }
+                } else if (obs.type === 'greenery_square') {
+                    const greenerySquareAsset = assetCache['greenery_patch_square'];
+                    if (greenerySquareAsset) {
+                        ctx.drawImage(greenerySquareAsset,-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    } else {
+                        ctx.fillStyle = '#2ECC40';
+                        ctx.fillRect(-obs.width / 2,-obs.height / 2,obs.width,obs.height);
+                    }
+                } else if (obs.type === 'parked_car') {
+                    // Draw tires first (underneath the car body)
+                    const tireWidth = 7;
+                    const tireHeight = 16;
+                    const tireOffsetX = CAR_WIDTH / 2 - 8;
+                    const tireOffsetY = CAR_HEIGHT / 2 - 24;
+
+                    ctx.fillStyle = '#000000';
+
+                    // Front left tire
+                    ctx.fillRect(-tireOffsetX - tireWidth / 2,-tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                    // Front right tire
+                    ctx.fillRect(tireOffsetX - tireWidth / 2,-tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                    // Rear left tire
+                    ctx.fillRect(-tireOffsetX - tireWidth / 2,tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                    // Rear right tire
+                    ctx.fillRect(tireOffsetX - tireWidth / 2,tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                    // Draw car body on top of tires
+                    const carAsset = assetCache[obs.assetId];
+                    if (carAsset && carAsset.complete && carAsset.naturalWidth > 0) {
+                        ctx.drawImage(carAsset,-CAR_WIDTH / 2,-CAR_HEIGHT / 2,CAR_WIDTH,CAR_HEIGHT);
+                    } else {
+                        // Draw fallback car body
+                        const carColors = {
+                            'parked_car_yellow': '#FFD600',
+                            'parked_car_green': '#00E676',
+                            'parked_car_purple': '#9C27B0',
+                            'parked_car_white': '#EEEEEE'
+                        };
+                        const carColor = carColors[obs.assetId] || '#888888';
+
+                        // Car body
+                        ctx.fillStyle = carColor;
+                        ctx.beginPath();
+                        ctx.roundRect(-CAR_WIDTH / 2,-CAR_HEIGHT / 2,CAR_WIDTH,CAR_HEIGHT,8);
+                        ctx.fill();
+
+                        // Windshield
+                        ctx.fillStyle = 'rgba(100,180,255,0.7)';
+                        ctx.fillRect(-CAR_WIDTH / 2 + 10,-CAR_HEIGHT / 2 + 15,CAR_WIDTH - 20,25);
+
+                        // Rear window
+                        ctx.fillRect(-CAR_WIDTH / 2 + 10,CAR_HEIGHT / 2 - 35,CAR_WIDTH - 20,20);
+                    }
+                }
+
+                if (currentMode === 'edit' && selectedObjectType === 'obstacle' && selectedObjectIndex === i) {
+                    ctx.strokeStyle = '#2196F3';
+                    ctx.lineWidth = 4;
+                    ctx.strokeRect(-obs.width / 2 - 5,-obs.height / 2 - 5,obs.width + 10,obs.height + 10);
+
+                    ctx.fillStyle = '#2196F3';
+                    ctx.fillRect(obs.width / 2 - 10,-10,20,20);
+                    ctx.fillRect(-10,obs.height / 2 - 10,20,20);
+                }
+
+                ctx.restore();
+            }
+
+            // Render player car (visible for 1 second after crash before disappearing)
+            if (!hideCrashedCar) {
+                ctx.save();
+                ctx.translate(playerX,playerY);
+                ctx.rotate(playerRotation * Math.PI / 180);
+
+                // Draw tires first (underneath the car body)
+                const tireWidth = 7;
+                const tireHeight = 16;
+                const tireOffsetX = CAR_WIDTH / 2 - 8; // Distance from edge
+                const tireOffsetY = CAR_HEIGHT / 2 - 24; // Distance from top/bottom
+
+                ctx.fillStyle = '#000000';
+
+                // Front left tire (with steering rotation)
+                ctx.save();
+                ctx.translate(-tireOffsetX,-tireOffsetY);
+                ctx.rotate(frontWheelAngle * Math.PI / 180);
+                ctx.fillRect(-tireWidth / 2,-tireHeight / 2,tireWidth,tireHeight);
+                ctx.restore();
+
+                // Front right tire (with steering rotation)
+                ctx.save();
+                ctx.translate(tireOffsetX,-tireOffsetY);
+                ctx.rotate(frontWheelAngle * Math.PI / 180);
+                ctx.fillRect(-tireWidth / 2,-tireHeight / 2,tireWidth,tireHeight);
+                ctx.restore();
+
+                // Rear left tire (no rotation)
+                ctx.fillRect(-tireOffsetX - tireWidth / 2,tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                // Rear right tire (no rotation)
+                ctx.fillRect(tireOffsetX - tireWidth / 2,tireOffsetY - tireHeight / 2,tireWidth,tireHeight);
+
+                // Draw car body on top of tires
+                const playerCar = assetCache['player_car'];
+                if (playerCar && playerCar.complete && playerCar.naturalWidth > 0) {
+                    ctx.drawImage(playerCar,-CAR_WIDTH / 2,-CAR_HEIGHT / 2,CAR_WIDTH,CAR_HEIGHT);
+                } else {
+                    // Draw fallback player car (red sports car style)
+                    ctx.fillStyle = '#E53935';
+                    ctx.beginPath();
+                    ctx.roundRect(-CAR_WIDTH / 2,-CAR_HEIGHT / 2,CAR_WIDTH,CAR_HEIGHT,10);
+                    ctx.fill();
+
+                    // Car roof / cabin
+                    ctx.fillStyle = '#B71C1C';
+                    ctx.beginPath();
+                    ctx.roundRect(-CAR_WIDTH / 2 + 8,-CAR_HEIGHT / 2 + 30,CAR_WIDTH - 16,50,6);
+                    ctx.fill();
+
+                    // Windshield
+                    ctx.fillStyle = 'rgba(100,180,255,0.8)';
+                    ctx.fillRect(-CAR_WIDTH / 2 + 12,-CAR_HEIGHT / 2 + 18,CAR_WIDTH - 24,20);
+
+                    // Rear window
+                    ctx.fillRect(-CAR_WIDTH / 2 + 12,CAR_HEIGHT / 2 - 38,CAR_WIDTH - 24,18);
+
+                    // Headlights
+                    ctx.fillStyle = '#FFEB3B';
+                    ctx.beginPath();
+                    ctx.arc(-CAR_WIDTH / 2 + 15,-CAR_HEIGHT / 2 + 10,6,0,Math.PI * 2);
+                    ctx.arc(CAR_WIDTH / 2 - 15,-CAR_HEIGHT / 2 + 10,6,0,Math.PI * 2);
+                    ctx.fill();
+
+                    // Taillights
+                    ctx.fillStyle = '#FF5722';
+                    ctx.beginPath();
+                    ctx.arc(-CAR_WIDTH / 2 + 15,CAR_HEIGHT / 2 - 10,5,0,Math.PI * 2);
+                    ctx.arc(CAR_WIDTH / 2 - 15,CAR_HEIGHT / 2 - 10,5,0,Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+
+            for (let deco of level.decorations) {
+                if (deco.type === 'tree' && assetCache['tree_small']) {
+                    ctx.save();
+                    ctx.translate(deco.x,deco.y);
+                    ctx.rotate(deco.rotation * Math.PI / 180);
+
+                    const img = assetCache['tree_small'];
+                    ctx.drawImage(img,-deco.width / 2,-deco.height / 2,deco.width,deco.height);
+                } else if (deco.type === 'lamp_post' && assetCache['lamp_post']) {
+                    ctx.save();
+                    ctx.translate(deco.x,deco.y);
+                    ctx.rotate(deco.rotation * Math.PI / 180);
+
+                    const img = assetCache['lamp_post'];
+                    ctx.drawImage(img,-20,-40,40,80);
+                } else if (deco.type === 'flower_bed' && assetCache['flower_bed']) {
+                    ctx.save();
+                    ctx.translate(deco.x,deco.y);
+                    ctx.rotate(deco.rotation * Math.PI / 180);
+
+                    const img = assetCache['flower_bed'];
+                    ctx.drawImage(img,-30,-30,60,60);
+                }
+
+                ctx.restore();
+            }
+
+            if (currentMode === 'edit') {
+                for (let i = 0; i < level.decorations.length; i++) {
+                    const deco = level.decorations[i];
+                    if (selectedObjectType === 'decoration' && selectedObjectIndex === i) {
+                        ctx.save();
+                        ctx.translate(deco.x,deco.y);
+                        ctx.rotate(deco.rotation * Math.PI / 180);
+
+                        ctx.strokeStyle = '#2196F3';
+                        ctx.lineWidth = 4;
+
+                        if (deco.type === 'road_line_dashed' || deco.type === 'road_line_solid') {
+                            ctx.strokeRect(-deco.length / 2 - 10,-15,deco.length + 20,30);
+                        } else if (deco.type === 'park_spot') {
+                            ctx.strokeRect(-deco.width / 2 - 5,-deco.height / 2 - 5,deco.width + 10,deco.height + 10);
+                        } else if (deco.type === 'tree') {
+                            const w = deco.width || 80;
+                            const h = deco.height || 100;
+                            ctx.strokeRect(-w / 2 - 5,-h / 2 - 5,w + 10,h + 10);
+                        } else {
+                            ctx.strokeRect(-35,-35,70,70);
+                        }
+
+                        ctx.restore();
+                    }
+                }
+            }
+        }
+
+        let lastTime = 0;
+        function gameLoop(timestamp) {
+            const deltaTime = Math.min((timestamp - lastTime) / 1000,0.1);
+            lastTime = timestamp;
+
+            if (currentMode === 'play' && gameRunning && timerStarted && !levelComplete && !crashed && !gamePaused) {
+                gameTimer += deltaTime;
+                uiElements.timerDisplay.textContent = Math.floor(gameTimer);
+            }
+
+            if (currentMode === 'play' && gameRunning) {
+                updatePhysics(deltaTime);
+            }
+
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+
+        /**
+         * Resume AudioContext for iOS (required after user interaction)
+         */
+        function resumeAudioContext() {
+            if (isIOS && WebAudioSound.sharedContext) {
+                if (WebAudioSound.sharedContext.state === 'suspended') {
+                    WebAudioSound.sharedContext.resume();
+                }
+            }
+        }
+
+        function setupInputHandlers() {
+            window.addEventListener('keydown',(e) => {
+                keys[e.key] = true;
+                resumeAudioContext();
+
+                // if (e.key === 'r' || e.key === 'R') {
+                //     initializePlayer();
+                //     if (engineAudio && currentMode === 'play') {
+                //         engineAudio.currentTime = 0;
+                //         engineAudio.play();
+                //     }
+                // }
+            });
+
+            window.addEventListener('keyup',(e) => {
+                keys[e.key] = false;
+            });
+
+            document.getElementById('nextLevelButton').addEventListener('click',(event) => {
+                event.target.blur(); // Remove focus to prevent button staying in selected state
+                window.gameConfig.currentLevel = (Number(window.gameConfig.currentLevel) + 1) % window.gameConfig.levels.length;
+                initializePlayer();
+                if (engineAudio && currentMode === 'play') {
+                    engineAudio.currentTime = 0;
+                    engineAudio.play();
+                }
+            });
+
+            document.getElementById('retryButton').addEventListener('click',(event) => {
+                event.target.blur(); // Remove focus to prevent button staying in selected state
+                initializePlayer(true);
+                if (engineAudio && currentMode === 'play') {
+                    engineAudio.currentTime = 0;
+                    engineAudio.play();
+                }
+            });
+
+            document.getElementById('menuButton').addEventListener('click',() => {
+                if (currentMode === 'edit') {
+                    toggleEditDrawer();
+                } else if (currentMode === 'play') {
+                    showPauseModal();
+                }
+            });
+
+            document.getElementById('continueButton').addEventListener('click',(event) => {
+                event.target.blur(); // Remove focus to prevent button staying in selected state
+                hidePauseModal();
+            });
+
+            document.getElementById('pauseRetryButton').addEventListener('click',(event) => {
+                event.target.blur(); // Remove focus to prevent button staying in selected state
+                hidePauseModal();
+                initializePlayer(true);
+                if (engineAudio && currentMode === 'play') {
+                    engineAudio.currentTime = 0;
+                    engineAudio.play();
+                }
+                if (backgroundMusic && currentMode === 'play') {
+                    backgroundMusic.play();
+                }
+            });
+
+            uiElements.modalBackdrop.addEventListener('click',() => {
+                if (currentMode === 'edit' && uiElements.editDrawer.classList.contains('show')) {
+                    toggleEditDrawer();
+                }
+            });
+
+            // Direction control buttons
+            const upBtn = document.getElementById('upBtn');
+            const downBtn = document.getElementById('downBtn');
+            const leftBtn = document.getElementById('leftBtn');
+            const rightBtn = document.getElementById('rightBtn');
+
+            // Track button pressed state - uses CSS :active pseudo-class check
+            const buttonKeyMap = {
+                'upBtn': 'w',
+                'downBtn': 's',
+                'leftBtn': 'a',
+                'rightBtn': 'd'
+            };
+
+            // Polling approach - check if buttons are being pressed via CSS matches
+            let pollInterval = null;
+
+            function startPolling() {
+                if (pollInterval) return;
+
+                pollInterval = setInterval(() => {
+                    // Check each button's pressed state via class
+                    const upPressed = upBtn?.classList.contains('pressed');
+                    const downPressed = downBtn?.classList.contains('pressed');
+                    const leftPressed = leftBtn?.classList.contains('pressed');
+                    const rightPressed = rightBtn?.classList.contains('pressed');
+
+                    keys['w'] = upPressed || keys['ArrowUp'] || keys['W'];
+                    keys['s'] = downPressed || keys['ArrowDown'] || keys['S'];
+                    keys['a'] = leftPressed || keys['ArrowLeft'] || keys['A'];
+                    keys['d'] = rightPressed || keys['ArrowRight'] || keys['D'];
+                },16); // ~60fps
+            }
+
+            startPolling();
+
+            // Setup touch/pointer handlers for buttons
+            function setupButtonHandlers(btn,key) {
+                if (!btn) return;
+
+                let isHolding = false;
+                let holdInterval = null;
+
+                const startHold = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (!isHolding) {
+                        isHolding = true;
+                        btn.classList.add('pressed');
+                        keys[key] = true;
+
+                        // Start timer if needed
+                        if (!timerStarted) {
+                            timerStarted = true;
+                            hideStartIndicator();
+                        }
+                        resumeAudioContext();
+
+                        // Keep key pressed while holding
+                        holdInterval = setInterval(() => {
+                            keys[key] = true;
+                        },16);
+
+                        console.log('Hold START:',key);
+                    }
+                };
+
+                const endHold = (e) => {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
+                    if (isHolding) {
+                        isHolding = false;
+                        btn.classList.remove('pressed');
+                        keys[key] = false;
+
+                        if (holdInterval) {
+                            clearInterval(holdInterval);
+                            holdInterval = null;
+                        }
+
+                        console.log('Hold END:',key);
+                    }
+                };
+
+                // Pointer events (works on both touch and mouse)
+                btn.addEventListener('pointerdown',startHold,{ passive: false });
+                btn.addEventListener('pointerup',endHold,{ passive: false });
+                btn.addEventListener('pointercancel',endHold,{ passive: false });
+                btn.addEventListener('pointerleave',endHold,{ passive: false });
+
+                // Fallback touch events
+                btn.addEventListener('touchstart',startHold,{ passive: false });
+                btn.addEventListener('touchend',endHold,{ passive: false });
+                btn.addEventListener('touchcancel',endHold,{ passive: false });
+
+                // Mouse events
+                btn.addEventListener('mousedown',startHold,{ passive: false });
+                btn.addEventListener('mouseup',endHold,{ passive: false });
+                btn.addEventListener('mouseleave',endHold,{ passive: false });
+
+                // Prevent context menu
+                btn.addEventListener('contextmenu',(e) => e.preventDefault());
+            }
+
+            // Setup all buttons
+            setupButtonHandlers(upBtn,'w');
+            setupButtonHandlers(downBtn,'s');
+            setupButtonHandlers(leftBtn,'a');
+            setupButtonHandlers(rightBtn,'d');
+
+            canvas.addEventListener('mousedown',handleCanvasMouseDown);
+            canvas.addEventListener('mousemove',handleCanvasMouseMove);
+            canvas.addEventListener('mouseup',handleCanvasMouseUp);
+            canvas.addEventListener('touchstart',handleCanvasTouchStart);
+            canvas.addEventListener('touchmove',handleCanvasTouchMove);
+            canvas.addEventListener('touchend',handleCanvasTouchEnd);
+        }
+
+        function handleCanvasMouseDown(e) {
+            if (currentMode !== 'edit') return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+            handleEditClick(x,y);
+        }
+
+        function handleCanvasMouseMove(e) {
+            if (currentMode !== 'edit' || !draggingObject) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+            handleEditDrag(x,y);
+        }
+
+        function handleCanvasMouseUp(e) {
+            if (currentMode !== 'edit') return;
+            draggingObject = false;
+        }
+
+        function handleCanvasTouchStart(e) {
+            resumeAudioContext(); // Resume AudioContext on iOS
+            if (currentMode !== 'edit') return;
+            e.preventDefault();
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+
+            handleEditClick(x,y);
+        }
+
+        function handleCanvasTouchMove(e) {
+            if (currentMode !== 'edit' || !draggingObject) return;
+            e.preventDefault();
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+
+            handleEditDrag(x,y);
+        }
+
+        function handleCanvasTouchEnd(e) {
+            if (currentMode !== 'edit') return;
+            e.preventDefault();
+            draggingObject = false;
+        }
+
+        function handleEditClick(x,y) {
+            const level = getCurrentLevel();
+
+            if (paletteSelection) {
+                const newObj = createObjectFromPalette(paletteSelection,x,y);
+                if (newObj.isObstacle) {
+                    level.obstacles.push(newObj.data);
+                    selectedObjectType = 'obstacle';
+                    selectedObjectIndex = level.obstacles.length - 1;
+                } else {
+                    level.decorations.push(newObj.data);
+                    selectedObjectType = 'decoration';
+                    selectedObjectIndex = level.decorations.length - 1;
+                }
+                paletteSelection = null;
+                updatePaletteUI();
+                showEditMenu();
+                showToast('Object placed!',1500);
+                return;
+            }
+
+            for (let i = level.obstacles.length - 1; i >= 0; i--) {
+                const obs = level.obstacles[i];
+                if (pointInRotatedRect(x,y,obs.x,obs.y,obs.width,obs.height,obs.rotation)) {
+                    selectedObjectType = 'obstacle';
+                    selectedObjectIndex = i;
+                    selectedObject = obs;
+                    draggingObject = true;
+                    dragOffsetX = x - obs.x;
+                    dragOffsetY = y - obs.y;
+                    showEditMenu();
+                    return;
+                }
+            }
+
+            for (let i = level.decorations.length - 1; i >= 0; i--) {
+                const deco = level.decorations[i];
+                let size;
+                if (deco.type === 'road_line_dashed' || deco.type === 'road_line_solid') {
+                    size = { w: deco.length,h: 30 };
+                } else if (deco.type === 'park_spot') {
+                    size = { w: deco.width,h: deco.height };
+                } else if (deco.type === 'tree') {
+                    size = { w: deco.width || 80,h: deco.height || 100 };
+                } else {
+                    size = { w: 70,h: 70 };
+                }
+                if (pointInRotatedRect(x,y,deco.x,deco.y,size.w,size.h,deco.rotation)) {
+                    selectedObjectType = 'decoration';
+                    selectedObjectIndex = i;
+                    selectedObject = deco;
+                    draggingObject = true;
+                    dragOffsetX = x - deco.x;
+                    dragOffsetY = y - deco.y;
+                    showEditMenu();
+                    return;
+                }
+            }
+
+            selectedObject = null;
+            selectedObjectType = null;
+            selectedObjectIndex = -1;
+            lib.editMenu.close();
+        }
+
+        function handleEditDrag(x,y) {
+            if (!selectedObject) return;
+
+            selectedObject.x = snapToGrid(x - dragOffsetX);
+            selectedObject.y = snapToGrid(y - dragOffsetY);
+        }
+
+        function createObjectFromPalette(type,x,y) {
+            const snappedX = snapToGrid(x);
+            const snappedY = snapToGrid(y);
+
+            const objectTypes = {
+                'barrier': {
+                    isObstacle: true,
+                    data: { type: 'barrier',x: snappedX,y: snappedY,width: 100,height: 40,rotation: 0 }
+                },
+                'greenery': {
+                    isObstacle: true,
+                    data: { type: 'greenery',x: snappedX,y: snappedY,width: 240,height: 120,rotation: 0 }
+                },
+                'greenery_square': {
+                    isObstacle: true,
+                    data: { type: 'greenery_square',x: snappedX,y: snappedY,width: 100,height: 100,rotation: 0 }
+                },
+                'parked_car_yellow': {
+                    isObstacle: true,
+                    data: { type: 'parked_car',assetId: 'parked_car_yellow',x: snappedX,y: snappedY,width: CAR_WIDTH,height: CAR_HEIGHT,rotation: 0,canMove: false,targetX: snappedX,targetY: snappedY,startDelay: 0,moveSpeed: 50,moveLoopInterval: 2 }
+                },
+                'parked_car_green': {
+                    isObstacle: true,
+                    data: { type: 'parked_car',assetId: 'parked_car_green',x: snappedX,y: snappedY,width: CAR_WIDTH,height: CAR_HEIGHT,rotation: 0,canMove: false,targetX: snappedX,targetY: snappedY,startDelay: 0,moveSpeed: 50,moveLoopInterval: 2 }
+                },
+                'parked_car_purple': {
+                    isObstacle: true,
+                    data: { type: 'parked_car',assetId: 'parked_car_purple',x: snappedX,y: snappedY,width: CAR_WIDTH,height: CAR_HEIGHT,rotation: 0,canMove: false,targetX: snappedX,targetY: snappedY,startDelay: 0,moveSpeed: 50,moveLoopInterval: 2 }
+                },
+                'parked_car_white': {
+                    isObstacle: true,
+                    data: { type: 'parked_car',assetId: 'parked_car_white',x: snappedX,y: snappedY,width: CAR_WIDTH,height: CAR_HEIGHT,rotation: 0,canMove: false,targetX: snappedX,targetY: snappedY,startDelay: 0,moveSpeed: 50,moveLoopInterval: 2 }
+                },
+                'road_line_dashed': {
+                    isObstacle: false,
+                    data: { type: 'road_line_dashed',x: snappedX,y: snappedY,length: 200,rotation: 0 }
+                },
+                'road_line_solid': {
+                    isObstacle: false,
+                    data: { type: 'road_line_solid',x: snappedX,y: snappedY,length: 200,rotation: 0 }
+                },
+                'park_spot': {
+                    isObstacle: false,
+                    data: { type: 'park_spot',x: snappedX,y: snappedY,width: 160,height: 100,rotation: 0 }
+                },
+                'tree': {
+                    isObstacle: false,
+                    data: { type: 'tree',x: snappedX,y: snappedY,rotation: 0,width: 80,height: 100 }
+                },
+                'lamp_post': {
+                    isObstacle: false,
+                    data: { type: 'lamp_post',x: snappedX,y: snappedY,rotation: 0 }
+                },
+                'flower_bed': {
+                    isObstacle: false,
+                    data: { type: 'flower_bed',x: snappedX,y: snappedY,rotation: 0 }
+                }
+            };
+
+            return objectTypes[type];
+        }
+
+        function showEditMenu() {
+            if (!selectedObject) {
+                lib.editMenu.close();
+                return;
+            }
+
+            const params = {
+                'X Position': {
+                    key: selectedObjectType === 'obstacle' ?
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.x` :
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.x`,
+                    type: 'slider',
+                    min: -CAR_WIDTH,
+                    max: 720 + CAR_WIDTH,
+                    step: 5,
+                    onChange: (value) => {
+                        selectedObject.x = value;
+                    }
+                },
+                'Y Position': {
+                    key: selectedObjectType === 'obstacle' ?
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.y` :
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.y`,
+                    type: 'slider',
+                    min: -CAR_HEIGHT,
+                    max: 1280 + CAR_HEIGHT,
+                    step: 5,
+                    onChange: (value) => {
+                        selectedObject.y = value;
+                    }
+                },
+                'Rotation': {
+                    key: selectedObjectType === 'obstacle' ?
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.rotation` :
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.rotation`,
+                    type: 'slider',
+                    min: 0,
+                    max: 360,
+                    step: 10,
+                    onChange: (value) => {
+                        selectedObject.rotation = value;
+                    }
+                }
+            };
+
+            if (selectedObject.width !== undefined) {
+                params['Width'] = {
+                    key: selectedObjectType === 'obstacle' ?
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.width` :
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.width`,
+                    type: 'slider',
+                    min: 10,
+                    max: 400,
+                    step: 10,
+                    onChange: (value) => {
+                        selectedObject.width = value;
+                    }
+                };
+            }
+
+            if (selectedObject.height !== undefined) {
+                params['Height'] = {
+                    key: selectedObjectType === 'obstacle' ?
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.height` :
+                        `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.height`,
+                    type: 'slider',
+                    min: 10,
+                    max: 400,
+                    step: 10,
+                    onChange: (value) => {
+                        selectedObject.height = value;
+                    }
+                };
+            }
+
+            if (selectedObject.length !== undefined) {
+                params['Length'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.decorations.${selectedObjectIndex}.length`,
+                    type: 'slider',
+                    min: 80,
+                    max: 800,
+                    step: 10,
+                    onChange: (value) => {
+                        selectedObject.length = value;
+                    }
+                };
+            }
+
+            // Add movement properties for parked cars
+            if (selectedObject.type === 'parked_car' && selectedObjectType === 'obstacle') {
+                // Ensure default values exist
+                if (selectedObject.canMove === undefined) selectedObject.canMove = false;
+                if (selectedObject.targetX === undefined) selectedObject.targetX = selectedObject.x;
+                if (selectedObject.targetY === undefined) selectedObject.targetY = selectedObject.y;
+                if (selectedObject.startDelay === undefined) selectedObject.startDelay = 0;
+                if (selectedObject.moveSpeed === undefined) selectedObject.moveSpeed = 100;
+                if (selectedObject.moveLoopInterval === undefined) selectedObject.moveLoopInterval = 5;
+
+                params['Can Move'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.canMove`,
+                    type: 'checkbox',
+                    onChange: (value) => {
+                        selectedObject.canMove = value;
+                    }
+                };
+
+                params['Target X'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.targetX`,
+                    type: 'slider',
+                    min: -CAR_WIDTH,
+                    max: 720 + CAR_WIDTH,
+                    step: 5,
+                    onChange: (value) => {
+                        selectedObject.targetX = value;
+                    }
+                };
+
+                params['Target Y'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.targetY`,
+                    type: 'slider',
+                    min: -CAR_HEIGHT,
+                    max: 1280 + CAR_HEIGHT,
+                    step: 5,
+                    onChange: (value) => {
+                        selectedObject.targetY = value;
+                    }
+                };
+
+                params['Start Delay'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.startDelay`,
+                    type: 'slider',
+                    min: 0,
+                    max: 60,
+                    step: 1,
+                    onChange: (value) => {
+                        selectedObject.startDelay = value;
+                    }
+                };
+
+                params['Move Speed'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.moveSpeed`,
+                    type: 'slider',
+                    min: 50,
+                    max: 500,
+                    step: 50,
+                    onChange: (value) => {
+                        selectedObject.moveSpeed = value;
+                    }
+                };
+
+                params['Loop Interval'] = {
+                    key: `gameConfig.levels.${window.gameConfig.currentLevel}.obstacles.${selectedObjectIndex}.moveLoopInterval`,
+                    type: 'slider',
+                    min: 1,
+                    max: 60,
+                    step: 1,
+                    onChange: (value) => {
+                        selectedObject.moveLoopInterval = value;
+                    }
+                };
+            }
+
+            lib.editMenu.open({
+                name: selectedObject.type.replace('_',' ').toUpperCase(),
+                params: params,
+                onCopy: () => {
+                    const level = getCurrentLevel();
+                    const copy = JSON.parse(JSON.stringify(selectedObject));
+                    copy.x += 40;
+                    copy.y += 40;
+
+                    if (selectedObjectType === 'obstacle') {
+                        level.obstacles.push(copy);
+                        selectedObjectIndex = level.obstacles.length - 1;
+                    } else {
+                        level.decorations.push(copy);
+                        selectedObjectIndex = level.decorations.length - 1;
+                    }
+                    selectedObject = copy;
+                    showEditMenu();
+                    showToast('Object copied!',1500);
+                },
+                onDelete: () => {
+                    const level = getCurrentLevel();
+                    if (selectedObjectType === 'obstacle') {
+                        level.obstacles.splice(selectedObjectIndex,1);
+                    } else {
+                        level.decorations.splice(selectedObjectIndex,1);
+                    }
+                    selectedObject = null;
+                    selectedObjectType = null;
+                    selectedObjectIndex = -1;
+                    lib.editMenu.close();
+                    showToast('Object deleted!',1500);
+                }
+            });
+        }
+
+        async function run(mode) {
+            lib.log('run() called. Mode: ' + mode);
+
+            currentMode = mode;
+
+            // Load user progress in play mode
+            if (mode === 'play') {
+                const progress = await loadUserProgress();
+                if (progress && progress.currentLevel !== undefined) {
+                    // Restore the player's current level
+                    window.gameConfig.currentLevel = progress.currentLevel;
+                    lib.log('Loaded progress: Level ' + (progress.currentLevel + 1));
+                }
+            }
+
+            preloadAssets([
+                'player_car','parked_car_yellow','parked_car_green','parked_car_purple','parked_car_white',
+                'greenery_patch','greenery_patch_square','tree_small','lamp_post','flower_bed',
+                'barrier_obstacle','park_spot_marker',
+                'engine_sound','crash_sound','success_sound','star_rating_sound','background_music'
+            ],() => {
+                // Generate pixel masks after all images are loaded
+                generateCarPixelMasks();
+                // Generate pixel masks for obstacles in this level
+                generateObstaclePixelMasks();
+                lib.log('Pixel masks generated successfully');
+            });
+
+            engineAudio = assetCache['engine_sound'];
+            backgroundMusic = assetCache['background_music'];
+
+            // Helper function to get parked car dropdown options
+            function getParkedCarOptions() {
+                const level = getCurrentLevel();
+                const parkedCars = [{ label: 'None',value: -1 }];
+
+                // Guard against null level or missing obstacles
+                if (!level || !level.obstacles || !Array.isArray(level.obstacles)) {
+                    lib.log('getParkedCarOptions: No valid level or obstacles found');
+                    return parkedCars;
+                }
+
+                level.obstacles.forEach((obstacle,index) => {
+                    if (obstacle.type === 'parked_car') {
+                        const carColor = obstacle.assetId ? obstacle.assetId.replace('parked_car_','') : 'unknown';
+                        parkedCars.push({
+                            label: `Parked Car ${index + 1} (${carColor})`,
+                            value: index
+                        });
+                    }
+                });
+
+                return parkedCars;
+            }
+
+            // Setup game parameters panel
+            function setupGameParameters() {
+                lib.showGameParameters({
+                    name: 'Game Settings',
+                    params: {
+                        'Max Speed': {
+                            key: 'gameConfig.settings.maxSpeed',
+                            type: 'slider',
+                            min: 100,
+                            max: 400,
+                            step: 10,
+                            onChange: (value) => {
+                                window.gameConfig.settings.maxSpeed = value;
+                                MAX_SPEED = value;
+                                MAX_REVERSE_SPEED = value / 2;
+                            }
+                        },
+                        'Acceleration': {
+                            key: 'gameConfig.settings.acceleration',
+                            type: 'slider',
+                            min: 50,
+                            max: 300,
+                            step: 10,
+                            onChange: (value) => {
+                                window.gameConfig.settings.acceleration = value;
+                                ACCELERATION = value;
+                                REVERSE_ACCELERATION = value / 2;
+                            }
+                        },
+                        'Turn Speed': {
+                            key: 'gameConfig.settings.turnSpeed',
+                            type: 'slider',
+                            min: 90,
+                            max: 360,
+                            step: 10,
+                            onChange: (value) => {
+                                window.gameConfig.settings.turnSpeed = value;
+                            }
+                        },
+                        'Current Level': {
+                            key: 'gameConfig.currentLevel',
+                            type: 'dropdown',
+                            options: [
+                                { label: 'Level 1',value: 0 },
+                                { label: 'Level 2',value: 1 },
+                                { label: 'Level 3',value: 2 },
+                                { label: 'Level 4',value: 3 },
+                                { label: 'Level 5',value: 4 },
+                                { label: 'Level 6',value: 5 },
+                                { label: 'Level 7',value: 6 },
+                                { label: 'Level 8',value: 7 },
+                                { label: 'Level 9',value: 8 },
+                                { label: 'Level 10',value: 9 }
+                            ],
+                            onChange: (value) => {
+                                window.gameConfig.currentLevel = Number(value);
+                                //initializePlayer();
+
+                                const level = getCurrentLevel();
+                                playerX = level.playerStart.x;
+                                playerY = level.playerStart.y;
+                                playerRotation = level.playerStart.rotation;
+
+                                updateLevelUI();
+
+                                setupGameParameters();
+
+                                selectedObject = null;
+                                selectedObjectType = null;
+                                selectedObjectIndex = -1;
+                                lib.editMenu.close();
+                            }
+                        },
+                        'Select Parked Car': {
+                            key: 'temp.selectedParkedCar',
+                            type: 'dropdown',
+                            options: getParkedCarOptions(),
+                            onChange: (value) => {
+                                const carIndex = Number(value);
+                                if (carIndex >= 0) {
+                                    const level = getCurrentLevel();
+                                    const obstacle = level.obstacles[carIndex];
+
+                                    if (obstacle && obstacle.type === 'parked_car') {
+                                        // Select this car as if it was clicked
+                                        selectedObjectType = 'obstacle';
+                                        selectedObjectIndex = carIndex;
+                                        selectedObject = obstacle;
+                                        showEditMenu();
+                                        //console.log('Selected parked car:', carIndex);
+                                    }
+                                }
+                            }
+                        },
+                        'Player Start X': {
+                            key: `gameConfig.levels.${window.gameConfig.currentLevel}.playerStart.x`,
+                            type: 'slider',
+                            min: 0,
+                            max: 720,
+                            step: 5,
+                            onChange: (value) => {
+                                const level = getCurrentLevel();
+                                level.playerStart.x = value;
+                                if (currentMode === 'edit') {
+                                    playerX = value;
+                                }
+                            }
+                        },
+                        'Player Start Y': {
+                            key: `gameConfig.levels.${window.gameConfig.currentLevel}.playerStart.y`,
+                            type: 'slider',
+                            min: 0,
+                            max: 1280,
+                            step: 5,
+                            onChange: (value) => {
+                                const level = getCurrentLevel();
+                                level.playerStart.y = value;
+                                if (currentMode === 'edit') {
+                                    playerY = value;
+                                }
+                            }
+                        },
+                        'Player Start Rotation': {
+                            key: `gameConfig.levels.${window.gameConfig.currentLevel}.playerStart.rotation`,
+                            type: 'slider',
+                            min: 0,
+                            max: 360,
+                            step: 5,
+                            onChange: (value) => {
+                                const level = getCurrentLevel();
+                                level.playerStart.rotation = value;
+                                if (currentMode === 'edit') {
+                                    playerRotation = value;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupGameParameters();
+
+            setupInputHandlers();
+            initializePlayer();
+
+            if (mode === 'play') {
+                gameRunning = true;
+                gamePaused = false;
+                uiElements.editDrawer.classList.remove('show');
+                uiElements.modalBackdrop.classList.remove('show');
+                uiElements.pauseModal.classList.remove('show');
+
+                // Remove edit-mode class from status-bar
+                document.querySelector('.status-bar').classList.remove('edit-mode');
+
+                // Show pause icon, hide menu icon
+                uiElements.menuIcon.style.display = 'none';
+                uiElements.pauseIcon.style.display = 'flex';
+
+                // Show timer in play mode
+                document.querySelector('.timer-display').style.display = 'flex';
+
+                // Show direction control buttons
+                document.getElementById('directionControls').style.display = 'flex';
+
+                if (backgroundMusic) {
+                    backgroundMusic.currentTime = 0;
+                    backgroundMusic.play();
+                }
+
+                if (engineAudio) {
+                    engineAudio.currentTime = 0;
+                    engineAudio.play();
+                }
+
+                MAX_SPEED = window.gameConfig.settings.maxSpeed;
+                MAX_REVERSE_SPEED = MAX_SPEED / 2;
+                ACCELERATION = window.gameConfig.settings.acceleration;
+                REVERSE_ACCELERATION = ACCELERATION / 2;
+            } else {
+                gameRunning = false;
+                gamePaused = false;
+                setupEditPalette();
+
+                // Add edit-mode class to status-bar
+                document.querySelector('.status-bar').classList.add('edit-mode');
+
+                // Show menu icon, hide pause icon
+                uiElements.menuIcon.style.display = 'flex';
+                uiElements.pauseIcon.style.display = 'none';
+
+                // Hide timer in edit mode
+                document.querySelector('.timer-display').style.display = 'none';
+
+                // Hide direction control buttons
+                document.getElementById('directionControls').style.display = 'none';
+
+                if (engineAudio) engineAudio.pause();
+                if (backgroundMusic) backgroundMusic.pause();
+            }
+
+            lastTime = performance.now();
+            requestAnimationFrame(gameLoop);
+
+        }
+
+        // Auto-start game when page loads (for Flutter WebView)
+        (function autoStartGame() {
+            // Wait for DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded',initGame);
+            } else {
+                initGame();
+            }
+
+            function initGame() {
+                // Load assetsMap from script tag if available
+                try {
+                    const assetsMapScript = document.getElementById('assetsMap');
+                    if (assetsMapScript && assetsMapScript.textContent.trim()) {
+                        window.assetMap = JSON.parse(assetsMapScript.textContent);
+                        console.log('Loaded assetMap from script tag');
+                    }
+                } catch (e) {
+                    console.log('No assetMap in script tag or parse error:',e);
+                }
+
+                // Load gameConfig from script tag if available
+                try {
+                    const configScript = document.getElementById('gameConfig');
+                    if (configScript && configScript.textContent.trim() && !window.gameConfig) {
+                        // Config is set via script execution, not JSON parse
+                        console.log('gameConfig loaded from script tag');
+                    }
+                } catch (e) {
+                    console.log('gameConfig parse error:',e);
+                }
+
+                // Small delay to ensure everything is ready then auto-start
+                setTimeout(() => {
+                    if (typeof run === 'function') {
+                        run('play');
+                        console.log('Game auto-started in play mode');
+                    }
+                },100);
+            }
+        })();
+
+    </script>
+</body>
+
+</html>

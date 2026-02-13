@@ -1,0 +1,972 @@
+{
+  "@@locale": "vi",
+  "preferredLanguage": "Tiếng Việt",
+  "@preferredLanguage": {
+    "description": "Tiếng Việt"
+  },
+  "newUpdate": "Cập nhật mới – Giao diện hoàn toàn mới!",
+  "newUpdateDescription": "Chúng tôi đã thiết kế lại trải nghiệm của bạn từ đầu! Hãy sẵn sàng với giao diện hiện đại, mượt mà và nhanh hơn, giúp mọi thao tác trở nên trực quan và dễ dàng hơn.",
+  "updateLater": "Cập nhật sau",
+  "updateNow": "Cập nhật ngay",
+  "listofTopics": "Danh sách chủ đề",
+  "selectlevelandnumberofquestionsBottomsheetdata": "Chọn cấp độ và số lượng câu hỏi",
+  "level": "Cấp độ",
+  "numberOfquestions": "Số lượng câu hỏi",
+  "cancel": "Hủy",
+  "start": "Bắt đầu",
+  "basicMath": "Toán tư duy cơ bản",
+  "mathlogic": "Toán logic",
+  "funGeometry": "Hình học vui",
+  "advancedArithmetic": "Số học nâng cao",
+  "specialChallenge": "Thử thách đặc biệt",
+  "probabilityMath": "Toán xác suất",
+  "visualLogicMath": "Toán logic hình ảnh",
+  "timeMath": "Toán thời gian",
+  "sequenceMath": "Toán dãy số",
+  "deductiveLogicMath": "Toán logic suy luận",
+  "divisionMath": "Toán phép chia",
+  "comprehensiveArithmetic": "Toán số học tổng hợp",
+  "fractionMath": "Toán phân số",
+  "primeNumberMath": "Toán số nguyên tố",
+  "perfectNumberMath": "Toán số hoàn hảo",
+  "fibonacciMath": "Toán dãy Fibonacci",
+  "palindromeNumberMath": "Toán số đối xứng",
+  "oddEvenNumberMath": "Toán số lẻ/chẵn",
+  "powerAndRootMath": "Toán số mũ và căn bậc hai",
+  "moduloMath": "Toán số học modulo",
+  "chooseThecorrectsign": "Chọn dấu đúng",
+  "fillInthemissingnumber": "Điền số còn thiếu",
+  "maximumnumber": "Số lớn nhất trong các số: {numbers} là?",
+  "@maximumnumber": {
+    "description": "Câu hỏi tìm số lớn nhất",
+    "placeholders": {
+      "numbers": {
+        "type": "String"
+      }
+    }
+  },
+  "isItevenorodd": "Số này là chẵn hay lẻ?",
+  "even": "Chẵn",
+  "odd": "Lẻ",
+  "ifExpressionresultthenwhatisunknown": "Nếu {expression} = {result}, thì {unknown} là gì?",
+  "@ifExpressionresultthenwhatisunknown": {
+    "description": "Mẫu câu hỏi tìm giá trị chưa biết trong phương trình",
+    "placeholders": {
+      "expression": {
+        "type": "String"
+      },
+      "result": {
+        "type": "String"
+      },
+      "unknown": {
+        "type": "String"
+      }
+    }
+  },
+  "whatShapehassides": "Hình nào có {sides} cạnh?",
+  "whatIsthemeasureofarightangle": "Số đo của một góc vuông là bao nhiêu?",
+  "theCircumferenceofacirclewithradiusisrounded": "Chu vi của hình tròn bán kính {radius} (làm tròn đến số nguyên gần nhất) là bao nhiêu?",
+  "@theCircumferenceofacirclewithradiusisrounded": {
+    "description": "Câu hỏi về chu vi hình tròn",
+    "placeholders": {
+      "radius": {
+        "type": "String"
+      }
+    }
+  },
+  "round": "Làm tròn",
+  "findXAddition": "Tìm x: x + {a} = {sum}",
+  "@findXAddition": {
+    "description": "Tìm x trong phép cộng",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "sum": {
+        "type": "String"
+      }
+    }
+  },
+  "findXSubtraction": "Tìm x: x - {a} = {b}",
+  "@findXSubtraction": {
+    "description": "Tìm x trong phép trừ",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "findXMultiplication": "Tìm x: x x {a} = {b}",
+  "@findXMultiplication": {
+    "description": "Tìm x trong phép nhân",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "probabilityMarble": "Có {total} viên bi, lấy ngẫu nhiên {pick} viên. Xác suất lấy được viên đầu tiên là bao nhiêu?",
+  "@probabilityMarble": {
+    "description": "Xác suất lấy viên bi đầu tiên",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "pick": {
+        "type": "String"
+      }
+    }
+  },
+  "probabilityCard": "Có {total} lá bài, rút {pick} lá. Xác suất rút được lá đầu là bao nhiêu?",
+  "@probabilityCard": {
+    "description": "Xác suất rút lá bài đầu tiên",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "pick": {
+        "type": "String"
+      }
+    }
+  },
+  "probabilityStudent": "Có {total} học sinh, chọn {pick} bạn đi thi. Có bao nhiêu cách chọn?",
+  "@probabilityStudent": {
+    "description": "Số cách chọn học sinh đi thi",
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "pick": {
+        "type": "String"
+      }
+    }
+  },
+  "shapesTotal": "Có {a} hình tròn và {b} hình vuông. Tổng số hình là?",
+  "@shapesTotal": {
+    "description": "Tổng số hình tròn và hình vuông",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "shapesRemove": "Có {a} hình tam giác, {b} hình vuông. Nếu bỏ đi {a} hình tam giác, còn lại bao nhiêu hình?",
+  "@shapesRemove": {
+    "description": "Số hình còn lại sau khi bỏ hình tam giác",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "shapesTotal3": "Có {a} hình tròn, {b} hình vuông, {c} hình tam giác. Tổng số hình là?",
+  "@shapesTotal3": {
+    "description": "Tổng số hình tròn, vuông, tam giác",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "nowIsHour": "Bây giờ là {h} giờ. Sau 2 giờ là mấy giờ?",
+  "@nowIsHour": {
+    "description": "Câu hỏi về thời gian cộng thêm giờ",
+    "placeholders": {
+      "h": {
+        "type": "String"
+      }
+    }
+  },
+  "nowIsHourMinute": "Bây giờ là {h} giờ {m} phút. Sau 45 phút là mấy giờ mấy phút?",
+  "@nowIsHourMinute": {
+    "description": "Câu hỏi về thời gian cộng thêm phút",
+    "placeholders": {
+      "h": {
+        "type": "String"
+      },
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "nowIsHourMinuteAdd": "Bây giờ là {h} giờ {m} phút. Sau {add} phút là mấy giờ mấy phút?",
+  "@nowIsHourMinuteAdd": {
+    "description": "Câu hỏi về thời gian cộng thêm số phút bất kỳ",
+    "placeholders": {
+      "h": {
+        "type": "String"
+      },
+      "m": {
+        "type": "String"
+      },
+      "add": {
+        "type": "String"
+      }
+    }
+  },
+  "todayIsDay": "Nếu hôm nay là thứ {a}, ngày mai là thứ mấy?",
+  "@todayIsDay": {
+    "description": "Câu hỏi về thứ trong tuần",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "todayIsDayInDays": "Nếu hôm nay là thứ {a}, {days} ngày nữa là thứ mấy?",
+  "@todayIsDayInDays": {
+    "description": "Câu hỏi về thứ trong tuần sau nhiều ngày",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "divisionQuestion": "{a} ÷ {b} = ?",
+  "@divisionQuestion": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "multiplicationQuestion": "{a} x {b} = ?",
+  "@multiplicationQuestion": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "powerQuestion": "{a}^{b} = ?",
+  "@powerQuestion": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "additionQuestion": "{a} + {b} = ?",
+  "@additionQuestion": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "compositeAddMul": "({a} + {b}) x {c} = ?",
+  "@compositeAddMul": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "compositeAddMulMinus": "({a} + {b}) x {c} - {a} = ?",
+  "@compositeAddMulMinus": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      }
+    }
+  },
+  "subtractionQuestion": "{a} - {b} = ?",
+  "@subtractionQuestion": {
+    "description": "Câu hỏi phép trừ",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "fractionAddition": "Tính: {a}/{b} + {c}/{d} = ?",
+  "@fractionAddition": {
+    "description": "Câu hỏi cộng phân số",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      },
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "fractionSubtraction": "Tính: {a}/{b} - {c}/{d} = ?",
+  "@fractionSubtraction": {
+    "description": "Câu hỏi trừ phân số",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      },
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "fractionMultiplication": "Tính: ({a}/{b}) x ({c}/{d}) = ?",
+  "@fractionMultiplication": {
+    "description": "Câu hỏi nhân phân số",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "c": {
+        "type": "String"
+      },
+      "d": {
+        "type": "String"
+      }
+    }
+  },
+  "isPrime": "Số {n} có phải là số nguyên tố không?",
+  "@isPrime": {
+    "description": "Câu hỏi số nguyên tố",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nextPrime": "Số nguyên tố tiếp theo sau {n} là số nào?",
+  "@nextPrime": {
+    "description": "Câu hỏi số nguyên tố tiếp theo",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "countPrimes": "Có bao nhiêu số nguyên tố nhỏ hơn {n}?",
+  "@countPrimes": {
+    "description": "Câu hỏi đếm số nguyên tố",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "isPerfect": "Số {n} có phải là số hoàn hảo không?",
+  "@isPerfect": {
+    "description": "Câu hỏi số hoàn hảo",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "nextPerfect": "Số hoàn hảo nhỏ nhất lớn hơn {n} là số nào?",
+  "@nextPerfect": {
+    "description": "Câu hỏi số hoàn hảo tiếp theo",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "countPerfects": "Có bao nhiêu số hoàn hảo nhỏ hơn {n}?",
+  "@countPerfects": {
+    "description": "Câu hỏi đếm số hoàn hảo",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "fibonacci": "Số Fibonacci thứ {n} là?",
+  "@fibonacci": {
+    "description": "Câu hỏi số Fibonacci",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "isPalindrome": "Số {n} có phải là số đối xứng không?",
+  "@isPalindrome": {
+    "description": "Câu hỏi số đối xứng",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "evenOdd": "Số {n} là số chẵn hay lẻ?",
+  "@evenOdd": {
+    "description": "Câu hỏi chẵn lẻ",
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "power": "{a} mũ {b} bằng bao nhiêu?",
+  "@power": {
+    "description": "Câu hỏi lũy thừa",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "square": "Bình phương của {a} là?",
+  "@square": {
+    "description": "Câu hỏi bình phương",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "sqrt": "Căn bậc hai của {a} (làm tròn):",
+  "@sqrt": {
+    "description": "Câu hỏi căn bậc hai",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "modAdd": "({a} + {b}) mod {m} = ?",
+  "@modAdd": {
+    "description": "Câu hỏi phép cộng modulo",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "modMul": "({a} x {b}) mod {m} = ?",
+  "@modMul": {
+    "description": "Câu hỏi phép nhân modulo",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "modPow": "({a}^{b}) mod {m} = ?",
+  "@modPow": {
+    "description": "Câu hỏi lũy thừa modulo",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      },
+      "m": {
+        "type": "String"
+      }
+    }
+  },
+  "squareArea": "Diện tích hình vuông cạnh {a} là?",
+  "rectangleArea": "Diện tích hình chữ nhật {a} x {b} là?",
+  "triangleArea": "Diện tích tam giác đáy {a}, chiều cao {h} là?",
+  "shapeWithAllEqualSidesAndRightAngles": "Hình nào có tất cả các cạnh bằng nhau và 4 góc vuông?",
+  "shapeWith6Sides": "Hình nào có 6 cạnh?",
+  "totalAnglesOfShape": "Một hình có {sides} cạnh thì tổng số góc là?",
+  "@squareArea": {
+    "description": "Câu hỏi diện tích hình vuông",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      }
+    }
+  },
+  "@rectangleArea": {
+    "description": "Câu hỏi diện tích hình chữ nhật",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "@triangleArea": {
+    "description": "Câu hỏi diện tích hình tam giác",
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "h": {
+        "type": "String"
+      }
+    }
+  },
+  "@shapeWithAllEqualSidesAndRightAngles": {
+    "description": "Câu hỏi nhận diện hình vuông"
+  },
+  "@shapeWith6Sides": {
+    "description": "Câu hỏi nhận diện hình 6 cạnh"
+  },
+  "@totalAnglesOfShape": {
+    "description": "Câu hỏi tổng số góc của hình",
+    "placeholders": {
+      "sides": {
+        "type": "String"
+      }
+    }
+  },
+  "exteriorAngleRegularPolygon": "Góc ngoài của đa giác đều {s} cạnh là bao nhiêu?",
+  "@exteriorAngleRegularPolygon": {
+    "placeholders": {
+      "s": {
+        "type": "String"
+      }
+    }
+  },
+  "rectanglePerimeter": "Chu vi hình chữ nhật có cạnh {a} và {b} là bao nhiêu?",
+  "@rectanglePerimeter": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "yes": "Đúng",
+  "no": "Sai",
+  "notFound": "Không tìm thấy",
+  "correct": "Chính xác!",
+  "incorrect": "Chưa đúng, thử lại nhé!",
+  "nextNumberintheSeries": "Số tiếp theo trong dãy số là",
+  "save": "Lưu",
+  "maximumNumberamongC": "Số lớn nhất",
+  "evenOddC": "chẵn hay lẻ",
+  "enterAnswer": "Nhập đáp án",
+  "next": "Tiếp theo",
+  "question": "Câu",
+  "discription": "Mô tả",
+  "discriptionSusgget": "Sử dụng gợi ý sẽ tốn 1 xu hoặc yêu cầu xem quảng cáo, với xu được sử dụng trước.",
+  "agree": "Đồng ý",
+  "result": "Kết quả",
+  "congratulations": "Chúc mừng!",
+  "congratulationsDescription": "Bạn đã hoàn thành tất cả câu hỏi trong chủ đề này. Hãy tiếp tục khám phá các chủ đề khác nhé!",
+  "dongiveup": "Đừng bỏ cuộc!",
+  "viewDetail": "Xem chi tiết",
+  "gotoHomepage": "Về trang chủ",
+  "keepPracticing": "Tiếp tục luyện tập",
+  "totalQuestions": "Tổng số câu hỏi",
+  "settings": "Cài đặt",
+  "settingInfoTitle": "Cài đặt & Thông tin",
+  "sectionGeneral": "CÀI ĐẶT CHUNG",
+  "sectionStoreInteraction": "CỬA HÀNG & TƯƠNG TÁC",
+  "sectionLegalSupport": "PHÁP LÝ & HỖ TRỢ",
+  "systemSettings": "Cài đặt hệ thống",
+  "systemSettingsDescription": "Âm thanh, thông báo & hiển thị",
+  "appInformation": "Thông tin ứng dụng",
+  "appInformationDescription": "Nhà phát triển & phiên bản",
+  "home_nav_home": "Trang chủ",
+  "home_nav_summary": "Tổng Kết",
+  "recentUsage": "Hoạt động gần đây",
+  "noRecentUsageLogs": "Không có nhật ký sử dụng gần đây",
+  "home_nav_store": "Cửa hàng",
+  "home_nav_settings": "Cài Đặt",
+  "appInfo": "Thông tin ứng dụng",
+  "version": "Phiên bản",
+  "appName": "Tên ứng dụng",
+  "shareAndSupport": "Chia sẻ & Hỗ trợ",
+  "shareApp": "Chia sẻ ứng dụng",
+  "shareAppDescription": "Chia sẻ ứng dụng này với bạn bè",
+  "rateApp": "Đánh giá ứng dụng",
+  "rateAppDescription": "Đánh giá chúng tôi trên App Store",
+  "feedback": "Phản hồi",
+  "feedbackDescription": "Gửi phản hồi cho chúng tôi",
+  "legal": "Pháp lý",
+  "privacyPolicy": "Chính sách bảo mật",
+  "privacyPolicyDescription": "Đọc chính sách bảo mật của chúng tôi",
+  "termsOfService": "Điều khoản dịch vụ",
+  "termsOfServiceDescription": "Đọc điều khoản dịch vụ của chúng tôi",
+  "about": "Thông tin",
+  "help": "Trợ giúp",
+  "helpDescription": "Nhận trợ giúp và hỗ trợ",
+  "contactUs": "Liên hệ chúng tôi",
+  "contactUsDescription": "Liên lạc với chúng tôi",
+  "developer": "Nhà phát triển",
+  "website": "Trang web",
+  "supportContact": "Liên hệ hỗ trợ",
+  "openSourceLicenses": "Giấy phép nguồn mở",
+  "copyrightNotice": "© {year} Trường Lâm.\nBảo lưu mọi quyền.",
+  "@copyrightNotice": {
+    "description": "Dòng bản quyền với placeholder năm",
+    "placeholders": {
+      "year": {}
+    }
+  },
+  "buyCoins": "Mua xu",
+  "buyCoinsDescription": "Mua xu để mở khóa gợi ý và tính năng",
+  "askParentsBeforePurchase": "Nhớ hỏi ý kiến cha mẹ trước khi mua nhé!",
+  "@askParentsBeforePurchase": {
+    "description": "Thông báo nhắc hỏi ý kiến cha mẹ trước khi mua"
+  },
+  "starsUnit": "Ngôi Sao",
+  "@starsUnit": {
+    "description": "Nhãn cho đơn vị xu hiển thị trên thẻ gói"
+  },
+  "termsOfConditions": "Điều khoản và điều kiện",
+  "time": "Thời gian",
+  "hour": "giờ",
+  "minute": "phút",
+  "purchaseCoins": "Mua xu",
+  "purchaseCoinsDescription": "Nhận thêm xu để sử dụng gợi ý và mở khóa tính năng",
+  "coinShop": "Cửa hàng xu",
+  "rollCall": "Điểm danh",
+  "checkIndailytoreceive30coins": "Điểm danh hàng ngày để nhận 2 đồng",
+  "checkIn": "Điểm danh",
+  "models": "Mô hình",
+  "model": "Mô hình",
+  "selectAIModel": "Chọn mô hình AI",
+  "filters": "Bộ lọc",
+  "features": "Tính năng",
+  "multimodal": "Đa phương thức",
+  "functionCalls": "Gọi hàm",
+  "thinking": "Suy nghĩ",
+  "clearFilters": "Xóa bộ lọc",
+  "sort": "Sắp xếp",
+  "showing": "Hiển thị",
+  "function": "Hàm",
+  "chat": "Trò chuyện",
+  "aiModelManager": "Quản lý mô hình AI",
+  "downloadedModels": "Mô hình đã tải",
+  "availableModels": "Mô hình khả dụng",
+  "manageModels": "Quản lý mô hình",
+  "modelManagement": "Quản lý mô hình",
+  "downloadStatus": "Trạng thái tải xuống",
+  "storageUsed": "Bộ nhớ đã sử dụng",
+  "totalStorage": "Tổng bộ nhớ",
+  "deleteModel": "Xóa mô hình",
+  "confirmDeleteModel": "Bạn có chắc muốn xóa mô hình này không?",
+  "modelDeleted": "Đã xóa mô hình thành công",
+  "noModelsDownloaded": "Chưa có mô hình nào được tải xuống",
+  "refreshModels": "Làm mới mô hình",
+  "modelDetails": "Chi tiết mô hình",
+  "modelSize": "Kích thước mô hình",
+  "downloadDate": "Ngày tải xuống",
+  "lastUsed": "Lần sử dụng cuối",
+  "viewAll": "Xem tất cả",
+  "backendType": "Loại backend",
+  "cpuBackend": "CPU Backend",
+  "gpuBackend": "GPU Backend",
+  "modelStatus": "Trạng thái mô hình",
+  "ready": "Sẵn sàng",
+  "downloading": "Đang tải xuống",
+  "failed": "Thất bại",
+  "notDownloaded": "Chưa tải xuống",
+  "aiChat": "Chat AI",
+  "aiAssistant": "AI Assistant",
+  "aiStatus": "AI Status",
+  "thinkingStatus": "Đang suy nghĩ...",
+  "readyToChat": "Sẵn sàng",
+  "startConversation": "Bắt đầu cuộc trò chuyện",
+  "askMeAnything": "Hỏi tôi bất cứ điều gì về toán học!\nTôi có thể giúp bạn giải bài tập, giải thích khái niệm...",
+  "syncMode": "Sync",
+  "typeMessage": "Nhập tin nhắn của bạn...",
+  "addImage": "Thêm hình ảnh",
+  "changeImage": "Đổi hình ảnh",
+  "removeImage": "Xóa hình ảnh",
+  "sendMessage": "Gửi tin nhắn",
+  "addImageDescription": "Thêm mô tả cho hình ảnh...",
+  "selectImageSource": "📷 Chọn nguồn hình ảnh",
+  "camera": "Camera",
+  "gallery": "Thư viện",
+  "takeNewPhoto": "Chụp ảnh mới",
+  "selectFromGallery": "Chọn từ thư viện",
+  "image": "Hình ảnh",
+  "aiProcessing": "AI đang xử lý...",
+  "composingMessage": "Đang soạn tin nhắn",
+  "imageNotSupportedOnWeb": "Tính năng chọn ảnh chưa hỗ trợ trên web",
+  "imageAddedSuccessfully": "Đã thêm hình ảnh thành công",
+  "errorSelectingImage": "Lỗi khi chọn ảnh",
+  "copiedToClipboard": "Đã copy vào clipboard",
+  "copy": "Copy",
+  "initializingModel": "🤖 Đang khởi tạo AI model...",
+  "modelInitialized": "Model đã sẵn sàng",
+  "chatHistory": "Lịch sử chat",
+  "newChat": "Chat mới",
+  "continueChat": "Tiếp tục chat",
+  "imageSupported": "Hỗ trợ hình ảnh",
+  "multimodalSupport": "Hỗ trợ đa phương thức",
+  "enterYourQuestion": "Nhập câu hỏi của bạn...",
+  "aiThinking": "🤖 AI đang suy nghĩ...",
+  "retry": "Thử lại",
+  "errorOccurred": "Đã xảy ra lỗi",
+  "networkError": "Lỗi mạng, vui lòng thử lại",
+  "modelError": "Lỗi model AI",
+  "processingImage": "Đang xử lý hình ảnh...",
+  "imageProcessed": "Đã xử lý hình ảnh",
+  "stopGeneration": "Dừng tạo",
+  "generatingResponse": "Đang tạo phản hồi...",
+  "responseGenerated": "Đã tạo phản hồi",
+  "coinInfo": "Thông tin Coin",
+  "costPerChat": "Chi phí mỗi lần chat",
+  "fiveCoins": "5 Coins",
+  "note": "Lưu ý",
+  "coinUsageNote": "• Mỗi tin nhắn gửi đi sẽ tiêu tốn 5 coins\n• Coin sẽ được trừ khi bạn nhấn gửi tin nhắn\n• Hãy đảm bảo có đủ coin trước khi chat",
+  "understood": "Đã hiểu",
+  "coinInfoTooltip": "Thông tin về coin",
+  "webNotSupported": "Tính năng chọn ảnh chưa hỗ trợ trên web",
+  "imageAddedSuccess": "Đã thêm hình ảnh thành công",
+  "imageSelectionError": "Lỗi khi chọn ảnh",
+  "enterDiscriptionexplainImage": "Thêm mô tả cho hình ảnh",
+  "entarYourMessage": "Nhập tin nhắn của bạn",
+  "insufficientCoins": "Không đủ Coin",
+  "notEnoughCoins": "Bạn không đủ coin",
+  "needCoinsToSend": "Cần ít nhất 5 coins để gửi tin nhắn",
+  "information": "Thông tin",
+  "rechargeCoinsMessage": "Vui lòng nạp thêm coin để tiếp tục sử dụng dịch vụ chat AI. Bạn có thể mua coin trong cửa hàng.",
+  "close": "Đóng",
+  "rechargeCoins": "Nạp Coin",
+  "addition": "Phép cộng",
+  "subtraction": "Phép trừ",
+  "think": "Suy nghĩ",
+  "reflex": "Phản xạ",
+  "game": "Trò chơi",
+  "home_daily_reward_subtitle": "Nhận ngay 10 ⭐",
+  "home_featured_basic_subtitle": "Làm quen với số và phép tính",
+  "home_card_reflex_title": "Toán Phản Xạ",
+  "home_card_reflex_subtitle": "Nhanh tay lẹ mắt",
+  "home_card_think_title": "Toán Tư Duy",
+  "home_card_think_subtitle": "Rèn luyện logic",
+  "home_card_ai_title": "Trò chuyện AI",
+  "home_card_ai_subtitle": "Hỏi đáp vui vẻ",
+  "home_card_ai_button": "trò chuyện",
+  "home_card_game_title": "Game Giải Trí",
+  "home_card_game_subtitle": "Vừa chơi vừa học",
+  "small_card_play": "Chơi",
+  "startNow": "Bắt đầu thôi",
+  "challengeTitle": "Thử thách Toán học",
+  "readyTitle": "Sẵn sàng chưa?",
+  "readySubtitle": "Hãy chọn thử thách phù hợp với bạn!",
+  "adventurePathTitle": "Đường phiêu lưu Toán học",
+  "chooseQuestionCount": "Chọn số lượng câu hỏi",
+  "difficultyEasy": "Dễ",
+  "difficultyMedium": "Trung bình",
+  "difficultyHard": "Khó",
+  "difficultyEasyDesc": "Bắt đầu cuộc phiêu lưu của bạn!",
+  "difficultyMediumDesc": "Khám phá vùng đất mới!",
+  "difficultyHardDesc": "Chinh phục đỉnh cao!",
+  "startChallengeSnackbar": "Bắt đầu thử thách",
+  "topic_list_title": "Toán Cơ Bản",
+  "topic_start_button": "Bắt đầu chủ đề",
+  "topic_addition_title": "Phép Cộng",
+  "topic_addition_subtitle": "Làm quen với việc thêm các con số và xây dựng nền tảng vững chắc.",
+  "topic_subtraction_title": "Phép Trừ",
+  "topic_subtraction_subtitle": "Học cách bớt đi từ một tổng thể, hiểu khái niệm còn lại.",
+  "topic_mixed_title": "Toán Cơ Bản Tổng Hợp",
+  "topic_mixed_subtitle": "Thực hành hỗn hợp cộng và trừ, nâng cao kỹ năng tính toán.",
+  "topic_mul_div_title": "Nhân & Chia",
+  "topic_mul_div_subtitle": "Phép tính cơ bản nâng cao: học cách nhân và chia.",
+  "topic_division_title": "Phép Chia",
+  "topic_division_subtitle": "Chia đều các phần bằng nhau, phát triển tư duy logic.",
+  "topic_review_title": "Ôn Tập Tổng Hợp",
+  "topic_review_subtitle": "Kết hợp cả 4 phép tính cơ bản để luyện tập tổng thể.",
+  "topic_fraction_title": "Phân Số & Thập Phân",
+  "topic_fraction_subtitle": "Hiểu về một phần của tổng thể và chuyển đổi giữa phân số và thập phân.",
+  "topic_even_odd_title": "Số Chẵn & Lẻ",
+  "topic_even_odd_subtitle": "Phân loại các con số và nhận biết tính chẵn lẻ.",
+  "topic_prime_title": "Số Nguyên Tố",
+  "topic_prime_subtitle": "Khám phá những con số đặc biệt; học về ước số và bội số.",
+  "topic_power_root_title": "Lũy Thừa & Căn",
+  "topic_power_root_subtitle": "Khám phá số mũ và căn cho các phép toán nâng cao.",
+  "topic_modulo_title": "Phép Chia Dư",
+  "topic_modulo_subtitle": "Toán modulo vui — hiểu về phần dư của phép chia.",
+  "topic_algebra_subtitle": "Nhận diện, so sánh hình ảnh — nhanh mắt, luyện phản xạ thị giác.",
+  "topic_geometry_subtitle": "Phân số/nhanh đọc — luyện phản xạ thị giác và đọc nhanh.",
+  "topic_calculus_subtitle": "Câu hỏi về giờ/phút — kiểm tra phản xạ nhanh tay.",
+  "topic_advanced_probability_subtitle": "Dãy số — nhận dạng mẫu nhanh, thử thách phản xạ ngắn.",
+  "mathlogic_subtitle": "Các câu đố và bài toán suy luận giúp củng cố tư duy logic.",
+  "@mathlogic_subtitle": {
+    "description": "Phụ đề cho chủ đề Toán logic"
+  },
+  "topic_deductive_subtitle": "Luyện tư duy suy luận theo bước qua các bài toán logic.",
+  "@topic_deductive_subtitle": {
+    "description": "Phụ đề cho chủ đề Toán logic suy luận"
+  },
+  "visualLogicMath2": "Toán logic hình ảnh 2",
+  "@visualLogicMath2": {
+    "description": "Tiêu đề bổ sung cho chủ đề Toán logic hình ảnh"
+  },
+  "topic_special_challenge_subtitle": "Những câu hỏi khó được tuyển chọn để thử thách giới hạn của bạn — sẵn sàng chưa?",
+  "@topic_special_challenge_subtitle": {
+    "description": "Phụ đề cho chủ đề Thử thách đặc biệt"
+  },
+  "practice_challenge": "Thử thách",
+  "practice_level": "Cấp độ",
+  "practice_score": "Điểm",
+  "practice_combo": "Chuỗi",
+  "practice_skip_question": "Bỏ qua câu hỏi này",
+  "practice_question_index": "Câu {current}/{total}",
+  "@practice_question_index": {
+    "description": "Question index on practice screen",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "practice_time_seconds": "{seconds}s",
+  "@practice_time_seconds": {
+    "description": "Formatted seconds for timer",
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "practice_points_plus": "+{points} điểm",
+  "@practice_points_plus": {
+    "description": "Points gained display",
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "versionandbuild": "Phiên bản {version} (Bản dựng {build})",
+  "progress_by_topic": "Tiến độ theo chủ đề",
+  "activity_week": "Hoạt động tuần qua",
+  "last_7_days": "7 ngày gần nhất",
+  "hello": "Xin chào",
+  "baby": "Bé cưng",
+  "gamesHeaderTitle": "Góc Vui Chơi",
+  "gamesTitleMain": "Giờ giải trí đến rồi!",
+  "gamesTitleSubtitle": "Bé muốn chơi trò gì nào?",
+  "featuredNew": "MỚI NHẤT",
+  "featuredWeekChallengeTitle": "Thử thách tuần này",
+  "featuredWeekChallengeSub": "Sưu tập ngôi sao may mắn!",
+  "gamePikachuTitle": "Nối Hình",
+  "gamePikachuSubtitle": "Rèn luyện trí nhớ",
+  "gameTetrisTitle": "Xếp Gạch",
+  "gameTetrisSubtitle": "Xếp hình vui nhộn",
+  "exit": "Thoát",
+  "playAgain": "Chơi lại",
+  "gameOver": "Trò chơi kết thúc",
+  "scoreMessage": "Điểm số: {score}",
+  "@scoreMessage": {
+    "description": "Thông báo điểm trong hộp thoại kết thúc trò chơi, có placeholder {score}"
+  },
+  "gamePacmanTitle": "Pac-men",
+  "gamePacmanSubtitle": "Ăn điểm mê cung",
+  "game2048Title": "2048",
+  "game2048Subtitle": "Ghép số thông minh",
+  "gameWordTitle": "Đoán Chữ",
+  "gameWordSubtitle": "Học từ vựng tiếng Anh & Việt qua hình ảnh",
+  "gameDuckTitle": "Vịt Trời",
+  "gameDuckSubtitle": "Bắn vịt vui nhộn",
+  "latest": "MỚI NHẤT",
+  "rectangle": "Chữ Nhật",
+  "triangle": "Tam Giác",
+  "circle": "Hình Tròn",
+  "either": "Cả Hai",
+  "hint": "Gợi Ý",
+  "hintDescription": "Dùng 1 star để nhận gợi ý để giúp bạn trả lời câu hỏi này.",
+  "useCoins": "Dùng stars",
+  "useCoinDescription": "Dùng {coins} stars để nhận gợi ý cho câu hỏi này.",
+  "coinUnit": "stars",
+  "or": "hoặc",
+  "watchAd": "Xem Quảng Cáo",
+  "watchAdDescription": "Xem quảng cáo để nhận gợi ý miễn phí cho câu hỏi này.",
+  "free": "Miễn Phí",
+  "addCoinsToTreasury": "Thêm stars vào kho",
+  "get": "Nhận",
+  "ads_not_ready_please_try_again_later": "Quảng cáo chưa sẵn sàng, vui lòng thử lại sau.",
+  "gamePackPalTitle": "Pack Pal",
+  "gamePackPalSubtitle": "Giúp các bạn trong đàn tìm đường về nhà!",
+  "gameCircuitTitle": "Kết Nối Mạch",
+  "gameCircuitSubtitle": "Kết nối các mạch để hoàn thành đường đi!",
+  "gameQuantumTitle": "Liên Kết Lượng Tử",
+  "gameQuantumSubtitle": "Giải các câu đố lượng tử và liên kết các hạt!",
+  "game2048Header": "Trò chơi 2048",
+  "scoreCardLabel": "ĐIỂM SỐ",
+  "bestCardLabel": "KỶ LỤC",
+  "aiHintBubble": "Bé ơi, thử kết hợp hai số 4 nhé! Cố lên!",
+  "reset": "Làm lại",
+  "aiHint": "Gợi ý AI",
+  "featureLockedMessage": "Tính năng sắp mở khóa!",
+  "undo": "Hoàn tác"
+}

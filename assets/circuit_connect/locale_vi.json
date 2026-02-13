@@ -1,0 +1,19 @@
+{
+    "locale": "vi",
+    "initializingText": "Đang khởi tạo mạch...",
+    "exitConfirm": "Thoát trò chơi? Mọi tiến trình chưa lưu sẽ bị mất.",
+    "exitLabel": "Quay lại",
+    "menuLabel": "Menu",
+    "resetLabel": "Đặt lại",
+    "undoLabel": "Hoàn tác",
+    "gameTitle": "Kết Nối Mạch",
+    "levelCompleteTitle": "Hoàn thành",
+    "levelCompleteBody": "Tuyệt! Sẵn sàng cho thử thách tiếp theo?",
+    "stayButton": "Ở lại",
+    "nextButton": "Tiếp theo",
+    "replayButton": "Chơi lại",
+    "nextLabel": "Tiếp",
+    "levelBadgePrefix": "Cấp",
+    "goodbyeTitle": "Tạm biệt",
+    "thanksText": "Cảm ơn bạn đã chơi."
+}

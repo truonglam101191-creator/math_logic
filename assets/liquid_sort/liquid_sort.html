@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liquid Sort</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- Google Fonts - Luckiest Guy & Lato for Candy Crush style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Lato:wght@400;700;900&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style id="gameStyle"></style>
+</head>
+<body>
+    <script id="startLoadApp"></script>
+    <!-- Main Menu Screen -->
+    <div id="mainMenuScreen" class="main-menu-screen">
+        <div class="menu-container">
+            <!-- Game Title -->
+            <div class="game-title-section">
+                <img id="gameTitleLogo" class="game-title-logo" alt="Liquid Sort">
+                <p class="game-subtitle">Pour and Sort the Colors!</p>
+            </div>
+
+            <!-- Menu Buttons -->
+            <div class="main-menu-buttons">
+                <button id="playButton" class="menu-main-btn">
+                    <span class="btn-text">PLAY</span>
+                </button>
+            </div>
+
+            <!-- Stats Display -->
+            <div class="menu-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Score</span>
+                    <span class="stat-value" id="menuTotalScore">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Stars</span>
+                    <span class="stat-value" id="menuTotalStars">0 / 90</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Levels Completed</span>
+                    <span class="stat-value" id="menuLevelsCompleted">0 / 30</span>
+                </div>
+            </div>
+
+            <!-- Top 3 Leaderboard Preview -->
+            <div class="menu-leaderboard-preview" id="leaderboardPreview">
+                <div class="leaderboard-header">
+                    <div class="leaderboard-title">TOP PLAYERS</div>
+                    <button id="openLeaderboardBtn" class="leaderboard-btn">🏆</button>
+                </div>
+                <div id="top3List" class="top3-list">
+                    <div class="loading-text">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameContainer" style="display: none;">
+        <!-- Status Bar -->
+        <div id="statusBar">
+             <button id="backButton" onclick="handleBackButton()">←</button>
+            <div id="levelInfo">Level 1</div>
+            <button id="menuButton">☰</button>
+        </div>
+        
+        <!-- Game Status Area - Premium Layout -->
+        <div id="gameStatusArea" style="position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 99;">
+            <!-- Countdown Timer -->
+            <div id="countdownTimer">
+                <span class="timer-icon">⏱</span>
+                <span class="timer-text">5:00</span>
+            </div>
+
+            <!-- Step Counter -->
+            <div id="stepCounter">0</div>
+        </div>
+        
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Tutorial Arrow and Hint -->
+        <div id="tutorialContainer" style="display: none; position: fixed; pointer-events: none; z-index: 9999;">
+            <div id="tutorialHintBubble" class="tutorial-hint-bubble">
+                <span id="tutorialHintText">Tap</span>
+            </div>
+            <div id="tutorialArrow" class="tutorial-arrow">▼</div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div id="actionBar">
+            <button id="undoBtn" class="action-button">
+                <img class="button-icon" data-asset="undo_icon" alt="Undo">
+            </button>
+            <button id="restartBtn" class="action-button">
+                <img class="button-icon" data-asset="restart_icon" alt="Restart">
+            </button>
+            <button id="hintBtn" class="action-button">
+                <img class="button-icon" data-asset="hint_icon" alt="Hint">
+                <span id="hintCountdown" style="display: none;"></span>
+            </button>
+        </div>
+        
+        <!-- Slide-out Drawer -->
+        <div id="drawerBackdrop"></div>
+        <div id="drawer">
+            <div class="drawer-header">
+                <div class="drawer-title">Game Menu</div>
+                <button id="closeDrawer">×</button>
+            </div>
+            
+            <div class="drawer-section">
+                <div class="section-title">Level Controls</div>
+                <button id="levelSelectBtn" class="drawer-button primary">
+                    <span>🎮</span> Back to Menu
+                </button>
+            </div>
+            
+            <div class="drawer-section" id="editSection">
+                <div class="section-title">Edit Tools</div>
+                <button id="addTubeBtn" class="drawer-button">
+                    <span>+</span> Add Tube
+                </button>
+                <button id="removeTubeBtn" class="drawer-button">
+                    <span>−</span> Remove Tube
+                </button>
+                <button id="clearAllBtn" class="drawer-button">
+                    <span>🗑</span> Clear All
+                </button>
+                <button id="testPuzzleBtn" class="drawer-button primary">
+                    <span>▶</span> Test Puzzle
+                </button>
+            </div>
+            
+            <div class="drawer-section">
+                <div class="section-title">Settings</div>
+                <button id="soundToggle" class="drawer-button">
+                    <span>🔊</span> Sound: On
+                </button>
+                <button id="musicToggle" class="drawer-button">
+                    <span>🎵</span> Music: On
+                </button>
+                <button id="vibrationToggle" class="drawer-button">
+                    <span>📳</span> Vibration: On
+                </button>
+            </div>
+        </div>
+        
+        <!-- Toast Container -->
+        <div id="toastContainer"></div>
+    </div>
+
+    <!-- Level Selection Modal (outside gameContainer so it's always visible) -->
+    <div id="levelSelectionModal" class="modal-backdrop">
+        <div class="level-selection-container">
+            <div class="level-header">
+                <h2 class="level-title">Select Level</h2>
+                <button id="closeLevelModal" class="close-modal-btn">×</button>
+            </div>
+            <div class="level-grid" id="levelGrid">
+                <!-- Levels will be dynamically generated here -->
+            </div>
+            <div class="level-footer">
+                <div class="total-stars">
+                    <span class="star-icon">⭐</span>
+                    <span id="totalStarsCount">0 / 36</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Dark Overlay (separate for z-index layering) -->
+    <div id="victoryDarkOverlay"></div>
+
+    <!-- Full Screen Confetti Canvas (between overlay and modal) -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <!-- Victory Modal -->
+    <div id="victoryModal" class="modal-backdrop">
+        <div class="victory-container">
+            <!-- Celebration Header -->
+            <div class="victory-header">
+                <h1 class="victory-title">Level Complete</h1>
+            </div>
+
+            <!-- Stars Display -->
+            <div class="stars-display">
+                <div class="star-item" data-star="1">⭐</div>
+                <div class="star-item" data-star="2">⭐</div>
+                <div class="star-item" data-star="3">⭐</div>
+            </div>
+
+            <!-- Score Card -->
+            <div class="score-card">
+                <div class="score-main">
+                    <div class="score-value" id="victoryScore">0</div>
+                    <div class="score-label">POINTS</div>
+                </div>
+                <div id="victoryPreviousBest" class="previous-best" style="display: none;"></div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👣</div>
+                    <div class="stat-value" id="victoryStepsBreakdown">0</div>
+                    <div class="stat-label">Steps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value" id="victoryTimeBreakdown">0:00</div>
+                    <div class="stat-label">Time</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="victory-buttons">
+                <button id="victoryMenuBtn" class="victory-btn secondary">
+                    Menu
+                </button>
+                <button id="victoryNextBtn" class="victory-btn primary">
+                    Next Level
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal (No Moves) -->
+    <div id="gameOverModal" class="modal-backdrop" style="display: none;">
+        <div class="failure-container">
+            <!-- Header -->
+            <div class="failure-header">
+                <h1 class="failure-title">No Moves Left</h1>
+            </div>
+
+            <!-- Message -->
+            <div class="failure-message">
+                <p class="failure-text">Don't give up! Every puzzle has a solution.</p>
+                <p class="failure-hint">Try using the undo button or restart fresh!</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="failure-buttons">
+                <button id="gameOverMenuBtn" class="failure-btn secondary">
+                    Menu
+                </button>
+                <button id="gameOverRetryBtn" class="failure-btn primary">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time's Up Modal -->
+    <div id="timeUpModal" class="modal-backdrop" style="display: none;">
+        <div class="failure-container">
+            <!-- Header -->
+            <div class="failure-header">
+                <h1 class="failure-title">Time's Up</h1>
+            </div>
+
+            <!-- Message -->
+            <div class="failure-message">
+                <p class="failure-text">Out of time, but not out of chances!</p>
+                <p class="failure-hint">Take a deep breath and try again.</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="failure-buttons">
+                <button id="timeUpMenuBtn" class="failure-btn secondary">
+                    Menu
+                </button>
+                <button id="timeUpRetryBtn" class="failure-btn primary">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal-backdrop">
+        <div class="leaderboard-container">
+            <!-- Header -->
+            <div class="leaderboard-modal-header">
+                <h1 class="leaderboard-modal-title">🏆 LEADERBOARD</h1>
+                <button id="closeLeaderboardBtn" class="close-modal-btn">✕</button>
+            </div>
+
+            <!-- Leaderboard List -->
+            <div class="leaderboard-scroll">
+                <div id="fullLeaderboardList" class="full-leaderboard-list">
+                    <div class="loading-text">Loading leaderboard...</div>
+                </div>
+            </div>
+
+            <!-- My Rank Footer -->
+            <div id="myRankFooter" class="my-rank-footer">
+                <div class="my-rank-content">
+                    <span id="myRankText">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="gameConfig"></script>
+
+    <script id="assetsMap" type="application/json"></script>
+
+    <script id="logic"></script>
+</body>
+</html>
+
+<script>
+    // Ensure the game initializes automatically when opening the page standalone.
+    // This waits for DOMContentLoaded so `run()` and other functions are defined.
+    window.addEventListener('DOMContentLoaded', () => {
+        try {
+            if (typeof run === 'function') {
+                run('play');
+                console.log('[AUTO] run("play") invoked');
+            } else {
+                console.warn('[AUTO] run() not found on page');
+            }
+        } catch (e) {
+            console.error('[AUTO] Failed to auto-run game:', e);
+        }
+    });
+</script>

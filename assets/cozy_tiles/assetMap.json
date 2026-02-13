@@ -1,0 +1,166 @@
+{
+    "tile_classic": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a519e142-50de-4aed-b576-d082c345c8cf.webp",
+        "type": "image",
+        "aspect_ratio": [
+            751,
+            741
+        ]
+    },
+    "tile_neon_glow": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/4f629148-88b6-4edd-bc35-ffb9b11b2f8e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            790,
+            807
+        ]
+    },
+    "tile_wooden_blocks": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/26f39aef-554c-417e-98f1-6a3e1c63be54.webp",
+        "type": "image",
+        "aspect_ratio": [
+            801,
+            803
+        ]
+    },
+    "tile_ocean_waves": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b064332c-3ee0-4b4d-890e-c12b40ed3353.webp",
+        "type": "image",
+        "aspect_ratio": [
+            873,
+            883
+        ]
+    },
+    "tile_sunset_gradient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/60ebda36-202b-4e4c-8446-56d2944c2f07.webp",
+        "type": "image",
+        "aspect_ratio": [
+            896,
+            890
+        ]
+    },
+    "tile_retro_pixel": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f8cd9606-a1ac-4032-809e-f9d64b0afd09.webp",
+        "type": "image",
+        "aspect_ratio": [
+            979,
+            963
+        ]
+    },
+    "tile_galaxy_space": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ba329de2-6a1f-47fc-b784-b7816f9268c9.webp",
+        "type": "image",
+        "aspect_ratio": [
+            944,
+            934
+        ]
+    },
+    "tile_candy_pop": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2bb0e695-8bb7-4c47-82b8-91fdd04db55f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            934,
+            932
+        ]
+    },
+    "tile_minimalist_mono": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/80431a6d-c376-4cf9-aa46-1d7be0fc774a.webp",
+        "type": "image",
+        "aspect_ratio": [
+            847,
+            851
+        ]
+    },
+    "tile_golden_luxury": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1029b130-6f94-4e69-aef7-6dce48c1984f.webp",
+        "type": "image",
+        "aspect_ratio": [
+            855,
+            858
+        ]
+    },
+    "background_music": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/7050986b-5f64-4895-9cb7-0ed1b771e368.mp3",
+        "type": "audio"
+    },
+    "tile_slide_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/fbfc41ba-2bc8-4889-b3d5-f3f31becb425.mp3",
+        "type": "audio"
+    },
+    "level_complete_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/c7b77e58-a787-453c-8f1e-f8054dab8c38.mp3",
+        "type": "audio"
+    },
+    "level_fail_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/464fb4bc-75c7-40ba-be65-6172eded6f2a.mp3",
+        "type": "audio"
+    },
+    "button_click_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/f76008fd-12e9-45f3-90d5-c68250e59653.mp3",
+        "type": "audio"
+    },
+    "skin_unlock_sfx": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/77cce7ab-058a-4eb5-9128-4e867b22698c.mp3",
+        "type": "audio"
+    },
+    "tile_christmas": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/59bd6181-c3fa-4c8c-875b-1204e881833e.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "background_christmas": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3241522f-59a5-4ae2-94be-153cd81b5210.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "jingle_bells_music": {
+        "url": "placeholder",
+        "type": "audio"
+    },
+    "tile_pumpkin_scary": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5449255e-8c25-4e67-9f5a-b8aeabb4e673.webp",
+        "type": "image",
+        "aspect_ratio": [
+            756,
+            778
+        ]
+    },
+    "tile_crown_gems": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ef622d43-c36a-41a0-889b-68b01b52cc7a.webp",
+        "type": "image",
+        "aspect_ratio": [
+            902,
+            908
+        ]
+    },
+    "santa_hat": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/40dc302e-d442-4859-8da2-11624b195cb2.webp",
+        "type": "image",
+        "aspect_ratio": [
+            901,
+            727
+        ]
+    },
+    "santa_sled_black": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5bd98023-99a8-453e-8749-f24ed8a40158.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1325,
+            872
+        ]
+    },
+    "background_cute": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8546ef4f-7e85-466f-9fe1-4e872110b246.webp",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    }
+}

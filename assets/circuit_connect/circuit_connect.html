@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Circuit Connect</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <style>
+        /* CSS RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #1A2332;
+            color: #00FFFF;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        :root {
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Color System */
+            --color-primary: #25F425;
+            --color-primary-hover: #4FFF4F;
+            --color-secondary: #FF00FF;
+            --color-secondary-hover: #FF33FF;
+            --color-success: #25F425;
+            --color-success-hover: #4FFF4F;
+
+            --color-bg-dark: #1A2332;
+            --color-bg-mid: #1A2332;
+            --color-bg-light: #2A3342;
+
+            --color-glass: rgba(11, 14, 19, 0.85);
+            --color-glass-light: rgba(26, 35, 50, 0.6);
+
+            /* Shadows & Effects */
+            --shadow-sm: 0 0 10px;
+            --shadow-md: 0 0 20px;
+            --shadow-lg: 0 0 40px;
+            --glow-primary: 0 0 20px var(--color-primary);
+            --glow-secondary: 0 0 20px var(--color-secondary);
+            --glow-success: 0 0 20px var(--color-success);
+
+            /* Safe Area Insets */
+            --safe-area-top: env(safe-area-inset-top, 0px);
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-left: env(safe-area-inset-left, 0px);
+            --safe-area-right: env(safe-area-inset-right, 0px);
+            /* Horizontal side padding used across layout */
+            --side-padding: 15px;
+        }
+
+        /* ============================================
+* LAYOUT STRUCTURE
+* ============================================ */
+        #gameContainer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding-left: var(--side-padding);
+            padding-right: var(--side-padding);
+        }
+
+        #backgroundCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #gameCanvas {
+            touch-action: none;
+            -ms-touch-action: none;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* ============================================
+* TOP BAR - Compact Header
+* ============================================ */
+        .top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding-top: calc(var(--space-sm) + var(--safe-area-top));
+            padding-bottom: var(--space-sm);
+            padding-left: var(--side-padding);
+            padding-right: var(--side-padding);
+            z-index: 3;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            pointer-events: auto;
+        }
+
+        .top-bar-center {
+            flex: 1;
+            text-align: center;
+        }
+
+        .top-bar-right {
+            pointer-events: auto;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        #levelHeader {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        #levelSubtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-primary);
+            opacity: 0.7;
+            letter-spacing: 0.05em;
+        }
+
+        #scoreCounter {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            letter-spacing: 0.05em;
+            background: var(--color-glass-light);
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            padding: 8px 16px;
+            min-width: 60px;
+            text-align: center;
+            box-shadow: var(--shadow-sm) var(--color-primary), inset 0 0 10px rgba(0, 255, 255, 0.1);
+        }
+
+        /* ============================================
+* ACTION BAR - Thumb Zone Controls
+* ============================================ */
+        .action-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-top: var(--space-md);
+            padding-bottom: calc(var(--space-md) + var(--safe-area-bottom));
+            padding-left: var(--side-padding);
+            padding-right: var(--side-padding);
+            background: transparent;
+            z-index: 3;
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-button {
+            flex: 1;
+            max-width: 180px;
+            min-height: 80px;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--color-glass-light);
+            border: 3px solid var(--color-primary);
+            border-radius: 16px;
+            color: var(--color-primary);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-shadow: var(--shadow-sm) var(--color-primary);
+            box-shadow: var(--shadow-sm) var(--color-primary), inset 0 0 10px rgba(0, 255, 255, 0.1);
+            transition: all var(--transition-normal) var(--ease-out);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .action-button .icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .action-button .label {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .action-button.secondary {
+            border-color: #FF4444;
+            color: #FF4444;
+            text-shadow: var(--shadow-sm) #FF4444;
+            box-shadow: var(--shadow-sm) #FF4444, inset 0 0 10px rgba(255, 68, 68, 0.1);
+        }
+
+        @media (hover: hover) {
+            .action-button:hover {
+                box-shadow: var(--shadow-md) var(--color-primary), inset 0 0 15px rgba(0, 255, 255, 0.2);
+                transform: translateY(-2px);
+                background: rgba(0, 255, 255, 0.1);
+            }
+
+            .action-button.secondary:hover {
+                box-shadow: var(--shadow-md) #FF4444, inset 0 0 15px rgba(255, 68, 68, 0.2);
+                background: rgba(255, 68, 68, 0.1);
+            }
+        }
+
+        .action-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ============================================
+* LEVEL SELECT - Vertical Scrolling List
+* ============================================ */
+        #levelSelectScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-dark);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all var(--transition-slow) var(--ease-out);
+        }
+
+        #levelSelectScreen.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .level-select-header {
+            padding: var(--space-lg) var(--space-sm);
+            padding-top: calc(var(--space-lg) + var(--safe-area-top));
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-bg-dark) 0%, transparent 100%);
+            position: relative;
+            z-index: 11;
+        }
+
+        #closeMenuButton {
+            position: absolute !important;
+            top: 16px !important;
+            right: 16px !important;
+            z-index: 12 !important;
+            pointer-events: auto !important;
+        }
+
+        .level-select-header h1 {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary), var(--shadow-lg) var(--color-primary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-xs);
+        }
+
+        .level-select-header .subtitle {
+            font-size: 16px;
+            color: var(--color-primary);
+            opacity: 0.7;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .level-list {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: var(--space-sm);
+            padding-bottom: calc(var(--space-xl) + var(--safe-area-bottom));
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .level-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .level-list::-webkit-scrollbar-track {
+            background: var(--color-bg-mid);
+        }
+
+        .level-list::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 2px;
+            box-shadow: var(--glow-primary);
+        }
+
+        .level-item {
+            width: 100%;
+            min-height: 120px;
+            margin-bottom: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--color-glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid var(--color-primary);
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            box-shadow: var(--shadow-sm) var(--color-primary), inset 0 0 15px rgba(0, 255, 255, 0.1);
+            transition: all var(--transition-normal) var(--ease-out);
+        }
+
+        .level-item.locked {
+            border-color: var(--color-bg-light);
+            color: var(--color-bg-light);
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.5;
+        }
+
+        @media (hover: hover) {
+            .level-item:not(.locked):hover {
+                box-shadow: var(--shadow-md) var(--color-primary), inset 0 0 20px rgba(0, 255, 255, 0.2);
+                transform: translateX(8px);
+                background: rgba(0, 255, 255, 0.05);
+            }
+        }
+
+        .level-item:active:not(.locked) {
+            transform: translateX(4px) scale(0.98);
+        }
+
+        .level-number {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            background: var(--color-glass-light);
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .level-item.locked .level-number {
+            border-color: var(--color-bg-light);
+            color: var(--color-bg-light);
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        .level-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .level-name {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .level-item.locked .level-name {
+            color: var(--color-bg-light);
+        }
+
+        .level-meta {
+            font-size: 14px;
+            color: var(--color-primary);
+            opacity: 0.7;
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .level-item.locked .level-meta {
+            color: var(--color-bg-light);
+        }
+
+        /* ============================================
+* COMPLETION POPUP - Mobile Optimized
+* ============================================ */
+        .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 19;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-normal) var(--ease-out);
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #completionPopup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: calc(100% - var(--space-lg) * 2);
+            max-width: 500px;
+            background: var(--color-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 4px solid var(--color-success);
+            border-radius: 24px;
+            padding: var(--space-xl) var(--space-md);
+            text-align: center;
+            box-shadow: var(--shadow-lg) var(--color-success), inset 0 0 30px rgba(0, 255, 0, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+            transition: all var(--transition-slow) var(--ease-bounce);
+        }
+
+        #completionPopup.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        #completionPopup h2 {
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-success);
+            text-shadow: var(--glow-success), var(--shadow-lg) var(--color-success);
+            margin-bottom: var(--space-lg);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .popup-icon {
+            font-size: 72px;
+            margin-bottom: var(--space-md);
+            animation: popupIconPulse 1.5s infinite;
+        }
+
+        .popup-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .popup-button {
+            width: 100%;
+            min-height: 96px;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-glass-light);
+            border: 3px solid var(--color-success);
+            border-radius: 16px;
+            color: var(--color-success);
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            text-shadow: var(--shadow-sm) var(--color-success);
+            box-shadow: var(--shadow-sm) var(--color-success), inset 0 0 15px rgba(0, 255, 0, 0.1);
+            transition: all var(--transition-normal) var(--ease-out);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .popup-button.secondary {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            text-shadow: var(--shadow-sm) var(--color-primary);
+            box-shadow: var(--shadow-sm) var(--color-primary), inset 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+
+        @media (hover: hover) {
+            .popup-button:hover {
+                box-shadow: var(--shadow-md) var(--color-success), inset 0 0 20px rgba(0, 255, 0, 0.2);
+                transform: translateY(-2px);
+                background: rgba(0, 255, 0, 0.1);
+            }
+
+            .popup-button.secondary:hover {
+                box-shadow: var(--shadow-md) var(--color-primary), inset 0 0 20px rgba(0, 255, 255, 0.2);
+                background: rgba(0, 255, 255, 0.1);
+            }
+        }
+
+        .popup-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ============================================
+* LOADING SCREEN
+* ============================================ */
+        #loadingScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity var(--transition-slow) var(--ease-out);
+        }
+
+        #loadingScreen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(0, 255, 255, 0.2);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: var(--glow-primary);
+        }
+
+        #loadingScreen p {
+            margin-top: var(--space-md);
+            font-family: 'Orbitron', 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+* ANIMATIONS
+* ============================================ */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes popupIconPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px var(--color-success));
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 40px var(--color-success));
+            }
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: var(--shadow-lg) var(--color-success), inset 0 0 30px rgba(0, 255, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 60px var(--color-success), inset 0 0 40px rgba(0, 255, 0, 0.3);
+            }
+        }
+
+        #completionPopup.show {
+            animation: glowPulse 2s infinite;
+        }
+
+        /* ============================================
+* REDUCED MOTION PREFERENCES
+* ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .spinner {
+                animation: none;
+                border-top-color: var(--color-primary);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameContainer">
+        <canvas id="backgroundCanvas"></canvas>
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="top-bar-left" style="display:flex;gap:12px;align-items:center;">
+                <button class="action-button" id="exitButton" aria-label="Back" title="Back"
+                    style="min-height: 56px; max-width: 56px; width: 56px; padding: 8px; border-radius: 12px; margin: 0; background: rgba(255,0,0,0.06); border-color: rgba(255,0,0,0.4); color: #FF6666;">
+                    <span class="icon" style="font-size: 20px;">←</span>
+                </button>
+                <button class="action-button secondary" id="backButton"
+                    style="min-height: 56px; max-width: 56px; width: 56px; padding: 8px; border-radius: 12px; margin: 0;">
+                    <span class="icon" style="font-size: 24px;">☰</span>
+                </button>
+
+            </div>
+            <div class="top-bar-center">
+                <div id="levelHeader"></div>
+                <div id="levelSubtitle"></div>
+            </div>
+            <div class="top-bar-right">
+                <div id="scoreCounter">0</div>
+            </div>
+        </div>
+
+        <!-- Action Bar (Thumb Zone) -->
+        <div class="action-bar">
+            <button class="action-button" id="undoButton">
+                <span class="icon">↶</span>
+
+            </button>
+            <button class="action-button secondary" id="resetButton">
+                <span class="icon">↻</span>
+
+            </button>
+        </div>
+
+        <!-- Level Select Screen -->
+        <div id="levelSelectScreen">
+            <div class="level-select-header">
+                <button class="action-button secondary" id="closeMenuButton"
+                    style="position: absolute; top: 16px; right: 16px; min-height: 56px; max-width: 56px; width: 56px; padding: 8px; border-radius: 12px; margin: 0;">
+                    <span class="icon" style="font-size: 24px;">✕</span>
+                </button>
+                <h1>Circuit Connect</h1>
+            </div>
+            <div class="level-list" id="levelList"></div>
+        </div>
+
+        <!-- Completion Popup -->
+        <div class="popup-overlay" id="popupOverlay"></div>
+        <div id="completionPopup">
+            <div class="popup-icon">✓</div>
+            <h2>Level Complete!</h2>
+            <div class="popup-buttons">
+                <button class="popup-button" id="nextButton">Next Level</button>
+                <button class="popup-button secondary" id="replayButton">Replay</button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen">
+            <div class="spinner"></div>
+            <p>Initializing Circuits...</p>
+        </div>
+    </div>
+
+    <!-- Inline game config so levels load when opened via file:// -->
+    <script id="gameConfigInline">
+        window.gameConfig = {
+            "currentLevel": 0,
+            "unlockedLevels": [0,1,2,3,4,5],
+            "levels": [
+                {
+                    "name": "Neon Initiation",
+                    "gridSize": 5,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "A1","end": "E1","assetId": "dot_cyan" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "B3","end": "D3","assetId": "dot_magenta" },
+                        { "color": "lime","colorHex": "#00FF00","start": "A5","end": "C5","assetId": "dot_lime" },
+                        { "color": "orange","colorHex": "#FF6600","start": "A2","end": "D5","assetId": "dot_orange" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "A3","end": "C4","assetId": "dot_white" }
+                    ]
+                },
+                {
+                    "name": "Quantum Circuit",
+                    "gridSize": 7,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "A1","end": "G1","assetId": "dot_cyan" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "B2","end": "F3","assetId": "dot_magenta" },
+                        { "color": "lime","colorHex": "#00FF00","start": "A7","end": "D5","assetId": "dot_lime" },
+                        { "color": "orange","colorHex": "#FF6600","start": "G7","end": "C6","assetId": "dot_orange" },
+                        { "color": "purple","colorHex": "#9933FF","start": "D2","end": "G5","assetId": "dot_purple" },
+                        { "color": "yellow","colorHex": "#FFFF00","start": "A2","end": "D6","assetId": "dot_yellow" }
+                    ]
+                },
+                {
+                    "name": "Ion Field",
+                    "gridSize": 7,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "A1","end": "G1","assetId": "dot_cyan" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "B2","end": "E3","assetId": "dot_magenta" },
+                        { "color": "lime","colorHex": "#00FF00","start": "A7","end": "D5","assetId": "dot_lime" },
+                        { "color": "orange","colorHex": "#FF6600","start": "G7","end": "C6","assetId": "dot_orange" },
+                        { "color": "purple","colorHex": "#9933FF","start": "G6","end": "D4","assetId": "dot_purple" },
+                        { "color": "yellow","colorHex": "#FFFF00","start": "B5","end": "E7","assetId": "dot_yellow" },
+                        { "color": "red","colorHex": "#FF0033","start": "E2","end": "F4","assetId": "dot_red" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "A2","end": "C3","assetId": "dot_white" }
+                    ]
+                },
+                {
+                    "name": "Hyperlink Maze",
+                    "gridSize": 9,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "A2","end": "F5","assetId": "dot_cyan" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "D7","end": "H5","assetId": "dot_magenta" },
+                        { "color": "orange","colorHex": "#FF6600","start": "A3","end": "B5","assetId": "dot_orange" },
+                        { "color": "purple","colorHex": "#9933FF","start": "F8","end": "I6","assetId": "dot_purple" },
+                        { "color": "yellow","colorHex": "#FFFF00","start": "E2","end": "H2","assetId": "dot_yellow" },
+                        { "color": "red","colorHex": "#FF0033","start": "B2","end": "E5","assetId": "dot_red" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "G7","end": "H8","assetId": "dot_white" },
+                        { "color": "blue","colorHex": "#0066FF","start": "A4","end": "C3","assetId": "dot_blue" },
+                        { "color": "green","colorHex": "#00CC66","start": "D4","end": "B8","assetId": "dot_green" }
+                    ]
+                },
+                {
+                    "name": "Warpstream Nexus",
+                    "gridSize": 9,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "F7","end": "H9","assetId": "dot_cyan" },
+                        { "color": "orange","colorHex": "#FF6600","start": "B2","end": "E2","assetId": "dot_orange" },
+                        { "color": "blue","colorHex": "#0066FF","start": "H3","end": "D8","assetId": "dot_blue" },
+                        { "color": "red","colorHex": "#FF0033","start": "I5","end": "G8","assetId": "dot_red" },
+                        { "color": "green","colorHex": "#00CC66","start": "C7","end": "E5","assetId": "dot_green" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "A4","end": "G3","assetId": "dot_magenta" },
+                        { "color": "yellow","colorHex": "#FFFF00","start": "B7","end": "H5","assetId": "dot_yellow" },
+                        { "color": "purple","colorHex": "#9933FF","start": "I7","end": "I9","assetId": "dot_purple" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "A9","end": "G9","assetId": "dot_white" }
+                    ]
+                },
+                {
+                    "name": "Singularity Core",
+                    "gridSize": 10,
+                    "pairs": [
+                        { "color": "yellow","colorHex": "#FFFF00","start": "A2","end": "C10","assetId": "dot_yellow" },
+                        { "color": "green","colorHex": "#00CC66","start": "B7","end": "H5","assetId": "dot_green" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "C3","end": "F5","assetId": "dot_white" },
+                        { "color": "purple","colorHex": "#9933FF","start": "A9","end": "H7","assetId": "dot_purple" },
+                        { "color": "blue","colorHex": "#0066FF","start": "C5","end": "I8","assetId": "dot_blue" },
+                        { "color": "orange","colorHex": "#FF6600","start": "D8","end": "F8","assetId": "dot_orange" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "A10","end": "I9","assetId": "dot_magenta" },
+                        { "color": "red","colorHex": "#FF0033","start": "J1","end": "I3","assetId": "dot_red" },
+                        { "color": "cyan","colorHex": "#00FFFF","start": "J2","end": "J6","assetId": "dot_cyan" }
+                    ]
+                },
+                {
+                    "name": "Nexus Collapse",
+                    "gridSize": 10,
+                    "pairs": [
+                        { "color": "cyan","colorHex": "#00FFFF","start": "A1","end": "J3","assetId": "dot_cyan" },
+                        { "color": "red","colorHex": "#FF0033","start": "B2","end": "H8","assetId": "dot_red" },
+                        { "color": "green","colorHex": "#00CC66","start": "A10","end": "G4","assetId": "dot_green" },
+                        { "color": "magenta","colorHex": "#FF00FF","start": "C1","end": "J7","assetId": "dot_magenta" },
+                        { "color": "blue","colorHex": "#0066FF","start": "D5","end": "I2","assetId": "dot_blue" },
+                        { "color": "yellow","colorHex": "#FFFF00","start": "E9","end": "J10","assetId": "dot_yellow" },
+                        { "color": "orange","colorHex": "#FF6600","start": "F3","end": "B9","assetId": "dot_orange" },
+                        { "color": "purple","colorHex": "#9933FF","start": "G10","end": "I6","assetId": "dot_purple" },
+                        { "color": "white","colorHex": "#FFFFFF","start": "H1","end": "D8","assetId": "dot_white" }
+                    ]
+                }
+            ]
+        };
+    </script>
+
+    <!-- Inline assets map so the game works from file:// without a server -->
+    <script id="assetsMap" type="application/json">
+{
+    "dot_cyan": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/63c06e15-8dae-4952-a4df-941b60e65bd1.webp", "type": "image", "aspect_ratio": [575,576] },
+    "dot_magenta": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f0a06a76-74e8-4bcb-b7f1-6deefa6bb928.webp", "type": "image", "aspect_ratio": [556,555] },
+    "dot_lime": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/380ed4a2-bb67-4eac-9238-07cb87e0b32e.webp", "type": "image", "aspect_ratio": [700,699] },
+    "dot_yellow": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/99402a53-6ff7-4da5-af76-f4347f596521.webp", "type": "image", "aspect_ratio": [602,608] },
+    "dot_red": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/9e75a5a3-5239-42c4-b5f9-db16a6b5b73b.webp", "type": "image", "aspect_ratio": [637,640] },
+    "dot_blue": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e39bc367-f799-439a-ba98-7d60ceed455e.webp", "type": "image", "aspect_ratio": [490,495] },
+    "dot_green": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/17cc72b9-5201-4d38-a6d6-e53b6ded6e14.webp", "type": "image", "aspect_ratio": [571,570] },
+    "dot_purple": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/cb6efcd2-ea17-47c9-ba57-060df2dfd7e5.webp", "type": "image", "aspect_ratio": [569,573] },
+    "dot_orange": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/58e9ae1c-8ced-4dfc-a5e4-313e7e90972b.webp", "type": "image", "aspect_ratio": [576,579] },
+    "background_circuit": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c9606316-a6c1-40a0-9f42-545554199900.webp", "type": "image", "aspect_ratio": [1024,1536] },
+    "sfx_path_connect": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/26ece487-a502-46bd-b84d-2b62bc2c1fc3.mp3", "type": "audio" },
+    "sfx_path_erase": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/6a41e106-6499-44d3-a78c-e56eff8660e9.mp3", "type": "audio" },
+    "sfx_level_complete": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/6a5cfb76-8615-4c73-8a1d-7d6ba50951c0.mp3", "type": "audio" },
+    "music_ambient": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/43c54ffc-e63b-4efc-b602-818f6df4069e.mp3", "type": "audio" },
+    "dot_white": { "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/bebea829-a91f-4792-808e-cbb1d771dead.webp", "type": "image", "aspect_ratio": [617,607] }
+}
+    </script>
+
+    <!-- Local lib shim inlined so `lib` is defined when the game starts -->
+    <script>
+        // Lightweight local `lib` implementation used for local testing and editor
+        // Provides: lib.log, lib.getAsset, save/load state via localStorage, simple event emitter
+        (function () {
+            if (typeof window.lib !== 'undefined') return; // don't overwrite existing lib
+
+            const cache = { assetsMap: null };
+            const listeners = {};
+
+            function emit(name,data) {
+                if (!listeners[name]) return;
+                listeners[name].forEach(fn => {
+                    try { fn(data); } catch (e) { console.warn('lib listener error',e); }
+                });
+            }
+
+            window.lib = {
+                log: function () {
+                    try { console.log.apply(console,arguments); } catch (e) { }
+                },
+
+                // simple event API
+                on: function (evt,cb) {
+                    if (!listeners[evt]) listeners[evt] = [];
+                    listeners[evt].push(cb);
+                    return function () {
+                        listeners[evt] = listeners[evt].filter(x => x !== cb);
+                    };
+                },
+                emit: emit,
+
+                // Loads asset map from inline <script id="assetsMap"> or external file 'asset_map' or 'asset_map.json'
+                getAsset: function (id) {
+                    try {
+                        if (cache.assetsMap) return cache.assetsMap[id];
+
+                        const mapEl = document.getElementById('assetsMap');
+                        if (mapEl && mapEl.textContent) {
+                            try {
+                                cache.assetsMap = JSON.parse(mapEl.textContent);
+                                // Notify listeners that assets map is available (useful for file://)
+                                try { emit('assetsMapLoaded',cache.assetsMap); } catch (e) { }
+                                return cache.assetsMap[id];
+                            } catch (e) { /* fallthrough */ }
+                        }
+
+                        // try fetching external json (synchronous isn't allowed, so fallback to undefined)
+                        // but attempt to fetch and cache asynchronously
+                        fetch('asset_map').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+                        fetch('asset_map.json').then(r => r.json()).then(j => { cache.assetsMap = j; emit('assetsMapLoaded',j); }).catch(() => { });
+
+                        return undefined;
+                    } catch (e) { return undefined; }
+                },
+
+                // Save/load user game state locally for testing
+                saveUserGameState: async function (state) {
+                    try {
+                        localStorage.setItem('circuit_connect_state',JSON.stringify(state));
+                        return { success: true,state };
+                    } catch (e) {
+                        return { success: false,error: String(e) };
+                    }
+                },
+
+                getUserGameState: async function () {
+                    try {
+                        const raw = localStorage.getItem('circuit_connect_state');
+                        if (!raw) return { success: true,state: null };
+                        return { success: true,state: JSON.parse(raw) };
+                    } catch (e) {
+                        return { success: false,error: String(e),state: null };
+                    }
+                },
+
+                deleteUserGameState: async function () {
+                    try { localStorage.removeItem('circuit_connect_state'); return { success: true }; } catch (e) { return { success: false }; }
+                },
+
+                // Animation/player stubs (not full-featured)
+                getAnimationPlayer: function (assetId) { return null; },
+                preloadAnimation: async function () { return; },
+
+                // Leaderboard stubs
+                addPlayerScoreToLeaderboard: async function (score) { return { success: true }; },
+                getTopNEntriesFromLeaderboard: async function () { return { entries: [],userRank: null,success: true }; }
+            };
+
+            // Expose a DOM-ready helper so game can wait if needed
+            document.addEventListener('DOMContentLoaded',function () { emit('domReady'); });
+        })();
+
+    </script>
+    <script>
+        /* ==================================================
+        * GAME OVERVIEW: Circuit Connect
+        * A futuristic Flow-style puzzle game where players connect matching colored dots
+        * by drawing continuous paths on a grid. Complete levels by connecting all pairs
+        * without overlapping paths and filling the entire grid.
+        *
+        * GAME STATE SHAPE: window.gameConfig = {
+        * currentLevel: 0,
+        * unlockedLevels: [0],
+        * levels: [
+        * {
+        * name: "Level Name",
+        * gridSize: 5,
+        * pairs: [
+        * { color: "cyan", colorHex: "#00FFFF", start: "A1", end: "E1", assetId: "dot_cyan" }
+        * ]
+        * }
+        * ]
+        * }
+        * ==================================================
+        */
+
+        // Asset cache
+        const assetCache = {};
+        const audioBuffers = {};
+        let audioContext;
+        let ambientMusicSource = null;
+
+        // Game state
+        let canvas,ctx,bgCanvas,bgCtx;
+        let currentLevel = null;
+        let paths = {}; // { color: [[x,y], [x,y], ...] }
+        let dots = {}; // { color: { start: [x,y], end: [x,y] } }
+        let isDrawing = false;
+        let currentDrawColor = null;
+        let currentPath = [];
+        let gridSize = 0;
+        let cellSize = 0;
+        let gridOffsetX = 0;
+        let gridOffsetY = 0;
+        let animationFrame = null;
+        let pulseTime = 0;
+        let pathHistory = []; // For undo functionality
+        let _pendingAmbientStart = false;
+
+        // Localization / i18n support
+        window.i18n = window.i18n || {
+            locale: 'en',
+            exitConfirm: 'Exit game? Any unsaved progress will be lost.',
+            goodbyeTitle: 'Goodbye',
+            thanksText: 'Thanks for playing.',
+            levelCompleteTitle: 'Level Complete',
+            levelCompleteBody: 'Great job! Ready for the next challenge?',
+            stayButton: 'Stay',
+            nextButton: 'Next'
+        };
+
+        // Allow Flutter or parent window to set localized strings by calling
+        // window.setLocaleStrings({ locale: 'vi', levelCompleteTitle: 'Hoàn thành', ... })
+        window.setLocaleStrings = function (obj) {
+            try {
+                if (!obj || typeof obj !== 'object') return;
+                window.i18n = Object.assign({},window.i18n || {},obj);
+
+                // Loading screen text
+                const loadingP = document.querySelector('#loadingScreen p');
+                if (loadingP && window.i18n.initializingText) loadingP.textContent = window.i18n.initializingText;
+
+                // Completion popup
+                const completionTitle = document.querySelector('#completionPopup h2');
+                if (completionTitle && window.i18n.levelCompleteTitle) completionTitle.textContent = window.i18n.levelCompleteTitle;
+                const nextBtn = document.getElementById('nextButton');
+                if (nextBtn && window.i18n.nextButton) nextBtn.textContent = window.i18n.nextButton;
+                const replayBtn = document.getElementById('replayButton');
+                if (replayBtn && window.i18n.replayButton) replayBtn.textContent = window.i18n.replayButton;
+
+                // Top bar / buttons (use title/aria for icon buttons)
+                const exitBtn = document.getElementById('exitButton');
+                if (exitBtn && window.i18n.exitLabel) exitBtn.title = window.i18n.exitLabel;
+                const backBtn = document.getElementById('backButton');
+                if (backBtn && window.i18n.menuLabel) backBtn.title = window.i18n.menuLabel;
+                const resetBtn = document.getElementById('resetButton');
+                if (resetBtn && window.i18n.resetLabel) resetBtn.title = window.i18n.resetLabel;
+                const undoBtn = document.getElementById('undoButton');
+                if (undoBtn && window.i18n.undoLabel) undoBtn.title = window.i18n.undoLabel;
+
+                // Level select header/title
+                const levelHeaderH1 = document.querySelector('#levelSelectScreen .level-select-header h1');
+                if (levelHeaderH1 && window.i18n.gameTitle) levelHeaderH1.textContent = window.i18n.gameTitle;
+
+                // Next-level overlay (if already shown)
+                const overlay = document.getElementById('nextLevelOverlay');
+                if (overlay) {
+                    const title = overlay.querySelector('.nlp-title');
+                    const sub = overlay.querySelector('.nlp-sub');
+                    const badge = overlay.querySelector('.nlp-badge');
+                    const nextAction = overlay.querySelector('.nlp-next');
+                    const cancelAction = overlay.querySelector('.nlp-cancel');
+                    if (title && window.i18n.levelCompleteTitle) title.textContent = window.i18n.levelCompleteTitle;
+                    if (sub && window.i18n.levelCompleteBody) sub.textContent = window.i18n.levelCompleteBody;
+                    if (nextAction && window.i18n.nextButton) nextAction.textContent = window.i18n.nextButton;
+                    if (cancelAction && window.i18n.stayButton) cancelAction.textContent = window.i18n.stayButton;
+                    if (badge && window.i18n.levelBadgePrefix) badge.textContent = `${window.i18n.levelBadgePrefix} ${badge.textContent || ''}`;
+                }
+            } catch (e) { console.warn('setLocaleStrings failed',e); }
+        };
+
+        // Listen for postMessage from parent/frame (Flutter can postMessage)
+        window.addEventListener('message',(e) => {
+            try {
+                const data = e.data;
+                if (!data) return;
+                if (data.type === 'setLocale' && data.payload && typeof data.payload === 'object') {
+                    window.setLocaleStrings(data.payload);
+                }
+            } catch (e) { /* ignore */ }
+        });
+
+        // Allow platform shim to trigger locale set via lib.emit or lib.on
+        if (window.lib && typeof lib.on === 'function') {
+            lib.on('setLocale',(payload) => {
+                try { window.setLocaleStrings(payload); } catch (e) { }
+            });
+        }
+
+        // Expose helper callable by Flutter: receiveLocale(payload)
+        window.receiveLocale = function (payload) {
+            try { window.setLocaleStrings(payload); } catch (e) { console.warn('receiveLocale failed',e); }
+        };
+
+        // On initial load ask the host for locale (Flutter can respond to 'requestLocale')
+        document.addEventListener('DOMContentLoaded',() => {
+            try {
+                // Primary: emit via lib event so host integrations can listen
+                try { if (window.lib && typeof lib.emit === 'function') lib.emit('requestLocale'); } catch (e) { }
+
+                // Post message to parent frame (works for many WebView integrations)
+                try { window.parent.postMessage({ type: 'requestLocale' },'*'); } catch (e) { }
+
+                // Try specific Flutter handlers
+                try { if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') window.flutter_inappwebview.callHandler('requestLocale'); } catch (e) { }
+            } catch (e) { /* ignore */ }
+
+            // Also try again shortly after in case host isn't ready yet
+            setTimeout(() => {
+                try { if (window.lib && typeof lib.emit === 'function') lib.emit('requestLocale'); } catch (e) { }
+                try { window.parent.postMessage({ type: 'requestLocale' },'*'); } catch (e) { }
+            },500);
+
+            // Apply any existing i18n defaults immediately so UI shows localized text even before host replies.
+            try { if (window.setLocaleStrings) window.setLocaleStrings(window.i18n || {}); } catch (e) { }
+        });
+
+        // Helper functions
+        function parseGridPos(pos) {
+            const col = pos.charCodeAt(0) - 65; // A=0, B=1, etc.
+            const row = parseInt(pos.substring(1)) - 1;
+            return [col,row];
+        }
+
+        function gridPosToString(col,row) {
+            return String.fromCharCode(65 + col) + (row + 1);
+        }
+
+        function cellsEqual(cell1,cell2) {
+            return cell1[0] === cell2[0] && cell1[1] === cell2[1];
+        }
+
+        function isAdjacent(cell1,cell2) {
+            const dx = Math.abs(cell2[0] - cell1[0]);
+            const dy = Math.abs(cell2[1] - cell1[1]);
+            return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
+        }
+
+        function getCellAtPosition(x,y) {
+            const col = Math.floor((x - gridOffsetX) / cellSize);
+            const row = Math.floor((y - gridOffsetY) / cellSize);
+            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize) {
+                return [col,row];
+            }
+            return null;
+        }
+
+        function isCellOccupied(col,row,excludeColor = null) {
+            for (let color in paths) {
+                if (color === excludeColor) continue;
+                for (let cell of paths[color]) {
+                    if (cell[0] === col && cell[1] === row) return true;
+                }
+            }
+            return false;
+        }
+
+        function isDotCell(col,row) {
+            for (let color in dots) {
+                const dot = dots[color];
+                if (cellsEqual(dot.start,[col,row]) || cellsEqual(dot.end,[col,row])) {
+                    return color;
+                }
+            }
+            return null;
+        }
+
+        function playSound(assetId) {
+            if (!audioContext || !audioBuffers[assetId]) return;
+            const source = audioContext.createBufferSource();
+            source.buffer = audioBuffers[assetId];
+            source.connect(audioContext.destination);
+            source.start(0);
+        }
+
+        function startAmbientMusic() {
+            // Do nothing if audio buffer isn't loaded yet
+            if (!audioBuffers['music_ambient']) return;
+
+            // If the AudioContext is suspended due to autoplay policy, defer starting
+            if (audioContext && audioContext.state === 'suspended') {
+                _pendingAmbientStart = true;
+                return;
+            }
+
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            if (ambientMusicSource) {
+                try { ambientMusicSource.stop(); } catch (e) { }
+            }
+
+            ambientMusicSource = audioContext.createBufferSource();
+            ambientMusicSource.buffer = audioBuffers['music_ambient'];
+            ambientMusicSource.loop = true;
+
+            const gainNode = audioContext.createGain();
+            gainNode.gain.value = 0.3; // Lower volume for ambient music
+
+            ambientMusicSource.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            try { ambientMusicSource.start(0); } catch (e) {
+                // If the context is suspended, mark pending start
+                _pendingAmbientStart = true;
+            }
+        }
+
+        function checkLevelComplete() {
+            if (!currentLevel) return false;
+
+            // Check all pairs are connected
+            for (let pair of currentLevel.pairs) {
+                if (!paths[pair.color]) return false;
+                const path = paths[pair.color];
+                if (path.length < 2) return false;
+
+                // Check path connects start to end
+                const start = dots[pair.color].start;
+                const end = dots[pair.color].end;
+
+                const startsOnStart = cellsEqual(path[0],start);
+                const startsOnEnd = cellsEqual(path[0],end);
+                const endsOnStart = cellsEqual(path[path.length - 1],start);
+                const endsOnEnd = cellsEqual(path[path.length - 1],end);
+
+                if (!((startsOnStart && endsOnEnd) || (startsOnEnd && endsOnStart))) {
+                    return false;
+                }
+            }
+
+            // Check no overlaps
+            const occupiedCells = new Set();
+            for (let color in paths) {
+                for (let cell of paths[color]) {
+                    const key = `${cell[0]},${cell[1]}`;
+                    if (occupiedCells.has(key)) return false;
+                    occupiedCells.add(key);
+                }
+            }
+
+            return true;
+        }
+
+        function onLevelComplete() {
+            lib.log('Level Completed Triggered');
+            console.log('Level Completed Triggered');
+
+            isDrawing = false;
+            currentDrawColor = null;
+            currentPath = [];
+
+            playSound('sfx_level_complete');
+
+            const currentIndex = window.gameConfig.currentLevel;
+            // Unlock next level if available
+            if (currentIndex < window.gameConfig.levels.length - 1) {
+                if (!window.gameConfig.unlockedLevels.includes(currentIndex + 1)) {
+                    window.gameConfig.unlockedLevels.push(currentIndex + 1);
+                }
+
+                // Show a confirmation prompt: advance only after user taps "Next"
+                const nextIndex = currentIndex + 1;
+                showNextLevelPrompt(nextIndex);
+                return;
+            }
+
+            // If this was the last level, fall back to showing the completion popup
+            const overlay = document.getElementById('popupOverlay');
+            const popup = document.getElementById('completionPopup');
+
+            setTimeout(() => overlay.classList.add('show'),100);
+            setTimeout(() => popup.classList.add('show'),200);
+        }
+
+        function resetLevel() {
+            paths = {};
+            pathHistory = [];
+            isDrawing = false;
+            currentDrawColor = null;
+            currentPath = [];
+
+            const overlay = document.getElementById('popupOverlay');
+            const popup = document.getElementById('completionPopup');
+            popup.classList.remove('show');
+            overlay.classList.remove('show');
+
+            render();
+        }
+
+        function undoLastPath() {
+            // Undo last saved path snapshot
+            if (!pathHistory || pathHistory.length === 0) {
+                // nothing to undo
+                return;
+            }
+
+            // Pop the last history state and restore
+            const prev = pathHistory.pop();
+            try {
+                paths = JSON.parse(JSON.stringify(prev));
+            } catch (e) {
+                paths = prev;
+            }
+
+            playSound('sfx_path_erase');
+            render();
+        }
+
+        // Save current `paths` snapshot for undo
+        function savePath() {
+            try {
+                const snap = JSON.parse(JSON.stringify(paths || {}));
+                pathHistory.push(snap);
+                // limit history size
+                if (pathHistory.length > 50) pathHistory.shift();
+            } catch (e) {
+                // fallback: shallow copy
+                pathHistory.push(Object.assign({},paths || {}));
+                if (pathHistory.length > 50) pathHistory.shift();
+            }
+        }
+
+
+        function showLevelSelect() {
+            const levelSelect = document.getElementById('levelSelectScreen');
+            levelSelect.classList.add('show');
+
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
+            }
+        }
+
+        function closeLevelSelect() {
+            const levelSelect = document.getElementById('levelSelectScreen');
+            levelSelect.classList.remove('show');
+
+            // Resume game if a level is loaded
+            if (currentLevel) {
+                if (!animationFrame) {
+                    animate();
+                }
+                render();
+            }
+        }
+
+        function exitGame() {
+            // No confirmation prompt: proceed to exit immediately.
+
+            // Build payload for host
+            const payload = { action: 'exit',time: Date.now() };
+            try { payload.levelIndex = window.gameConfig && typeof window.gameConfig.currentLevel === 'number' ? window.gameConfig.currentLevel : null; } catch (e) { }
+
+            // Emit via lib
+            try { if (window.lib && typeof lib.emit === 'function') lib.emit('exitGame',payload); } catch (e) { }
+
+            // Flutter handlers
+            try { if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') window.flutter_inappwebview.callHandler('exitGame',payload); } catch (e) { }
+            try { if (window.FlutterWebViewChannel && typeof window.FlutterWebViewChannel.postMessage === 'function') window.FlutterWebViewChannel.postMessage(JSON.stringify({ type: 'exitGame',payload })); } catch (e) { }
+            try { if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.flutterInAppWebView && typeof window.webkit.messageHandlers.flutterInAppWebView.postMessage === 'function') window.webkit.messageHandlers.flutterInAppWebView.postMessage(payload); } catch (e) { }
+            try { window.parent.postMessage({ type: 'exitGame',payload },'*'); } catch (e) { }
+
+            // Try to close window
+            try { window.close(); } catch (e) { }
+
+            // Fallback: show localized goodbye screen
+            const container = document.getElementById('gameContainer');
+            if (container) container.style.display = 'none';
+
+            const exitScreen = document.createElement('div');
+            exitScreen.style.position = 'fixed';
+            exitScreen.style.inset = '0';
+            exitScreen.style.background = 'var(--color-bg-dark)';
+            exitScreen.style.color = 'var(--color-primary)';
+            exitScreen.style.display = 'flex';
+            exitScreen.style.alignItems = 'center';
+            exitScreen.style.justifyContent = 'center';
+            exitScreen.style.zIndex = 9999;
+            const title = (window.i18n && window.i18n.goodbyeTitle) ? window.i18n.goodbyeTitle : 'Goodbye';
+            const thanks = (window.i18n && window.i18n.thanksText) ? window.i18n.thanksText : 'Thanks for playing.';
+            exitScreen.innerHTML = `<div style="text-align:center;"><h1>${title}</h1><p>${thanks}</p></div>`;
+            document.body.appendChild(exitScreen);
+        }
+
+        function calculateGridLayout() {
+            // Account for action bar and top bar
+            const actionBarHeight = 128; // Approximate height with padding
+            const topBarHeight = 60;
+            const padding = 16;
+
+            // Use CSS pixel sizes (canvas.width is in backing pixels)
+            const dpr = window.devicePixelRatio || 1;
+            const cssWidth = canvas.width / dpr;
+            const cssHeight = canvas.height / dpr;
+
+            const availableWidth = cssWidth - (padding * 2);
+            const availableHeight = cssHeight - actionBarHeight - topBarHeight - (padding * 2);
+
+            // Calculate max cell size that fits the grid
+            const maxCellSize = Math.min(availableWidth / gridSize,availableHeight / gridSize);
+
+            // Scale cell size based on grid size for responsiveness
+            let cellSize_min = 50;
+            let cellSize_max = 120;
+
+            if (gridSize >= 9) {
+                cellSize_min = 30;
+                cellSize_max = 70;
+            } else if (gridSize >= 7) {
+                cellSize_min = 50;
+                cellSize_max = 90;
+            }
+
+            cellSize = Math.max(cellSize_min,Math.min(maxCellSize,cellSize_max));
+
+            const gridWidth = cellSize * gridSize;
+            const gridHeight = cellSize * gridSize;
+
+            gridOffsetX = (cssWidth - gridWidth) / 2;
+            gridOffsetY = topBarHeight + ((availableHeight - gridHeight) / 2);
+        }
+
+        function drawGrid() {
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = 'rgba(0, 255, 255, 0.6)';
+
+            // Draw vertical lines
+            for (let i = 0; i <= gridSize; i++) {
+                const x = gridOffsetX + i * cellSize;
+                ctx.beginPath();
+                ctx.moveTo(x,gridOffsetY);
+                ctx.lineTo(x,gridOffsetY + gridSize * cellSize);
+                ctx.stroke();
+            }
+
+            // Draw horizontal lines
+            for (let i = 0; i <= gridSize; i++) {
+                const y = gridOffsetY + i * cellSize;
+                ctx.beginPath();
+                ctx.moveTo(gridOffsetX,y);
+                ctx.lineTo(gridOffsetX + gridSize * cellSize,y);
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+        }
+
+        function drawDots() {
+            if (!currentLevel || !currentLevel.pairs) return;
+            for (let pair of currentLevel.pairs) {
+                const asset = assetCache[pair.assetId];
+                if (!asset) continue;
+
+                const dotData = dots[pair.color];
+                const dotSize = cellSize * 0.65;
+                const pulseScale = 0.90 + Math.sin(pulseTime) * 0.10;
+                const drawSize = dotSize * pulseScale;
+
+                // Enhanced glow effect for dots
+                const glowIntensity = 15 + Math.sin(pulseTime * 1.5) * 10;
+
+                // Start dot
+                const startX = gridOffsetX + dotData.start[0] * cellSize + cellSize / 2;
+                const startY = gridOffsetY + dotData.start[1] * cellSize + cellSize / 2;
+
+                ctx.shadowBlur = glowIntensity + 15;
+                ctx.shadowColor = pair.colorHex;
+                ctx.globalAlpha = 0.6;
+                ctx.drawImage(asset,startX - drawSize / 2,startY - drawSize / 2,drawSize,drawSize);
+
+                ctx.shadowBlur = glowIntensity;
+                ctx.globalAlpha = 1;
+                ctx.drawImage(asset,startX - drawSize / 2,startY - drawSize / 2,drawSize,drawSize);
+
+                // End dot
+                const endX = gridOffsetX + dotData.end[0] * cellSize + cellSize / 2;
+                const endY = gridOffsetY + dotData.end[1] * cellSize + cellSize / 2;
+
+                ctx.shadowBlur = glowIntensity + 15;
+                ctx.shadowColor = pair.colorHex;
+                ctx.globalAlpha = 0.6;
+                ctx.drawImage(asset,endX - drawSize / 2,endY - drawSize / 2,drawSize,drawSize);
+
+                ctx.shadowBlur = glowIntensity;
+                ctx.globalAlpha = 1;
+                ctx.drawImage(asset,endX - drawSize / 2,endY - drawSize / 2,drawSize,drawSize);
+
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function drawPath(pathCells,color,isActive = false) {
+            if (!pathCells || pathCells.length < 2) return;
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = cellSize * 0.4;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = color;
+
+            ctx.beginPath();
+            const firstCell = pathCells[0];
+            const firstX = gridOffsetX + firstCell[0] * cellSize + cellSize / 2;
+            const firstY = gridOffsetY + firstCell[1] * cellSize + cellSize / 2;
+            ctx.moveTo(firstX,firstY);
+
+            for (let i = 1; i < pathCells.length; i++) {
+                const cell = pathCells[i];
+                const x = gridOffsetX + cell[0] * cellSize + cellSize / 2;
+                const y = gridOffsetY + cell[1] * cellSize + cellSize / 2;
+                ctx.lineTo(x,y);
+            }
+
+            ctx.stroke();
+
+            if (isActive) {
+                ctx.shadowBlur = 30;
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+        }
+
+        function render() {
+            // Clear canvas
+            ctx.fillStyle = '#1A2332';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+            // Draw grid
+            drawGrid();
+
+            // Draw completed paths
+            for (let color in paths) {
+                const pair = currentLevel && currentLevel.pairs ? currentLevel.pairs.find(p => p.color === color) : null;
+                if (pair) {
+                    drawPath(paths[color],pair.colorHex,false);
+                }
+            }
+
+            // Draw current drawing path (if any)
+            if (isDrawing && currentPath.length > 0 && currentLevel) {
+                const activePair = currentLevel.pairs.find(p => p.color === currentDrawColor);
+                if (activePair) {
+                    drawPath(currentPath,activePair.colorHex,true);
+                }
+            }
+
+            // Draw dots on top
+            drawDots();
+        }
+
+
+        function animate() {
+            pulseTime += 0.05;
+            render();
+            animationFrame = requestAnimationFrame(animate);
+        }
+
+        function handlePointerDown(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            const cell = getCellAtPosition(x,y);
+            if (!cell) return;
+
+            // Check if clicking on a dot to start drawing
+            const dotColor = isDotCell(cell[0],cell[1]);
+            if (dotColor) {
+                // Check if there's already a path for this color - if so, erase it
+                if (paths[dotColor]) {
+                    delete paths[dotColor];
+                    playSound('sfx_path_erase');
+                    render();
+
+                    // Check completion after erasing
+                    if (checkLevelComplete()) {
+                        onLevelComplete();
+                    }
+                    return;
+                }
+
+                isDrawing = true;
+                currentDrawColor = dotColor;
+                currentPath = [cell];
+                render();
+                return;
+            }
+
+            // Check if clicking on an existing path to erase it
+            for (let color in paths) {
+                for (let pathCell of paths[color]) {
+                    if (cellsEqual(pathCell,cell)) {
+                        delete paths[color];
+                        playSound('sfx_path_erase');
+                        render();
+
+                        // Check completion after erasing
+                        if (checkLevelComplete()) {
+                            onLevelComplete();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+        function handlePointerMove(e) {
+            if (!isDrawing) return;
+
+            e.preventDefault();
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            const cell = getCellAtPosition(x,y);
+            if (!cell) return;
+
+            const lastCell = currentPath[currentPath.length - 1];
+
+            // Check if this is a new cell
+            if (cellsEqual(cell,lastCell)) return;
+
+            // Check if adjacent
+            if (!isAdjacent(lastCell,cell)) return;
+
+            // Check if cell is valid
+            // Can't go through other paths
+            if (isCellOccupied(cell[0],cell[1],currentDrawColor)) return;
+
+            // Can't go through dots (except the matching end dot)
+            const dotColor = isDotCell(cell[0],cell[1]);
+            if (dotColor && dotColor !== currentDrawColor) return;
+
+            // Can backtrack on own path
+            if (currentPath.length > 1) {
+                const prevCell = currentPath[currentPath.length - 2];
+                if (cellsEqual(cell,prevCell)) {
+                    currentPath.pop();
+                    render();
+                    return;
+                }
+            }
+
+            // Add cell to path
+            currentPath.push(cell);
+            render();
+        }
+
+        function handlePointerUp(e) {
+            if (!isDrawing) return;
+
+            isDrawing = false;
+
+            // Check if path is complete (ends on matching dot)
+            if (currentPath.length < 2) {
+                currentPath = [];
+                currentDrawColor = null;
+                render();
+                return;
+            }
+
+            const lastCell = currentPath[currentPath.length - 1];
+            const dotData = dots[currentDrawColor];
+            const endsOnDot = cellsEqual(lastCell,dotData.start) || cellsEqual(lastCell,dotData.end);
+            const startsOnDot = cellsEqual(currentPath[0],dotData.start) || cellsEqual(currentPath[0],dotData.end);
+
+            if (endsOnDot && startsOnDot && !cellsEqual(currentPath[0],lastCell)) {
+                // Valid path - save it
+                savePath(); // Save to history before adding new path
+                paths[currentDrawColor] = [...currentPath];
+                playSound('sfx_path_connect');
+
+                // Check if level is complete
+                if (checkLevelComplete()) {
+                    onLevelComplete();
+                }
+            }
+
+            currentPath = [];
+            currentDrawColor = null;
+            render();
+        }
+
+        function setupEventListeners() {
+            // Canvas events
+            canvas.addEventListener('mousedown',handlePointerDown);
+            canvas.addEventListener('mousemove',handlePointerMove);
+            canvas.addEventListener('mouseup',handlePointerUp);
+            canvas.addEventListener('mouseleave',handlePointerUp);
+
+            canvas.addEventListener('touchstart',handlePointerDown);
+            canvas.addEventListener('touchmove',handlePointerMove);
+            canvas.addEventListener('touchend',handlePointerUp);
+            canvas.addEventListener('touchcancel',handlePointerUp);
+
+            // UI buttons
+            document.getElementById('resetButton').addEventListener('click',resetLevel);
+            document.getElementById('backButton').addEventListener('click',showLevelSelect);
+            const exitBtn = document.getElementById('exitButton');
+            if (exitBtn) exitBtn.addEventListener('click',exitGame);
+            document.getElementById('closeMenuButton').addEventListener('click',closeLevelSelect);
+            document.getElementById('undoButton').addEventListener('click',undoLastPath);
+            document.getElementById('replayButton').addEventListener('click',() => resetLevel());
+            document.getElementById('nextButton').addEventListener('click',() => {
+                const nextIndex = window.gameConfig.currentLevel + 1;
+                if (nextIndex < window.gameConfig.levels.length) {
+                    loadLevel(nextIndex);
+                } else {
+                    showLevelSelect();
+                }
+            });
+
+            // Close popup on overlay click
+            document.getElementById('popupOverlay').addEventListener('click',() => {
+                const overlay = document.getElementById('popupOverlay');
+                const popup = document.getElementById('completionPopup');
+                popup.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+        }
+
+        function createLevelButtons() {
+            const levelList = document.getElementById('levelList');
+            levelList.innerHTML = '';
+
+            for (let i = 0; i < window.gameConfig.levels.length; i++) {
+                const
+                    level = window.gameConfig.levels[i]; const
+                        isUnlocked = window.gameConfig.unlockedLevels.includes(i); const
+                            item = document.createElement('div'); item.className = 'level-item'; if (!isUnlocked) {
+                                item.classList.add('locked');
+                            } const gridInfo = `${level.gridSize}×${level.gridSize}`;
+                const pairInfo = `${level.pairs.length} pairs`; item.innerHTML = ` <div
+                                class="level-number">${i + 1}</div>
+                                <div class="level-info">
+                                    <div class="level-name">${level.name}</div>
+                                    <div class="level-meta">
+                                        <span>${gridInfo}</span>
+                                        <span>•</span>
+                                        <span>${pairInfo}</span>
+                                    </div>
+                                </div>
+                                `;
+
+                if (isUnlocked) {
+                    item.addEventListener('click',() => loadLevel(i));
+                }
+
+                levelList.appendChild(item);
+            }
+        }
+
+        function loadLevel(levelIndex) {
+            if (!window.gameConfig || !window.gameConfig.levels || !window.gameConfig.levels[levelIndex]) {
+                console.warn('Invalid level index',levelIndex);
+                return;
+            }
+
+            // Set current level index globally
+            window.gameConfig.currentLevel = levelIndex;
+
+            // Reset runtime level state
+            currentLevel = JSON.parse(JSON.stringify(window.gameConfig.levels[levelIndex]));
+            paths = {};
+            pathHistory = [];
+            isDrawing = false;
+            currentDrawColor = null;
+            currentPath = [];
+            dots = {};
+
+            // Populate dots map from level pairs
+            if (currentLevel.pairs && Array.isArray(currentLevel.pairs)) {
+                for (let pair of currentLevel.pairs) {
+                    try {
+                        dots[pair.color] = {
+                            start: parseGridPos(pair.start),
+                            end: parseGridPos(pair.end)
+                        };
+                    } catch (e) {
+                        console.warn('Failed to parse pair positions for',pair);
+                    }
+                }
+            }
+
+            // Set grid size
+            gridSize = currentLevel.gridSize || 5;
+
+            // Update UI header/subtitle if present
+            const header = document.getElementById('levelHeader');
+            const subtitle = document.getElementById('levelSubtitle');
+            if (header) header.textContent = `Level ${levelIndex + 1}`;
+            if (subtitle) subtitle.textContent = `${gridSize}×${gridSize} Grid`;
+
+            // Hide level select UI if shown
+            const levelSelect = document.getElementById('levelSelectScreen');
+            if (levelSelect) levelSelect.classList.remove('show');
+
+            // Recalculate layout and redraw
+            calculateGridLayout();
+            drawBackground();
+            render();
+
+            // Ensure animation loop is running
+            if (!animationFrame) animate();
+
+            // Start ambient music when a level loads
+            startAmbientMusic();
+        }
+
+        async function preloadAssets() {
+            const assetIds = [
+                'dot_cyan','dot_magenta','dot_lime','dot_yellow',
+                'dot_red','dot_blue','dot_green','dot_purple','dot_orange','dot_white',
+                'background_circuit'
+            ];
+
+            const audioIds = [
+                'sfx_path_connect','sfx_path_erase','sfx_level_complete','music_ambient'
+            ];
+
+            // Initialize audio context (create only if not already created)
+            audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+
+            // Load images
+            const imagePromises = assetIds.map(id => {
+                return new Promise((resolve,reject) => {
+                    const assetInfo = lib.getAsset(id);
+                    if (!assetInfo) {
+                        lib.log(`Asset not found: ${id}`);
+                        resolve();
+                        return;
+                    }
+
+                    const img = new Image();
+                    img.onload = () => {
+                        assetCache[id] = img;
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        lib.log(`Failed to load image: ${id}`);
+                        resolve();
+                    };
+                    img.src = assetInfo.url;
+                });
+            });
+
+            // Load audio
+            const audioPromises = audioIds.map(id => {
+                return new Promise((resolve,reject) => {
+                    const assetInfo = lib.getAsset(id);
+                    if (!assetInfo) {
+                        lib.log(`Asset not found: ${id}`);
+                        resolve();
+                        return;
+                    }
+
+                    fetch(assetInfo.url)
+                        .then(response => response.arrayBuffer())
+                        .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+                        .then(audioBuffer => {
+                            audioBuffers[id] = audioBuffer;
+                            resolve();
+                        })
+                        .catch(error => {
+                            lib.log(`Failed to load audio: ${id}`);
+                            resolve();
+                        });
+                });
+            });
+
+            await Promise.all([...imagePromises,...audioPromises]);
+        }
+
+        // Ensure the AudioContext is resumed on first user gesture to satisfy autoplay policies
+        (function setupAudioGestureResume() {
+            function resumeAudio() {
+                try {
+                    if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    if (audioContext.state === 'suspended' && typeof audioContext.resume === 'function') {
+                        audioContext.resume().then(() => {
+                            try {
+                                if (_pendingAmbientStart) {
+                                    _pendingAmbientStart = false;
+                                    startAmbientMusic();
+                                }
+                            } catch (e) { /* ignore */ }
+                        }).catch(() => { });
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            document.addEventListener('pointerdown',resumeAudio,{ once: true,passive: true });
+            document.addEventListener('touchstart',resumeAudio,{ once: true,passive: true });
+        })();
+
+        function drawBackground() {
+            const bgAsset = assetCache['background_circuit'];
+            if (bgAsset) {
+                // Draw background with cover scaling
+                const canvasAspect = bgCanvas.width / bgCanvas.height;
+                const imageAspect = bgAsset.width / bgAsset.height;
+
+                let drawWidth,drawHeight,offsetX,offsetY;
+
+                if (canvasAspect > imageAspect) {
+                    drawWidth = bgCanvas.width;
+                    drawHeight = drawWidth / imageAspect;
+                    offsetX = 0;
+                    offsetY = (bgCanvas.height - drawHeight) / 2;
+                } else {
+                    drawHeight = bgCanvas.height;
+                    drawWidth = drawHeight * imageAspect;
+                    offsetX = (bgCanvas.width - drawWidth) / 2;
+                    offsetY = 0;
+                }
+
+                bgCtx.drawImage(bgAsset,offsetX,offsetY,drawWidth,drawHeight);
+            } else {
+                bgCtx.fillStyle = '#1A2332';
+                bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+            }
+        }
+
+        function run(mode) {
+            lib.log('run() called. Mode: ' + mode);
+
+            // Update Level 3 (Ion Field) dot positions
+            if (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[2]) {
+                const level3 = window.gameConfig.levels[2];
+                const purplePair = level3.pairs.find(p => p.color === 'purple');
+                if (purplePair) {
+                    purplePair.start = 'G6';
+                    purplePair.end = 'D4';
+                }
+                const redPair = level3.pairs.find(p => p.color === 'red');
+                if (redPair) {
+                    redPair.start = 'E2';
+                    redPair.end = 'F4';
+                }
+                // Add white dot pair if it doesn't exist
+                const whitePair = level3.pairs.find(p => p.color === 'white');
+                if (!whitePair) {
+                    level3.pairs.push({
+                        color: 'white',
+                        colorHex: '#FFFFFF',
+                        start: 'A2',
+                        end: 'C3',
+                        assetId: 'dot_white'
+                    });
+                }
+            }
+
+            // Update Level 4 (Hyperlink Maze) dot positions with valid paths
+            if (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[3]) {
+                const level4 = window.gameConfig.levels[3];
+                const pairs = [
+                    { color: 'cyan',start: 'A2',end: 'F5' },
+                    { color: 'orange',start: 'A3',end: 'B5' },
+                    { color: 'blue',start: 'A4',end: 'C3' },
+                    { color: 'red',start: 'B2',end: 'E5' },
+                    { color: 'green',start: 'D4',end: 'B8' },
+                    { color: 'magenta',start: 'D7',end: 'H5' },
+                    { color: 'yellow',start: 'E2',end: 'H2' },
+                    { color: 'purple',start: 'F8',end: 'I6' },
+                    { color: 'white',start: 'G7',end: 'H8' }
+                ];
+
+                // Remove lime pair if it exists
+                level4.pairs = level4.pairs.filter(p => p.color !== 'lime');
+
+                pairs.forEach(newPair => {
+                    const existingPair = level4.pairs.find(p => p.color === newPair.color);
+                    if (existingPair) {
+                        existingPair.start = newPair.start;
+                        existingPair.end = newPair.end;
+                    } else {
+                        // Add new pair if it doesn't exist
+                        const colorHexMap = {
+                            'blue': '#0066FF',
+                            'cyan': '#00FFFF',
+                            'magenta': '#FF00FF',
+                            'lime': '#00FF00',
+                            'orange': '#FF6600',
+                            'purple': '#9933FF',
+                            'yellow': '#FFFF00',
+                            'red': '#FF0033',
+                            'white': '#FFFFFF',
+                            'green': '#00CC66'
+                        };
+                        level4.pairs.push({
+                            color: newPair.color,
+                            colorHex: colorHexMap[newPair.color] || '#FFFFFF',
+                            start: newPair.start,
+                            end: newPair.end,
+                            assetId: `dot_${newPair.color}`
+                        });
+                    }
+                });
+            }
+
+            // Update Level 5 (Warpstream Nexus) - 9x9 grid with 9 dot pairs
+            if (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[4]) {
+                const level5 = window.gameConfig.levels[4];
+                level5.gridSize = 9;
+                const pairs = [
+                    { color: 'cyan',start: 'F7',end: 'H9' },
+                    { color: 'orange',start: 'B2',end: 'E2' },
+                    { color: 'blue',start: 'H3',end: 'D8' },
+                    { color: 'red',start: 'I5',end: 'G8' },
+                    { color: 'green',start: 'C7',end: 'E5' },
+                    { color: 'magenta',start: 'A4',end: 'G3' },
+                    { color: 'yellow',start: 'B7',end: 'H5' },
+                    { color: 'purple',start: 'I7',end: 'I9' },
+                    { color: 'white',start: 'A9',end: 'G9' }
+                ];
+
+                level5.pairs = [];
+
+                pairs.forEach(newPair => {
+                    const colorHexMap = {
+                        'blue': '#0066FF',
+                        'cyan': '#00FFFF',
+                        'magenta': '#FF00FF',
+                        'lime': '#00FF00',
+                        'orange': '#FF6600',
+                        'purple': '#9933FF',
+                        'yellow': '#FFFF00',
+                        'red': '#FF0033',
+                        'white': '#FFFFFF',
+                        'green': '#00CC66'
+                    };
+                    level5.pairs.push({
+                        color: newPair.color,
+                        colorHex: colorHexMap[newPair.color] || '#FFFFFF',
+                        start: newPair.start,
+                        end: newPair.end,
+                        assetId: `dot_${newPair.color}`
+                    });
+                });
+            }
+
+            // Update Level 6 (Singularity Core) - 10x10 grid with 9 dot pairs
+            if (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[5]) {
+                const level6 = window.gameConfig.levels[5];
+                level6.gridSize = 10;
+                const pairs = [
+                    { color: 'yellow',start: 'A2',end: 'C10' },
+                    { color: 'green',start: 'B7',end: 'H5' },
+                    { color: 'white',start: 'C3',end: 'F5' },
+                    { color: 'purple',start: 'A9',end: 'H7' },
+                    { color: 'blue',start: 'C5',end: 'I8' },
+                    { color: 'orange',start: 'D8',end: 'F8' },
+                    { color: 'magenta',start: 'A10',end: 'I9' },
+                    { color: 'red',start: 'J1',end: 'I3' },
+                    { color: 'cyan',start: 'J2',end: 'J6' }
+                ];
+
+                level6.pairs = [];
+
+                pairs.forEach(newPair => {
+                    const colorHexMap = {
+                        'blue': '#0066FF',
+                        'cyan': '#00FFFF',
+                        'magenta': '#FF00FF',
+                        'lime': '#00FF00',
+                        'orange': '#FF6600',
+                        'purple': '#9933FF',
+                        'yellow': '#FFFF00',
+                        'red': '#FF0033',
+                        'white': '#FFFFFF',
+                        'green': '#00CC66'
+                    };
+                    level6.pairs.push({
+                        color: newPair.color,
+                        colorHex: colorHexMap[newPair.color] || '#FFFFFF',
+                        start: newPair.start,
+                        end: newPair.end,
+                        assetId: `dot_${newPair.color}`
+                    });
+                });
+            }
+
+            // Update Level 7 (Nexus Collapse) - 10x10 grid with 9 dot pairs
+            if (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[6]) {
+                const level7 = window.gameConfig.levels[6];
+                level7.gridSize = 10;
+                const pairs = [
+                    { color: 'cyan',start: 'A1',end: 'J3' },
+                    { color: 'red',start: 'B2',end: 'H8' },
+                    { color: 'green',start: 'A10',end: 'G4' },
+                    { color: 'magenta',start: 'C1',end: 'J7' },
+                    { color: 'blue',start: 'D5',end: 'I2' },
+                    { color: 'yellow',start: 'E9',end: 'J10' },
+                    { color: 'orange',start: 'F3',end: 'B9' },
+                    { color: 'purple',start: 'G10',end: 'I6' },
+                    { color: 'white',start: 'H1',end: 'D8' }
+                ];
+
+                level7.pairs = [];
+
+                pairs.forEach(newPair => {
+                    const colorHexMap = {
+                        'blue': '#0066FF',
+                        'cyan': '#00FFFF',
+                        'magenta': '#FF00FF',
+                        'lime': '#00FF00',
+                        'orange': '#FF6600',
+                        'purple': '#9933FF',
+                        'yellow': '#FFFF00',
+                        'red': '#FF0033',
+                        'white': '#FFFFFF',
+                        'green': '#00CC66'
+                    };
+                    level7.pairs.push({
+                        color: newPair.color,
+                        colorHex: colorHexMap[newPair.color] || '#FFFFFF',
+                        start: newPair.start,
+                        end: newPair.end,
+                        assetId: `dot_${newPair.color}`
+                    });
+                });
+            }
+
+            // Initialize canvases and make them responsive to window size & devicePixelRatio
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            bgCanvas = document.getElementById('backgroundCanvas');
+            bgCtx = bgCanvas.getContext('2d');
+
+            function resizeCanvases() {
+                const dpr = window.devicePixelRatio || 1;
+                const cssWidth = Math.max(document.documentElement.clientWidth,window.innerWidth || 0);
+                const cssHeight = Math.max(document.documentElement.clientHeight,window.innerHeight || 0);
+
+                // Set backing store size
+                canvas.width = Math.round(cssWidth * dpr);
+                canvas.height = Math.round(cssHeight * dpr);
+                bgCanvas.width = Math.round(cssWidth * dpr);
+                bgCanvas.height = Math.round(cssHeight * dpr);
+
+                // Set CSS display size
+                canvas.style.width = cssWidth + 'px';
+                canvas.style.height = cssHeight + 'px';
+                bgCanvas.style.width = cssWidth + 'px';
+                bgCanvas.style.height = cssHeight + 'px';
+
+                // Normalize drawing units to CSS pixels
+                ctx.setTransform(dpr,0,0,dpr,0,0);
+                bgCtx.setTransform(dpr,0,0,dpr,0,0);
+
+                // Recalculate layout and redraw
+                if (currentLevel) {
+                    calculateGridLayout();
+                }
+                drawBackground();
+                render();
+            }
+
+            // Debounced resize handler
+            let _resizeTimer = null;
+            function onResize() {
+                if (_resizeTimer) clearTimeout(_resizeTimer);
+                _resizeTimer = setTimeout(() => {
+                    resizeCanvases();
+                },120);
+            }
+
+            // Initial sizing
+            resizeCanvases();
+
+            // React to window changes
+            window.addEventListener('resize',onResize);
+            window.addEventListener('orientationchange',onResize);
+
+            // Show loading screen
+            const loadingScreen = document.getElementById('loadingScreen');
+
+            // Preload assets
+            preloadAssets().then(() => {
+                // Draw background
+                drawBackground();
+
+                // Setup event listeners
+                setupEventListeners();
+
+                // Create level buttons (kept for debug/remote access)
+                createLevelButtons();
+
+                // Start ambient music
+                startAmbientMusic();
+
+                // Hide loading screen with transition
+                setTimeout(() => {
+                    loadingScreen.classList.add('hide');
+                },500);
+
+                // Start the game immediately at level 0 (Level 1 for users)
+                const startIndex = (window.gameConfig && typeof window.gameConfig.currentLevel === 'number') ? window.gameConfig.currentLevel : 0;
+                setTimeout(() => {
+                    loadLevel(startIndex);
+                    if (!animationFrame) animate();
+                },700);
+            });
+        }
+
+        // Show a confirmation overlay prompting the user to advance to the next level
+        function showNextLevelPrompt(nextIndex) {
+            // avoid duplicate prompts
+            if (document.getElementById('nextLevelOverlay')) return;
+
+            // Inject minimal styles if not present
+            const styleId = 'nlp-styles';
+            if (!document.getElementById(styleId)) {
+                const s = document.createElement('style');
+                s.id = styleId;
+                s.textContent = `
+                    @keyframes nlp-fade { from { opacity: 0 } to { opacity: 1 } }
+                    @keyframes nlp-pop { from { transform: scale(0.98); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+                    #nextLevelOverlay { position: fixed; inset: 0; display:flex; align-items:center; justify-content:center; z-index:10000; }
+                    #nextLevelOverlay .nlp-backdrop { position:absolute; inset:0; background:rgba(2,6,23,0.6); backdrop-filter: blur(4px); animation: nlp-fade 180ms ease both; }
+                    #nextLevelOverlay .nlp-card { position:relative; width: min(460px, 94%); background: linear-gradient(180deg, rgba(18,26,34,0.98), rgba(10,12,16,0.98)); border-radius:12px; padding:18px; box-shadow: 0 18px 48px rgba(0,0,0,0.7); color:var(--color-primary); text-align:left; animation: nlp-pop 200ms cubic-bezier(.2,.9,.2,1) both; }
+                    #nextLevelOverlay .nlp-title { font-size:18px; font-weight:700; margin-bottom:6px; }
+                    #nextLevelOverlay .nlp-sub { font-size:13px; color:rgba(255,255,255,0.85); margin-bottom:12px; }
+                    #nextLevelOverlay .nlp-info { display:flex; gap:12px; align-items:center; margin-bottom:14px; }
+                    #nextLevelOverlay .nlp-badge { background: linear-gradient(90deg,#00c78a,#02d39a); color:#05251e; font-weight:700; padding:8px 12px; border-radius:10px; }
+                    #nextLevelOverlay .nlp-meta { font-size:13px; color:rgba(255,255,255,0.9); }
+                    #nextLevelOverlay .nlp-actions { display:flex; gap:12px; justify-content:flex-end; }
+                    #nextLevelOverlay button { cursor:pointer; border:0; padding:10px 14px; border-radius:10px; font-weight:700; }
+                    #nextLevelOverlay .nlp-cancel { background:transparent; color:rgba(255,255,255,0.78); }
+                    #nextLevelOverlay .nlp-next { background: linear-gradient(90deg,#06d6a0,#00b894); color:#072A1F; }
+                `;
+                document.head.appendChild(s);
+            }
+
+            const overlay = document.createElement('div');
+            overlay.id = 'nextLevelOverlay';
+
+            const backdrop = document.createElement('div');
+            backdrop.className = 'nlp-backdrop';
+            backdrop.addEventListener('click',() => remove());
+
+            const card = document.createElement('div');
+            card.className = 'nlp-card';
+
+            const title = document.createElement('div');
+            title.className = 'nlp-title';
+            title.textContent = (window.i18n && window.i18n.levelCompleteTitle) ? window.i18n.levelCompleteTitle : 'Level Complete';
+
+            const sub = document.createElement('div');
+            sub.className = 'nlp-sub';
+            sub.textContent = (window.i18n && window.i18n.levelCompleteBody) ? window.i18n.levelCompleteBody : 'Great job! Ready for the next challenge?';
+
+            const info = document.createElement('div');
+            info.className = 'nlp-info';
+
+            const badge = document.createElement('div');
+            badge.className = 'nlp-badge';
+            badge.textContent = (window.i18n && window.i18n.levelBadgePrefix) ? `${window.i18n.levelBadgePrefix} ${nextIndex + 1}` : `Lv ${nextIndex + 1}`;
+
+            const meta = document.createElement('div');
+            meta.className = 'nlp-meta';
+            const gridSz = (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[nextIndex]) ? (window.gameConfig.levels[nextIndex].gridSize || '?') : '?';
+            const pairsCnt = (window.gameConfig && window.gameConfig.levels && window.gameConfig.levels[nextIndex] && window.gameConfig.levels[nextIndex].pairs) ? window.gameConfig.levels[nextIndex].pairs.length : '?';
+            meta.innerHTML = `<div style="font-weight:700">${(window.i18n && window.i18n.nextLabel) ? window.i18n.nextLabel : 'Next'}: Level ${nextIndex + 1}</div><div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px">${gridSz}×${gridSz} • ${pairsCnt} pairs</div>`;
+
+            info.appendChild(badge);
+            info.appendChild(meta);
+
+            const actions = document.createElement('div');
+            actions.className = 'nlp-actions';
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'nlp-cancel';
+            cancelBtn.textContent = (window.i18n && window.i18n.stayButton) ? window.i18n.stayButton : 'Stay';
+            cancelBtn.addEventListener('click',() => remove());
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'nlp-next';
+            nextBtn.textContent = (window.i18n && window.i18n.nextButton) ? window.i18n.nextButton : 'Next';
+            nextBtn.addEventListener('click',() => {
+                remove();
+                loadLevel(nextIndex);
+                if (!animationFrame) animate();
+            });
+
+            actions.appendChild(cancelBtn);
+            actions.appendChild(nextBtn);
+
+            card.appendChild(title);
+            card.appendChild(sub);
+            card.appendChild(info);
+            card.appendChild(actions);
+
+            overlay.appendChild(backdrop);
+            overlay.appendChild(card);
+            document.body.appendChild(overlay);
+
+            function onKey(e) { if (e.key === 'Escape') remove(); }
+            document.addEventListener('keydown',onKey);
+            function remove() { try { document.removeEventListener('keydown',onKey); } catch (e) { } try { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); } catch (e) { } }
+        }
+    </script>
+
+    <!-- Auto-start helper: ensure game runs when assetsMap and DOM are ready -->
+    <script>
+        (function () {
+            if (window._circuitStarted) return;
+            function tryStart() {
+                if (window._circuitStarted) return true;
+                if (typeof run !== 'function') return false;
+                // gameConfig must be present
+                if (!window.gameConfig) return false;
+
+                // If assets are available via lib.getAsset or inline <script id="assetsMap">, start
+                try {
+                    const hasAssetsScript = !!document.getElementById('assetsMap');
+                    const sample = (window.lib && typeof lib.getAsset === 'function') ? lib.getAsset('dot_cyan') : null;
+                    if (sample || hasAssetsScript) {
+                        window._circuitStarted = true;
+                        // small defer to allow any pending DOM tasks to finish
+                        setTimeout(() => run('auto-start'),50);
+                        return true;
+                    }
+                } catch (e) {
+                    console.warn('start check failed',e);
+                }
+                return false;
+            }
+
+            // Try immediately
+            if (tryStart()) return;
+
+            // Listen for assetsMapLoaded from lib
+            if (window.lib && typeof lib.on === 'function') {
+                lib.on('assetsMapLoaded',() => {
+                    tryStart();
+                });
+                lib.on('domReady',() => {
+                    tryStart();
+                });
+            }
+
+            // Fallback: try to start after short delay
+            setTimeout(() => { tryStart(); },1200);
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2683 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vịt Trời Đại Chiến</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ===================================
+         * CSS RESET & BASE STYLES
+         * =================================== */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a1128;
+            font-family: "Orbitron", "Rajdhani", "Arial", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===================================
+         * CSS CUSTOM PROPERTIES
+         * =================================== */
+
+        :root {
+            /* Colors */
+            --color-primary: #00f3ff;
+            --color-primary-hover: #33f5ff;
+            --color-secondary: #ff006e;
+            --color-accent: #8338ec;
+            --color-success: #00ff88;
+            --color-bg-dark: #0a1128;
+            --color-bg-mid: #1a2332;
+            --color-bg-panel: rgba(26, 35, 50, 0.85);
+            --color-bg-panel-solid: rgba(26, 35, 50, 0.95);
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #a0aec0;
+
+            /* Shadows & Effects */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --glow-primary: 0 0 20px rgba(0, 243, 255, 0.5);
+            --glow-primary-lg: 0 0 40px rgba(0, 243, 255, 0.6);
+            --glow-secondary: 0 0 20px rgba(255, 0, 110, 0.5);
+            --glow-accent: 0 0 20px rgba(131, 56, 236, 0.5);
+
+            /* Animation Timings */
+            --transition-fast: 150ms;
+            --transition-normal: 300ms;
+            --transition-slow: 500ms;
+            --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+            /* Spacing Scale */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            /* Status / Safe area inset (for notch/status bar) */
+            --status-top: env(safe-area-inset-top, 0px);
+            /* Safe area at bottom (home indicator area) */
+            --status-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        /* ===================================
+         * GAME CONTAINER & CANVAS
+         * =================================== */
+
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            /* shift entire container down by status bar / safe-area inset and reduce height accordingly */
+            top: var(--status-top);
+            height: calc(100% - var(--status-top) - var(--status-bottom));
+            overflow: hidden;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            -ms-touch-action: none;
+            cursor: crosshair;
+        }
+
+        /* Corner Brackets Decoration */
+
+        .corner-brackets {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            display: none !important;
+            /* hide corner decorations as requested */
+        }
+
+        .corner-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--color-primary);
+            opacity: 0.6;
+        }
+
+        .corner-bracket.top-left {
+            top: var(--space-sm);
+            left: var(--space-sm);
+            border-right: none;
+            border-bottom: none;
+            border-radius: 4px 0 0 0;
+        }
+
+        .corner-bracket.top-right {
+            top: var(--space-sm);
+            right: var(--space-sm);
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 4px 0 0;
+        }
+
+        .corner-bracket.bottom-left {
+            bottom: var(--space-sm);
+            left: var(--space-sm);
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 4px;
+        }
+
+        .corner-bracket.bottom-right {
+            bottom: var(--space-sm);
+            right: var(--space-sm);
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 4px 0;
+        }
+
+        /* Scan Line Effect */
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    var(--color-primary) 50%,
+                    transparent 100%);
+            opacity: 0.3;
+            animation: scanLineMove 4s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes scanLineMove {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(1280px);
+            }
+        }
+
+        /* ===================================
+         * SPLASH SCREEN
+         * =================================== */
+
+        #splashScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, #1a0a28 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity var(--transition-slow) var(--ease-out);
+        }
+
+        #splashScreen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash-title {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-align: center;
+            text-shadow: 0 0 30px var(--color-primary),
+                0 0 60px var(--color-primary);
+            margin-bottom: var(--space-lg);
+            animation: titlePulse 2s ease-in-out infinite;
+            line-height: 1.2;
+            padding: 0 var(--space-md);
+        }
+
+        .splash-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            font-family: "Rajdhani", sans-serif;
+        }
+
+        .splash-start {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            padding: var(--space-sm) var(--space-lg);
+            border: 3px solid var(--color-primary);
+            border-radius: 8px;
+            background: var(--color-bg-panel);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            animation: tapPromptPulse 1.5s ease-in-out infinite;
+            min-width: 240px;
+            min-height: 96px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .splash-start:active {
+            transform: scale(0.95);
+            box-shadow: var(--glow-primary-lg);
+        }
+
+        @keyframes titlePulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 30px var(--color-primary),
+                    0 0 60px var(--color-primary);
+            }
+
+            50% {
+                text-shadow: 0 0 40px var(--color-primary),
+                    0 0 80px var(--color-primary),
+                    0 0 120px var(--color-primary);
+            }
+        }
+
+        @keyframes tapPromptPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 243, 255, 0.6);
+            }
+        }
+
+        /* Loading Indicator */
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--color-bg-mid);
+            border-top: 4px solid var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--space-md);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===================================
+         * GUN SHOP OVERLAY
+         * =================================== */
+
+        #gunShopOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, #1a0a28 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-normal) var(--ease-out);
+            overflow-y: auto;
+            padding: var(--space-md);
+        }
+
+        #gunShopOverlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gun-shop-content {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .gun-shop-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary-lg);
+            margin-bottom: var(--space-lg);
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        .gun-shop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .gun-shop-item {
+            background: var(--color-bg-panel);
+            border: 3px solid var(--color-accent);
+            border-radius: 12px;
+            padding: var(--space-md);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gun-shop-item:active {
+            transform: scale(0.95);
+        }
+
+        .gun-shop-item.selected {
+            border-color: var(--color-primary);
+            box-shadow: var(--glow-primary-lg);
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        .gun-shop-item-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+
+        .gun-shop-item-icon {
+            font-size: 64px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .gun-shop-close {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            padding: var(--space-sm) var(--space-lg);
+            border: 3px solid var(--color-primary);
+            border-radius: 8px;
+            background: var(--color-bg-panel);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            min-width: 240px;
+            min-height: 96px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gun-shop-close:active {
+            transform: scale(0.95);
+            box-shadow: var(--glow-primary-lg);
+        }
+
+        /* ===================================
+         * GAME OVER OVERLAY
+         * =================================== */
+
+        #gameOverOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 17, 40, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-normal) var(--ease-out);
+        }
+
+        #gameOverOverlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .game-over-content {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        .game-over-title {
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary-lg);
+            margin-bottom: var(--space-md);
+            animation: gameOverSlideIn 0.5s var(--ease-bounce);
+        }
+
+        .game-over-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-secondary);
+            text-shadow: var(--glow-secondary);
+            margin-bottom: var(--space-sm);
+            animation: gameOverSlideIn 0.5s var(--ease-bounce) 0.1s backwards;
+        }
+
+        .game-over-high-score {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--space-lg);
+            animation: gameOverSlideIn 0.5s var(--ease-bounce) 0.2s backwards;
+        }
+
+        .game-over-new-record {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-success);
+            text-shadow: 0 0 20px var(--color-success);
+            margin-bottom: var(--space-lg);
+            animation: gameOverSlideIn 0.5s var(--ease-bounce) 0.2s backwards,
+                recordPulse 1.5s ease-in-out infinite 0.7s;
+        }
+
+        .game-over-replay {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            padding: var(--space-sm) var(--space-lg);
+            border: 3px solid var(--color-primary);
+            border-radius: 8px;
+            background: var(--color-bg-panel);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            animation: gameOverSlideIn 0.5s var(--ease-bounce) 0.3s backwards;
+            min-width: 240px;
+            min-height: 96px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-over-replay:active {
+            transform: scale(0.95);
+            box-shadow: var(--glow-primary-lg);
+        }
+
+        @keyframes gameOverSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes recordPulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px var(--color-success);
+            }
+
+            50% {
+                text-shadow: 0 0 40px var(--color-success),
+                    0 0 60px var(--color-success);
+            }
+        }
+
+        /* ===================================
+         * EDIT MODE UI
+         * =================================== */
+
+        #editUI {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 17, 40, 0.98);
+            overflow-y: auto;
+            padding: var(--space-md);
+            padding-bottom: 120px;
+            /* Space for FAB */
+            box-sizing: border-box;
+            display: none;
+            z-index: 200;
+        }
+
+        #editUI.active {
+            display: block;
+        }
+
+        .edit-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+            padding-top: var(--space-md);
+        }
+
+        .edit-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .edit-subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            font-family: "Rajdhani", sans-serif;
+        }
+
+        /* Edit Sections */
+
+        .edit-section {
+            background: var(--color-bg-panel);
+            border: 2px solid var(--color-primary);
+            border-radius: 12px;
+            padding: var(--space-sm);
+            margin-bottom: var(--space-md);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .edit-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            cursor: pointer;
+            user-select: none;
+            min-height: 96px;
+        }
+
+        .edit-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-shadow: var(--glow-primary);
+        }
+
+        .edit-section-toggle {
+            font-size: 28px;
+            color: var(--color-primary);
+            transition: transform var(--transition-normal) var(--ease-out);
+        }
+
+        .edit-section.collapsed .edit-section-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .edit-section-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height var(--transition-slow) var(--ease-out);
+        }
+
+        .edit-section.collapsed .edit-section-content {
+            max-height: 0;
+        }
+
+        /* Duck Cards */
+
+        .duck-card {
+            background: rgba(13, 27, 42, 0.9);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            min-height: 96px;
+        }
+
+        .duck-card:active {
+            transform: scale(0.98);
+        }
+
+        .duck-card.selected {
+            border-color: var(--color-primary);
+            box-shadow: var(--glow-primary);
+            background: rgba(13, 27, 42, 1);
+        }
+
+        .duck-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xs);
+            min-height: 48px;
+        }
+
+        .duck-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .duck-card-info {
+            font-size: 16px;
+            color: var(--color-secondary);
+            font-family: "Rajdhani", sans-serif;
+        }
+
+        /* Property Rows */
+
+        .property-row {
+            margin: var(--space-sm) 0;
+        }
+
+        .property-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+            display: block;
+        }
+
+        .property-input {
+            width: 100%;
+            padding: var(--space-sm);
+            background: rgba(10, 17, 40, 0.8);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            font-family: "Rajdhani", sans-serif;
+            box-sizing: border-box;
+            min-height: 48px;
+            transition: border-color var(--transition-fast) var(--ease-out);
+        }
+
+        .property-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Buttons */
+
+        .btn {
+            padding: var(--space-sm) var(--space-md);
+            background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            color: var(--color-text-primary);
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            margin: var(--space-xs);
+            min-width: 120px;
+            min-height: 96px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, var(--color-secondary), #ff4d00);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            width: 100%;
+            margin: var(--space-sm) 0;
+        }
+
+        /* Color Picker */
+
+        .color-picker-row {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 96px;
+            height: 96px;
+            border-radius: 8px;
+            border: 3px solid var(--color-accent);
+            cursor: pointer;
+            transition: all var(--transition-normal) var(--ease-out);
+            flex-shrink: 0;
+        }
+
+        .color-swatch:active {
+            transform: scale(0.95);
+        }
+
+        .color-swatch.selected {
+            border-color: var(--color-primary);
+            border-width: 4px;
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Floating Action Button */
+
+        .fab {
+            position: fixed;
+            bottom: var(--space-md);
+            right: var(--space-md);
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: 3px solid var(--color-primary);
+            box-shadow: var(--shadow-lg), var(--glow-primary-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 300;
+            transition: all var(--transition-normal) var(--ease-out);
+            font-size: 48px;
+            color: var(--color-text-primary);
+            font-weight: 900;
+        }
+
+        .fab:active {
+            transform: scale(0.9);
+        }
+
+        /* ===================================
+         * ANIMATIONS
+         * =================================== */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 243, 255, 0.6);
+            }
+        }
+
+        /* Utility Animation Classes */
+
+        .animate-fade-in {
+            animation: fadeIn var(--transition-normal) var(--ease-out);
+        }
+
+        .animate-slide-up {
+            animation: slideUp var(--transition-normal) var(--ease-out);
+        }
+
+        .animate-pulse {
+            animation: pulse 0.3s var(--ease-bounce);
+        }
+
+        /* ===================================
+         * REDUCED MOTION
+         * =================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .scan-line {
+                display: none;
+            }
+        }
+
+        /* Back button (top-left) */
+        .back-button {
+            position: absolute;
+            top: calc(var(--status-top) + var(--space-sm));
+            left: var(--space-sm);
+            z-index: 220;
+            background: rgba(10, 17, 40, 0.75);
+            color: var(--color-primary);
+            border: 2px solid rgba(0, 243, 255, 0.12);
+            padding: 8px 12px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: var(--glow-primary-lg);
+            transition: transform var(--transition-fast) var(--ease-out), background var(--transition-fast) var(--ease-out);
+            backdrop-filter: blur(6px);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            background: rgba(10, 17, 40, 0.9);
+            color: var(--color-primary-hover);
+        }
+
+        /* Back confirmation overlay that shows current score and lets user exit */
+        .back-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 999;
+            pointer-events: auto;
+            background: linear-gradient(180deg, rgba(10, 11, 20, 0.45), rgba(10, 11, 20, 0.65));
+        }
+
+        .back-overlay.active {
+            display: flex;
+        }
+
+        .back-overlay-panel {
+            margin-top: calc(var(--status-top) + var(--space-sm));
+            background: var(--color-bg-panel-solid);
+            color: var(--color-text-primary);
+            border-radius: 12px;
+            padding: var(--space-md);
+            width: min(480px, 92%);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.03);
+            max-height: calc(100% - var(--status-top) - var(--status-bottom) - 48px);
+            overflow: auto;
+        }
+
+        .back-overlay h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .back-overlay .back-score {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .back-overlay .back-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .back-overlay .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .back-overlay .btn.cancel {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-text-primary);
+        }
+
+        .back-overlay .btn.exit {
+            background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameContainer">
+        <!-- Back button (top-left) -->
+        <button id="backButton" class="back-button" title="Back">←</button>
+
+        <!-- Back confirmation overlay -->
+        <div id="backOverlay" class="back-overlay" aria-hidden="true">
+            <div class="back-overlay-panel" role="dialog" aria-modal="true">
+                <h3>Bạn có muốn thoát?</h3>
+                <div class="back-score" id="backOverlayScore">Score: 0</div>
+                <div class="back-actions">
+                    <div class="btn cancel" id="backOverlayCancel">Hủy</div>
+                    <div class="btn exit" id="backOverlayExit">Thoát và đóng</div>
+                </div>
+            </div>
+        </div>
+        <!-- Corner Brackets Decoration -->
+        <div class="corner-brackets">
+            <div class="corner-bracket top-left"></div>
+            <div class="corner-bracket top-right"></div>
+            <div class="corner-bracket bottom-left"></div>
+            <div class="corner-bracket bottom-right"></div>
+        </div>
+
+        <!-- Scan Line Effect -->
+        <div class="scan-line"></div>
+
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Splash Screen -->
+        <div id="splashScreen">
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <h1 class="splash-title">VỊT TRỜI<br>ĐẠI CHIẾN</h1>
+            <p class="splash-subtitle">Cyberpunk Duck Hunt</p>
+            <div class="splash-start" id="startButton" style="display: none;">
+                TAP TO START
+            </div>
+            <div class="splash-start" id="gunShopButton"
+                style="display: none; margin-top: var(--space-md); background: linear-gradient(135deg, var(--color-accent), var(--color-secondary)); cursor: pointer;">
+                🔫 GUN SHOP
+            </div>
+        </div>
+
+        <!-- Gun Shop Overlay -->
+        <div id="gunShopOverlay">
+            <div class="gun-shop-content">
+                <h2 class="gun-shop-title">GUN SHOP</h2>
+                <div class="gun-shop-grid" id="gunShopGrid"></div>
+                <div class="gun-shop-close" id="gunShopCloseButton">
+                    BACK TO GAME
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div id="gameOverOverlay">
+            <div class="game-over-content">
+                <h2 class="game-over-title">MISSION<br>COMPLETE</h2>
+                <div class="game-over-score" id="finalScore">Score: 0</div>
+                <div class="game-over-high-score" id="highScoreDisplay" style="display: none;"></div>
+                <div class="game-over-new-record" id="newRecordDisplay" style="display: none;">
+                    ★ NEW RECORD ★
+                </div>
+                <div class="game-over-replay" id="replayButton">
+                    PLAY AGAIN
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Mode UI -->
+        <div id="editUI">
+            <div class="edit-header">
+                <h1 class="edit-title">GAME EDITOR</h1>
+                <p class="edit-subtitle">Customize your cyberpunk duck hunt</p>
+            </div>
+
+            <div id="editContent"></div>
+
+            <div class="fab" id="editDoneButton" title="Done Editing">▶</div>
+        </div>
+    </div>
+
+    <!-- Inline assets map fallback so the page works when opened via file:// (avoids CORS) -->
+    <script id="assetsMap" type="application/json">
+{
+    "cyber_duck_basic": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/bdd283e2-50a6-45dd-ac07-deaa389609e9.webp",
+        "type": "image",
+        "aspect_ratio": [1237, 919]
+    },
+    "cyber_duck_fast": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/dabefa44-b980-4b0f-bd7f-2fb246d2c31a.webp",
+        "type": "image",
+        "aspect_ratio": [1161, 642]
+    },
+    "cyber_duck_heavy": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/617067c0-f01e-428f-bc69-31f56a7a589d.webp",
+        "type": "image",
+        "aspect_ratio": [913, 819]
+    },
+    "cyber_duck_rare": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/4102c899-5405-4865-aee1-dfb326eb844c.webp",
+        "type": "image",
+        "aspect_ratio": [1124, 784]
+    },
+    "cityscape_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/15c38d3e-ea3c-4849-b64f-0a3118bc9d74.webp",
+        "type": "image",
+        "aspect_ratio": [1024, 1536]
+    },
+    "duck_hit_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/5c73292d-85c6-4f7c-a802-06ef722432f4.mp3",
+        "type": "audio"
+    },
+    "duck_spawn_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/5beab4ed-a49b-4beb-b683-b6e3861502ef.mp3",
+        "type": "audio"
+    },
+    "game_over_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/3452b37a-4af3-4640-96f5-5d35a919920d.mp3",
+        "type": "audio"
+    },
+    "background_music": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/a9f63e65-1ac5-4e3a-992c-f5b1c72f0b95.mp3",
+        "type": "audio"
+    },
+    "combo_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/bbc7c651-c50a-4a3d-9482-517c2c57d4dc.mp3",
+        "type": "audio"
+    },
+    "gun_plasma": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0b7ddd79-b80e-4d73-b1d3-b8e7657a8c62.webp",
+        "type": "image",
+        "aspect_ratio": [1467, 532]
+    },
+    "gun_laser": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3397b576-5afe-4ef8-9d62-b5983b975396.webp",
+        "type": "image",
+        "aspect_ratio": [995, 627]
+    },
+    "gun_pulse": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/47be43c4-e01b-48a3-8a9a-a72358436de1.webp",
+        "type": "image",
+        "aspect_ratio": [1221, 629]
+    },
+    "gun_cannon": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6b283a5d-a034-4ba3-a837-c54b7f476281.webp",
+        "type": "image",
+        "aspect_ratio": [1239, 768]
+    }
+}
+    </script>
+
+    <script>
+        (function () {
+            // Minimal runtime shim for lib and assets map so the game can run locally.
+            window.assetsMap = window.assetsMap || {};
+            window.lib = window.lib || {};
+
+            // Prefer inline JSON fallback (works when opening file://).
+            // If running from file://, avoid calling fetch() (browsers block file:// fetches).
+            const inlineEl = document.getElementById('assetsMap');
+            const isFileProtocol = (typeof location !== 'undefined') && (location.protocol === 'file:' || location.origin === 'null');
+
+            if (inlineEl) {
+                try {
+                    window.assetsMap = JSON.parse(inlineEl.textContent || inlineEl.innerText || '{}');
+                    window.assetsReady = Promise.resolve();
+                } catch (e) {
+                    console.warn('Error parsing inline assets map',e);
+                    window.assetsMap = window.assetsMap || {};
+                    window.assetsReady = Promise.resolve();
+                }
+            } else if (isFileProtocol) {
+                // Running from file:// and no inline map available — do not attempt to fetch.
+                console.warn('Running from file:// and no inline assets map found; skipping fetch to avoid CORS errors.');
+                window.assetsMap = window.assetsMap || {};
+                window.assetsReady = Promise.resolve();
+            } else {
+                // Load assets_map.json asynchronously and expose a Promise `assetsReady`
+                window.assetsReady = fetch('assets_map.json')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Failed to fetch assets_map.json: ' + response.status);
+                        return response.json();
+                    })
+                    .then(json => {
+                        window.assetsMap = json || {};
+                    })
+                    .catch(err => {
+                        console.warn('Error loading assets_map.json',err);
+                        window.assetsMap = window.assetsMap || {};
+                    });
+            }
+            window.lib.getAsset = function (id) {
+                return window.assetsMap ? window.assetsMap[id] : undefined;
+            };
+
+            window.lib.log = function () {
+                if (console && console.log) console.log.apply(console,arguments);
+            };
+
+            // Minimal UI hook used by the game; for local testing just log the params.
+            window.lib.showGameParameters = function (config) {
+                window.lib.log('showGameParameters',config);
+            };
+        })();
+
+    </script>
+    <script>
+        // Provide a sane default `window.gameConfig` when missing so the game can run standalone.
+        (function () {
+            if (!window.gameConfig) {
+                window.gameConfig = {
+                    timerDuration: 60,
+                    backgroundColor: '#0a1128',
+                    neonColor: '#00f3ff',
+                    selectedGun: 'gun_plasma',
+                    duckTypes: [
+                        { id: 'duck_basic',assetId: 'cyber_duck_basic',speed: 1.2,points: 1,size: 1.0,pattern: 'straight',frequency: 'common' },
+                        { id: 'duck_fast',assetId: 'cyber_duck_fast',speed: 1.9,points: 2,size: 0.9,pattern: 'wavy',frequency: 'common' },
+                        { id: 'duck_heavy',assetId: 'cyber_duck_heavy',speed: 1.0,points: 3,size: 1.2,pattern: 'zigzag',frequency: 'uncommon' }
+                    ]
+                };
+            }
+
+            // Auto-start the game for quick smoke testing after assets are ready and DOM loaded.
+            function tryAutoStart() {
+                if (window.run) {
+                    try {
+                        window.run('play');
+                    } catch (e) {
+                        console.warn('Auto-start run() failed:',e);
+                    }
+                }
+            }
+
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                if (window.assetsReady) window.assetsReady.then(tryAutoStart);
+                else tryAutoStart();
+            } else {
+                document.addEventListener('DOMContentLoaded',() => {
+                    if (window.assetsReady) window.assetsReady.then(tryAutoStart);
+                    else tryAutoStart();
+                });
+            }
+        })();
+    </script>
+
+
+    <script>
+        /* ==================================================
+         * GAME OVERVIEW: Vịt Trời Đại Chiến - Modern cyberpunk duck hunt
+         * Tap/click to shoot robotic ducks flying across a futuristic cityscape
+         * 60-second rounds with combo system and increasing difficulty
+         * 
+         * EDIT MODE: Customize duck types (speed, points, size, pattern, frequency),
+         * background colors, and timer duration
+         * 
+         * GAME STATE SHAPE: window.gameConfig = {
+         *   duckTypes: [{ id, assetId, speed, points, size, pattern, frequency }],
+         *   timerDuration: 60,
+         *   backgroundColor: '#0a1128',
+         *   neonColor: '#00f3ff'
+         * }
+         * ==================================================
+         */
+
+        // Constants
+        const CANVAS_WIDTH = 720;
+        const CANVAS_HEIGHT = 1280;
+        const MAX_DELTA = 0.11;
+        const COMBO_TIMEOUT = 2000; // 2 seconds
+        const MAX_COMBO = 6; // 3x multiplier at combo 6
+
+        // Game state
+        let canvas,ctx;
+        let currentMode = 'play';
+        let assetCache = {};
+        let audioContext,audioBuffers = {};
+        let backgroundMusicSource = null;
+
+        // Runtime game state (NOT in gameConfig)
+        let gameActive = false;
+        let score = 0;
+        let combo = 0;
+        let comboTimer = 0;
+        let timeRemaining = 60;
+        let activeDucks = [];
+        let particles = [];
+        let bulletTrails = [];
+        let lastTime = 0;
+        let gamePhase = 0; // 0: 0-20s, 1: 20-40s, 2: 40-60s
+        let spawnTimer = 0;
+        let highScore = 0;
+        let assetsLoaded = false;
+        let lastShotTime = 0;
+        let gunBaseX = CANVAS_WIDTH / 2;
+        // Safe area / status bar offset in pixels (calculated from CSS env or host)
+        let statusTop = 0;
+        // Safe area bottom inset (home indicator) in pixels
+        let statusBottom = 0;
+        let gunBaseY = CANVAS_HEIGHT - 50;
+
+        // Edit mode state
+        let selectedDuckIndex = -1;
+
+        // Asset IDs
+        const ASSET_IDS = {
+            ducks: ['cyber_duck_basic','cyber_duck_fast','cyber_duck_heavy','cyber_duck_rare'],
+            background: 'cityscape_background',
+            guns: ['gun_plasma','gun_laser','gun_pulse','gun_cannon'],
+            sounds: {
+                hit: 'duck_hit_sound',
+                spawn: 'duck_spawn_sound',
+                gameOver: 'game_over_sound',
+                music: 'background_music',
+                combo: 'combo_sound'
+            }
+        };
+
+        // Flight patterns
+        const PATTERNS = {
+            straight: (duck,dt) => {
+                duck.x += duck.vx * dt;
+                duck.y += duck.vy * dt;
+            },
+            wavy: (duck,dt) => {
+                duck.x += duck.vx * dt;
+                duck.waveTime = (duck.waveTime || 0) + dt * 3;
+                duck.y += duck.vy * dt + Math.sin(duck.waveTime) * 100 * dt;
+            },
+            zigzag: (duck,dt) => {
+                duck.x += duck.vx * dt;
+                duck.zigzagTime = (duck.zigzagTime || 0) + dt * 2;
+                const zigzag = Math.floor(duck.zigzagTime) % 2 === 0 ? 1 : -1;
+                duck.y += duck.vy * dt + zigzag * 150 * dt;
+            },
+            circular: (duck,dt) => {
+                duck.circleTime = (duck.circleTime || 0) + dt;
+                const radius = 150;
+                const speed = duck.speed * 0.5;
+                duck.x = duck.centerX + Math.cos(duck.circleTime * speed) * radius;
+                duck.y = duck.centerY + Math.sin(duck.circleTime * speed) * radius;
+            }
+        };
+
+        // Helper: Load image
+        function loadImage(url) {
+            return new Promise((resolve,reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = url;
+            });
+        }
+
+        // Helper: Load audio
+        function loadAudio(url) {
+            return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(buffer => audioContext.decodeAudioData(buffer));
+        }
+
+        // Helper: Play sound
+        function playSound(bufferId,loop = false,volume = 1.0) {
+            if (!audioContext || !audioBuffers[bufferId]) return null;
+
+            const source = audioContext.createBufferSource();
+            const gainNode = audioContext.createGain();
+
+            source.buffer = audioBuffers[bufferId];
+            source.loop = loop;
+            gainNode.gain.value = volume;
+
+            source.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            source.start(0);
+
+            return source;
+        }
+
+        // Helper: Draw image with aspect ratio
+        function drawImage(img,x,y,width,height,mode = 'contain') {
+            if (!img || !img.complete) return;
+
+            const imgAspect = img.width / img.height;
+            const targetAspect = width / height;
+
+            let drawWidth,drawHeight,drawX,drawY;
+
+            if (mode === 'cover') {
+                if (imgAspect > targetAspect) {
+                    drawHeight = height;
+                    drawWidth = height * imgAspect;
+                    drawX = x - (drawWidth - width) / 2;
+                    drawY = y;
+                } else {
+                    drawWidth = width;
+                    drawHeight = width / imgAspect;
+                    drawX = x;
+                    drawY = y - (drawHeight - height) / 2;
+                }
+            } else { // contain
+                if (imgAspect > targetAspect) {
+                    drawWidth = width;
+                    drawHeight = width / imgAspect;
+                    drawX = x;
+                    drawY = y + (height - drawHeight) / 2;
+                } else {
+                    drawHeight = height;
+                    drawWidth = height * imgAspect;
+                    drawX = x + (width - drawWidth) / 2;
+                    drawY = y;
+                }
+            }
+
+            ctx.drawImage(img,drawX,drawY,drawWidth,drawHeight);
+        }
+
+        // Preload all assets
+        async function preloadAssets() {
+            lib.log('Preloading assets...');
+
+            // Initialize audio context
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            const loadPromises = [];
+
+            // Load duck images
+            ASSET_IDS.ducks.forEach(id => {
+                const asset = lib.getAsset(id);
+                if (asset) {
+                    loadPromises.push(
+                        loadImage(asset.url).then(img => {
+                            assetCache[id] = img;
+                            lib.log(`Loaded image: ${id}`);
+                        })
+                    );
+                }
+            });
+
+            // Load gun images
+            ASSET_IDS.guns.forEach(id => {
+                const asset = lib.getAsset(id);
+                if (asset) {
+                    loadPromises.push(
+                        loadImage(asset.url).then(img => {
+                            assetCache[id] = img;
+                            lib.log(`Loaded image: ${id}`);
+                        }).catch(() => {
+                            lib.log(`Warning: Gun asset ${id} not found`);
+                        })
+                    );
+                } else {
+                    lib.log(`Warning: Gun asset ${id} not found`);
+                }
+            });
+
+            // Load background
+            const bgAsset = lib.getAsset(ASSET_IDS.background);
+            if (bgAsset) {
+                loadPromises.push(
+                    loadImage(bgAsset.url).then(img => {
+                        assetCache[ASSET_IDS.background] = img;
+                        lib.log('Loaded background');
+                    })
+                );
+            }
+
+            // Load sounds
+            Object.entries(ASSET_IDS.sounds).forEach(([key,id]) => {
+                const asset = lib.getAsset(id);
+                if (asset) {
+                    loadPromises.push(
+                        loadAudio(asset.url).then(buffer => {
+                            audioBuffers[id] = buffer;
+                            lib.log(`Loaded audio: ${id}`);
+                        })
+                    );
+                }
+            });
+
+            await Promise.all(loadPromises);
+            lib.log('All assets loaded');
+            assetsLoaded = true;
+        }
+
+        // Initialize canvas
+        function initCanvas() {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = CANVAS_WIDTH;
+            canvas.height = CANVAS_HEIGHT;
+        }
+
+        // Spawn duck
+        function spawnDuck() {
+            if (!gameActive) return;
+
+            // Select random duck type based on frequency
+            const types = window.gameConfig.duckTypes;
+            const weights = types.map(t => {
+                switch (t.frequency) {
+                    case 'very common': return 4;
+                    case 'common': return 3;
+                    case 'uncommon': return 2;
+                    case 'rare': return 1;
+                    default: return 3;
+                }
+            });
+
+            const totalWeight = weights.reduce((a,b) => a + b,0);
+            let random = Math.random() * totalWeight;
+            let selectedType = types[0];
+
+            for (let i = 0; i < types.length; i++) {
+                random -= weights[i];
+                if (random <= 0) {
+                    selectedType = types[i];
+                    break;
+                }
+            }
+
+            // Spawn from random edge
+            const edge = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+            let x,y,vx,vy;
+
+            const baseSpeed = selectedType.speed * 100;
+
+            switch (edge) {
+                case 0: // top
+                    x = Math.random() * CANVAS_WIDTH;
+                    y = -50;
+                    vx = (Math.random() - 0.5) * baseSpeed;
+                    vy = baseSpeed * 0.5;
+                    break;
+                case 1: // right
+                    x = CANVAS_WIDTH + 50;
+                    y = Math.random() * CANVAS_HEIGHT;
+                    vx = -baseSpeed;
+                    vy = (Math.random() - 0.5) * baseSpeed * 0.5;
+                    break;
+                case 2: // bottom
+                    x = Math.random() * CANVAS_WIDTH;
+                    y = CANVAS_HEIGHT + 50;
+                    vx = (Math.random() - 0.5) * baseSpeed;
+                    vy = -baseSpeed * 0.5;
+                    break;
+                case 3: // left
+                    x = -50;
+                    y = Math.random() * CANVAS_HEIGHT;
+                    vx = baseSpeed;
+                    vy = (Math.random() - 0.5) * baseSpeed * 0.5;
+                    break;
+            }
+
+            const duck = {
+                x,y,vx,vy,
+                type: selectedType,
+                speed: selectedType.speed,
+                size: selectedType.size * 80,
+                pattern: selectedType.pattern,
+                assetId: selectedType.assetId,
+                centerX: x,
+                centerY: y
+            };
+
+            activeDucks.push(duck);
+        }
+
+        // Update ducks
+        function updateDucks(dt) {
+            for (let i = activeDucks.length - 1; i >= 0; i--) {
+                const duck = activeDucks[i];
+
+                // Apply movement pattern
+                if (PATTERNS[duck.pattern]) {
+                    PATTERNS[duck.pattern](duck,dt);
+                }
+
+                // Remove if off screen
+                if (duck.x < -200 || duck.x > CANVAS_WIDTH + 200 ||
+                    duck.y < -200 || duck.y > CANVAS_HEIGHT + 200) {
+                    activeDucks.splice(i,1);
+                }
+            }
+        }
+
+        // Check hit
+        function checkHit(x,y) {
+            // Record shot time for muzzle flash
+            lastShotTime = performance.now();
+
+            // Check from top to bottom (most recent first)
+            for (let i = activeDucks.length - 1; i >= 0; i--) {
+                const duck = activeDucks[i];
+                const dx = x - duck.x;
+                const dy = y - duck.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const hitRadius = duck.size * 0.4; // Slightly smaller than visual
+
+                if (distance < hitRadius) {
+                    // Hit!
+                    const points = duck.type.points;
+                    const multiplier = 1 + Math.min(combo,MAX_COMBO) * 0.5;
+                    const earnedPoints = Math.floor(points * multiplier);
+
+                    score += earnedPoints;
+                    combo++;
+                    comboTimer = COMBO_TIMEOUT;
+
+                    // Create bullet trail from gun to duck
+                    createBulletTrail(gunBaseX,gunBaseY,duck.x,duck.y);
+
+                    // Create particles
+                    createHitParticles(duck.x,duck.y);
+
+                    // Play sounds
+                    playSound(ASSET_IDS.sounds.hit,false,0.5);
+                    if (combo > 1) {
+                        playSound(ASSET_IDS.sounds.combo,false,0.3);
+                    }
+
+                    // Remove duck
+                    activeDucks.splice(i,1);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Get gun color based on selected gun
+        function getGunColor() {
+            const gunColors = {
+                'gun_plasma': '#00f3ff',    // Cyan
+                'gun_laser': '#ff0000',     // Red
+                'gun_pulse': '#8338ec',     // Purple
+                'gun_cannon': '#ffaa00'     // Orange
+            };
+            const selectedGun = window.gameConfig.selectedGun || 'gun_plasma';
+            return gunColors[selectedGun] || '#00f3ff';
+        }
+
+        // Create bullet trail
+        function createBulletTrail(fromX,fromY,toX,toY) {
+            const gunColor = getGunColor();
+            bulletTrails.push({
+                fromX,fromY,toX,toY,
+                life: 0.15,
+                maxLife: 0.15,
+                color: gunColor,
+                width: 4
+            });
+        }
+
+        // Create hit particles
+        function createHitParticles(x,y) {
+            const colors = ['#00f3ff','#ff006e','#8338ec'];
+            for (let i = 0; i < 12; i++) {
+                const angle = (Math.PI * 2 * i) / 12;
+                const speed = 200 + Math.random() * 100;
+                particles.push({
+                    x,y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 0.5,
+                    maxLife: 0.5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: 8 + Math.random() * 8
+                });
+            }
+        }
+
+        // Update bullet trails
+        function updateBulletTrails(dt) {
+            for (let i = bulletTrails.length - 1; i >= 0; i--) {
+                const trail = bulletTrails[i];
+                trail.life -= dt;
+
+                if (trail.life <= 0) {
+                    bulletTrails.splice(i,1);
+                }
+            }
+        }
+
+        // Update particles
+        function updateParticles(dt) {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+                p.life -= dt;
+
+                if (p.life <= 0) {
+                    particles.splice(i,1);
+                }
+            }
+        }
+
+        // Update game state
+        function updateGame(dt) {
+            if (!gameActive) return;
+
+            // Update timer
+            timeRemaining -= dt;
+            if (timeRemaining <= 0) {
+                timeRemaining = 0;
+                endGame();
+                return;
+            }
+
+            // Update game phase
+            const elapsed = window.gameConfig.timerDuration - timeRemaining;
+            const phaseDuration = window.gameConfig.timerDuration / 3;
+            gamePhase = Math.min(2,Math.floor(elapsed / phaseDuration));
+
+            // Update combo timer
+            if (combo > 0) {
+                comboTimer -= dt * 1000;
+                if (comboTimer <= 0) {
+                    combo = 0;
+                }
+            }
+
+            // Spawn ducks based on phase
+            const spawnRates = [1.5,1.0,0.6]; // seconds between spawns
+            spawnTimer -= dt;
+            if (spawnTimer <= 0) {
+                spawnDuck();
+                spawnTimer = spawnRates[gamePhase];
+            }
+
+            // Update ducks
+            updateDucks(dt);
+
+            // Update bullet trails
+            updateBulletTrails(dt);
+
+            // Update particles
+            updateParticles(dt);
+        }
+
+        // Render game
+        function renderGame() {
+            // Clear
+            ctx.fillStyle = window.gameConfig.backgroundColor || '#0a1128';
+            ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+
+            // Draw background
+            const bgImg = assetCache[ASSET_IDS.background];
+            if (bgImg) {
+                drawImage(bgImg,0,0,CANVAS_WIDTH,CANVAS_HEIGHT,'cover');
+            }
+
+            // Draw bullet trails
+            bulletTrails.forEach(trail => {
+                const alpha = trail.life / trail.maxLife;
+                ctx.strokeStyle = trail.color;
+                ctx.globalAlpha = alpha * 0.8;
+                ctx.lineWidth = trail.width;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Draw glow effect
+                ctx.shadowColor = trail.color;
+                ctx.shadowBlur = 15;
+
+                ctx.beginPath();
+                ctx.moveTo(trail.fromX,trail.fromY);
+                ctx.lineTo(trail.toX,trail.toY);
+                ctx.stroke();
+
+                ctx.shadowBlur = 0;
+            });
+            ctx.globalAlpha = 1;
+
+            // Draw ducks
+            activeDucks.forEach(duck => {
+                const img = assetCache[duck.assetId];
+                if (img) {
+                    ctx.save();
+
+                    // Flip if moving left
+                    if (duck.vx < 0) {
+                        ctx.translate(duck.x,duck.y);
+                        ctx.scale(-1,1);
+                        drawImage(img,-duck.size / 2,-duck.size / 2,duck.size,duck.size,'contain');
+                    } else {
+                        drawImage(img,duck.x - duck.size / 2,duck.y - duck.size / 2,duck.size,duck.size,'contain');
+                    }
+
+                    ctx.restore();
+                }
+            });
+
+            // Draw particles
+            particles.forEach(p => {
+                const alpha = p.life / p.maxLife;
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = alpha;
+                ctx.beginPath();
+                ctx.arc(p.x,p.y,p.size * alpha,0,Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+
+            // Draw UI
+            renderUI();
+        }
+
+        // Render UI
+        function renderUI() {
+            // Top HUD bar background (offset by statusTop)
+            const hudHeight = 120 + (statusTop || 0);
+            ctx.fillStyle = 'rgba(10, 17, 40, 0.85)';
+            ctx.fillRect(0,0,CANVAS_WIDTH,hudHeight);
+
+            // HUD accent line
+            ctx.fillStyle = window.gameConfig.neonColor || '#00f3ff';
+            ctx.fillRect(0,hudHeight - 2,CANVAS_WIDTH,2);
+
+            // Score (left side) (offset by statusTop)
+            const hudLeftPad = 120; // left padding for HUD elements (requested: 120px)
+            const scoreY1 = 45 + (statusTop || 0);
+            const scoreY2 = 95 + (statusTop || 0);
+            ctx.fillStyle = window.gameConfig.neonColor || '#00f3ff';
+            ctx.font = 'bold 36px Orbitron, Arial';
+            ctx.textAlign = 'left';
+            ctx.shadowColor = window.gameConfig.neonColor || '#00f3ff';
+            ctx.shadowBlur = 20;
+            ctx.fillText(`SCORE`,hudLeftPad,scoreY1);
+            ctx.font = 'bold 48px Orbitron, Arial';
+            ctx.fillText(`${score}`,hudLeftPad,scoreY2);
+            ctx.shadowBlur = 0;
+
+            // Timer (right side)
+            const timerColor = timeRemaining < 10 ? '#ff006e' : (window.gameConfig.neonColor || '#00f3ff');
+            ctx.fillStyle = timerColor;
+            ctx.font = 'bold 36px Orbitron, Arial';
+            ctx.textAlign = 'right';
+            ctx.shadowColor = timerColor;
+            ctx.shadowBlur = 20;
+            ctx.fillText(`TIME`,CANVAS_WIDTH - 24,45);
+            ctx.font = 'bold 48px Orbitron, Arial';
+            ctx.fillText(`${Math.ceil(timeRemaining)}`,CANVAS_WIDTH - 24,95);
+            ctx.shadowBlur = 0;
+
+            // Combo (center, when active)
+            if (combo > 1) {
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#ff006e';
+                ctx.font = 'bold 32px Orbitron, Arial';
+                ctx.shadowColor = '#ff006e';
+                ctx.shadowBlur = 30;
+                const multiplier = (1 + Math.min(combo,MAX_COMBO) * 0.5).toFixed(1);
+                ctx.fillText(`COMBO ×${multiplier}`,CANVAS_WIDTH / 2,160);
+                ctx.shadowBlur = 0;
+            }
+
+            // Bottom gun display
+            renderGun(statusBottom);
+        }
+
+        // Render gun at bottom
+        function renderGun(statusBottomParam) {
+            const gunSkin = window.gameConfig.selectedGun || 'gun_plasma';
+            const gunImg = assetCache[gunSkin];
+            const gunColor = getGunColor();
+
+            // Gun background panel
+            ctx.fillStyle = 'rgba(10, 17, 40, 0.85)';
+            ctx.fillRect(0,CANVAS_HEIGHT - 140 - (statusBottomParam || 0),CANVAS_WIDTH,140);
+
+            // Gun accent line
+            ctx.fillStyle = gunColor;
+            ctx.fillRect(0,CANVAS_HEIGHT - 142 - (statusBottomParam || 0),CANVAS_WIDTH,2);
+
+            // Draw gun image pointing toward tap position
+            const centerX = CANVAS_WIDTH / 2;
+            const gunBaseY = CANVAS_HEIGHT - 50 - (statusBottomParam || 0);
+
+            // Calculate angle toward last tap position (or default to up)
+            let angle = -Math.PI / 2; // Default: pointing up
+            if (window.lastTapX !== undefined && window.lastTapY !== undefined) {
+                const dx = window.lastTapX - centerX;
+                const dy = window.lastTapY - gunBaseY;
+                angle = Math.atan2(dy,dx);
+            }
+
+            if (gunImg) {
+                const gunSize = 100;
+                ctx.save();
+
+                // Translate to gun position and rotate toward tap
+                ctx.translate(centerX,gunBaseY);
+                ctx.rotate(angle);
+
+                // Draw gun image centered at origin
+                drawImage(gunImg,-gunSize / 2,-gunSize / 2,gunSize,gunSize,'contain');
+
+                ctx.restore();
+            } else {
+                // Fallback: draw simple gun pointing toward tap
+                ctx.strokeStyle = gunColor;
+                ctx.lineWidth = 4;
+                ctx.shadowColor = gunColor;
+                ctx.shadowBlur = 20;
+
+                // Gun barrel pointing toward tap
+                const barrelLength = 80;
+                ctx.beginPath();
+                ctx.moveTo(centerX,gunBaseY);
+                ctx.lineTo(centerX + Math.cos(angle) * barrelLength,gunBaseY + Math.sin(angle) * barrelLength);
+                ctx.stroke();
+
+                // Gun body
+                ctx.fillStyle = gunColor;
+                ctx.beginPath();
+                ctx.arc(centerX,gunBaseY,20,0,Math.PI * 2);
+                ctx.fill();
+
+                // Muzzle
+                ctx.beginPath();
+                ctx.arc(centerX + Math.cos(angle) * barrelLength,gunBaseY + Math.sin(angle) * barrelLength,12,0,Math.PI * 2);
+                ctx.fill();
+
+                ctx.shadowBlur = 0;
+            }
+
+            // Muzzle flash effect (if recently shot)
+            if (lastShotTime && performance.now() - lastShotTime < 100) {
+                const flashAlpha = 1 - (performance.now() - lastShotTime) / 100;
+
+                ctx.fillStyle = gunColor;
+                ctx.globalAlpha = flashAlpha * 0.8;
+
+                // Flash burst at muzzle position
+                const barrelLength = 85;
+                const muzzleX = centerX + Math.cos(angle) * barrelLength;
+                const muzzleY = gunBaseY + Math.sin(angle) * barrelLength;
+
+                for (let i = 0; i < 3; i++) {
+                    const size = 15 + i * 10;
+                    ctx.beginPath();
+                    ctx.arc(muzzleX,muzzleY,size,0,Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.globalAlpha = 1;
+            }
+
+            // Gun name label
+            ctx.fillStyle = gunColor;
+            ctx.font = 'bold 16px Rajdhani, Arial';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = gunColor;
+            ctx.shadowBlur = 10;
+            const gunLabel = gunSkin.replace('gun_','').toUpperCase();
+            ctx.fillText(gunLabel,CANVAS_WIDTH / 2,CANVAS_HEIGHT - 15 - (statusBottomParam || 0));
+            ctx.shadowBlur = 0;
+
+            // Draw gun shop buttons (redesigned - larger, more prominent)
+            const buttonSize = 50;
+            const buttonY = CANVAS_HEIGHT - 70 - (statusBottomParam || 0);
+            const leftButtonX = 50;
+            const rightButtonX = CANVAS_WIDTH - 50;
+
+            // Store button positions for click detection
+            window.gunShopButtons = {
+                left: { x: leftButtonX,y: buttonY,size: buttonSize },
+                right: { x: rightButtonX,y: buttonY,size: buttonSize }
+            };
+
+            // Left arrow button - larger and more visible
+            ctx.fillStyle = gunColor;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath();
+            ctx.arc(leftButtonX,buttonY,buttonSize / 2,0,Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            // Button border
+            ctx.strokeStyle = gunColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(leftButtonX,buttonY,buttonSize / 2,0,Math.PI * 2);
+            ctx.stroke();
+
+            // Left arrow symbol
+            ctx.fillStyle = '#0a1128';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('◀',leftButtonX,buttonY);
+
+            // Right arrow button - larger and more visible
+            ctx.fillStyle = gunColor;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath();
+            ctx.arc(rightButtonX,buttonY,buttonSize / 2,0,Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            // Button border
+            ctx.strokeStyle = gunColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(rightButtonX,buttonY,buttonSize / 2,0,Math.PI * 2);
+            ctx.stroke();
+
+            // Right arrow symbol
+            ctx.fillStyle = '#0a1128';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('▶',rightButtonX,buttonY);
+        }
+
+        // Start game
+        function startGame() {
+            gameActive = true;
+            score = 0;
+            combo = 0;
+            comboTimer = 0;
+            timeRemaining = window.gameConfig.timerDuration;
+            activeDucks = [];
+            particles = [];
+            bulletTrails = [];
+            gamePhase = 0;
+            spawnTimer = 1.0;
+
+            // Initialize gun aiming position (center top of screen)
+            window.lastTapX = CANVAS_WIDTH / 2;
+            window.lastTapY = CANVAS_HEIGHT / 2;
+
+            // Hide splash screen
+            hideSplashScreen();
+
+            // Start background music
+            if (backgroundMusicSource) {
+                backgroundMusicSource.stop();
+            }
+            backgroundMusicSource = playSound(ASSET_IDS.sounds.music,true,0.3);
+        }
+
+        // End game
+        function endGame() {
+            gameActive = false;
+
+            const isNewHighScore = score > highScore;
+            if (isNewHighScore) {
+                highScore = score;
+            }
+
+            // Stop music
+            if (backgroundMusicSource) {
+                backgroundMusicSource.stop();
+                backgroundMusicSource = null;
+            }
+
+            // Play game over sound
+            playSound(ASSET_IDS.sounds.gameOver,false,0.5);
+
+
+            // Notify host (WebView / parent frame) that game ended and send score.
+            // This will call GameChannel.postMessage(...) for mobile WebView (webview_flutter)
+            // and window.parent.postMessage(...) when embedded in an iframe (web).
+            try {
+                const payload = JSON.stringify({ type: 'game_end',score: score });
+                // webview_flutter / native WebView channel
+                if (window.GameChannel && typeof window.GameChannel.postMessage === 'function') {
+                    try { window.GameChannel.postMessage(payload); } catch (e) { /* ignore */ }
+                }
+                // iframe parent
+                try { window.parent.postMessage(payload,'*'); } catch (e) { /* ignore */ }
+            } catch (e) {
+                console.warn('Failed to notify host about game end',e);
+            }
+
+
+            // Show game over overlay
+            showGameOverOverlay(isNewHighScore);
+        }
+
+        // Game loop
+        function gameLoop(timestamp) {
+            const dt = Math.min((timestamp - lastTime) / 1000,MAX_DELTA);
+            lastTime = timestamp;
+
+            if (dt > 0) {
+                updateGame(dt);
+                renderGame();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Cycle gun skin
+        function cycleGun(direction) {
+            const gunSkins = ['gun_plasma','gun_laser','gun_pulse','gun_cannon'];
+            const currentGun = window.gameConfig.selectedGun || 'gun_plasma';
+            const currentIndex = gunSkins.indexOf(currentGun);
+            let newIndex = currentIndex + direction;
+
+            // Wrap around
+            if (newIndex < 0) newIndex = gunSkins.length - 1;
+            if (newIndex >= gunSkins.length) newIndex = 0;
+
+            window.gameConfig.selectedGun = gunSkins[newIndex];
+        }
+
+        // Handle input
+        function handleInput(x,y) {
+            if (currentMode === 'edit') return;
+
+            // Check if clicking gun shop buttons
+            if (gameActive && window.gunShopButtons) {
+                const leftBtn = window.gunShopButtons.left;
+                const rightBtn = window.gunShopButtons.right;
+
+                // Check left button
+                const distToLeft = Math.sqrt((x - leftBtn.x) ** 2 + (y - leftBtn.y) ** 2);
+                if (distToLeft < leftBtn.size) {
+                    cycleGun(-1);
+                    return;
+                }
+
+                // Check right button
+                const distToRight = Math.sqrt((x - rightBtn.x) ** 2 + (y - rightBtn.y) ** 2);
+                if (distToRight < rightBtn.size) {
+                    cycleGun(1);
+                    return;
+                }
+            }
+
+            // Store the tap position for gun aiming
+            window.lastTapX = x;
+            window.lastTapY = y;
+
+            if (gameActive) {
+                checkHit(x,y);
+            }
+        }
+
+        // Setup input handlers
+        function setupInput() {
+            // Touch
+            canvas.addEventListener('touchstart',(e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = CANVAS_WIDTH / rect.width;
+                const scaleY = CANVAS_HEIGHT / rect.height;
+
+                for (let touch of e.changedTouches) {
+                    const x = (touch.clientX - rect.left) * scaleX;
+                    const y = (touch.clientY - rect.top) * scaleY;
+                    handleInput(x,y);
+                }
+            },{ passive: false });
+
+            // Mouse
+            canvas.addEventListener('click',(e) => {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = CANVAS_WIDTH / rect.width;
+                const scaleY = CANVAS_HEIGHT / rect.height;
+                const x = (e.clientX - rect.left) * scaleX;
+                const y = (e.clientY - rect.top) * scaleY;
+                handleInput(x,y);
+            });
+        }
+
+        // UI Functions
+        function showSplashScreen() {
+            const splash = document.getElementById('splashScreen');
+            const startBtn = document.getElementById('startButton');
+            const gunShopBtn = document.getElementById('gunShopButton');
+            const spinner = document.getElementById('loadingSpinner');
+
+            splash.classList.remove('hidden');
+
+            if (assetsLoaded) {
+                spinner.style.display = 'none';
+                startBtn.style.display = 'flex';
+                gunShopBtn.style.display = 'flex';
+            }
+        }
+
+        function hideSplashScreen() {
+            const splash = document.getElementById('splashScreen');
+            splash.classList.add('hidden');
+        }
+
+        function showGameOverOverlay(isNewRecord) {
+            const overlay = document.getElementById('gameOverOverlay');
+            const finalScoreEl = document.getElementById('finalScore');
+            const highScoreEl = document.getElementById('highScoreDisplay');
+            const newRecordEl = document.getElementById('newRecordDisplay');
+
+            finalScoreEl.textContent = `SCORE: ${score}`;
+
+            if (isNewRecord) {
+                newRecordEl.style.display = 'block';
+                highScoreEl.style.display = 'none';
+            } else if (highScore > 0) {
+                newRecordEl.style.display = 'none';
+                highScoreEl.style.display = 'block';
+                highScoreEl.textContent = `High Score: ${highScore}`;
+            } else {
+                newRecordEl.style.display = 'none';
+                highScoreEl.style.display = 'none';
+            }
+
+            overlay.classList.add('visible');
+        }
+
+        function hideGameOverOverlay() {
+            const overlay = document.getElementById('gameOverOverlay');
+            overlay.classList.remove('visible');
+        }
+
+        // Build edit UI
+        function buildEditUI() {
+            const editContent = document.getElementById('editContent');
+
+            let html = '';
+
+            // Duck Types Section
+            html += '<div class="edit-section" id="duckSection">';
+            html += '<div class="edit-section-header" onclick="toggleSection(\'duckSection\')">';
+            html += '<h2 class="edit-section-title">Duck Types</h2>';
+            html += '<span class="edit-section-toggle">▼</span>';
+            html += '</div>';
+            html += '<div class="edit-section-content">';
+
+            window.gameConfig.duckTypes.forEach((duck,index) => {
+                const selected = index === selectedDuckIndex ? 'selected' : '';
+                html += `<div class="duck-card ${selected}" onclick="selectDuck(${index})">`;
+                html += '<div class="duck-card-header">';
+                html += `<div class="duck-card-title">Duck Type ${index + 1}</div>`;
+                html += `<div class="duck-card-info">${duck.points} pts • ${duck.speed.toFixed(1)}× speed</div>`;
+                html += '</div>';
+
+                if (index === selectedDuckIndex) {
+                    html += '<div class="property-row">';
+                    html += '<label class="property-label">Speed</label>';
+                    html += `<input type="range" class="property-input" min="0.5" max="3" step="0.1" value="${duck.speed}" onchange="updateDuckProperty(${index}, 'speed', parseFloat(this.value))">`;
+                    html += '</div>';
+
+                    html += '<div class="property-row">';
+                    html += '<label class="property-label">Points</label>';
+                    html += `<input type="number" class="property-input" min="1" max="10" value="${duck.points}" onchange="updateDuckProperty(${index}, 'points', parseInt(this.value))">`;
+                    html += '</div>';
+
+                    html += '<div class="property-row">';
+                    html += '<label class="property-label">Size</label>';
+                    html += `<input type="range" class="property-input" min="0.5" max="2" step="0.1" value="${duck.size}" onchange="updateDuckProperty(${index}, 'size', parseFloat(this.value))">`;
+                    html += '</div>';
+
+                    html += '<div class="property-row">';
+                    html += '<label class="property-label">Pattern</label>';
+                    html += `<select class="property-input" onchange="updateDuckProperty(${index}, 'pattern', this.value)">`;
+                    ['straight','wavy','zigzag','circular'].forEach(p => {
+                        const sel = p === duck.pattern ? 'selected' : '';
+                        html += `<option value="${p}" ${sel}>${p}</option>`;
+                    });
+                    html += '</select>';
+                    html += '</div>';
+
+                    html += '<div class="property-row">';
+                    html += '<label class="property-label">Frequency</label>';
+                    html += `<select class="property-input" onchange="updateDuckProperty(${index}, 'frequency', this.value)">`;
+                    ['rare','uncommon','common','very common'].forEach(f => {
+                        const sel = f === duck.frequency ? 'selected' : '';
+                        html += `<option value="${f}" ${sel}>${f}</option>`;
+                    });
+                    html += '</select>';
+                    html += '</div>';
+
+                    html += '<div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;">';
+                    html += `<button class="btn" onclick="duplicateDuck(${index})">DUPLICATE</button>`;
+                    if (window.gameConfig.duckTypes.length > 2) {
+                        html += `<button class="btn btn-delete" onclick="deleteDuck(${index})">DELETE</button>`;
+                    }
+                    html += '</div>';
+                }
+
+                html += '</div>';
+            });
+
+            if (window.gameConfig.duckTypes.length < 8) {
+                html += '<button class="btn btn-add" onclick="addDuck()">+ ADD DUCK TYPE</button>';
+            }
+
+            html += '</div></div>';
+
+            // Gun Skins Section
+            html += '<div class="edit-section" id="gunSection">';
+            html += '<div class="edit-section-header" onclick="toggleSection(\'gunSection\')">';
+            html += '<h2 class="edit-section-title">Gun Skins</h2>';
+            html += '<span class="edit-section-toggle">▼</span>';
+            html += '</div>';
+            html += '<div class="edit-section-content">';
+            html += '<div class="color-picker-row">';
+
+            const gunSkins = ['gun_plasma','gun_laser','gun_pulse','gun_cannon'];
+            gunSkins.forEach(gunId => {
+                const sel = gunId === (window.gameConfig.selectedGun || 'gun_plasma') ? 'selected' : '';
+                const gunLabel = gunId.replace('gun_','').toUpperCase();
+                html += `<div class="color-swatch ${sel}" style="background: linear-gradient(135deg, #8338ec, #ff006e); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: white; text-align: center; padding: 8px;" onclick="updateGameSetting('selectedGun', '${gunId}')" title="${gunLabel}">`;
+                html += gunLabel;
+                html += '</div>';
+            });
+
+            html += '</div>';
+            html += '</div></div>';
+
+            // Game Settings Section
+            html += '<div class="edit-section" id="settingsSection">';
+            html += '<div class="edit-section-header" onclick="toggleSection(\'settingsSection\')">';
+            html += '<h2 class="edit-section-title">Game Settings</h2>';
+            html += '<span class="edit-section-toggle">▼</span>';
+            html += '</div>';
+            html += '<div class="edit-section-content">';
+
+            html += '<div class="property-row">';
+            html += '<label class="property-label">Timer Duration</label>';
+            html += `<select class="property-input" onchange="updateGameSetting('timerDuration', parseInt(this.value))">`;
+            [30,60,90,120].forEach(t => {
+                const sel = t === window.gameConfig.timerDuration ? 'selected' : '';
+                html += `<option value="${t}" ${sel}>${t} seconds</option>`;
+            });
+            html += '</select>';
+            html += '</div>';
+
+            html += '<div class="property-row">';
+            html += '<label class="property-label">Background Color</label>';
+            html += '<div class="color-picker-row">';
+            const bgColors = [
+                { color: '#0a1128',name: 'Deep Blue' },
+                { color: '#1a0a28',name: 'Purple Night' },
+                { color: '#0a2818',name: 'Dark Green' },
+                { color: '#281a0a',name: 'Brown Dusk' }
+            ];
+            bgColors.forEach(({ color,name }) => {
+                const sel = color === window.gameConfig.backgroundColor ? 'selected' : '';
+                html += `<div class="color-swatch ${sel}" style="background: ${color};" onclick="updateGameSetting('backgroundColor', '${color}')" title="${name}"></div>`;
+            });
+            html += '</div>';
+            html += '</div>';
+
+            html += '<div class="property-row">';
+            html += '<label class="property-label">Neon Accent Color</label>';
+            html += '<div class="color-picker-row">';
+            const neonColors = [
+                { color: '#00f3ff',name: 'Cyan' },
+                { color: '#ff006e',name: 'Hot Pink' },
+                { color: '#8338ec',name: 'Purple' },
+                { color: '#00ff88',name: 'Green' }
+            ];
+            neonColors.forEach(({ color,name }) => {
+                const sel = color === window.gameConfig.neonColor ? 'selected' : '';
+                html += `<div class="color-swatch ${sel}" style="background: ${color};" onclick="updateGameSetting('neonColor', '${color}')" title="${name}"></div>`;
+            });
+            html += '</div>';
+            html += '</div>';
+
+            html += '</div></div>';
+
+            editContent.innerHTML = html;
+        }
+
+        // Edit mode functions (global scope for onclick)
+        window.toggleSection = function (sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('collapsed');
+        };
+
+        window.selectDuck = function (index) {
+            selectedDuckIndex = selectedDuckIndex === index ? -1 : index;
+            buildEditUI();
+        };
+
+        window.updateDuckProperty = function (index,prop,value) {
+            window.gameConfig.duckTypes[index][prop] = value;
+            buildEditUI();
+        };
+
+        window.duplicateDuck = function (index) {
+            if (window.gameConfig.duckTypes.length >= 8) return;
+            const copy = { ...window.gameConfig.duckTypes[index] };
+            copy.id = 'duck_' + Date.now();
+            window.gameConfig.duckTypes.push(copy);
+            selectedDuckIndex = window.gameConfig.duckTypes.length - 1;
+            buildEditUI();
+        };
+
+        window.deleteDuck = function (index) {
+            if (window.gameConfig.duckTypes.length <= 2) return;
+            window.gameConfig.duckTypes.splice(index,1);
+            selectedDuckIndex = -1;
+            buildEditUI();
+        };
+
+        window.addDuck = function () {
+            if (window.gameConfig.duckTypes.length >= 8) return;
+            const newDuck = {
+                id: 'duck_' + Date.now(),
+                assetId: ASSET_IDS.ducks[0],
+                speed: 1.5,
+                points: 1,
+                size: 1.0,
+                pattern: 'straight',
+                frequency: 'common'
+            };
+            window.gameConfig.duckTypes.push(newDuck);
+            selectedDuckIndex = window.gameConfig.duckTypes.length - 1;
+            buildEditUI();
+        };
+
+        window.updateGameSetting = function (key,value) {
+            window.gameConfig[key] = value;
+            buildEditUI();
+        };
+
+        // Show gun shop
+        function showGunShop() {
+            const overlay = document.getElementById('gunShopOverlay');
+            const grid = document.getElementById('gunShopGrid');
+            const closeBtn = document.getElementById('gunShopCloseButton');
+
+            if (!overlay || !grid || !closeBtn) {
+                lib.log('Error: Gun shop elements not found');
+                return;
+            }
+
+            const gunSkins = [
+                { id: 'gun_plasma',name: 'Plasma',icon: '⚡' },
+                { id: 'gun_laser',name: 'Laser',icon: '🔴' },
+                { id: 'gun_pulse',name: 'Pulse',icon: '💫' },
+                { id: 'gun_cannon',name: 'Cannon',icon: '💥' }
+            ];
+
+            const currentGun = window.gameConfig.selectedGun || 'gun_plasma';
+
+            let html = '';
+            gunSkins.forEach(gun => {
+                const selected = gun.id === currentGun ? 'selected' : '';
+                html += `<div class="gun-shop-item ${selected}" onclick="selectGunFromShop('${gun.id}')">`;
+                html += `<div class="gun-shop-item-icon">${gun.icon}</div>`;
+                html += `<div class="gun-shop-item-name">${gun.name}</div>`;
+                html += '</div>';
+            });
+
+            grid.innerHTML = html;
+
+            // Set button to "START GAME" when shop is opened from splash
+            closeBtn.textContent = 'START GAME';
+            closeBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                hideGunShop();
+                startGame();
+            };
+
+            overlay.classList.add('visible');
+            lib.log('Gun shop opened');
+        }
+
+        // Hide gun shop
+        function hideGunShop() {
+            const overlay = document.getElementById('gunShopOverlay');
+            overlay.classList.remove('visible');
+        }
+
+        // Select gun from shop
+        window.selectGunFromShop = function (gunId) {
+            window.gameConfig.selectedGun = gunId;
+            // Update the grid to show selection
+            const grid = document.getElementById('gunShopGrid');
+            if (grid) {
+                const items = grid.querySelectorAll('.gun-shop-item');
+                items.forEach(item => item.classList.remove('selected'));
+                const gunSkins = ['gun_plasma','gun_laser','gun_pulse','gun_cannon'];
+                const index = gunSkins.indexOf(gunId);
+                if (index >= 0 && items[index]) {
+                    items[index].classList.add('selected');
+                }
+            }
+        };
+
+        // Setup UI event listeners
+        function setupUIListeners() {
+            // Start button
+            const startBtn = document.getElementById('startButton');
+            if (startBtn) {
+                startBtn.addEventListener('click',() => {
+                    startGame();
+                });
+            }
+
+            // Gun shop button - open shop directly
+            const gunShopBtn = document.getElementById('gunShopButton');
+            if (gunShopBtn) {
+                gunShopBtn.addEventListener('click',(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    lib.log('Gun Shop button clicked');
+                    showGunShop();
+                });
+            }
+
+            // Gun shop close button
+            const gunShopCloseBtn = document.getElementById('gunShopCloseButton');
+            if (gunShopCloseBtn) {
+                gunShopCloseBtn.addEventListener('click',(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    hideGunShop();
+                });
+            }
+
+            // Replay button
+            const replayBtn = document.getElementById('replayButton');
+            if (replayBtn) {
+                replayBtn.addEventListener('click',() => {
+                    hideGameOverOverlay();
+                    startGame();
+                });
+            }
+
+            // Edit done button
+            const editDoneBtn = document.getElementById('editDoneButton');
+            if (editDoneBtn) {
+                editDoneBtn.addEventListener('click',() => {
+                    // Switch to play mode
+                    document.getElementById('editUI').classList.remove('active');
+                    canvas.style.display = 'block';
+                    currentMode = 'play';
+                    showSplashScreen();
+                });
+            }
+        }
+
+        // Main run function
+        async function run(mode) {
+            lib.log('run() called. Mode: ' + mode);
+            currentMode = mode;
+
+            // Initialize
+            initCanvas();
+
+            // Preload assets
+            await preloadAssets();
+
+            // compute statusTop from CSS safe-area env or from host-provided value
+            try {
+                // CSS variable --status-top references env(safe-area-inset-top)
+                const cssTop = getComputedStyle(document.documentElement).getPropertyValue('--status-top') || '0px';
+                const parsedTop = parseFloat(cssTop);
+                statusTop = isNaN(parsedTop) ? 0 : parsedTop;
+                // CSS variable --status-bottom references env(safe-area-inset-bottom)
+                const cssBottom = getComputedStyle(document.documentElement).getPropertyValue('--status-bottom') || '0px';
+                const parsedBottom = parseFloat(cssBottom);
+                statusBottom = isNaN(parsedBottom) ? 0 : parsedBottom;
+            } catch (e) { statusTop = 0; statusBottom = 0; }
+
+            // Allow host (Flutter) to override statusTop/statusBottom by providing numeric values on window.gameConfig
+            try {
+                if (window.gameConfig && typeof window.gameConfig.statusBarHeight === 'number') {
+                    statusTop = window.gameConfig.statusBarHeight || statusTop;
+                }
+                if (window.gameConfig && typeof window.gameConfig.statusBarBottomHeight === 'number') {
+                    statusBottom = window.gameConfig.statusBarBottomHeight || statusBottom;
+                }
+                // legacy name support
+                if (window.gameConfig && typeof window.gameConfig.safeAreaBottom === 'number') {
+                    statusBottom = window.gameConfig.safeAreaBottom || statusBottom;
+                }
+            } catch (e) { /* ignore */ }
+
+            // Update global gun base Y to account for bottom safe area
+            try { gunBaseY = CANVAS_HEIGHT - 50 - (statusBottom || 0); } catch (e) { gunBaseY = CANVAS_HEIGHT - 50; }
+
+            // Show start button when assets are loaded
+            if (assetsLoaded) {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('startButton').style.display = 'flex';
+                document.getElementById('gunShopButton').style.display = 'flex';
+            }
+
+            // Validate gameConfig
+            if (!window.gameConfig.duckTypes || window.gameConfig.duckTypes.length === 0) {
+                lib.log('Invalid gameConfig, using defaults');
+            }
+
+            // Show game parameters
+            lib.showGameParameters({
+                name: 'Game Settings',
+                params: {
+                    'Timer Duration': {
+                        key: 'gameConfig.timerDuration',
+                        type: 'dropdown',
+                        options: [
+                            { label: '30 seconds',value: 30 },
+                            { label: '60 seconds',value: 60 },
+                            { label: '90 seconds',value: 90 },
+                            { label: '120 seconds',value: 120 }
+                        ],
+                        onChange: (value) => {
+                            window.gameConfig.timerDuration = value;
+                        }
+                    },
+                    'Background Color': {
+                        key: 'gameConfig.backgroundColor',
+                        type: 'color',
+                        onChange: (value) => {
+                            window.gameConfig.backgroundColor = value;
+                        }
+                    }
+                }
+            });
+
+            // Setup UI listeners
+            setupUIListeners();
+
+            if (mode === 'edit') {
+                // Edit mode
+                document.getElementById('editUI').classList.add('active');
+                canvas.style.display = 'none';
+                document.getElementById('splashScreen').classList.add('hidden');
+                buildEditUI();
+            } else {
+                // Play mode
+                document.getElementById('editUI').classList.remove('active');
+                canvas.style.display = 'block';
+                showSplashScreen();
+                setupInput();
+                lastTime = performance.now();
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Expose run function
+        window.run = run;
+
+        // Back button behavior: open an overlay showing current score and let user confirm exit;
+        // also notify host that back was pressed so the native side can react if desired.
+        (function attachBackButton() {
+            const backBtn = document.getElementById('backButton');
+            const overlay = document.getElementById('backOverlay');
+            const overlayScore = document.getElementById('backOverlayScore');
+            const overlayCancel = document.getElementById('backOverlayCancel');
+            const overlayExit = document.getElementById('backOverlayExit');
+            if (!backBtn || !overlay) return;
+
+            function openOverlay() {
+                if (overlayScore) overlayScore.textContent = `Score: ${score}`;
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden','false');
+                // notify embedding host that the back button was pressed (informational)
+                try { window.parent.postMessage({ type: 'duck-war-back-pressed',score },'*'); } catch (e) { /* ignore */ }
+                // call optional host handler
+                try {
+                    if (window.flutter_inappwebview && typeof window.flutter_inappwebview.callHandler === 'function') {
+                        window.flutter_inappwebview.callHandler('onBackPressed');
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            function closeOverlay() {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden','true');
+            }
+
+            backBtn.addEventListener('click',function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                //openOverlay();
+
+                try {
+                    const payload = JSON.stringify({ type: 'lose_app' });
+                    if (window.GameChannel && typeof window.GameChannel.postMessage === 'function') {
+                        try { window.GameChannel.postMessage(payload); } catch (e) { /* ignore */ }
+                    }
+                } catch (e) { /* ignore */ }
+                // as a fallback, try history.back()
+                try { window.history.back(); } catch (e) { /* ignore */ }
+            });
+
+            // Cancel -> just close overlay
+            // if (overlayCancel) overlayCancel.addEventListener('click',function () { closeOverlay(); });
+
+            // // Exit -> notify host to close the WebView (host should listen for this message)
+            // if (overlayExit) overlayExit.addEventListener('click',function () {
+            //     // send close request with current score
+            //     try { window.parent.postMessage({ type: 'duck-war-close-request',score },'*'); } catch (e) { /* ignore */ }
+            //     try {
+            //         const payload = JSON.stringify({ type: 'lose_app' });
+            //         if (window.GameChannel && typeof window.GameChannel.postMessage === 'function') {
+            //             try { window.GameChannel.postMessage(payload); } catch (e) { /* ignore */ }
+            //         }
+            //     } catch (e) { /* ignore */ }
+            //     // as a fallback, try history.back()
+            //     try { window.history.back(); } catch (e) { /* ignore */ }
+            // });
+
+            // // Allow keyboard 'Escape' to close the overlay (or open if not visible)
+            // document.addEventListener('keydown',(e) => {
+            //     if (e.key === 'Escape') {
+            //         if (overlay.classList.contains('active')) closeOverlay(); else openOverlay();
+            //     }
+            // });
+        })();
+    </script>
+</body>
+
+</html>

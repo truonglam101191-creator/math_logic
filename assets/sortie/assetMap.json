@@ -1,0 +1,1130 @@
+{
+    "compartment_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/89f42a20-46fb-4daf-a49d-d03dde9920d1.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "pink_stethoscope": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8ea231d9-9197-4317-a9a1-80bc41fb8aa6.webp?scale=48",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "sparkle_particles": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e133c83f-f145-4c8f-b853-fdc9f8021bc3.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "snap_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/4161a4f6-280e-4440-b58b-d4121c45e798.mp3",
+        "type": "audio"
+    },
+    "sparkle_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/8ce07c6a-e554-42ab-9097-d1ae16c52947.mp3",
+        "type": "audio"
+    },
+    "ambient_music": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/e127252d-6f7e-4e79-8340-5c2494e933a5.mp3",
+        "type": "audio"
+    },
+    "medical_gloves": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/855f1504-041e-4cf0-bdaf-7cbeafefe019.webp?scale=39",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "pill_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/915bdcc1-e546-4a11-b4e4-304a09e78b10.webp?scale=24",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "thermometer": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7a2b32d8-cc6b-4d10-aa1b-a6854c019d35.webp?scale=56",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "baby_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b31f904e-a722-4dc7-a725-f7d8917665fd.webp?scale=49",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "gauze_roll": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/276ae4fe-c608-4ed3-b870-7571ac922898.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "bandages": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7d0130eb-cf43-4306-afb3-875aff518b62.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "syringe": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/deb9aa89-26f0-4ecd-b1c3-2876c14e641d.webp?scale=77",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "cotton_swabs": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d55432d4-82bb-48e0-8302-c9e7cb9b904f.webp?scale=24",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "medical_mask": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/dc1fdaf3-08bc-4d41-bb49-7752921ee13f.webp?scale=43",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "medical_scissors": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/cbc3e5df-40d2-47f5-92d8-e476666850ad.webp?scale=18",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "large_medical_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/faafa23b-6549-4fb4-9eeb-171e5fc78b5e.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "completion_fanfare": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/5ed25bad-8ebe-4a31-8d31-73a3c8bb0497.mp3",
+        "type": "audio"
+    },
+    "rustling_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/67c379c8-faf5-4e3a-8e67-c783d6c035d6.mp3",
+        "type": "audio"
+    },
+    "toolbox_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/785007e8-0ce2-4e38-aafc-ca23d86190df.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "hammer_tool": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/24e6ca1e-8a23-4d6b-8061-1ccb53d2fcee.webp?scale=60",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "screwdriver_tool": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/cebeb206-3ccf-4503-a47a-d4c504578f6a.webp?scale=34",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "wrench_tool": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/98bcbd6f-a3aa-48d2-85de-420d8f92bb65.webp?scale=33",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "pliers_tool": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3c859da3-88c9-4a4e-847d-abd96f9fea69.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "measuring_tape": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8c82b777-73c0-43fe-bb90-4f6bb85223a5.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "level_tool": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2b62288b-1061-4a8f-9fbc-c909bb50419a.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "drill_bits": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/90a945a8-b6d2-4539-a600-d720666ae0ee.webp?scale=31",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "utility_knife": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/380cae76-58d4-4531-90f5-1bcbb29b1232.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "safety_glasses": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2fb04460-55e0-4d19-9735-f678f001a30c.webp?scale=45",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toolbox_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/bc2cb828-6c2f-45ef-8cc4-78037f0cab85.mp3",
+        "type": "audio"
+    },
+    "tool_clink": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/01b7f596-af55-452b-85e0-3d7f99d08ea7.mp3",
+        "type": "audio"
+    },
+    "allen_wrench_set": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ccdd91e7-adba-48d0-81b0-52becbce841c.webp?scale=28",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "socket_wrench": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c6479f64-abc3-46c2-add4-5d2354913302.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "workshop_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/84010e28-3b9d-4459-b0da-4ed512a7e5d0.mp3",
+        "type": "audio"
+    },
+    "metal_clink": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/927a77c4-27e0-43a0-9247-3bf6d187dd17.mp3",
+        "type": "audio"
+    },
+    "farm_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5c831785-71bc-4b16-97a2-9e8ce8434273.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "watering_can": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/02b972d8-4c7a-4a5e-b3c6-245a0904e459.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_shovel": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/dc953195-6c37-4ccc-9288-9ae8d9a54b90.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "seed_packet": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/4a64037e-852a-4a19-ab1f-03310029edcf.webp?scale=19",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_gloves": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ee4604d4-199d-4e3f-a886-33908d7726bb.webp?scale=19",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "plant_pot": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/238b2e7f-8c00-40e2-8152-9d9d04de9c5d.webp?scale=18",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "pruning_shears": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b5b0edb6-b356-4720-bb42-920951ee10b1.webp?scale=21",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "fertilizer_bag": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e03c365e-318e-4b3a-9b8e-f8cf3f30efdf.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_rake": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/485049a1-d23b-43e1-b762-91ce4a536bc1.webp?scale=21",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "spray_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3c5f3400-a775-41cd-9455-1bcacb63324d.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "farm_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/3cd097bf-a173-4136-926f-e43e8b2e0107.mp3",
+        "type": "audio"
+    },
+    "garden_rustle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/8b509559-5565-4914-a7d2-1db68b9797e1.mp3",
+        "type": "audio"
+    },
+    "school_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8e9f7703-73e5-40bd-9cb5-3bd1bbd6448f.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "pencil_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0496dedc-6e69-40e9-9b5f-30560dd85c06.webp?scale=15",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "eraser_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/11e59a77-c528-42ae-9cab-dbf0e49d95d3.webp?scale=20",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "scissors_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/afe6186f-c59f-407e-8c00-b24d3c3bc125.webp?scale=21",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "glue_stick": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/fb8bc93f-c515-4349-a808-178e7c86e3e1.webp?scale=28",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "ruler_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/79aeb98f-a350-496c-9c21-f42dcbc089c7.webp?scale=48",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "crayon_box": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/65435ba9-2cc1-41ad-82ad-c9470e411e9e.webp?scale=62",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "notebook_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/93ef7215-9fe9-4ea8-9317-6910a7370914.webp?scale=59",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "calculator_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/50f82ef8-d113-46e2-b93d-d5c16173878d.webp?scale=42",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "stapler_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0038d43a-d9ac-42ce-bd36-db815cd4444d.webp?scale=31",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "pencil_case": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/72b5b362-6466-40fc-bc59-de5bb0eda251.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "school_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/fb4660d5-4ba3-46ca-b784-220a4ee92f8b.mp3",
+        "type": "audio"
+    },
+    "paper_rustle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/38849ef1-5267-4664-a4dc-39438e2c1d8a.mp3",
+        "type": "audio"
+    },
+    "art_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/72f26968-c9c7-414b-9292-241a6dd82b35.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "paint_brush": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2e751e5c-58e1-4bb2-9d38-df985976540b.webp?scale=63",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "paint_palette": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/420f853c-63c9-42cc-a78e-d23148d72c04.webp?scale=29",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "colored_pencils": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b5bc0ed7-ea71-45a5-afe0-d63492e5fc1c.webp?scale=27",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "paint_tubes": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/55ab80d0-ac8f-4a05-870e-192668d175ad.webp?scale=33",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "art_canvas": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3283b39c-5244-45a6-ac2c-f88f26f5a6dc.webp?scale=34",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "art_markers": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7f666eb3-84f1-48cf-b840-7b6d5592a95e.webp?scale=36",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "palette_knife": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c187793c-75d2-4e08-bdd4-354ba7a08c53.webp?scale=32",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "art_eraser": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/afea5af8-0914-4611-99f8-277594c41ed4.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "sketch_pad": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/aa7d0ce7-8fc0-462f-8cc9-955275ea44b3.webp?scale=32",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "charcoal_sticks": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/8c797e2e-e0fc-4640-aff2-316b9e651482.webp?scale=24",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "art_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/fc51b26b-7a70-4f68-ab8a-5f6273b2a23d.mp3",
+        "type": "audio"
+    },
+    "brush_swish": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/3312b18c-0bee-4806-bf14-53729b11f1a9.mp3",
+        "type": "audio"
+    },
+    "toy_chest": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5b570921-5af7-41d1-8b9b-3c282b85fbc2.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "teddy_bear": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6884f44b-8e16-44d8-8c3a-5a90ffe63afa.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_car": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c7785923-f1ab-4330-a938-628a10701049.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "building_blocks": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e4047ebd-fb4f-4a6e-9c67-4fd5c7a250f5.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_airplane": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/638a4e39-14c0-432c-a9ae-9416b2a37eff.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "rubber_duck": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1ce18ced-7a36-4a7a-9c3b-e20b1d7b5e34.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_robot": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/36033ea0-491a-4d7e-86ef-394f45199a5c.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_ball": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/82df6560-9221-4ae1-8643-490180ee9607.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_train": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2090ba70-d9fe-4a44-a83f-ee4844575d88.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_dinosaur": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/53beef72-3742-4a65-9126-858b465ad1f4.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_doll": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/16027674-ad6b-41fb-8938-728744396426.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toy_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/87bfe50c-8cff-4aa1-8461-f0f567629344.mp3",
+        "type": "audio"
+    },
+    "toy_clink": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/1d152cbe-589d-4808-8f81-1d23648d5582.mp3",
+        "type": "audio"
+    },
+    "kitchen_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/64ca0f2a-53b6-44b6-a605-f03d0a124352.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "chef_knife": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/7b4bba8c-fd53-4262-b4c2-3f00dbb5ee5f.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "wooden_spoon": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/50d6bd0b-69d0-4eef-9615-66cef0385b1c.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "whisk": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f8443c0a-5ccb-43f9-8c87-fcafe3603a22.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "spatula": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/81827aba-9125-4c12-949c-0781f6bd8cf9.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "measuring_cups": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/b52a9498-b235-47c6-ada7-a0259b63a85a.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "can_opener": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a0f78803-966a-4a0a-81f7-f98fe09d894c.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "tongs": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a3d034bb-f0c9-4d36-b662-5114955d0521.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "peeler": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5a23a81b-4c50-49c5-ad55-bc64b579ada6.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "ladle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/18a0c836-07ea-48ff-8c8f-7e899b1953d0.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1536
+        ]
+    },
+    "cutting_board": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2a2264c8-3740-4584-ac8d-ffa66ad47920.webp?scale=40",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "kitchen_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/1b8a5e5a-9884-4313-bd35-529cd52ce2b8.mp3",
+        "type": "audio"
+    },
+    "utensil_clink": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/c901221d-5b7e-4934-ae0a-b1198a94ff8f.mp3",
+        "type": "audio"
+    },
+    "backpack_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/15df947d-c691-464a-b877-527c61e5a449.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "homework_folder": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/9385d6a7-f3b5-4fec-a98d-24478984b941.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "lunch_box": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/39524c2b-82b4-4efd-822d-14bc97332f71.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "water_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f64581ee-7556-4e5d-8fd0-59f608d40c8e.webp?scale=18",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "textbook": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/83fce020-6232-45fc-a0f9-bae3a1b7cb59.webp?scale=17",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "gym_clothes": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/23b71769-92ae-4ad4-b2e4-c972769069e3.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "headphones": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6a2e97d1-4d91-460e-846c-257037be3f92.webp?scale=18",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "art_supplies_bag": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3f105345-a3e5-4e94-9536-c87fc44b5c2f.webp?scale=18",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "library_card": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/d62c4171-8936-485f-b468-31420fcf0f56.webp?scale=21",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "hand_sanitizer": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c550e811-40dc-4102-85c5-d24591554ffd.webp?scale=20",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "backpack_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/9ab5e26b-9ea8-43c2-bdd0-d9138e0d022f.mp3",
+        "type": "audio"
+    },
+    "zipper_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/1399bba8-8bf1-497b-87ec-03782b28fbaa.mp3",
+        "type": "audio"
+    },
+    "bathroom_tray": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/6b5ee86f-6541-4ee7-8e5a-69d9895aa3de.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "toothbrush": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/bb4d0098-1872-4def-8934-0ec66fe8747f.webp?scale=41",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "toothpaste_tube": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0a44fa1e-f7a7-4d04-9057-a3fbc9e41013.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "shampoo_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/50607961-2ea8-460f-8f7c-de1bb592b2df.webp?scale=30",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "soap_dispenser": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0899e41e-6099-4115-9874-c02219c079c6.webp?scale=32",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "face_wash": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/26359379-dac0-4575-9f4d-9d06aef0cb6e.webp?scale=45",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "lotion_bottle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/bdd5327f-32fe-41fd-a3cb-c919a9376827.webp?scale=24",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "razor": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/fbf41dce-9b82-41ea-9066-910d663ffd36.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "hair_brush": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/eeec5d3b-8501-4496-9551-655f87dca01c.webp?scale=42",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "deodorant": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f47d96f2-583f-4aed-bd40-dda0d6212cfe.webp?scale=20",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "cotton_balls": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/fa7402ee-dd71-4daa-ab76-261a7832fd20.webp?scale=23",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "bathroom_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/7ededd20-bcc8-43be-a101-83b724a7e664.mp3",
+        "type": "audio"
+    },
+    "water_drop_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/160fce0f-cbee-40ff-b64d-2cb65c52f520.mp3",
+        "type": "audio"
+    },
+    "gardening_tote": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/a783d410-5a48-4337-adc0-e7b5b8aea25b.webp?scale=90",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "garden_trowel": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e1f24ff9-18c8-4537-9b98-f0f7add87693.webp?scale=20",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_fork": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f64f3dbf-d91c-45ed-b464-393990984a7f.webp?scale=28",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_weeder": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2b9f586c-dcd1-4577-a606-edcfe3c56329.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "plant_markers": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/258f9c38-dbb5-4419-9dd8-dacdeea8b9cb.webp?scale=20",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_twine": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/26ecbc6e-668b-4dad-abc8-8d01be8fba1c.webp?scale=22",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "soil_scoop": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/11bb9a15-75b7-47fe-ba7c-a17bd68d4b90.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_kneeler": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/34282bb2-fc25-46ad-9df8-352700f53be3.webp?scale=35",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "bulb_planter": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/1bacae36-d814-4d08-bd61-6664454ac484.webp?scale=25",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "garden_apron": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/37f9b5aa-ec4d-48e2-8318-2d2c61fa4968.webp?scale=40",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "gardening_ambient": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/66b2921e-c6fc-448c-8323-4dcfb9474fa3.mp3",
+        "type": "audio"
+    },
+    "soil_rustle": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/67acbab0-d709-418c-8588-b769f1b42e79.mp3",
+        "type": "audio"
+    },
+    "protractor_item": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/33338f13-b1e5-45b5-86a7-4804ddd39745.webp?scale=27",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "highlighter_set": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/e717ab90-80d6-47c6-8c45-4bfc38c5c23b.webp?scale=43",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "new_stapler_asset": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/31e753d6-9778-41f8-8202-7c8630e6cd1f.webp?scale=31",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "negative_click_sound": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/effect/8e7c6414-7db2-469d-84b7-975e06533a43.mp3",
+        "type": "audio"
+    },
+    "puzzle_game_music": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/261913c1-cdbe-4866-b9d2-dbd2e881aa80.mp3",
+        "type": "audio"
+    },
+    "game_complete_celebration": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/sounds/music/db7bb916-4c6f-49a9-acb4-ae398d0f116c.mp3",
+        "type": "audio"
+    },
+    "empty_container_slot": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c300e98e-a45a-4a24-a055-7d284c2a9967.webp?scale=16",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "checkmark_graphic": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/9d1ddaee-f9d7-4ea5-bd95-914958e8eb2a.webp?scale=12",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "subtle_sparkles": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ee85daf8-1601-476b-99e3-1cdd13712455.webp?scale=16",
+        "type": "image",
+        "aspect_ratio": [
+            1024,
+            1024
+        ]
+    },
+    "medical_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/3b3382fc-dbd8-4918-ab28-3172cba2c52f.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "toolbox_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/691405ee-693c-40fb-8787-417c27a8b2cf.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "farm_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/0432d49c-ccde-4fe9-b1ce-a94374f32ca2.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "school_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c94b02f2-eb0b-4837-b5ca-eaf15fb449cf.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "art_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/f170aff5-db85-481e-833b-983531e2c08f.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "bathroom_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c3e2e3c8-c8dd-487f-800d-91e36181e2a0.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "toybox_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/2bd804a2-f3e5-4df4-9f8d-1ab85d41f095.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "kitchen_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/ff332678-40ba-48c6-82c7-856c6c60c02e.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "backpack_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/5751a16e-dd6d-4247-bf7c-664816044351.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    },
+    "gardening_background": {
+        "url": "https://d2oir5eh8rty2e.cloudfront.net/assets/images/c9de281b-1984-486b-b71c-afcc5bc7c473.webp?scale=50",
+        "type": "image",
+        "aspect_ratio": [
+            1536,
+            1024
+        ]
+    }
+}

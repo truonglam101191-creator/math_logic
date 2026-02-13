@@ -1,0 +1,12 @@
+{
+    "selectedSkin": "tile_ocean_waves",
+    "customTimer": null,
+    "customGridSize": null,
+    "customShuffleComplexity": "medium",
+    "audio": {
+        "musicVolume": 1,
+        "sfxVolume": 0.8,
+        "musicEnabled": true,
+        "sfxEnabled": true
+    }
+}

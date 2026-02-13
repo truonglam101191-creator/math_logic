@@ -1,0 +1,76 @@
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id("dev.flutter.flutter-gradle-plugin")
+    
+}
+
+android {
+    namespace = "com.lamit.logic.math.logic"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = "27.0.12077973"
+    //ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        // Enable core library desugaring for libraries that require newer java APIs
+        isCoreLibraryDesugaringEnabled = true
+    }
+
+    aaptOptions {
+        noCompress("tflite", "safetensors", "bin", "model", "task")
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("src/main/kotlin")
+        }
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.lamit.logic.math.logic"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdkVersion(flutter.minSdkVersion)
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("../../builds/limit_123456.jks")
+            storePassword = "123456"
+            keyAlias = "limit"
+            keyPassword = "123456"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+}
+
+dependencies {
+  implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
+  implementation("com.google.firebase:firebase-analytics")
+    // Required for core library desugaring (e.g. flutter_local_notifications)
+    // Version must be >= 2.1.4 per AAR metadata checks
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
+
+flutter {
+    source = "../.."
+}
+
+// Enable Google Services plugin for Firebase
+apply(plugin = "com.google.gms.google-services")
