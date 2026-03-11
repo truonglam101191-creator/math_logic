@@ -1,4 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,22 +68,26 @@ class _WebSuperCrewState extends State<WebSuperCrew> {
           'assets/super_crew/super_crew.html',
         );
 
-        final config = await rootBundle.loadString(
-          'assets/super_crew/config.json',
-        );
-
         html = html.replaceAll('<style id="gameStyle"></style>', style);
 
         if (config.isNotEmpty) {
-          html = html.replaceAll(
-            '<script id="gameConfig"></script>',
-            '<script id="gameConfig"> window.gameConfig = $config;</script>',
-          );
+          html = html.replaceAll('<script id="gameConfig"></script>', config);
+        }
+
+        String finalAssetsMapScript;
+        try {
+          finalAssetsMapScript = await _prepareAssets();
+        } catch (e) {
+          debugPrint('Download assets failed: $e');
+          if (mounted) {
+            setState(() => _error = true);
+          }
+          return;
         }
 
         html = html.replaceAll(
           '<script id="assetsMap" type="application/json"></script>',
-          assets,
+          finalAssetsMapScript,
         );
 
         html = html.replaceAll('<script id="logic"></script>', config);
@@ -187,6 +196,96 @@ class _WebSuperCrewState extends State<WebSuperCrew> {
     }
   }
 
+  Future<String> _prepareAssets() async {
+    String rawAssets = assets
+        .replaceAll('<script id="assetsMap" type="application/json">', '')
+        .replaceAll('</script>', '');
+
+    Map<String, dynamic> assetsMap = {};
+    try {
+      assetsMap = jsonDecode(rawAssets);
+    } catch (e) {
+      debugPrint("Failed to parse assets JSON: $e");
+      return assets;
+    }
+
+    final docDir = await getApplicationDocumentsDirectory();
+    final cacheDir = Directory('${docDir.path}/super_crew_assets');
+    if (!cacheDir.existsSync()) {
+      cacheDir.createSync(recursive: true);
+    }
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    // We keep a separate list of files to download in the background
+    List<Map<String, String>> toDownload = [];
+    bool allLocal = true;
+
+    for (String key in assetsMap.keys) {
+      if (assetsMap[key]['url'] == null) continue;
+      String originalUrl = assetsMap[key]['url'];
+      String ext = '.png';
+      if (originalUrl.contains('.webp')) ext = '.webp';
+      if (originalUrl.contains('.mp3')) ext = '.mp3';
+
+      String localPath = '${cacheDir.path}/$key$ext';
+      File localFile = File(localPath);
+
+      if (localFile.existsSync()) {
+        // Use local file safely
+        assetsMap[key]['url'] = 'file://$localPath';
+      } else {
+        // File doesn't exist locally.
+        allLocal = false;
+        // Keep the original URL for web load if internet is available
+        assetsMap[key]['url'] = originalUrl;
+
+        // Queue for background download
+        toDownload.add({'url': originalUrl, 'path': localPath});
+      }
+    }
+
+    if (!allLocal && !hasInternet) {
+      // Missing some files and no internet
+      throw Exception(
+        "Không có kết nối mạng và chưa tải đủ dữ liệu game. Vui lòng kết nối mạng!",
+      );
+    }
+
+    // Trigger background download asynchronously if needed
+    if (toDownload.isNotEmpty && hasInternet) {
+      _downloadAssetsInBackground(toDownload);
+    }
+
+    String newJson = jsonEncode(assetsMap);
+    return '<script id="assetsMap" type="application/json">$newJson</script>';
+  }
+
+  Future<void> _downloadAssetsInBackground(
+    List<Map<String, String>> files,
+  ) async {
+    Dio dio = Dio();
+    bool allSuccess = true;
+
+    for (var fileInfo in files) {
+      String url = fileInfo['url']!;
+      String path = fileInfo['path']!;
+      try {
+        await dio.download(url, path);
+        debugPrint('Downloaded background asset: $path');
+      } catch (e) {
+        debugPrint('Failed to download background asset $url: $e');
+        allSuccess = false;
+      }
+    }
+
+    if (allSuccess) {
+      // Mark as fully downloaded if applicable
+      perferen.setBool('super_crew_assets_downloaded', true);
+      debugPrint('All assets downloaded in background successfully.');
+    }
+  }
+
   // helper: load persisted state (or null)
   // Future<Map<String, dynamic>?> _loadPersistedState() async {
   //   try {
@@ -223,7 +322,7 @@ class _WebSuperCrewState extends State<WebSuperCrew> {
 
     //linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F6FF 100%)
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -245,6 +344,9 @@ class _WebSuperCrewState extends State<WebSuperCrew> {
                   mediaPlaybackRequiresUserGesture: false,
                   allowsInlineMediaPlayback: true,
                   useShouldOverrideUrlLoading: true,
+                  allowFileAccessFromFileURLs: true,
+                  allowUniversalAccessFromFileURLs: true,
+                  allowFileAccess: true,
                 ),
                 onWebViewCreated: (controller) async {
                   _controller = controller;
