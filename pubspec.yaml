@@ -40,12 +40,12 @@ dependencies:
   cloud_firestore: ^6.0.1
   firebase_core: ^4.1.0
   flutter_keyboard_visibility: ^6.0.0
-  flutter_riverpod: ^3.0.3
+  flutter_riverpod: ^2.6.1
    # Generate Unique Id
   # Easily detect Swipes
   flutter_swipe_detector: ^2.0.0
   shorebird_code_push:
-  bonfire: ^3.13.0
+  bonfire: ^3.6.2
   flame_audio: ^2.11.12
   provider: ^6.1.2
   cached_network_image: ^3.4.1
@@ -121,6 +121,7 @@ flutter:
     - assets/liquid_sort/
     - assets/cozy_tiles/
     - assets/garden_gulp/
+    - assets/super_screw/
     - shorebird.yaml
 
 targets:

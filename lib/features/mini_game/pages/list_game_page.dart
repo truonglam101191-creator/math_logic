@@ -20,6 +20,7 @@ import 'package:logic_mathematics/features/mini_game/web_liquid_sort/web_liquid_
 import 'package:logic_mathematics/features/mini_game/web_pack_pal/web_pack_pal_stub.dart';
 import 'package:logic_mathematics/features/mini_game/web_quantum_link/web_quantum_link_stub.dart';
 import 'package:logic_mathematics/features/mini_game/web_sortie/web_sortie_pal_stub.dart';
+import 'package:logic_mathematics/features/mini_game/web_super_crew/web_super_crew.dart';
 import 'package:logic_mathematics/features/mini_game/web_wood_block_puzzle/web_web_wood_block_puzzle.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 
@@ -224,6 +225,18 @@ class _ListGamePageState extends State<ListGamePage> {
 
   Widget _buildGamesGrid(BuildContext context, AppLocalizations loc) {
     final games = [
+      GameCardData(
+        title: 'Super Crew',
+        subtitle: 'Unscrew the bolts to free the nuts',
+        imageUrl: 'assets/super_crew/super_crew_thumbnail.gif',
+        backgroundColor: const Color(0xFFEAF4FF),
+        onTap: () => _openGame(
+          context,
+          'Super Crew',
+          'assets/super_crew/super_crew_thumbnail.gif',
+          WebSuperCrew(),
+        ),
+      ),
       GameCardData(
         title: 'Arrows Escape',
         subtitle: 'Slide arrows to escape the grid',

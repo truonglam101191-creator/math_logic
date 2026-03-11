@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/legacy.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /*
 A Notifier when a round starts, in order to prevent the next round starts before the current ends

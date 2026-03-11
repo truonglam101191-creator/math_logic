@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'package:logic_mathematics/cores/db_storage/db_funtion.dart';
 import 'package:logic_mathematics/main.dart';
