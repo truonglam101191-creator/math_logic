@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logic_mathematics/cores/models/common_model.dart';
-import 'package:oziapi/models/request_model.dart';
+import 'package:logic_mathematics/cores/models/chat_message_model.dart';
 
 class ChatGroup extends CommonModel {
   late String idGroup;

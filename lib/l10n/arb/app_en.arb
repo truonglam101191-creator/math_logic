@@ -1090,5 +1090,15 @@
   "upgradePremiumMessage": "Upgrade to Premium\nEnjoy a smooth, ad-free experience.",
   "subscribeNowPrefix": "Subscribe now ",
   "noSubscriptionPackages": "No subscription packages found. Please check your connection or network configuration.",
-  "restorePurchases": "Purchased before? Restore here"
+  "restorePurchases": "Purchased before? Restore here",
+  "aiFriendTitle": "AI Friend",
+  "onlineStatus": "Online",
+  "downloadingOfflineModel": "Downloading Offline AI Model",
+  "doNotCloseAppWarning": "⚠️ NOTE: Please DO NOT close the app while downloading. If the app is closed, the download will restart from the beginning.\n\nOnce complete, you can use the AI offline without internet!",
+  "ramRecommendationTitle": "Recommended RAM Requirements:",
+  "ramRecommendationDesc": "📱 3GB  ❌ Prone to crash\n📱 4GB  ⚠️ Very tight\n📱 6GB  ✅ Stable\n📱 8GB+ 🔥 Smooth",
+  "defaultChatTitle": "AI Conversation",
+  "deleteChatTitle": "Delete conversation",
+  "deleteChatConfirmContent": "Are you sure you want to delete this chat history?",
+  "deleteAction": "Delete"
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -16,7 +17,6 @@ import 'package:logic_mathematics/features/onborading/onboarding_page.dart';
 import 'package:logic_mathematics/gen/assets.gen.dart';
 import 'package:logic_mathematics/main.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import 'package:oziapi/requests/request.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SplashPage extends StatefulWidget {
@@ -82,7 +82,7 @@ class _SplashPageState extends State<SplashPage> {
     //await serviceLocator<AdmobController>().loadAd();
     final url =
         'https://raw.githubusercontent.com/truonglam101191-creator/manager_api/main/ads.json';
-    final response = await serviceLocator.get<Request>().client.get(url);
+    final response = await serviceLocator.get<Dio>().get(url);
 
     if (response.statusCode == HttpStatus.ok) {
       final data = json.decode(response.data);

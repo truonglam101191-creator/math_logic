@@ -1420,4 +1420,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get restorePurchases => 'Purchased before? Restore here';
+
+  @override
+  String get aiFriendTitle => 'AI Friend';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get downloadingOfflineModel => 'Downloading Offline AI Model';
+
+  @override
+  String get doNotCloseAppWarning =>
+      '⚠️ NOTE: Please DO NOT close the app while downloading. If the app is closed, the download will restart from the beginning.\n\nOnce complete, you can use the AI offline without internet!';
+
+  @override
+  String get ramRecommendationTitle => 'Recommended RAM Requirements:';
+
+  @override
+  String get ramRecommendationDesc =>
+      '📱 3GB  ❌ Prone to crash\n📱 4GB  ⚠️ Very tight\n📱 6GB  ✅ Stable\n📱 8GB+ 🔥 Smooth';
+
+  @override
+  String get defaultChatTitle => 'AI Conversation';
+
+  @override
+  String get deleteChatTitle => 'Delete conversation';
+
+  @override
+  String get deleteChatConfirmContent =>
+      'Are you sure you want to delete this chat history?';
+
+  @override
+  String get deleteAction => 'Delete';
 }

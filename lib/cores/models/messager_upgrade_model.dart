@@ -1,10 +1,10 @@
-import 'package:oziapi/models/request_model.dart';
+import 'package:logic_mathematics/cores/models/chat_message_model.dart';
 
 class MessagerUpgradeModel {
-  late final String role;
-  late final String content;
-  late final List<ContentTypeMessage> contents;
-  late final bool isImage;
+  late String role;
+  late String content;
+  late List<ContentTypeMessage> contents;
+  late bool isImage;
   late bool isPlaying;
 
   MessagerUpgradeModel({

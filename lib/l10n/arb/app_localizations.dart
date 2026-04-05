@@ -2579,6 +2579,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Purchased before? Restore here'**
   String get restorePurchases;
+
+  /// No description provided for @aiFriendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Friend'**
+  String get aiFriendTitle;
+
+  /// No description provided for @onlineStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get onlineStatus;
+
+  /// No description provided for @downloadingOfflineModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading Offline AI Model'**
+  String get downloadingOfflineModel;
+
+  /// No description provided for @doNotCloseAppWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ NOTE: Please DO NOT close the app while downloading. If the app is closed, the download will restart from the beginning.\n\nOnce complete, you can use the AI offline without internet!'**
+  String get doNotCloseAppWarning;
+
+  /// No description provided for @ramRecommendationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended RAM Requirements:'**
+  String get ramRecommendationTitle;
+
+  /// No description provided for @ramRecommendationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'📱 3GB  ❌ Prone to crash\n📱 4GB  ⚠️ Very tight\n📱 6GB  ✅ Stable\n📱 8GB+ 🔥 Smooth'**
+  String get ramRecommendationDesc;
+
+  /// No description provided for @defaultChatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Conversation'**
+  String get defaultChatTitle;
+
+  /// No description provided for @deleteChatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete conversation'**
+  String get deleteChatTitle;
+
+  /// No description provided for @deleteChatConfirmContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this chat history?'**
+  String get deleteChatConfirmContent;
+
+  /// No description provided for @deleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteAction;
 }
 
 class _AppLocalizationsDelegate

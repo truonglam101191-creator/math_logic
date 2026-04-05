@@ -8,15 +8,13 @@ import 'package:logic_mathematics/cores/themes/app_colors.dart';
 import 'package:logic_mathematics/features/in_app/in_app_product_page.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
 import 'package:logic_mathematics/main.dart';
-import 'package:oziapi/models/request_model.dart';
-import 'package:oziapi/ozi_api.dart';
+import 'package:logic_mathematics/cores/models/chat_message_model.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-// removed flutter_gemma_interface.dart
 import 'package:flutter_gemma/core/message.dart' as gemma_message;
 import 'package:flutter_gemma/core/model_response.dart' as gemma_response;
-import 'package:logic_mathematics/cores/extentions/messagingservice.dart';
 import 'package:logic_mathematics/cores/services/gemma_service.dart';
 import 'package:logic_mathematics/cores/extentions/shared.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class InputchataiWidget extends StatefulWidget {
   const InputchataiWidget({
@@ -27,6 +25,7 @@ class InputchataiWidget extends StatefulWidget {
     this.listMessager,
     this.onSendMessage,
     this.onresultMessage,
+    this.onUpdateMessage,
     this.indexFunction = 0,
     this.onCreate,
   });
@@ -43,6 +42,7 @@ class InputchataiWidget extends StatefulWidget {
 
   final Function(Message val, bool isImgae)? onSendMessage;
   final Function(Message val, bool isImgae)? onresultMessage;
+  final Function(Message val)? onUpdateMessage;
 
   final Function(InputchataiWidgetState controller)? onCreate;
 
@@ -876,78 +876,74 @@ class InputchataiWidgetState extends State<InputchataiWidget> {
     }
 
     setState(() {
-      try {
-        isSendMessager = true;
-        if (widget.indexFunction == 2) {
-          // Image generation logic
+      isSendMessager = true;
+    });
+
+    try {
+      String ocrText = '';
+      if (pathFile.isNotEmpty) {
+        try {
+          final textRecognizer = TextRecognizer(
+            script: TextRecognitionScript.latin,
+          );
+          final recognizedText = await textRecognizer.processImage(
+            InputImage.fromFilePath(pathFile),
+          );
+          ocrText = recognizedText.text;
+          textRecognizer.close();
+        } catch (e) {
+          debugPrint('OCR Error: $e');
+        }
+      }
+
+      if (widget.indexFunction == 2) {
+        // Image generation logic (DEPRECATED - OFFLINE ONLY)
+        setState(() {
           listMessager.add(
             Message(role: 'user', content: controller.text, contents: []),
           );
-          widget.onSendMessage?.call(
-            listMessager.last,
-            widget.indexFunction == 2,
-          );
-          final prompt = controller.text;
           controller.text = '';
-          serviceLocator<Request>()
-              .sendCreateImage(prompt, modelChat: 'dall-e-2')
-              .then((value) {
-                setState(() {
-                  isSendMessager = false;
-                  if (value.data['error'] != null) {
-                    listMessager.add(
-                      Message(
-                        role: 'assistant',
-                        content: value.data['error']['message'],
-                        contents: [],
-                      ),
-                    );
-                    widget.onresultMessage?.call(
-                      listMessager.last,
-                      widget.indexFunction == 2,
-                    );
-                  } else if (value.data['data'] != null) {
-                    final listImage = List.from(value.data['data'])
-                        .map(
-                          (e) => ContentTypeMessage(
-                            content: e['url'],
-                            type: 'url_image',
-                          ),
-                        )
-                        .toList();
-                    listMessager.add(
-                      Message(
-                        role: 'assistant',
-                        isImage: true,
-                        content: '',
-                        contents: listImage,
-                      ),
-                    );
-                    widget.onresultMessage?.call(
-                      listMessager.last,
-                      widget.indexFunction == 2,
-                    );
-                  }
-                });
-              })
-              .catchError((error) {
-                setState(() {
-                  isSendMessager = false;
-                });
-              });
-        } else {
-          // Chat message logic
+        });
+        widget.onSendMessage?.call(
+          listMessager.last,
+          widget.indexFunction == 2,
+        );
 
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            setState(() {
+              isSendMessager = false;
+              listMessager.add(
+                Message(
+                  role: 'assistant',
+                  content:
+                      'Xin lỗi, chế độ tạo ảnh từ văn bản hiện không khả dụng trong phiên bản Offline. Vui lòng sử dụng tính năng Chat AI.',
+                  contents: [],
+                ),
+              );
+            });
+            widget.onresultMessage?.call(listMessager.last, true);
+          }
+        });
+      } else {
+        // Chat message logic
+        String finalUserPrompt = controller.text.trim();
+        if (ocrText.isNotEmpty) {
+          finalUserPrompt +=
+              '\n\n[Nội dung văn bản trích xuất từ ảnh được gửi]:\n$ocrText';
+        }
+
+        setState(() {
           listMessager.add(
             Message(
               role: 'user',
-              content: pathFile.isEmpty ? controller.text : '',
+              content: pathFile.isEmpty ? finalUserPrompt : '',
               timestamp: DateTime.now(),
               contents: pathFile.isEmpty
                   ? []
                   : [
                       ContentTypeMessage(
-                        content: controller.text,
+                        content: finalUserPrompt,
                         type: 'text',
                       ),
                       ContentTypeMessage(
@@ -957,120 +953,111 @@ class InputchataiWidgetState extends State<InputchataiWidget> {
                     ],
             ),
           );
+        });
 
-          widget.onSendMessage?.call(
-            listMessager.last,
-            widget.indexFunction == 2,
-          );
+        widget.onSendMessage?.call(listMessager.last, false);
 
-          // AI ROUTING FLOW: Try Offline Gemma first, fallback to Cloud (OziApi)
-          if (Shared.instance.isInitializedModelAI &&
-              Shared.instance.chat != null) {
-            // LOCAL GENERATION (When initialized)
-            final gemmaSvc = GemmaLocalService(Shared.instance.chat!);
-            final gemmaMsg = gemma_message.Message(
-              text: pathFile.isEmpty
-                  ? controller.text.trim()
-                  : controller.text.trim() + " [Image included]",
-              isUser: true,
-            );
-
-            listMessager.add(
-              Message(
-                role: 'assistant',
-                content: '',
-                timestamp: DateTime.now(),
-                contents: [],
-              ),
-            );
-            final assIdx = listMessager.length - 1;
+        if (!Shared.instance.isInitializedModelAI ||
+            Shared.instance.chat == null) {
+          // Model isn't ready
+          setState(() {
             controller.text = '';
             pathFile = '';
+          });
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (mounted) {
+              setState(() {
+                isSendMessager = false;
+                listMessager.add(
+                  Message(
+                    role: 'assistant',
+                    content:
+                        'Hệ thống AI Offline đang được tải/khởi tạo. Vui lòng đợi trong giây lát rồi thử lại!',
+                    contents: [],
+                  ),
+                );
+              });
+              widget.onresultMessage?.call(listMessager.last, false);
+            }
+          });
+          return;
+        }
 
-            gemmaSvc
-                .processMessage(gemmaMsg, useSyncMode: false)
-                .then((responseStream) {
-                  responseStream.listen(
-                    (response) {
-                      if (response is gemma_response.TextResponse) {
-                        setState(() {
-                          listMessager[assIdx].content =
-                              listMessager[assIdx].content + response.token;
-                        });
-                      }
-                    },
-                    onDone: () {
-                      if (mounted) {
-                        setState(() {
-                          isSendMessager = false;
-                        });
-                        widget.onresultMessage?.call(
-                          listMessager[assIdx],
-                          widget.indexFunction == 2,
-                        );
-                      }
-                    },
-                    onError: (e) {
-                      if (mounted) {
-                        setState(() {
-                          listMessager[assIdx].content =
-                              '${listMessager[assIdx].content}\n(Lỗi AI: $e)';
-                          isSendMessager = false;
-                        });
-                      }
-                    },
-                  );
-                })
-                .catchError((e) {
+        // LOCAL GENERATION (When initialized)
+        final gemmaSvc = GemmaLocalService(Shared.instance.chat!);
+
+        // Use the augmented prompt with OCR text, send as Text to avoid native Image dropping
+        final gemmaMsg = gemma_message.Message(
+          text: finalUserPrompt,
+          isUser: true,
+        );
+
+        setState(() {
+          listMessager.add(
+            Message(
+              role: 'assistant',
+              content: '',
+              timestamp: DateTime.now(),
+              contents: [],
+            ),
+          );
+          controller.text = '';
+          pathFile = '';
+        });
+
+        final assIdx = listMessager.length - 1;
+
+        gemmaSvc
+            .processMessage(gemmaMsg, useSyncMode: false)
+            .then((responseStream) {
+              responseStream.listen(
+                (response) {
+                  if (response is gemma_response.TextResponse) {
+                    if (mounted) {
+                      setState(() {
+                        listMessager[assIdx].content =
+                            listMessager[assIdx].content + response.token;
+                      });
+                      widget.onUpdateMessage?.call(listMessager[assIdx]);
+                    }
+                  }
+                },
+                onDone: () {
                   if (mounted) {
                     setState(() {
-                      listMessager[assIdx].content = 'Lỗi khởi chạy AI: $e';
                       isSendMessager = false;
                     });
-                    widget.onresultMessage?.call(
-                      listMessager[assIdx],
-                      widget.indexFunction == 2,
-                    );
+                    widget.onresultMessage?.call(listMessager[assIdx], false);
                   }
+                },
+                onError: (e) {
+                  if (mounted) {
+                    setState(() {
+                      listMessager[assIdx].content =
+                          '${listMessager[assIdx].content}\n(Lỗi AI: $e)';
+                      isSendMessager = false;
+                    });
+                  }
+                },
+              );
+            })
+            .catchError((e) {
+              if (mounted) {
+                setState(() {
+                  listMessager[assIdx].content = 'Lỗi khởi chạy AI: $e';
+                  isSendMessager = false;
                 });
-          } else {
-            // CLOUD FALLBACK (OziApi)
-            serviceLocator<Request>()
-                .sendMessageToChat(listMessager, modelChat: 'gpt-4o')
-                .then((value) {
-                  serviceLocator
-                      .get<DataBaseFuntion>()
-                      .saveStar(coinUser - 5)
-                      .then((value) {
-                        serviceLocator.get<MessagingService>().send(
-                          channel: MessageChannel.startUserChanged,
-                          parameter: '',
-                        );
-                      });
-                  setState(() {
-                    isSendMessager = false;
-                    controller.text = '';
-                    pathFile = '';
-                    listMessager.add(value.choices.first.message);
-                    widget.onresultMessage?.call(
-                      listMessager.last,
-                      widget.indexFunction == 2,
-                    );
-                  });
-                })
-                .catchError((error) {
-                  setState(() {
-                    isSendMessager = false;
-                  });
-                });
-          }
-        }
-      } catch (e) {
+                widget.onresultMessage?.call(listMessager[assIdx], false);
+              }
+            });
+      }
+    } catch (e) {
+      if (mounted) {
         setState(() {
           isSendMessager = false;
         });
-        print(e);
       }
-    });
+      print(e);
+    }
   }
 }

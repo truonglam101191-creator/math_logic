@@ -28,7 +28,6 @@ import 'package:logic_mathematics/features/subscription/data/datasources/subscri
 import 'package:logic_mathematics/features/subscription/data/repositories/subscription_repository_impl.dart';
 import 'package:logic_mathematics/features/subscription/domain/repositories/subscription_repository.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
-import 'package:oziapi/requests/request.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -165,12 +164,8 @@ Future<void> initStartApp() async {
   await serviceLocator.get<AudioManager>().init();
   debugPrint('Last check-in date: ${Shared.instance.lastCheckInDate}');
 
-  
   // Initialize and verify subscription offline/online
   await serviceLocator.get<SubscriptionRepository>().checkSubscriptionStatus();
-
-  // Start downloading the AI model in the background immediately
-  Shared.instance.startBackgroundModelDownload();
 }
 
 late GetIt serviceLocator;
@@ -184,7 +179,6 @@ Future<void> setUpServiceLocator() async {
   serviceLocator.registerSingleton<DataBaseFuntion>(DataBaseFuntion());
   serviceLocator.registerSingleton<Dio>(Dio());
   serviceLocator.registerSingleton<DeviceInfoPlugin>(DeviceInfoPlugin());
-  serviceLocator.registerSingleton<Request>(Request());
   serviceLocator.registerSingleton<ImagePicker>(ImagePicker());
   serviceLocator.registerSingleton<KeyboardVisibilityController>(
     KeyboardVisibilityController(),
@@ -198,7 +192,7 @@ Future<void> setUpServiceLocator() async {
   serviceLocator.registerLazySingleton<NetworkTimeRemoteDataSource>(
     () => NetworkTimeRemoteDataSource(Dio()),
   );
-  
+
   final prefs = await SharedPreferences.getInstance();
   serviceLocator.registerLazySingleton<SubscriptionLocalDataSource>(
     () => SubscriptionLocalDataSource(prefs),

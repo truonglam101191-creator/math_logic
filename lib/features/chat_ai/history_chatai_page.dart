@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,10 +11,11 @@ import 'package:logic_mathematics/cores/models/messager_upgrade_model.dart';
 import 'package:logic_mathematics/cores/themes/app_colors.dart';
 import 'package:logic_mathematics/cores/widgets/user_coin_widget.dart';
 import 'package:logic_mathematics/features/chat_ai/widgets/inputchatai_widget.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
 import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 import 'package:logic_mathematics/main.dart';
-import 'package:oziapi/models/request_model.dart';
+import 'package:logic_mathematics/cores/models/chat_message_model.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HistoryChataiPage extends StatefulWidget {
@@ -100,6 +100,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
     Future.delayed(
       const Duration(milliseconds: 600),
     ).then((value) => focsunode.requestFocus());
+    Shared.instance.startBackgroundModelDownload();
     getListChat();
 
     checkCondition();
@@ -145,177 +146,324 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF3FFF3),
-      appBar: AppBar(
-        title: Column(
-          children: [
-            Text(
-              'Người bạn AI',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w800,
-                color: AppColors.primaryDark,
-              ),
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisSize: MainAxisSize.min,
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: const AnimatedBackground(
+            backgroundColor: Color(0xFFF3FFF3),
+            particleColor: Color(0xFF22C55E), // Light green floating particles
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Column(
               children: [
-                Container(
-                  width: 9,
-                  height: 9,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF22C55E).withOpacity(0.65),
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                      ),
-                    ],
+                Text(
+                  AppLocalizations.of(context).aiFriendTitle,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.primaryDark,
                   ),
                 ),
-                SizedBox(width: 8),
-                Text(
-                  'Đang trực tuyến',
-                  style: TextStyle(
-                    fontSize: 10.sp,
-                    color: AppColors.primaryDark.withOpacity(0.72),
-                    fontWeight: FontWeight.w600,
-                  ),
+                SizedBox(height: 4),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 9,
+                      height: 9,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF22C55E),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF22C55E).withOpacity(0.65),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      AppLocalizations.of(context).onlineStatus,
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        color: AppColors.primaryDark.withOpacity(0.72),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white.withOpacity(0.7),
-        elevation: 0,
-        leading: Container(
-          margin: EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primaryDark.withOpacity(0.12),
-                blurRadius: 10,
-                offset: Offset(0, 3),
+            centerTitle: true,
+            backgroundColor: Colors.white.withOpacity(0.4),
+            elevation: 0,
+            leading: Container(
+              margin: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.7),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primaryDark.withOpacity(0.08),
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, color: AppColors.primaryDark),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+            actions: [
+              UserCoinWidget(),
+              SizedBox(width: 5),
+              Container(
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primaryDark.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    _showCoinInfoDialog(context);
+                  },
+                  icon: Icon(Icons.help_outline, color: AppColors.primaryDark),
+                  tooltip: AppLocalizations.of(context).coinInfoTooltip,
+                ),
+              ),
+              SizedBox(width: 15),
             ],
           ),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back, color: AppColors.primaryDark),
-            onPressed: () => Navigator.pop(context),
-          ),
+          body: buildBody(),
         ),
-        actions: [
-          UserCoinWidget(),
-          SizedBox(width: 5),
-          Container(
-            margin: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primaryDark.withOpacity(0.1),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: IconButton(
-              onPressed: () {
-                _showCoinInfoDialog(context);
-              },
-              icon: Icon(Icons.help_outline, color: AppColors.primaryDark),
-              tooltip: AppLocalizations.of(context)!.coinInfoTooltip,
-            ),
-          ),
-          SizedBox(width: 15),
-        ],
-      ),
-      body: buildBody(),
+      ],
     );
   }
 
   Widget buildBody() {
-    return Column(
-      children: [
-        // Messages area (empty state or list) is constrained inside Expanded
-        Expanded(
-          child: listMessages.isNotEmpty
-              ? ListView.separated(
-                  controller: _scrollController,
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  itemBuilder: (BuildContext context, int index) =>
-                      buildItemChat(listMessages[index]),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      SizedBox(height: 2.h),
-                  itemCount: listMessages.length,
-                )
-              : indexCopy == 2
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [],
-                )
-              : _buildEmptyState(),
-        ),
+    return ValueListenableBuilder<int>(
+      valueListenable: Shared.instance.downloadProgress,
+      builder: (context, progress, child) {
+        if (!Shared.instance.isInitializedModelAI) {
+          return _buildDownloadScreen(context, progress);
+        }
+        return Column(
+          children: [
+            // Messages area (empty state or list) is constrained inside Expanded
+            Expanded(
+              child: listMessages.isNotEmpty
+                  ? ListView.separated(
+                      controller: _scrollController,
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      itemBuilder: (BuildContext context, int index) =>
+                          buildItemChat(listMessages[index]),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(height: 2.h),
+                      itemCount: listMessages.length,
+                    )
+                  : indexCopy == 2
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [],
+                    )
+                  : _buildEmptyState(),
+            ),
 
-        // Input section
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
-            border: Border(
-              top: BorderSide(color: const Color(0xFFEAF7EB), width: 1),
+            // Input section
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.9),
+                border: Border(
+                  top: BorderSide(color: const Color(0xFFEAF7EB), width: 1),
+                ),
+              ),
+              child: SafeArea(
+                top: false,
+                child: InputchataiWidget(
+                  focusNode: focsunode,
+                  indexFunction: indexCopy,
+                  listMessager: listMessages
+                      .map(
+                        (e) => Message(
+                          role: e.role,
+                          content: e.content,
+                          isImage: e.isImage,
+                          contents: e.contents,
+                        ),
+                      )
+                      .toList(),
+                  onCreate: (controller) {
+                    controlerInput = controller;
+                  },
+                  onSendMessage: (val, isImgae) => setState(() {
+                    listMessages.add(
+                      MessagerUpgradeModel(
+                        content: val.content,
+                        isImage: val.isImage,
+                        role: val.role,
+                        contents: val.contents,
+                      ),
+                    );
+                  }),
+                  onUpdateMessage: (val) => setState(() {
+                    isChanged = true; // Mark as dirty
+                    if (listMessages.isNotEmpty &&
+                        listMessages.last.role == 'assistant' &&
+                        listMessages.last.content.contains(
+                          val.content.substring(
+                            0,
+                            val.content.length > 5 ? 5 : val.content.length,
+                          ),
+                        )) {
+                      // Fallback string matching to update the bubble in place instead of creating a new one
+                      // This allows streaming text bubble updates
+                      listMessages.last.content = val.content;
+                    } else {
+                      // If for some reason the last bubble isn't assistant or wasn't added yet, add it
+                      if (listMessages.isNotEmpty &&
+                          listMessages.last.role == 'assistant') {
+                        listMessages.last.content = val.content;
+                      } else {
+                        listMessages.add(
+                          MessagerUpgradeModel(
+                            content: val.content,
+                            role: val.role,
+                            contents: val.contents,
+                            isImage: val.isImage,
+                          ),
+                        );
+                      }
+                    }
+                  }),
+                  onresultMessage: (val, isImgae) => setState(() {
+                    isChanged = true;
+                    if (listMessages.isNotEmpty &&
+                        listMessages.last.role == 'assistant') {
+                      listMessages.last.content = val.content;
+                    } else {
+                      listMessages.add(
+                        MessagerUpgradeModel(
+                          content: val.content,
+                          role: val.role,
+                          contents: val.contents,
+                          isImage: val.isImage,
+                        ),
+                      );
+                    }
+                  }),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildDownloadScreen(BuildContext context, int progress) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.cloud_download_outlined,
+            size: 64,
+            color: AppColors.primaryDark,
+          ),
+          SizedBox(height: 24),
+          Text(
+            AppLocalizations.of(context).downloadingOfflineModel,
+            style: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primaryDark,
             ),
           ),
-          child: SafeArea(
-            top: false,
-            child: InputchataiWidget(
-              focusNode: focsunode,
-              indexFunction: indexCopy,
-              listMessager: listMessages
-                  .map(
-                    (e) => Message(
-                      role: e.role,
-                      content: e.content,
-                      isImage: e.isImage,
-                      contents: e.contents,
-                    ),
-                  )
-                  .toList(),
-              onCreate: (controller) {
-                controlerInput = controller;
-              },
-              onSendMessage: (val, isImgae) => setState(() {
-                listMessages.add(
-                  MessagerUpgradeModel(
-                    content: val.content,
-                    isImage: val.isImage,
-                    role: val.role,
-                    contents: val.contents,
-                  ),
-                );
-              }),
-              onresultMessage: (val, isImgae) => setState(() {
-                isChanged = true;
-                listMessages.add(
-                  MessagerUpgradeModel(
-                    content: val.content,
-                    role: val.role,
-                    contents: val.contents,
-                    isImage: val.isImage,
-                  ),
-                );
-              }),
+          SizedBox(height: 16),
+          Text(
+            AppLocalizations.of(context).doNotCloseAppWarning,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15.sp,
+              color: Colors.red[700],
+              fontWeight: FontWeight.w600,
+              height: 1.3,
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 32),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                height: 120,
+                width: 120,
+                child: CircularProgressIndicator(
+                  value: progress > 0 ? progress / 100 : null,
+                  strokeWidth: 8,
+                  backgroundColor: Colors.grey[200],
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    AppColors.primaryDark,
+                  ),
+                ),
+              ),
+              Text(
+                '$progress%',
+                style: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryDark,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 48),
+          Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.amber.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.amber),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppLocalizations.of(context).ramRecommendationTitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp,
+                    color: Colors.orange[900],
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  AppLocalizations.of(context).ramRecommendationDesc,
+                  style: TextStyle(
+                    height: 1.5,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -435,7 +583,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                         children: [
                           _buildActionButton(
                             icon: Icons.copy,
-                            tooltip: AppLocalizations.of(context)!.copy,
+                            tooltip: AppLocalizations.of(context).copy,
                             color: const Color(0xFF4CAF50),
                             onPressed: () {
                               Clipboard.setData(
@@ -528,7 +676,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
           ),
           SizedBox(height: 4.h),
           Text(
-            AppLocalizations.of(context)!.startConversation,
+            AppLocalizations.of(context).startConversation,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontSize: 20.sp,
               fontWeight: FontWeight.w700,
@@ -537,7 +685,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
           ),
           SizedBox(height: 2.h),
           Text(
-            AppLocalizations.of(context)!.askMeAnything,
+            AppLocalizations.of(context).askMeAnything,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 14.sp,
@@ -655,7 +803,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                         ),
                         SizedBox(width: 3.w),
                         Text(
-                          AppLocalizations.of(context)!.coinInfo,
+                          AppLocalizations.of(context).coinInfo,
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
                                 fontSize: 18.sp,
@@ -707,7 +855,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.costPerChat,
+                                    AppLocalizations.of(context).costPerChat,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall
@@ -727,7 +875,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                                       ),
                                       SizedBox(width: 1.w),
                                       Text(
-                                        AppLocalizations.of(context)!.fiveCoins,
+                                        AppLocalizations.of(context).fiveCoins,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium
@@ -770,7 +918,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                                   ),
                                   SizedBox(width: 2.w),
                                   Text(
-                                    AppLocalizations.of(context)!.note,
+                                    AppLocalizations.of(context).note,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall
@@ -784,7 +932,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                               ),
                               SizedBox(height: 1.h),
                               Text(
-                                AppLocalizations.of(context)!.coinUsageNote,
+                                AppLocalizations.of(context).coinUsageNote,
                                 style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
                                       fontSize: 12.sp,
@@ -839,7 +987,7 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
                           ),
                           SizedBox(width: 2.w),
                           Text(
-                            AppLocalizations.of(context)!.understood,
+                            AppLocalizations.of(context).understood,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w600,

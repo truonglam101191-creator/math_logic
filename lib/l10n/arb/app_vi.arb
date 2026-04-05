@@ -1063,5 +1063,15 @@
   "upgradePremiumMessage": "Nâng cấp Premium\nTrải nghiệm mượt mà không quảng cáo.",
   "subscribeNowPrefix": "Đăng ký ngay ",
   "noSubscriptionPackages": "Không tìm thấy gói mua nào. Kiểm tra kết nối hoặc cấu hình mạng.",
-  "restorePurchases": "Đã mua trước đó? Khôi phục tại đây"
+  "restorePurchases": "Đã mua trước đó? Khôi phục tại đây",
+  "aiFriendTitle": "Người bạn AI",
+  "onlineStatus": "Đang trực tuyến",
+  "downloadingOfflineModel": "Đang tải Model AI Offline",
+  "doNotCloseAppWarning": "⚠️ LƯU Ý: Vui lòng KHÔNG đóng ứng dụng trong khi tải. Nếu ứng dụng bị đóng, quá trình tải sẽ bắt đầu lại từ đầu.\n\nSau khi tải xong, bạn hoàn toàn có thể sử dụng AI offline không cần mạng internet!",
+  "ramRecommendationTitle": "Khuyến cáo cấu hình máy (RAM):",
+  "ramRecommendationDesc": "📱 3GB  ❌ Dễ crash\n📱 4GB  ⚠️ Rất sát\n📱 6GB  ✅ Ổn định\n📱 8GB+ 🔥 Rất mượt",
+  "defaultChatTitle": "Cuộc trò chuyện AI",
+  "deleteChatTitle": "Xóa cuộc trò chuyện",
+  "deleteChatConfirmContent": "Bạn có chắc chắn muốn xoá lịch sử chat này không?",
+  "deleteAction": "Xoá"
 }

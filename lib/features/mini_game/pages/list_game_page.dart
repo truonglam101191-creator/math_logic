@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logic_mathematics/cores/adsmob/ads_mob.dart';
 import 'package:logic_mathematics/cores/extentions/utils.dart';
+import 'package:logic_mathematics/cores/widgets/ad_native_widget.dart';
 import 'package:logic_mathematics/cores/widgets/user_coin_widget.dart';
 import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/features/mini_game/arrows_escape/arrows_escape_page.dart';
@@ -453,19 +454,49 @@ class _ListGamePageState extends State<ListGamePage> {
       ),
     ];
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: 0.78,
-      ),
-      itemCount: games.length,
-      itemBuilder: (context, index) {
-        return _buildGameCard(context, games[index]);
-      },
+    int middleIndex = (games.length / 2).ceil();
+    if (middleIndex % 2 != 0 && middleIndex < games.length) {
+      // make sure the grid breaks cleanly on an even number to keep uniform rows
+      middleIndex += 1;
+    }
+
+    final firstHalf = games.sublist(0, middleIndex);
+    final secondHalf = games.sublist(middleIndex);
+
+    return Column(
+      children: [
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            childAspectRatio: 0.78,
+          ),
+          itemCount: firstHalf.length,
+          itemBuilder: (context, index) {
+            return _buildGameCard(context, firstHalf[index]);
+          },
+        ),
+        const SizedBox(height: 16),
+        const AdNativeWidget(),
+        const SizedBox(height: 16),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+            childAspectRatio: 0.78,
+          ),
+          itemCount: secondHalf.length,
+          itemBuilder: (context, index) {
+            return _buildGameCard(context, secondHalf[index]);
+          },
+        ),
+      ],
     );
   }
 

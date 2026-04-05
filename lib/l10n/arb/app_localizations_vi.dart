@@ -1417,4 +1417,37 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get restorePurchases => 'Đã mua trước đó? Khôi phục tại đây';
+
+  @override
+  String get aiFriendTitle => 'Người bạn AI';
+
+  @override
+  String get onlineStatus => 'Đang trực tuyến';
+
+  @override
+  String get downloadingOfflineModel => 'Đang tải Model AI Offline';
+
+  @override
+  String get doNotCloseAppWarning =>
+      '⚠️ LƯU Ý: Vui lòng KHÔNG đóng ứng dụng trong khi tải. Nếu ứng dụng bị đóng, quá trình tải sẽ bắt đầu lại từ đầu.\n\nSau khi tải xong, bạn hoàn toàn có thể sử dụng AI offline không cần mạng internet!';
+
+  @override
+  String get ramRecommendationTitle => 'Khuyến cáo cấu hình máy (RAM):';
+
+  @override
+  String get ramRecommendationDesc =>
+      '📱 3GB  ❌ Dễ crash\n📱 4GB  ⚠️ Rất sát\n📱 6GB  ✅ Ổn định\n📱 8GB+ 🔥 Rất mượt';
+
+  @override
+  String get defaultChatTitle => 'Cuộc trò chuyện AI';
+
+  @override
+  String get deleteChatTitle => 'Xóa cuộc trò chuyện';
+
+  @override
+  String get deleteChatConfirmContent =>
+      'Bạn có chắc chắn muốn xoá lịch sử chat này không?';
+
+  @override
+  String get deleteAction => 'Xoá';
 }

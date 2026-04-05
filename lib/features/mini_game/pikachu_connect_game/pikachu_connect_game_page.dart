@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logic_mathematics/features/mini_game/pikachu_connect_game/util/connect_sounds.dart';
 import 'package:logic_mathematics/gen/assets.gen.dart';
-import 'package:oziapi/ozi_api.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'data/models.dart';
 import 'logic/pikachu_board.dart';
 import 'widgets/board_widget.dart';

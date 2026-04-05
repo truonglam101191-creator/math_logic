@@ -35,8 +35,26 @@ enum ModelAI {
     topP: 0.95,
     supportImage: true,
     maxTokens: 4096,
+    supportsFunctionCalls: true,
+  ),
+
+  gemma4_mobile(
+    url:
+        'https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm',
+    filename: 'gemma-4-E2B-it.litertlm',
+    displayName: 'Gemma 4 Mobile (E2B)',
+    size: '2.58GB',
+    licenseUrl: '',
+    needsAuth: false, // public 302
+    preferredBackend: PreferredBackend.cpu,
+    modelType: ModelType.gemmaIt,
+    temperature: 0.7,
+    topK: 40,
+    topP: 0.8,
+    supportImage: true,
     maxNumImages: 1,
     supportsFunctionCalls: true,
+    fileType: ModelFileType.litertlm,
   ),
 
   // Gemma 3 1B model
