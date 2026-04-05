@@ -81,12 +81,12 @@ class _SplashPageState extends State<SplashPage> {
     //serviceLocator<AdmobController>().createInterstitialAd();
     //await serviceLocator<AdmobController>().loadAd();
     final url =
-        'https://raw.githubusercontent.com/truonglam5555/managerAi/main/manager_ai.json';
+        'https://raw.githubusercontent.com/truonglam101191-creator/manager_api/main/ads.json';
     final response = await serviceLocator.get<Request>().client.get(url);
 
     if (response.statusCode == HttpStatus.ok) {
       final data = json.decode(response.data);
-      Shared.instance.isShowAds = data['isShowAds'] ?? true;
+      Shared.instance.isShowAds = data['isAds'] ?? true;
       serviceLocator<AdmobController>().createInterstitialAd();
     } else {
       print('Lỗi: ${response.statusCode}');

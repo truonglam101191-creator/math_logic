@@ -98,6 +98,7 @@ class AssetLoaderService {
   /// Load image from URL
   Future<void> _loadImage(String assetId, String url) async {
     if (_imageCache.containsKey(assetId)) return;
+    if (url.isEmpty) return;
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -140,6 +141,7 @@ class AssetLoaderService {
 
   /// Load image from local asset
   Future<ui.Image?> loadLocalImage(String assetPath) async {
+    if (assetPath.isEmpty) return null;
     try {
       final data = await rootBundle.load(assetPath);
       final bytes = data.buffer.asUint8List();

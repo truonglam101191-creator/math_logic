@@ -1,7 +1,7 @@
 name: logic_mathematics
 description: "An application for learning and practicing mathematical logic. Includes lessons, exercises, and quizzes to enhance understanding of logical concepts."
 
-version: 2.3.2+36
+version: 2.5.0+40
 
 environment:
   sdk: ^3.8.1
@@ -56,7 +56,8 @@ dependencies:
   flutter_timezone: ^5.0.1
   permission_handler: ^12.0.1
   # firebase_remote_config: ^6.1.3
-  # flutter_gemma: 
+  flutter_gemma: 
+  flutter_dotenv: ^5.2.1
   # Thư viện AI local Gemma (Google)
   #flutter_markdown: ^0.7.1
   #shorebird release android --app-id=app.ozilogic.math --version=1.0.5+11
@@ -122,6 +123,7 @@ flutter:
     - assets/cozy_tiles/
     - assets/garden_gulp/
     - assets/super_crew/
+    - .env
     - shorebird.yaml
 
 targets:

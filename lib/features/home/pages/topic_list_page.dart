@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logic_mathematics/features/practice/practice_screen.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
+import 'package:logic_mathematics/cores/widgets/native_ad_small_dark_widget.dart';
 
 class TopicListPage extends StatelessWidget {
   const TopicListPage({super.key, this.enumTopicMath = EnumTopicMath.basic});
@@ -85,7 +86,18 @@ class TopicListPage extends StatelessWidget {
             return ListView.separated(
               padding: const EdgeInsets.only(top: 8, bottom: 10),
               itemCount: topics.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 6),
+              separatorBuilder: (context, index) {
+                if ((index + 1) % 3 == 0) {
+                  return const Column(
+                    children: [
+                      SizedBox(height: 6),
+                      NativeAdSmallDarkWidget(),
+                      SizedBox(height: 6),
+                    ],
+                  );
+                }
+                return const SizedBox(height: 6);
+              },
               itemBuilder: (context, index) {
                 final t = topics[index];
                 return TopicCard(

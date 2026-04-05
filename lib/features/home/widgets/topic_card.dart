@@ -33,12 +33,9 @@ class TopicCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
         borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: Colors.grey.shade300, width: 2),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
+          BoxShadow(color: Colors.grey.shade300, offset: const Offset(0, 6)),
         ],
       ),
       child: Column(
@@ -54,10 +51,13 @@ class TopicCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: iconBackground,
                   borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.5),
+                    width: 2,
+                  ),
                   boxShadow: [
                     BoxShadow(
-                      color: iconBackground,
-                      blurRadius: 8,
+                      color: iconBackground.withOpacity(0.5),
                       offset: const Offset(0, 4),
                     ),
                   ],
@@ -121,12 +121,9 @@ class TopicCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.primaryDark,
                   borderRadius: BorderRadius.circular(28),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primaryDark.withOpacity(.5),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
+                  border: Border.all(color: const Color(0xFF13AF25), width: 2),
+                  boxShadow: const [
+                    BoxShadow(color: Color(0xFF13AF25), offset: Offset(0, 6)),
                   ],
                 ),
                 child: Text(

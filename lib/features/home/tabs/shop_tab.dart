@@ -5,6 +5,8 @@ import 'package:logic_mathematics/cores/widgets/user_coin_widget.dart';
 import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/main.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
+import 'package:logic_mathematics/cores/widgets/ad_native_widget.dart';
 
 class ShopTab extends StatelessWidget {
   const ShopTab({super.key});
@@ -16,13 +18,22 @@ class ShopTab extends StatelessWidget {
   Widget build(BuildContext context) {
     LocalInAppPurchase.listProduct.sort((a, b) => a.coin.compareTo(b.coin));
     return Scaffold(
-      body: Column(
+      backgroundColor: Colors.transparent,
+      body: Stack(
         children: [
-          // Header
-          _ShopHeader(),
+          const AnimatedBackground(
+            backgroundColor: Color(0xFFFFF8E1),
+            particleColor: Color(0x66FFC107),
+          ),
+          SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                // Header
+                _ShopHeader(),
 
-          // Content
-          Expanded(
+                // Content
+                Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(bottom: 24),
               child: Column(
@@ -150,8 +161,13 @@ class ShopTab extends StatelessWidget {
                   //   ),
                   // ),
                   const SizedBox(height: 20),
+                  const AdNativeWidget(),
+                  const SizedBox(height: 20),
                 ],
               ),
+            ),
+          ),
+              ],
             ),
           ),
         ],
@@ -207,9 +223,25 @@ class _HeroBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 7,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: Stack(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color(0xFFFFB300), width: 3),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFFFA000),
+              offset: const Offset(0, 6),
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
           fit: StackFit.expand,
           children: [
             Image.network(
@@ -251,6 +283,7 @@ class _HeroBanner extends StatelessWidget {
           ],
         ),
       ),
+      ),
     );
   }
 }
@@ -284,9 +317,16 @@ class _StickerCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: background,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: background.withOpacity(0.8),
+            width: 3,
+          ),
           boxShadow: [
-            BoxShadow(color: background.withOpacity(0.1), blurRadius: 10),
+            BoxShadow(
+              color: _darken(background, 0.1),
+              offset: const Offset(0, 6),
+            ),
           ],
         ),
         child: Column(
@@ -353,5 +393,12 @@ class _StickerCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _darken(Color c, [double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+    final hsl = HSLColor.fromColor(c);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+    return hslDark.toColor();
   }
 }

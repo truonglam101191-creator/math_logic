@@ -10,8 +10,10 @@ import 'package:logic_mathematics/features/home/tabs/home_tab.dart';
 import 'package:logic_mathematics/features/home/tabs/setting_info_tab.dart';
 import 'package:logic_mathematics/features/home/tabs/shop_tab.dart';
 import 'package:logic_mathematics/features/home/tabs/summary_tab.dart';
+import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
 import 'package:logic_mathematics/main.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class HomeNewPage extends StatefulWidget {
@@ -91,11 +93,14 @@ class _HomeNewPageState extends State<HomeNewPage>
     Shared.instance.setContext(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F8F7),
-      body: Column(
+      backgroundColor: Colors.transparent,
+      body: Stack(
         children: [
-          // Bottom navigation mimic
-          Expanded(
+          const AnimatedBackground(),
+          Column(
+            children: [
+              // Bottom navigation mimic
+              Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
@@ -111,10 +116,23 @@ class _HomeNewPageState extends State<HomeNewPage>
             ),
           ),
           Container(
-            color: Colors.white,
-            padding: const EdgeInsets.only(top: 15),
+            margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Colors.grey.shade200, width: 2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 16,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
             child: SafeArea(
               top: false,
+              bottom: false,
               child: Column(
                 children: [
                   AnimatedBuilder(
@@ -156,6 +174,8 @@ class _HomeNewPageState extends State<HomeNewPage>
                 ],
               ),
             ),
+              ),
+            ],
           ),
         ],
       ),
@@ -178,24 +198,35 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: active ? AppColors.primaryDark : Colors.grey[400],
-            ),
-            const SizedBox(height: 6),
-            Text(
-              label,
-              style: TextStyle(
-                color: active ? AppColors.primaryDark : Colors.grey[500],
-                fontSize: 12,
+      child: AnimatedScaleButton(
+        onPressed: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          decoration: active
+              ? BoxDecoration(
+                  color: AppColors.primaryDark.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                )
+              : null,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                color: active ? AppColors.primaryDark : Colors.grey[400],
+                size: active ? 28 : 24,
               ),
-            ),
-          ],
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: active ? AppColors.primaryDark : Colors.grey[500],
+                  fontSize: 11,
+                  fontWeight: active ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

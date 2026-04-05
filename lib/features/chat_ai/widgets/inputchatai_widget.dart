@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logic_mathematics/cores/db_storage/db_funtion.dart';
-import 'package:logic_mathematics/cores/extentions/messagingservice.dart';
 import 'package:logic_mathematics/cores/themes/app_colors.dart';
 import 'package:logic_mathematics/features/in_app/in_app_product_page.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
@@ -12,6 +11,12 @@ import 'package:logic_mathematics/main.dart';
 import 'package:oziapi/models/request_model.dart';
 import 'package:oziapi/ozi_api.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+// removed flutter_gemma_interface.dart
+import 'package:flutter_gemma/core/message.dart' as gemma_message;
+import 'package:flutter_gemma/core/model_response.dart' as gemma_response;
+import 'package:logic_mathematics/cores/extentions/messagingservice.dart';
+import 'package:logic_mathematics/cores/services/gemma_service.dart';
+import 'package:logic_mathematics/cores/extentions/shared.dart';
 
 class InputchataiWidget extends StatefulWidget {
   const InputchataiWidget({
@@ -957,34 +962,108 @@ class InputchataiWidgetState extends State<InputchataiWidget> {
             listMessager.last,
             widget.indexFunction == 2,
           );
-          serviceLocator<Request>()
-              .sendMessageToChat(listMessager, modelChat: 'gpt-4o')
-              .then((value) {
-                serviceLocator
-                    .get<DataBaseFuntion>()
-                    .saveStar(coinUser - 5)
-                    .then((value) {
-                      serviceLocator.get<MessagingService>().send(
-                        channel: MessageChannel.startUserChanged,
-                        parameter: '',
-                      );
-                    });
-                setState(() {
-                  isSendMessager = false;
-                  controller.text = '';
-                  pathFile = '';
-                  listMessager.add(value.choices.first.message);
-                  widget.onresultMessage?.call(
-                    listMessager.last,
-                    widget.indexFunction == 2,
+
+          // AI ROUTING FLOW: Try Offline Gemma first, fallback to Cloud (OziApi)
+          if (Shared.instance.isInitializedModelAI &&
+              Shared.instance.chat != null) {
+            // LOCAL GENERATION (When initialized)
+            final gemmaSvc = GemmaLocalService(Shared.instance.chat!);
+            final gemmaMsg = gemma_message.Message(
+              text: pathFile.isEmpty
+                  ? controller.text.trim()
+                  : controller.text.trim() + " [Image included]",
+              isUser: true,
+            );
+
+            listMessager.add(
+              Message(
+                role: 'assistant',
+                content: '',
+                timestamp: DateTime.now(),
+                contents: [],
+              ),
+            );
+            final assIdx = listMessager.length - 1;
+            controller.text = '';
+            pathFile = '';
+
+            gemmaSvc
+                .processMessage(gemmaMsg, useSyncMode: false)
+                .then((responseStream) {
+                  responseStream.listen(
+                    (response) {
+                      if (response is gemma_response.TextResponse) {
+                        setState(() {
+                          listMessager[assIdx].content =
+                              listMessager[assIdx].content + response.token;
+                        });
+                      }
+                    },
+                    onDone: () {
+                      if (mounted) {
+                        setState(() {
+                          isSendMessager = false;
+                        });
+                        widget.onresultMessage?.call(
+                          listMessager[assIdx],
+                          widget.indexFunction == 2,
+                        );
+                      }
+                    },
+                    onError: (e) {
+                      if (mounted) {
+                        setState(() {
+                          listMessager[assIdx].content =
+                              '${listMessager[assIdx].content}\n(Lỗi AI: $e)';
+                          isSendMessager = false;
+                        });
+                      }
+                    },
                   );
+                })
+                .catchError((e) {
+                  if (mounted) {
+                    setState(() {
+                      listMessager[assIdx].content = 'Lỗi khởi chạy AI: $e';
+                      isSendMessager = false;
+                    });
+                    widget.onresultMessage?.call(
+                      listMessager[assIdx],
+                      widget.indexFunction == 2,
+                    );
+                  }
                 });
-              })
-              .catchError((error) {
-                setState(() {
-                  isSendMessager = false;
+          } else {
+            // CLOUD FALLBACK (OziApi)
+            serviceLocator<Request>()
+                .sendMessageToChat(listMessager, modelChat: 'gpt-4o')
+                .then((value) {
+                  serviceLocator
+                      .get<DataBaseFuntion>()
+                      .saveStar(coinUser - 5)
+                      .then((value) {
+                        serviceLocator.get<MessagingService>().send(
+                          channel: MessageChannel.startUserChanged,
+                          parameter: '',
+                        );
+                      });
+                  setState(() {
+                    isSendMessager = false;
+                    controller.text = '';
+                    pathFile = '';
+                    listMessager.add(value.choices.first.message);
+                    widget.onresultMessage?.call(
+                      listMessager.last,
+                      widget.indexFunction == 2,
+                    );
+                  });
+                })
+                .catchError((error) {
+                  setState(() {
+                    isSendMessager = false;
+                  });
                 });
-              });
+          }
         }
       } catch (e) {
         setState(() {

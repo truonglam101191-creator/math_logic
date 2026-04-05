@@ -11,8 +11,11 @@ import 'package:logic_mathematics/gen/assets.gen.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
 import 'package:logic_mathematics/main.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
+import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:logic_mathematics/cores/widgets/ad_native_widget.dart';
 
 class SettingInfoTab extends StatefulWidget {
   const SettingInfoTab({super.key, this.onBackCoin});
@@ -62,7 +65,7 @@ class _SettingInfoTabState extends State<SettingInfoTab>
   }
 
   void _openPrivacyPolicy() async {
-    final url = 'https://logicmath-eca11.web.app/#/privacy';
+    final url = 'https://logicmath-eca11.web.app/privacy';
     try {
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
@@ -77,7 +80,7 @@ class _SettingInfoTabState extends State<SettingInfoTab>
   }
 
   void _openTermsOfService() async {
-    final url = 'https://logicmath-eca11.web.app/#/terms';
+    final url = 'https://logicmath-eca11.web.app/terms';
     try {
       if (await canLaunchUrl(Uri.parse(url))) {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
@@ -188,9 +191,15 @@ class _SettingInfoTabState extends State<SettingInfoTab>
     final primary = AppColors.accentDark;
 
     return Scaffold(
-      backgroundColor: bg,
-      body: SafeArea(
-        bottom: false,
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          const AnimatedBackground(
+            backgroundColor: Color(0xFFF0F8FF), 
+            particleColor: Color(0x66FFFFFF),
+          ),
+          SafeArea(
+            bottom: false,
         child: Column(
           children: [
             // Top bar
@@ -408,12 +417,16 @@ class _SettingInfoTabState extends State<SettingInfoTab>
                       ),
                     ),
                     const SizedBox(height: 24),
+                    const AdNativeWidget(),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+        ],
       ),
     );
   }
@@ -438,13 +451,12 @@ class _SettingInfoTabState extends State<SettingInfoTab>
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade100),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.grey.shade300, width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            color: Colors.grey.shade300,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -453,33 +465,36 @@ class _SettingInfoTabState extends State<SettingInfoTab>
           final it = items[i];
           return Column(
             children: [
-              ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                leading: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: it.iconBg,
-                    borderRadius: BorderRadius.circular(999),
+              AnimatedScaleButton(
+                onPressed: () => onTap?.call(it.functionKey),
+                pressedScale: 0.98,
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
                   ),
-                  child: Icon(it.icon, color: it.iconColor, size: 22),
+                  leading: Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: it.iconBg,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Icon(it.icon, color: it.iconColor, size: 22),
+                  ),
+                  title: Text(
+                    it.title,
+                    style: const TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  subtitle: Text(
+                    it.subtitle,
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+                  ),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: Colors.grey.shade400,
+                  ),
                 ),
-                title: Text(
-                  it.title,
-                  style: const TextStyle(fontWeight: FontWeight.w700),
-                ),
-                subtitle: Text(
-                  it.subtitle,
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
-                ),
-                trailing: Icon(
-                  Icons.chevron_right,
-                  color: Colors.grey.shade400,
-                ),
-                onTap: () => onTap?.call(it.functionKey),
               ),
               if (i != items.length - 1)
                 Divider(height: 1, thickness: 1, color: Colors.grey.shade100),

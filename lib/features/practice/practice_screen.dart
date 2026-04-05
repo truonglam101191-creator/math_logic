@@ -18,9 +18,9 @@ import 'package:logic_mathematics/cores/widgets/gradient_button_widget.dart';
 import 'package:logic_mathematics/cores/widgets/user_coin_widget.dart';
 import 'package:logic_mathematics/features/analytics/stats_service.dart';
 import 'package:logic_mathematics/features/bottomsheets/result_question_bottomsheet.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
 import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/features/in_app/in_app_product_page.dart';
-import 'package:logic_mathematics/features/popups/discription_popup.dart';
 import 'package:logic_mathematics/features/popups/option_sugget_popup.dart';
 import 'package:logic_mathematics/features/popups/suggest_popup.dart';
 import 'package:logic_mathematics/gen/assets.gen.dart';
@@ -477,6 +477,10 @@ class _PracticeScreenState extends State<PracticeScreen>
       child: Stack(
         fit: StackFit.expand,
         children: [
+          const AnimatedBackground(
+            backgroundColor: Color(0xFFF9FAFB),
+            particleColor: Color(0x22000000),
+          ),
           Positioned.fill(
             bottom: 30,
             child: Column(
@@ -488,29 +492,44 @@ class _PracticeScreenState extends State<PracticeScreen>
                   child: Row(
                     children: [
                       Expanded(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Builder(
-                            builder: (context) {
-                              final total = widget.questions.isEmpty
-                                  ? 1
-                                  : widget.questions.length;
-                              final target = (current + 1) / total;
-                              return TweenAnimationBuilder<double>(
-                                tween: Tween<double>(end: target),
-                                duration: const Duration(milliseconds: 450),
-                                curve: Curves.easeOutCubic,
-                                builder: (context, value, child) =>
-                                    LinearProgressIndicator(
-                                      value: value.clamp(0.0, 1.0),
-                                      minHeight: 12,
-                                      backgroundColor: Colors.grey.shade200,
-                                      valueColor: AlwaysStoppedAnimation(
-                                        Color(0xff9AE59E),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                              width: 2,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade300,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Builder(
+                              builder: (context) {
+                                final total = widget.questions.isEmpty
+                                    ? 1
+                                    : widget.questions.length;
+                                final target = (current + 1) / total;
+                                return TweenAnimationBuilder<double>(
+                                  tween: Tween<double>(end: target),
+                                  duration: const Duration(milliseconds: 450),
+                                  curve: Curves.easeOutCubic,
+                                  builder: (context, value, child) =>
+                                      LinearProgressIndicator(
+                                        value: value.clamp(0.0, 1.0),
+                                        minHeight: 12,
+                                        backgroundColor: Colors.grey.shade200,
+                                        valueColor: AlwaysStoppedAnimation(
+                                          Color(0xff9AE59E),
+                                        ),
                                       ),
-                                    ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -591,11 +610,14 @@ class _PracticeScreenState extends State<PracticeScreen>
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.grey.shade300,
+                                        width: 2,
+                                      ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.06),
-                                          blurRadius: 12,
-                                          offset: Offset(0, 6),
+                                          color: Colors.grey.shade300,
+                                          offset: const Offset(0, 6),
                                         ),
                                       ],
                                     ),
@@ -624,8 +646,18 @@ class _PracticeScreenState extends State<PracticeScreen>
                                         vertical: 8,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 2,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.shade300,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ],
                                       ),
                                       child: Text(
                                         // use localization with placeholders
@@ -660,6 +692,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                                   return GridView.builder(
                                     shrinkWrap: true,
                                     padding: EdgeInsets.zero,
+                                    physics: NeverScrollableScrollPhysics(),
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
@@ -768,9 +801,9 @@ class _PracticeScreenState extends State<PracticeScreen>
           Positioned(
             right: 30,
             bottom: 60,
-            child: InkWell(
+            child: AnimatedScaleButton(
               key: keySuggest,
-              onTap: () async {
+              onPressed: () async {
                 // final getCoin = await serviceLocator<DataBaseFuntion>()
                 //     .getStar();
                 // if (getCoin < 1) {
@@ -855,6 +888,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFC700),
                   shape: BoxShape.circle,
+                  border: Border.all(color: const Color(0xFFF59E0B), width: 2),
+                  boxShadow: const [
+                    BoxShadow(color: Color(0xFFD97706), offset: Offset(0, 6)),
+                  ],
                 ),
                 child: Container(
                   padding: EdgeInsets.all(5),
@@ -882,8 +919,8 @@ class _PracticeScreenState extends State<PracticeScreen>
     required VoidCallback onTap,
     required bool isSelected,
   }) {
-    return GestureDetector(
-      onTap: onTap,
+    return AnimatedScaleButton(
+      onPressed: onTap,
       child: Stack(
         children: [
           Container(
@@ -893,13 +930,13 @@ class _PracticeScreenState extends State<PracticeScreen>
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: Offset(0, 4),
+                  color: isSelected ? Color(0xff06A954) : Colors.grey.shade300,
+                  offset: const Offset(0, 6),
                 ),
               ],
               border: Border.all(
-                color: isSelected ? Color(0xff06A954) : Colors.grey.shade100,
+                color: isSelected ? Color(0xff06A954) : Colors.grey.shade300,
+                width: 2,
               ),
             ),
             alignment: Alignment.center,

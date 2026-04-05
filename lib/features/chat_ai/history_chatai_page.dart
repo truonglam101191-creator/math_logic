@@ -278,6 +278,16 @@ class _HistoryChataiPageState extends State<HistoryChataiPage> {
             child: InputchataiWidget(
               focusNode: focsunode,
               indexFunction: indexCopy,
+              listMessager: listMessages
+                  .map(
+                    (e) => Message(
+                      role: e.role,
+                      content: e.content,
+                      isImage: e.isImage,
+                      contents: e.contents,
+                    ),
+                  )
+                  .toList(),
               onCreate: (controller) {
                 controlerInput = controller;
               },

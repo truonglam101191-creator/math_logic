@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:logic_mathematics/cores/audio/audio_manager.dart';
+import 'package:logic_mathematics/main.dart';
 
 /// A button that animates its scale to [pressedScale] when tapped, then
 /// returns to its original scale. Use this when you want a quick press
@@ -67,6 +70,8 @@ class _AnimatedScaleButtonState extends State<AnimatedScaleButton>
   }
 
   void _handleTap() async {
+    HapticFeedback.lightImpact();
+    serviceLocator.get<AudioManager>().playClick();
     await _runTapAnimation();
     widget.onPressed?.call();
   }

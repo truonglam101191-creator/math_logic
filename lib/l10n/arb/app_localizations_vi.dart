@@ -612,42 +612,42 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String findFirstAddend(String sum, String secondAddend) {
-    return 'If the sum is $sum and the second addend is $secondAddend, what is the first addend?';
+    return 'Nếu tổng là $sum và số hạng thứ hai là $secondAddend, số hạng thứ nhất là bao nhiêu?';
   }
 
   @override
   String findSecondAddend(String firstAddend, String sum) {
-    return 'If the first addend is $firstAddend and the sum is $sum, what is the second addend?';
+    return 'Nếu số hạng thứ nhất là $firstAddend và tổng là $sum, số hạng thứ hai là bao nhiêu?';
   }
 
   @override
   String findMinuend(String difference, String subtrahend) {
-    return 'If the difference is $difference and the subtrahend is $subtrahend, what is the minuend?';
+    return 'Nếu hiệu là $difference và số trừ là $subtrahend, số bị trừ là bao nhiêu?';
   }
 
   @override
   String findSubtrahend(String minuend, String difference) {
-    return 'If the minuend is $minuend and the difference is $difference, what is the subtrahend?';
+    return 'Nếu số bị trừ là $minuend và hiệu là $difference, số trừ là bao nhiêu?';
   }
 
   @override
   String findMultiplicand(String product, String multiplier) {
-    return 'If the product is $product and the multiplier is $multiplier, what is the multiplicand?';
+    return 'Nếu tích là $product và thừa số thứ hai là $multiplier, thừa số thứ nhất là bao nhiêu?';
   }
 
   @override
   String findMultiplier(String multiplicand, String product) {
-    return 'If the multiplicand is $multiplicand and the product is $product, what is the multiplier?';
+    return 'Nếu thừa số thứ nhất là $multiplicand và tích là $product, thừa số thứ hai là bao nhiêu?';
   }
 
   @override
   String findDividend(String quotient, String divisor) {
-    return 'If the quotient is $quotient and the divisor is $divisor, what is the dividend?';
+    return 'Nếu thương là $quotient và số chia là $divisor, số bị chia là bao nhiêu?';
   }
 
   @override
   String findDivisor(String dividend, String quotient) {
-    return 'If the dividend is $dividend and the quotient is $quotient, what is the divisor?';
+    return 'Nếu số bị chia là $dividend và thương là $quotient, số chia là bao nhiêu?';
   }
 
   @override

@@ -968,5 +968,93 @@
   "reset": "Làm lại",
   "aiHint": "Gợi ý AI",
   "featureLockedMessage": "Tính năng sắp mở khóa!",
-  "undo": "Hoàn tác"
+  "undo": "Hoàn tác",
+  "findFirstAddend": "Nếu tổng là {sum} và số hạng thứ hai là {secondAddend}, số hạng thứ nhất là bao nhiêu?",
+  "@findFirstAddend": {
+    "placeholders": {
+      "sum": {
+        "type": "String"
+      },
+      "secondAddend": {
+        "type": "String"
+      }
+    }
+  },
+  "findSecondAddend": "Nếu số hạng thứ nhất là {firstAddend} và tổng là {sum}, số hạng thứ hai là bao nhiêu?",
+  "@findSecondAddend": {
+    "placeholders": {
+      "firstAddend": {
+        "type": "String"
+      },
+      "sum": {
+        "type": "String"
+      }
+    }
+  },
+  "findMinuend": "Nếu hiệu là {difference} và số trừ là {subtrahend}, số bị trừ là bao nhiêu?",
+  "@findMinuend": {
+    "placeholders": {
+      "difference": {
+        "type": "String"
+      },
+      "subtrahend": {
+        "type": "String"
+      }
+    }
+  },
+  "findSubtrahend": "Nếu số bị trừ là {minuend} và hiệu là {difference}, số trừ là bao nhiêu?",
+  "@findSubtrahend": {
+    "placeholders": {
+      "minuend": {
+        "type": "String"
+      },
+      "difference": {
+        "type": "String"
+      }
+    }
+  },
+  "findMultiplicand": "Nếu tích là {product} và thừa số thứ hai là {multiplier}, thừa số thứ nhất là bao nhiêu?",
+  "@findMultiplicand": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      },
+      "multiplier": {
+        "type": "String"
+      }
+    }
+  },
+  "findMultiplier": "Nếu thừa số thứ nhất là {multiplicand} và tích là {product}, thừa số thứ hai là bao nhiêu?",
+  "@findMultiplier": {
+    "placeholders": {
+      "multiplicand": {
+        "type": "String"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
+  "findDividend": "Nếu thương là {quotient} và số chia là {divisor}, số bị chia là bao nhiêu?",
+  "@findDividend": {
+    "placeholders": {
+      "quotient": {
+        "type": "String"
+      },
+      "divisor": {
+        "type": "String"
+      }
+    }
+  },
+  "findDivisor": "Nếu số bị chia là {dividend} và thương là {quotient}, số chia là bao nhiêu?",
+  "@findDivisor": {
+    "placeholders": {
+      "dividend": {
+        "type": "String"
+      },
+      "quotient": {
+        "type": "String"
+      }
+    }
+  }
 }

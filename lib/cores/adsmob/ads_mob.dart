@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logic_mathematics/cores/extentions/shared.dart';
 
-const int maxFailedLoadAttempts = 0;
+const int maxFailedLoadAttempts = 3;
 
 class AdmobController {
   RewardedInterstitialAd? _rewardedInterstitialAd;
@@ -14,6 +14,7 @@ class AdmobController {
   AppOpenAd? _appOpenAd;
 
   bool _isShowingAd = false;
+  DateTime? _lastAdShowTime;
 
   AdmobController() {
     createRewardedInterstitialAd();
@@ -101,14 +102,23 @@ class AdmobController {
   void showInterstitialAd({Function(bool isSucess)? callback}) {
     //if (_numRewardedInterstitialLoadAttempts >= maxFailedLoadAttempts) {
     if (Shared.instance.isShowAds) {
+      if (_lastAdShowTime != null &&
+          DateTime.now().difference(_lastAdShowTime!).inSeconds < 60) {
+        print('Skipping Interstitial due to 60s cooldown.');
+        callback?.call(true);
+        return;
+      }
+
       if (_interstitialAd == null) {
         print('Warning: attempt to show interstitial before loaded.');
         callback?.call(false);
         return;
       }
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (InterstitialAd ad) =>
-            print('$ad onAdShowedFullScreenContent.'),
+        onAdShowedFullScreenContent: (InterstitialAd ad) {
+          print('$ad onAdShowedFullScreenContent.');
+          _lastAdShowTime = DateTime.now();
+        },
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           print('$ad onAdDismissedFullScreenContent.');
           ad.dispose();
@@ -155,6 +165,17 @@ class AdmobController {
   );
 
   void showAdIfAvailable({Function()? callback}) async {
+    if (!Shared.instance.isShowAds) {
+      callback?.call();
+      return;
+    }
+
+    if (_lastAdShowTime != null &&
+        DateTime.now().difference(_lastAdShowTime!).inSeconds < 60) {
+      callback?.call();
+      return;
+    }
+
     if (_isShowingAd) {
       callback?.call();
       return;
@@ -167,7 +188,10 @@ class AdmobController {
     }
 
     _appOpenAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (ad) => _isShowingAd = true,
+      onAdShowedFullScreenContent: (ad) {
+        _isShowingAd = true;
+        _lastAdShowTime = DateTime.now();
+      },
       onAdDismissedFullScreenContent: (ad) {
         _isShowingAd = true;
         ad.dispose();

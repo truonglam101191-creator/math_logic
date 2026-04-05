@@ -65,6 +65,7 @@ class _AdmobAdapterBannerState extends State<AdmobAdapterBanner> {
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           if (!mounted) return;
+          count = 0;
           setState(() {});
         },
         onAdFailedToLoad: (ad, error) {
@@ -113,8 +114,14 @@ class _AdmobAdapterBannerState extends State<AdmobAdapterBanner> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.grey.shade300, width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade300,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   padding: const EdgeInsets.all(4),
                   child: AdWidget(ad: _banner!),

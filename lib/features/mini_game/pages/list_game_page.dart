@@ -22,6 +22,7 @@ import 'package:logic_mathematics/features/mini_game/web_quantum_link/web_quantu
 import 'package:logic_mathematics/features/mini_game/web_sortie/web_sortie_pal_stub.dart';
 import 'package:logic_mathematics/features/mini_game/web_super_crew/web_super_crew.dart';
 import 'package:logic_mathematics/features/mini_game/web_wood_block_puzzle/web_web_wood_block_puzzle.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 
 import 'package:logic_mathematics/main.dart';
@@ -62,36 +63,44 @@ class _ListGamePageState extends State<ListGamePage> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF9F6),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header
-            _buildHeader(context, loc),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          const AnimatedBackground(
+            backgroundColor: Color(0xFFF0F8FF),
+            particleColor: Color(0x66FFFFFF),
+          ),
+          SafeArea(
+            child: Column(
+              children: [
+                // Header
+                _buildHeader(context, loc),
 
-            // Content
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 8),
-                    // Title Section
-                    _buildTitleSection(context, loc),
-                    const SizedBox(height: 16),
-                    // Featured Banner
-                    _buildFeaturedBanner(context, loc),
-                    const SizedBox(height: 20),
-                    // Games Grid
-                    _buildGamesGrid(context, loc),
-                    const SizedBox(height: 24),
-                  ],
+                // Content
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 8),
+                        // Title Section
+                        _buildTitleSection(context, loc),
+                        const SizedBox(height: 16),
+                        // Featured Banner
+                        _buildFeaturedBanner(context, loc),
+                        const SizedBox(height: 20),
+                        // Games Grid
+                        _buildGamesGrid(context, loc),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -173,11 +182,13 @@ class _ListGamePageState extends State<ListGamePage> {
           colors: [const Color(0xFFFBD74C), const Color(0xFFF5C842)],
         ),
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0xFFF0A500), width: 3),
         boxShadow: [
+          BoxShadow(color: const Color(0xFFD68A00), offset: const Offset(0, 8)),
           BoxShadow(
-            color: const Color(0xFFFBD74C).withOpacity(0.3),
+            color: Colors.black.withOpacity(0.15),
             blurRadius: 16,
-            offset: const Offset(0, 8),
+            offset: const Offset(0, 16),
           ),
         ],
       ),
@@ -204,9 +215,17 @@ class _ListGamePageState extends State<ListGamePage> {
           Text(
             loc.challengeTitle,
             style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
               color: Colors.black87,
+              letterSpacing: 0.5,
+              shadows: [
+                Shadow(
+                  color: Colors.white70,
+                  offset: Offset(1, 1),
+                  blurRadius: 2,
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 4),
@@ -358,15 +377,24 @@ class _ListGamePageState extends State<ListGamePage> {
         subtitle: loc.gamePikachuSubtitle,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/2436/2436636.png',
         backgroundColor: const Color(0xFFFFF8E7),
-        onTap: () =>
-            _openGame(context, 'Connect Point', '', PikachuConnectGamePage()),
+        onTap: () => _openGame(
+          context,
+          'Connect Point',
+          'https://cdn-icons-png.flaticon.com/512/2436/2436636.png',
+          PikachuConnectGamePage(),
+        ),
       ),
       GameCardData(
         title: loc.gameTetrisTitle,
         subtitle: loc.gameTetrisSubtitle,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3612/3612569.png',
         backgroundColor: const Color(0xFFFFF0E8),
-        onTap: () => _openGame(context, 'Tetris', '', TetrisGameScreen()),
+        onTap: () => _openGame(
+          context,
+          'Tetris',
+          'https://cdn-icons-png.flaticon.com/512/3612/3612569.png',
+          TetrisGameScreen(),
+        ),
       ),
       // GameCardData(
       //   title: loc.gamePacmanTitle,
@@ -392,14 +420,24 @@ class _ListGamePageState extends State<ListGamePage> {
         subtitle: loc.gameWordSubtitle,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/3898/3898082.png',
         backgroundColor: const Color(0xFFFFF8E7),
-        onTap: () => _openGame(context, 'word_puzzle', '', SelectWidget()),
+        onTap: () => _openGame(
+          context,
+          'word_puzzle',
+          'https://cdn-icons-png.flaticon.com/512/3898/3898082.png',
+          SelectWidget(),
+        ),
       ),
       GameCardData(
         title: loc.gameDuckTitle,
         subtitle: loc.gameDuckSubtitle,
         imageUrl: 'https://cdn-icons-png.flaticon.com/512/2436/2436891.png',
         backgroundColor: const Color(0xFFE8F0FF),
-        onTap: () => _openGame(context, loc.gameDuckTitle, '', WebDuckWar()),
+        onTap: () => _openGame(
+          context,
+          loc.gameDuckTitle,
+          'https://cdn-icons-png.flaticon.com/512/2436/2436891.png',
+          WebDuckWar(),
+        ),
       ),
       GameCardData(
         title: loc.gameCircuitTitle,
@@ -409,7 +447,7 @@ class _ListGamePageState extends State<ListGamePage> {
         onTap: () => _openGame(
           context,
           loc.gameCircuitTitle,
-          '',
+          'https://cdn-icons-png.flaticon.com/512/564/564619.png',
           WebCircuitConnectStub(),
         ),
       ),
@@ -470,11 +508,14 @@ class _ListGamePageState extends State<ListGamePage> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: game.backgroundColor.withOpacity(0.8),
+            width: 3,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
+              color: game.backgroundColor.withOpacity(0.6),
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -497,16 +538,30 @@ class _ListGamePageState extends State<ListGamePage> {
                     clipBehavior: Clip.antiAlias,
                     child: Center(
                       child: Padding(
-                        padding: game.imageUrl.contains('webp')
+                        padding:
+                            game.imageUrl.contains('webp') ||
+                                game.imageUrl.contains('gif')
                             ? EdgeInsets.zero
                             : const EdgeInsets.all(20),
-                        child:
-                            !game.imageUrl.contains('https://') &&
-                                game.imageUrl.contains('assets/')
+                        child: game.imageUrl.isEmpty
+                            ? Icon(
+                                Icons.gamepad,
+                                size: 60,
+                                color: Colors.grey.shade400,
+                              )
+                            : !game.imageUrl.contains('https://') &&
+                                  game.imageUrl.contains('assets/')
                             ? Image.asset(
                                 game.imageUrl,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Icon(
+                                    Icons.gamepad,
+                                    size: 60,
+                                    color: Colors.grey.shade400,
+                                  );
+                                },
                               )
                             : Image.network(
                                 width: double.infinity,
@@ -568,11 +623,11 @@ class _ListGamePageState extends State<ListGamePage> {
                 decoration: BoxDecoration(
                   color: const Color(0xFFFBD74C),
                   shape: BoxShape.circle,
+                  border: Border.all(color: const Color(0xFFF0A500), width: 2),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFFBD74C).withOpacity(0.4),
-                      blurRadius: 8,
-                      offset: const Offset(0, 3),
+                      color: const Color(0xFFD68A00),
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),

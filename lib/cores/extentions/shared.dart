@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_gemma/core/chat.dart';
-// import 'package:flutter_gemma/flutter_gemma_interface.dart';
+import 'package:flutter_gemma/flutter_gemma.dart';
+import 'package:flutter_gemma/flutter_gemma_interface.dart';
+import 'package:flutter_gemma/core/chat.dart';
 import 'package:logic_mathematics/cores/enum/enum_difficulty_type.dart';
 import 'package:logic_mathematics/cores/models/option_quesion_model.dart';
+import 'package:logic_mathematics/cores/models/ai_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -57,50 +60,75 @@ class Shared {
 
   DateTime lastCheckInDate = DateTime.now();
 
-  // // ignore: avoid_init_to_null
-  // late InferenceModel? modelChat = null;
+  ValueNotifier<int> downloadProgress = ValueNotifier<int>(0);
+  bool isDownloadingModel = false;
 
-  // // ignore: avoid_init_to_null
-  // late ModelAI? modelAI = null;
+  // ignore: avoid_init_to_null
+  InferenceModel? modelChat = null;
 
-  // bool isInitializedModelAI = false;
+  // ignore: avoid_init_to_null
+  ModelAI? modelAI = null;
 
-  // InferenceChat? chat = null;
+  bool isInitializedModelAI = false;
 
-  // void creatModel() {
-  //   if (modelAI != null || !isInitializedModelAI) {
-  //     serviceLocator.get<DataBaseFuntion>().getOptionAiByName().then((
-  //       value,
-  //     ) async {
-  //       if (value != null) {
-  //         modelAI = ModelAI.values.firstWhere(
-  //           (element) => element.name == value.modelName,
-  //         );
-  //         FlutterGemmaPlugin.instance
-  //             .createModel(
-  //               preferredBackend: modelAI!.preferredBackend,
-  //               modelType: modelAI!.modelType,
-  //               fileType: modelAI!.fileType,
-  //               maxTokens: modelAI!.maxTokens,
-  //               supportImage: modelAI!.supportImage,
-  //               maxNumImages: modelAI!.maxNumImages,
-  //             )
-  //             .then((value) {
-  //               modelChat = value;
-  //               isInitializedModelAI = true;
-  //               serviceLocator.get<MessagingService>().send(
-  //                 channel: MessageChannel.modelAIChanged,
-  //                 parameter: '',
-  //               );
-  //             });
-  //       }
-  //     });
-  //   }
-  // }
+  InferenceChat? chat = null;
 
-  // void clearModel() {
-  //   modelChat?.close();
-  //   modelChat = null;
-  //   isInitializedModelAI = false;
-  // }
+  void creatModel() {
+    // We only initialize the target model here for now
+    modelAI = ModelAI.gemma3n_2B; // fallback default
+    isInitializedModelAI = false;
+  }
+
+  void clearModel() {
+    modelChat?.close();
+    modelChat = null;
+    isInitializedModelAI = false;
+  }
+
+  Future<void> startBackgroundModelDownload() async {
+    if (isInitializedModelAI || isDownloadingModel) return;
+    
+    creatModel();
+    final _modelAI = modelAI;
+    if (_modelAI == null) return;
+
+    try {
+      final isReady = await FlutterGemma.isModelInstalled(_modelAI.filename);
+      
+      if (!isReady) {
+        isDownloadingModel = true;
+        // Using the modern fluent API for download with progress
+        await FlutterGemma.installModel(modelType: _modelAI.modelType)
+            .fromNetwork(_modelAI.url)
+            .withProgress((progress) {
+              downloadProgress.value = progress;
+            })
+            .install();
+      }
+
+      // Model is downloaded, let's create the instances
+      modelChat = await FlutterGemmaPlugin.instance.createModel(
+        modelType: _modelAI.modelType,
+        fileType: _modelAI.fileType,
+        preferredBackend: _modelAI.preferredBackend,
+        maxTokens: _modelAI.maxTokens,
+        supportImage: _modelAI.supportImage,
+        maxNumImages: _modelAI.maxNumImages,
+      );
+
+      chat = await modelChat!.createChat(
+        temperature: _modelAI.temperature,
+        topK: _modelAI.topK,
+        topP: _modelAI.topP,
+        modelType: _modelAI.modelType,
+      );
+
+      isInitializedModelAI = true;
+      isDownloadingModel = false;
+      downloadProgress.value = 100;
+    } catch (e) {
+      debugPrint('Background download failed: $e');
+      isDownloadingModel = false;
+    }
+  }
 }

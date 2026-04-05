@@ -4,9 +4,11 @@ import 'package:logic_mathematics/features/analytics/attempt_model.dart';
 import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 import 'package:logic_mathematics/features/home/widgets/expension_widget.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
+import 'package:logic_mathematics/cores/widgets/ad_native_widget.dart';
 import '../../analytics/stats_service.dart';
 import 'package:logic_mathematics/cores/analytics/usage_service.dart';
 import 'package:logic_mathematics/cores/enum/usage_type.dart';
+import 'package:logic_mathematics/features/game_core/widgets/animated_background.dart';
 
 class SummaryTab extends StatefulWidget {
   const SummaryTab({super.key, this.onPlay});
@@ -106,10 +108,16 @@ class _SummaryTabState extends State<SummaryTab> {
     final dayHeights = dayHeights0();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F8F5),
-      body: SafeArea(
-        bottom: false,
-        child: _loading
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          const AnimatedBackground(
+            backgroundColor: Color(0xFFF0F8FF), 
+            particleColor: Color(0x66FFFFFF),
+          ),
+          SafeArea(
+            bottom: false,
+            child: _loading
             ? const Center(child: CircularProgressIndicator(color: primary))
             : Stack(
                 children: [
@@ -238,6 +246,8 @@ class _SummaryTabState extends State<SummaryTab> {
                           ),
                         ),
                         const SizedBox(height: 16),
+                        const AdNativeWidget(),
+                        const SizedBox(height: 16),
 
                         // activity card with bars
                         Container(
@@ -245,10 +255,11 @@ class _SummaryTabState extends State<SummaryTab> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(24),
+                            border: Border.all(color: Colors.grey.shade300, width: 2),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.03),
-                                blurRadius: 6,
+                                color: Colors.grey.shade300,
+                                offset: const Offset(0, 6),
                               ),
                             ],
                           ),
@@ -416,7 +427,9 @@ class _SummaryTabState extends State<SummaryTab> {
                   ),
                 ],
               ),
-      ),
+            ),
+          ],
+        ),
     );
   }
 
@@ -446,9 +459,13 @@ class _SummaryTabState extends State<SummaryTab> {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey.shade300, width: 2),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6),
+                BoxShadow(
+                  color: Colors.grey.shade300,
+                  offset: const Offset(0, 6),
+                ),
               ],
             ),
             child: ExpensionWidget(
@@ -458,12 +475,7 @@ class _SummaryTabState extends State<SummaryTab> {
                   if (entry.value.first.meta?['image'] != null)
                     ClipRRect(
                       borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        entry.value.first.meta!['image'],
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.cover,
-                      ),
+                      child: _buildUsageImage(entry.value.first.meta?['image']),
                     ),
                   Expanded(
                     child: Text(
@@ -496,6 +508,45 @@ class _SummaryTabState extends State<SummaryTab> {
             ),
           ),
       ],
+    );
+  }
+
+  Widget _buildUsageImage(dynamic imagePath) {
+    if (imagePath == null || imagePath is! String || imagePath.isEmpty) {
+      return Container(
+        width: 20,
+        height: 20,
+        color: Colors.grey.shade200,
+        child: const Icon(Icons.gamepad, size: 14, color: Colors.grey),
+      );
+    }
+
+    if (imagePath.startsWith('http')) {
+      return Image.network(
+        imagePath,
+        width: 20,
+        height: 20,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          width: 20,
+          height: 20,
+          color: Colors.grey.shade200,
+          child: const Icon(Icons.gamepad, size: 14, color: Colors.grey),
+        ),
+      );
+    }
+
+    return Image.asset(
+      imagePath,
+      width: 20,
+      height: 20,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) => Container(
+        width: 20,
+        height: 20,
+        color: Colors.grey.shade200,
+        child: const Icon(Icons.gamepad, size: 14, color: Colors.grey),
+      ),
     );
   }
 
@@ -547,9 +598,16 @@ class _StatCard extends StatelessWidget {
           : null,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: emphasize ? AppColors.primaryDark : Colors.grey.shade300,
+          width: 2,
+        ),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6),
+          BoxShadow(
+            color: emphasize ? AppColors.primaryDark : Colors.grey.shade300,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       clipBehavior: Clip.hardEdge,
@@ -724,8 +782,12 @@ class _TopicProgress extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade300, width: 2),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6),
+          BoxShadow(
+            color: Colors.grey.shade300,
+            offset: const Offset(0, 6),
+          ),
         ],
       ),
       child: Row(

@@ -60,6 +60,11 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
             return min + Random().nextDouble() * (max - min);
           }
 
+          if (!mounted) {
+            timer.cancel();
+            return;
+          }
+
           Confetti.launch(
             context,
             options: ConfettiOptions(
@@ -136,6 +141,16 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
                           borderRadius: BorderRadius.circular(
                             Configs.instance.commonRadius,
                           ),
+                          border: Border.all(
+                            color: colorCorrect.withValues(alpha: 0.3),
+                            width: 2,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: colorCorrect.withValues(alpha: 0.2),
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Stack(
                           children: [
@@ -159,6 +174,16 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
                           borderRadius: BorderRadius.circular(
                             Configs.instance.commonRadius,
                           ),
+                          border: Border.all(
+                            color: colorIncorrect.withValues(alpha: 0.3),
+                            width: 2,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: colorIncorrect.withValues(alpha: 0.2),
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Stack(
                           children: [
@@ -190,8 +215,15 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
                     decoration: BoxDecoration(
                       color: Theme.of(
                         context,
-                      ).iconTheme.color!.withValues(alpha: .1),
+                      ).iconTheme.color!.withValues(alpha: .05),
                       borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.grey.shade300, width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade300,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -222,10 +254,13 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
                             borderRadius: BorderRadius.circular(
                               Configs.instance.commonRadiusMax,
                             ),
+                            border: Border.all(
+                              color: colorCorrect.withValues(alpha: 0.3),
+                              width: 2,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: colorCorrect.withValues(alpha: 0.4),
-                                blurRadius: 8,
+                                color: colorCorrect.withValues(alpha: 0.2),
                                 offset: const Offset(0, 4),
                               ),
                             ],
@@ -250,11 +285,14 @@ class _ResultQuestionBottomsheetState extends State<ResultQuestionBottomsheet> {
                             borderRadius: BorderRadius.circular(
                               Configs.instance.commonRadiusMax,
                             ),
-                            boxShadow: [
+                            border: Border.all(
+                              color: const Color(0xFF04823E),
+                              width: 2,
+                            ),
+                            boxShadow: const [
                               BoxShadow(
-                                color: colorCorrect.withValues(alpha: 0.4),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
+                                color: Color(0xFF04823E),
+                                offset: Offset(0, 5),
                               ),
                             ],
                           ),

@@ -22,15 +22,19 @@ import 'package:logic_mathematics/cores/services/app_lifecycle_handler.dart';
 import 'package:logic_mathematics/cores/services/local_notification_service.dart';
 import 'package:logic_mathematics/cores/themes/app_theme.dart';
 import 'package:logic_mathematics/features/splash/splash_page.dart';
+import 'package:logic_mathematics/cores/audio/audio_manager.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 import 'package:oziapi/requests/request.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gemma/flutter_gemma.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   try {
     await Firebase.initializeApp();
     await MobileAds.instance.initialize();
@@ -42,6 +46,12 @@ void main() async {
     await MobileAds.instance.updateRequestConfiguration(configuration);
   } catch (error) {
     debugPrint('Firebase initialization error: $error');
+  }
+  try {
+    // HuggingFace token from .env file
+    await FlutterGemma.initialize(huggingFaceToken: dotenv.env['HF_TOKEN']);
+  } catch (e) {
+    debugPrint('FlutterGemma initialization error: $e');
   }
   await setUpServiceLocator();
   await initStartApp();
@@ -148,7 +158,11 @@ Future<void> initStartApp() async {
   Shared.instance.lastCheckInDate = await serviceLocator
       .get<DataBaseFuntion>()
       .getlastCheckInDate();
+  await serviceLocator.get<AudioManager>().init();
   debugPrint('Last check-in date: ${Shared.instance.lastCheckInDate}');
+
+  // Start downloading the AI model in the background immediately
+  Shared.instance.startBackgroundModelDownload();
 }
 
 late GetIt serviceLocator;
@@ -170,4 +184,5 @@ Future<void> setUpServiceLocator() async {
   serviceLocator.registerSingleton<LocalNotificationService>(
     LocalNotificationService(),
   );
+  serviceLocator.registerSingleton<AudioManager>(AudioManager());
 }

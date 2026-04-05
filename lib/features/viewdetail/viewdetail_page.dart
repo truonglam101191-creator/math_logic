@@ -7,6 +7,7 @@ import 'package:logic_mathematics/cores/widgets/app_bar_widget.dart';
 import 'package:logic_mathematics/features/detail_question/detail_question_page.dart';
 import 'package:logic_mathematics/gen/assets.gen.dart';
 import 'package:logic_mathematics/l10n/l10n.dart';
+import 'package:logic_mathematics/features/home/widgets/animated_scale_button.dart';
 
 class ViewdetailPage extends StatefulWidget {
   const ViewdetailPage({super.key, required this.questions});
@@ -61,6 +62,13 @@ class _ViewdetailPageState extends State<ViewdetailPage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Configs.instance.commonRadius),
             color: Theme.of(context).cardColor,
+            border: Border.all(color: Colors.grey.shade300, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,6 +88,13 @@ class _ViewdetailPageState extends State<ViewdetailPage> {
                         borderRadius: BorderRadius.circular(
                           Configs.instance.commonRadius,
                         ),
+                        border: Border.all(color: colorCorrect.withValues(alpha: 0.3), width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorCorrect.withValues(alpha: 0.2),
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
                       child: Stack(
                         children: [
@@ -103,6 +118,13 @@ class _ViewdetailPageState extends State<ViewdetailPage> {
                         borderRadius: BorderRadius.circular(
                           Configs.instance.commonRadius,
                         ),
+                        border: Border.all(color: colorIncorrect.withValues(alpha: 0.3), width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorIncorrect.withValues(alpha: 0.2),
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
                       child: Stack(
                         children: [
@@ -135,8 +157,8 @@ class _ViewdetailPageState extends State<ViewdetailPage> {
             ),
             itemBuilder: (context, index) {
               final question = widget.questions[index];
-              return InkWell(
-                onTap: () => Navigator.push(
+              return AnimatedScaleButton(
+                onPressed: () => Navigator.push(
                   context,
                   createRouter(
                     DetailQuestionPage(
@@ -154,11 +176,26 @@ class _ViewdetailPageState extends State<ViewdetailPage> {
                     borderRadius: BorderRadius.circular(
                       Configs.instance.commonRadius,
                     ),
+                    border: Border.all(
+                      color: question.correct 
+                          ? colorCorrect.withValues(alpha: 0.3) 
+                          : colorIncorrect.withValues(alpha: 0.3),
+                      width: 2,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: question.correct 
+                            ? colorCorrect.withValues(alpha: 0.2) 
+                            : colorIncorrect.withValues(alpha: 0.2),
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Text(
                     '${context.l10n.question} ${index + 1}',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: question.correct ? colorCorrect : colorIncorrect,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
