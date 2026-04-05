@@ -2537,6 +2537,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Undo'**
   String get undo;
+
+  /// No description provided for @removeAdsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Ads'**
+  String get removeAdsTitle;
+
+  /// No description provided for @premiumActiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You are using the Premium version!\nAll ads have been disabled.'**
+  String get premiumActiveMessage;
+
+  /// No description provided for @premiumExpirePrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires: '**
+  String get premiumExpirePrefix;
+
+  /// No description provided for @upgradePremiumMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium\nEnjoy a smooth, ad-free experience.'**
+  String get upgradePremiumMessage;
+
+  /// No description provided for @subscribeNowPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe now '**
+  String get subscribeNowPrefix;
+
+  /// No description provided for @noSubscriptionPackages.
+  ///
+  /// In en, this message translates to:
+  /// **'No subscription packages found. Please check your connection or network configuration.'**
+  String get noSubscriptionPackages;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchased before? Restore here'**
+  String get restorePurchases;
 }
 
 class _AppLocalizationsDelegate

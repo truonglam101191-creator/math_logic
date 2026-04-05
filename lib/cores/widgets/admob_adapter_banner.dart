@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logic_mathematics/cores/extentions/shared.dart';
+import 'package:logic_mathematics/features/subscription/data/datasources/subscription_local_datasource.dart';
+import 'package:logic_mathematics/main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AdmobAdapterBanner extends StatefulWidget {
@@ -96,7 +98,7 @@ class _AdmobAdapterBannerState extends State<AdmobAdapterBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (Shared.instance.isShowAds == false) {
+    if (Shared.instance.isShowAds == false || serviceLocator<SubscriptionLocalDataSource>().isActive) {
       return SizedBox();
     }
     return AnimatedContainer(

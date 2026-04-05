@@ -1083,5 +1083,12 @@
   "reset": "Reset",
   "aiHint": "AI Hint",
   "featureLockedMessage": "Feature will be unlocked soon!",
-  "undo": "Undo"
+  "undo": "Undo",
+  "removeAdsTitle": "Remove Ads",
+  "premiumActiveMessage": "You are using the Premium version!\nAll ads have been disabled.",
+  "premiumExpirePrefix": "Expires: ",
+  "upgradePremiumMessage": "Upgrade to Premium\nEnjoy a smooth, ad-free experience.",
+  "subscribeNowPrefix": "Subscribe now ",
+  "noSubscriptionPackages": "No subscription packages found. Please check your connection or network configuration.",
+  "restorePurchases": "Purchased before? Restore here"
 }

@@ -1396,4 +1396,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get undo => 'Undo';
+
+  @override
+  String get removeAdsTitle => 'Remove Ads';
+
+  @override
+  String get premiumActiveMessage =>
+      'You are using the Premium version!\nAll ads have been disabled.';
+
+  @override
+  String get premiumExpirePrefix => 'Expires: ';
+
+  @override
+  String get upgradePremiumMessage =>
+      'Upgrade to Premium\nEnjoy a smooth, ad-free experience.';
+
+  @override
+  String get subscribeNowPrefix => 'Subscribe now ';
+
+  @override
+  String get noSubscriptionPackages =>
+      'No subscription packages found. Please check your connection or network configuration.';
+
+  @override
+  String get restorePurchases => 'Purchased before? Restore here';
 }

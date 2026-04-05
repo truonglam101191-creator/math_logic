@@ -1393,4 +1393,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get undo => 'Hoàn tác';
+
+  @override
+  String get removeAdsTitle => 'Loại Bỏ Quảng Cáo';
+
+  @override
+  String get premiumActiveMessage =>
+      'Bạn đang sử dụng phiên bản Premium!\nTất cả quảng cáo đã được vô hiệu hoá.';
+
+  @override
+  String get premiumExpirePrefix => 'Hết hạn: ';
+
+  @override
+  String get upgradePremiumMessage =>
+      'Nâng cấp Premium\nTrải nghiệm mượt mà không quảng cáo.';
+
+  @override
+  String get subscribeNowPrefix => 'Đăng ký ngay ';
+
+  @override
+  String get noSubscriptionPackages =>
+      'Không tìm thấy gói mua nào. Kiểm tra kết nối hoặc cấu hình mạng.';
+
+  @override
+  String get restorePurchases => 'Đã mua trước đó? Khôi phục tại đây';
 }

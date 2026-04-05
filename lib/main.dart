@@ -23,6 +23,10 @@ import 'package:logic_mathematics/cores/services/local_notification_service.dart
 import 'package:logic_mathematics/cores/themes/app_theme.dart';
 import 'package:logic_mathematics/features/splash/splash_page.dart';
 import 'package:logic_mathematics/cores/audio/audio_manager.dart';
+import 'package:logic_mathematics/features/subscription/data/datasources/network_time_remote_datasource.dart';
+import 'package:logic_mathematics/features/subscription/data/datasources/subscription_local_datasource.dart';
+import 'package:logic_mathematics/features/subscription/data/repositories/subscription_repository_impl.dart';
+import 'package:logic_mathematics/features/subscription/domain/repositories/subscription_repository.dart';
 import 'package:logic_mathematics/l10n/arb/app_localizations.dart';
 import 'package:oziapi/requests/request.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -161,6 +165,10 @@ Future<void> initStartApp() async {
   await serviceLocator.get<AudioManager>().init();
   debugPrint('Last check-in date: ${Shared.instance.lastCheckInDate}');
 
+  
+  // Initialize and verify subscription offline/online
+  await serviceLocator.get<SubscriptionRepository>().checkSubscriptionStatus();
+
   // Start downloading the AI model in the background immediately
   Shared.instance.startBackgroundModelDownload();
 }
@@ -185,4 +193,21 @@ Future<void> setUpServiceLocator() async {
     LocalNotificationService(),
   );
   serviceLocator.registerSingleton<AudioManager>(AudioManager());
+
+  // Subscription Dependencies
+  serviceLocator.registerLazySingleton<NetworkTimeRemoteDataSource>(
+    () => NetworkTimeRemoteDataSource(Dio()),
+  );
+  
+  final prefs = await SharedPreferences.getInstance();
+  serviceLocator.registerLazySingleton<SubscriptionLocalDataSource>(
+    () => SubscriptionLocalDataSource(prefs),
+  );
+
+  serviceLocator.registerLazySingleton<SubscriptionRepository>(
+    () => SubscriptionRepositoryImpl(
+      serviceLocator<SubscriptionLocalDataSource>(),
+      serviceLocator<NetworkTimeRemoteDataSource>(),
+    ),
+  );
 }

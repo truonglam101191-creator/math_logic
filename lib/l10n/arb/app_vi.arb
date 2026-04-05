@@ -1056,5 +1056,12 @@
         "type": "String"
       }
     }
-  }
+  },
+  "removeAdsTitle": "Loại Bỏ Quảng Cáo",
+  "premiumActiveMessage": "Bạn đang sử dụng phiên bản Premium!\nTất cả quảng cáo đã được vô hiệu hoá.",
+  "premiumExpirePrefix": "Hết hạn: ",
+  "upgradePremiumMessage": "Nâng cấp Premium\nTrải nghiệm mượt mà không quảng cáo.",
+  "subscribeNowPrefix": "Đăng ký ngay ",
+  "noSubscriptionPackages": "Không tìm thấy gói mua nào. Kiểm tra kết nối hoặc cấu hình mạng.",
+  "restorePurchases": "Đã mua trước đó? Khôi phục tại đây"
 }

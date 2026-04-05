@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logic_mathematics/cores/extentions/shared.dart';
+import 'package:logic_mathematics/features/subscription/data/datasources/subscription_local_datasource.dart';
+import 'package:logic_mathematics/main.dart';
 
 const int maxFailedLoadAttempts = 3;
 
@@ -100,6 +102,14 @@ class AdmobController {
   }
 
   void showInterstitialAd({Function(bool isSucess)? callback}) {
+    // Check Premium status first!
+    final isPremium = serviceLocator<SubscriptionLocalDataSource>().isActive;
+    if (isPremium) {
+      print('Premium User: Ads Disabled');
+      callback?.call(true);
+      return;
+    }
+
     //if (_numRewardedInterstitialLoadAttempts >= maxFailedLoadAttempts) {
     if (Shared.instance.isShowAds) {
       if (_lastAdShowTime != null &&
@@ -165,6 +175,14 @@ class AdmobController {
   );
 
   void showAdIfAvailable({Function()? callback}) async {
+    // Check Premium status first!
+    final isPremium = serviceLocator<SubscriptionLocalDataSource>().isActive;
+    if (isPremium) {
+      print('Premium User: Ads Disabled');
+      callback?.call();
+      return;
+    }
+
     if (!Shared.instance.isShowAds) {
       callback?.call();
       return;
